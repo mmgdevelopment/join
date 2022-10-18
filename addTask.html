@@ -8,9 +8,62 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="style.css">
     <title>addTask</title>
+    <link rel="stylesheet" href="./style/addTask.css">
+    <script src="./script/templates.js"></script>
 </head>
 
-<body>
+<body onload="includeHTML()">
+    <div w3-include-html="templates/sideBar.html"></div>
+
+    <div class="container">
+        <h1>Add Task</h1>
+        <div class="forms">
+            <div class="leftForm">
+                <div class="inputContainer">
+                    <span>Title</span>
+                    <input type="text" name="title" id="title">
+                </div>
+                <div class="inputContainer">
+                    <span>Description</span>
+                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                </div>
+                <div class="inputContainer">
+                    <span>Category</span>
+                    <select name="category" id="category">
+                        <option value="selectCategory">Select task category</option>
+                        <option value="newCategory">New Category</option>
+                        <option value="sales">Sales</option>
+                        <option value="backoffice">Backoffice</option>
+                    </select>
+                </div>
+                <div class="inputContainer">
+                    <span>Assigned to</span>
+                    <select name="assigned" id="assigned">
+                        <option value="selectContact">Select contact to assign</option>
+                        <option value="marcel">Marcel</option>
+                        <option value="paul">Paul</option>
+                        <option value="steven">Steven</option>
+                </div>
+            </div>
+            <div class="rightForm">
+                <div class="inputContainer">
+                    <span>Due Date</span>
+                    <input type="date" name="dueDate" id="dueDate">
+                </div>
+                <div class="inputContainer">
+                    <span>Prio</span>
+                    <input type="button" value="Urgent">
+                    <input type="button" value="Medium">
+                    <input type="button" value="Low">
+                </div>
+                <div class="inputContainer">
+                    <span>Subtasks</span>
+                    <input type="text" name="subtask" id="subtask">
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 </body>
 
