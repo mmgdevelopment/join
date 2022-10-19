@@ -9,26 +9,26 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="./style/login.css">
     <link rel="stylesheet" href="./style/fonts.css">
-    <title>Login</title>
+    <title>Sign up</title>
 </head>
 
 <body>
 
     <img class="logo" src="assets/join_logo.svg" alt="join_logo">
 
-    <div class="sign-up-container">
-        <p class="sign-up-container-text">Not a Join user?</p>
-        <button class="login-button sign-btn">Sign up</button>
-    </div>
-
     <div class="login-card">
 
-        <h1>Log in</h1>
+        <h1>Sign up</h1>
         <div class="underline"></div>
 
         <form class="login-card-content">
 
-            <div>
+            <div class="login-input-container">
+
+                <div class="login-single-input-container">
+                    <input class="login-input" type="text" placeholder="Name">
+                    <img src="assets/profile.svg" alt="profile-icon">
+                </div>
 
                 <div class="login-single-input-container">
                     <input class="login-input" type="email" placeholder="Email">
@@ -42,18 +42,7 @@
 
             </div>
 
-            <div class="login-text">
-                <div class="login-remember-container">
-                    <input class="remember-checkbox" type="checkbox">
-                    <label class="login-remember-text">Remember me</label>
-                </div>
-                <a class="forgot-password" href="#">Forgot my password</a>
-            </div>
-    
-            <div class="login-button-container">
-                <button class="login-button">Log in</button>
-                <button class="login-button guest">Guest Log in</button>
-            </div>
+            <button class="login-button">Sign up</button>
 
         </form>
 
