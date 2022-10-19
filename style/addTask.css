@@ -1,16 +1,96 @@
+body {
+    display: flex;
+    justify-content: center;
+    font-family: 'Inter', sans-serif;
+    background-color: #F5F5F5;
+    font-weight: 400;
+    font-size: 21px;
+}
+
+h1 {
+    margin: 0;
+    padding: 25px;
+    font-weight: 700;
+    font-size: 61px;
+}
+
+input, select {
+    border: 1px solid #D1D1D1;
+    /* height: 50px; */
+    font-weight: 400;
+    font-size: 21px;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    padding: 12px;
+}
+
+input:focus {
+    outline: none;
+    border: 1px solid black;
+}
+
+textarea:focus {
+    outline: none;
+    border: 1px solid black;
+}
+
+input::placeholder {
+    color: #D1D1D1;
+}
+
+textarea {
+    resize: none;
+    border: 1px solid #D1D1D1;
+    border-radius: 10px;
+    padding: 12px;
+}
+
+textarea {
+    font-weight: 400;
+    font-size: 21px;
+    font-family: 'Inter', sans-serif;
+
+}
+
+textarea::placeholder {
+    color: #D1D1D1;
+
+}
+
+label {
+    font-weight: 400;
+    font-size: 21px;
+    margin: 5px;
+}
+
+#dueDate {
+    color: #D1D1D1;
+}
+
 .inputContainer {
     display: flex;
     flex-direction: column;
-    padding: 25px;
+    padding: 10px 35px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    margin: 40px;
 }
 
 .forms {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 .form {
     width: 450px;
+}
+
+.form:first-child {
+    border-right: 1px solid #D1D1D1;
 }
 
 .row {
@@ -22,4 +102,29 @@
 .row input {
     width: 30%;
     height: 45px;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
+    margin-right: 35px;
+}
+
+.button {
+    border-radius: 10px;
+    padding: 12px;
+}
+
+.button img {
+    padding-left: 5px;
+}
+
+#clear {
+    border: 1px solid #2A3647;
+}
+
+#createTask {
+    background-color: #2A3647;
+    color: #FFFFFF;
 }
