@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <title>addTask</title>
     <link rel="stylesheet" href="./style/addTask.css">
+    <link rel="stylesheet" href="./style/fonts.css">
     <script src="./script/templates.js"></script>
 </head>
 
@@ -21,16 +22,16 @@
         <div class="forms">
             <div class="form">
                 <div class="inputContainer">
-                    <span>Title</span>
-                    <input type="text" name="title" id="title">
+                    <label for="title">Title</label>
+                    <input type="text" placeholder="Enter a title" id="title">
                 </div>
                 <div class="inputContainer">
-                    <span>Description</span>
-                    <textarea name="description" id="description" cols="30" rows="10"></textarea>
+                    <label for="description">Description</label>
+                    <textarea id="description" placeholder="Enter a Description" cols="30" rows="6"></textarea>
                 </div>
                 <div class="inputContainer">
-                    <span>Category</span>
-                    <select name="category" id="category">
+                    <label for="category">Category</label>
+                    <select id="category">
                         <option value="selectCategory">Select task category</option>
                         <option value="newCategory">New Category</option>
                         <option value="sales">Sales</option>
@@ -38,8 +39,8 @@
                     </select>
                 </div>
                 <div class="inputContainer">
-                    <span>Assigned to</span>
-                    <select name="assigned" id="assigned">
+                    <label for="assigned">Assigned to</label>
+                    <select id="assigned">
                         <option value="selectContact">Select contact to assign</option>
                         <option value="marcel">Marcel</option>
                         <option value="paul">Paul</option>
@@ -50,11 +51,11 @@
             </div>
             <div class="form">
                 <div class="inputContainer">
-                    <span>Due Date</span>
-                    <input type="date" name="dueDate" id="dueDate">
+                    <label for="dueDate">Due Date</label>
+                    <input type="date" placeholder="" id="dueDate">
                 </div>
                 <div class="inputContainer">
-                    <span>Prio</span>
+                    <label>Prio</label>
                     <div class="row">
                         <input type="button" value="Urgent">
                         <input type="button" value="Medium">
@@ -63,9 +64,19 @@
 
                 </div>
                 <div class="inputContainer">
-                    <span>Subtasks</span>
-                    <input type="text" name="subtask" id="subtask">
+                    <label for="subtask">Subtasks</label>
+                    <input type="text" placeholder="Add new subtask" id="subtask">
                 </div>
+            </div>
+        </div>
+        <div class="buttonContainer">
+            <div class="button" id="clear">
+                clear
+                <img src="./assets/clear.svg" alt="">
+            </div>
+            <div class="button" id="createTask">
+                create task
+                <img src="./assets/createTask.svg" alt="">
             </div>
         </div>
     </div>
