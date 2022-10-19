@@ -9,6 +9,34 @@ body {
     align-items: center;
 }
 
+
+.logo {
+    position: absolute;
+    top: 50px;
+    left: 70px;
+}
+
+
+.sign-up-container {
+    display: flex;
+    align-items: center;
+
+    position: absolute;
+    top: 50px;
+    right: 70px;
+}
+
+.sign-up-container-text {
+    font-size: 21px;
+}
+
+.sign-btn {
+    font-size: 16px !important;
+    padding: 16px !important;
+    margin-left: 32px;
+}
+
+
 .login-card {
     display: flex;
     flex-direction: column;
