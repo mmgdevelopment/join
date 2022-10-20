@@ -31,12 +31,12 @@
             <div>
 
                 <div class="login-single-input-container">
-                    <input class="login-input" type="email" placeholder="Email" required>
+                    <input class="login-input" type="email" placeholder="Email" title="Please ensert a valid email adress!" required>
                     <img src="assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress!">
                 </div>
     
                 <div class="login-single-input-container">
-                    <input class="login-input" type="password" placeholder="Password" required>
+                    <input class="login-input" type="password" placeholder="Password" title="Please ensert your password" required>
                     <img src="assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                 </div>
 
@@ -52,7 +52,7 @@
     
             <div class="login-button-container">
                 <input class="login-button" type="submit" value="Log in">
-                <input class="login-button guest" type="submit" value="Guest Log in">
+                <button class="login-button guest">Guest Log in</button> <!--Guest Log in doesn't require an email or password-->
             </div>
 
         </form>

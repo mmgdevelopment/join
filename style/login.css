@@ -224,6 +224,16 @@ h1 {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.15);
     border-radius: 20px;
     border: none;
+    cursor: pointer;
+    transition: 75ms ease-in-out;
+}
+
+.success-reset-button:hover {
+    transform: scale(0.985);
+}
+
+.success-reset-button:active {
+    opacity: 0.85;
 }
 
 /****************************FORGOT PASSWORD*************************/
