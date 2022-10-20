@@ -1,6 +1,7 @@
 body {
     margin: 0px;
     font-family: 'Inter';
+    font-style: normal;
     background-color: #F5F5F5;
     height: 100vh;
 
@@ -136,6 +137,10 @@ h1 {
     text-decoration: none;
 }
 
+.forgot-password:hover {
+    text-decoration: underline #29ABE2;
+}
+
 .login-button-container {
     display: flex;
     gap: 35px;
@@ -151,6 +156,17 @@ h1 {
     background-color: #2A3647;
     border-radius: 8px;
     border: none;
+
+    cursor: pointer;
+    transition: 75ms ease-in-out;
+}
+
+.login-button:hover {
+    transform: scale(0.97);
+}
+
+.login-button:active {
+    opacity: 0.85;
 }
 
 .guest {

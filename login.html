@@ -26,18 +26,18 @@
         <h1>Log in</h1>
         <div class="underline"></div>
 
-        <form class="login-card-content">
+        <form action="#" class="login-card-content">
 
             <div>
 
                 <div class="login-single-input-container">
-                    <input class="login-input" type="email" placeholder="Email">
-                    <img src="assets/mail.svg" alt="mail-icon">
+                    <input class="login-input" type="email" placeholder="Email" required>
+                    <img src="assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress!">
                 </div>
     
                 <div class="login-single-input-container">
-                    <input class="login-input" type="password" placeholder="Password">
-                    <img src="assets/lock.svg" alt="lock-icon">
+                    <input class="login-input" type="password" placeholder="Password" required>
+                    <img src="assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                 </div>
 
             </div>
@@ -51,8 +51,8 @@
             </div>
     
             <div class="login-button-container">
-                <button class="login-button">Log in</button>
-                <button class="login-button guest">Guest Log in</button>
+                <input class="login-button" type="submit" value="Log in">
+                <input class="login-button guest" type="submit" value="Guest Log in">
             </div>
 
         </form>
