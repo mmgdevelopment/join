@@ -3,8 +3,6 @@ body {
     justify-content: center;
     font-family: 'Inter', sans-serif;
     background-color: #F5F5F5;
-    font-weight: 400;
-    font-size: 21px;
 }
 
 h1 {
@@ -76,7 +74,7 @@ label {
 .container {
     display: flex;
     flex-direction: column;
-    margin: 40px;
+    margin-top: 85px;
 }
 
 .forms {

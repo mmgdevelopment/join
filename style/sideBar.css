@@ -1,3 +1,7 @@
+* {
+    font-family: 'Inter';
+}
+
 header {
     background-color: #FFFFFF;
     display: flex;
@@ -6,7 +10,25 @@ header {
     left: 0;
     right: 0;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    height: 90px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    margin-left: 280px;
+}
+
+.profileContainer {
+    display: flex;
+    gap: 35px;
+    margin-right: 45px;
+}
+
+.profileContainer img:last-child {
+    border-radius: 50%;
+    border: 1px solid transparent;
+    outline: 3px solid #2A3647;
 }
 
 nav {
@@ -16,7 +38,7 @@ nav {
     bottom: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    gap: 85px;
     background-color: #2A3647;
 }
 
@@ -28,14 +50,22 @@ nav {
 
 a {
     color: #FFFFFF;
-    width: 100%;
     height: 45px;
     display: flex;
     align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    text-decoration: none;
+}
+
+a:hover {
+    background-color: #091931;
 }
 
 a img {
-    padding: 5px;
+    padding: 15px;
+    width: 25px;
+    height: 25px;
 }
 
 #logo {
