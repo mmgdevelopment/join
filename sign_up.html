@@ -5,8 +5,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+
+
+    <script src="mini_backend.js"></script>
+    <script>
+        setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+    </script>
+    <script src="login.js"></script>
+
+
+
     <link rel="stylesheet" href="./style/login.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <title>Sign up</title>
@@ -21,22 +29,22 @@
         <h1>Sign up</h1>
         <div class="underline"></div>
 
-        <form onsubmit="" class="login-card-content">
+        <form class="login-card-content" onsubmit="signUp(); return false;">
 
             <div class="login-input-container">
 
                 <div class="login-single-input-container">
-                    <input class="login-input" type="text" minlength="2" placeholder="Name" title="Please ensert a username" required>
+                    <input class="login-input" id="usernameSU" type="text" minlength="2" placeholder="Name" title="Please ensert a username" required>
                     <img src="assets/profile.svg" alt="profile-icon" title="Please ensert a username">
                 </div>
 
                 <div class="login-single-input-container">
-                    <input class="login-input" type="email" placeholder="Email" title="Please ensert a valid email adress" required>
+                    <input class="login-input" id="emailSU" type="email" placeholder="Email" title="Please ensert a valid email adress" required>
                     <img src="assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress">
                 </div>
     
                 <div class="login-single-input-container">
-                    <input class="login-input" type="password" minlength="8" placeholder="Password" title="Please ensert a new password" required>
+                    <input class="login-input" id="passwordSU" type="password" minlength="8" placeholder="Password" title="Please ensert a new password" required>
                     <img src="assets/lock.svg" alt="lock-icon" title="Please ensert a new password">
                 </div>
 

@@ -9,8 +9,9 @@
 
     <script src="mini_backend.js"></script>
     <script>
-        setURL('http://gruppe-354.developerakademie.net/smallest_backend_ever');
+        setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
     </script>
+    <script src="login.js"></script>
 
 
 
@@ -33,17 +34,17 @@
         <h1>Log in</h1>
         <div class="underline"></div>
 
-        <form onsubmit="" class="login-card-content">
+        <form onsubmit="login(); return false;" class="login-card-content">
 
             <div>
 
                 <div class="login-single-input-container">
-                    <input class="login-input" type="email" placeholder="Email" title="Please ensert a valid email adress!" required>
+                    <input class="login-input" id="emailLI" type="email" placeholder="Email" title="Please ensert a valid email adress!" required>
                     <img src="assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress!">
                 </div>
     
                 <div class="login-single-input-container">
-                    <input class="login-input" minlength="8" type="password" placeholder="Password" title="Please ensert your password" required>
+                    <input class="login-input" id="passwordLI" minlength="8" type="password" placeholder="Password" title="Please ensert your password" required>
                     <img src="assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                 </div>
 
