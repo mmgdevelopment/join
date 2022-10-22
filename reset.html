@@ -5,14 +5,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="style.css">
+
+
+    <script src="mini_backend.js"></script>
+    <script>
+        setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+    </script>
+    <script src="login.js"></script>
+
+
+
     <link rel="stylesheet" href="./style/login.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <title>Reset Password</title>
 </head>
 
-<body>
+<body onload="loadUsers()">
 
     <img class="logo" src="assets/join_logo.svg" alt="join_logo">
 

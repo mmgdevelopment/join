@@ -51,7 +51,17 @@ function login() {
 }
 
 
-
+/**
+ * function should send an email to existing user to resert password
+ */
 function sendPasswordResetMail() {
-    
+    let email = document.getElementById('email');
+
+    let user = users.find(u => u.email == email.value);
+    if(user) {
+        //send an email with reset password link,,,, dont know how this works yet
+    } else {
+        email.value = '';
+        alert('Es existier kein Account mit dieser E-Mail!');
+    }
 }
