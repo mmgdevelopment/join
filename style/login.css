@@ -240,6 +240,10 @@ h1 {
     display: none;
 }
 
+.mobile-logo-container {
+    display: none;
+}
+
 .mobile-sign-up {
     display: none;
 }
@@ -304,6 +308,7 @@ h1 {
     }
 
     .mobile-logo-container {
+        display: flex;
         width: 90%;
         margin-bottom: 16px;
     }
