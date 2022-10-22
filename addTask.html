@@ -11,6 +11,8 @@
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <script src="./script/templates.js"></script>
+    <script src="./script/addTask.js"></script>
+
 </head>
 
 <body onload="includeHTML()">
@@ -57,9 +59,18 @@
                 <div class="inputContainer">
                     <label>Prio</label>
                     <div class="row">
-                        <input type="button" value="Urgent">
-                        <input type="button" value="Medium">
-                        <input type="button" value="Low">
+                        <button id="urgent" class="prioButton" onclick="prioButton('urgent')">
+                            Urgent
+                            <img src="./assets/urgent.svg" alt="">
+                        </button>
+                        <button id="medium" class="prioButton" onclick="prioButton('medium')">
+                            Medium
+                            <img src="./assets/medium.svg" alt="">
+                        </button>
+                        <button id="low" class="prioButton" onclick="prioButton('low')">
+                            Low
+                            <img src="./assets/low.svg" alt="">
+                        </button>
                     </div>
 
                 </div>
