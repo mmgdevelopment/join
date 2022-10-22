@@ -24,3 +24,7 @@ function resetButtons() {
         document.getElementById(button).classList = 'prioButton';
     });
 }
+
+function openMenu(id) {
+    document.getElementById(id).classList.toggle('open');
+}
