@@ -236,4 +236,141 @@ h1 {
     opacity: 0.85;
 }
 
+.mobile-backgound-first-page {
+    display: none;
+}
+
+.mobile-sign-up {
+    display: none;
+}
+
 /****************************FORGOT PASSWORD*************************/
+
+@media (max-width: 1300px) {  /** Version for small computer screens*/
+
+    .sign-up-container {
+        top: 30px;
+        right: 50px;
+    }
+
+    .logo {
+        transform: scale(0.8);
+    }
+
+}
+
+@media (max-width: 1000px) {  /** Version for very small computer screens*/
+
+    .sign-up-container {
+        top: 20px;
+        right: 20px;
+    }
+
+    .logo {
+        transform: scale(0.6);
+        top: 0px;
+        left: 20px;
+    }
+
+}
+
+@media (max-width: 800px) {
+
+    body {
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .first-page {
+        display: none;
+    }
+
+    .mobile-backgound-first-page {
+        width: 100%;
+        height: 100vh;
+        background-color: #2A3647;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    h1 {
+        font-size: 47px;
+        height: 40px;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .mobile-logo-container {
+        width: 90%;
+        margin-bottom: 16px;
+    }
+
+    .logo-mobile {
+        transform: scale(80%);
+    }
+
+    .login-card {
+        width: 90%;
+    }
+
+    .login-card-content {
+        width: 90%;
+    }
+
+    .mobile-login-input-container {
+        width: 100%;
+    }
+
+    .login-single-input-container {
+        width: auto;
+        height: 41px;
+        margin-bottom: 32px;
+    }
+
+    .login-input {
+        width: 80%;
+        height: 36px;
+    }
+
+    .login-text {
+        flex-direction: column-reverse;
+        gap: 24px;
+        width: 95%;
+        align-items: flex-start;
+    }
+
+    .login-button-container {
+        flex-direction: column;
+        gap: 21px;
+    }
+
+    .login-button {
+        font-size: 16px;
+        width: 180px;
+        height: 51px;
+    }
+
+    .mobile-sign-up {
+        display: flex;
+        position: relative;
+        padding-block: 16px;
+        top: 0px;
+        right: 0px;
+    }
+
+    .desktop-sign-up {
+        display: none;
+    }
+
+    .sign-btn {
+        width: auto;
+    }
+
+
+
+
+
+}

@@ -22,12 +22,15 @@
 
 <body onload="loadUsers()">
 
-    <img class="logo" src="assets/join_logo.svg" alt="join_logo">
+    <img class="logo" src="assets/join_logo.svg" alt="join_logo"> <!--desktop logo-->
 
-    <div class="sign-up-container">
+    <div class="sign-up-container desktop-sign-up"> <!--desktop sign in-->
         <p class="sign-up-container-text">Not a Join user?</p>
         <a href="sign_up.html"><button class="login-button sign-btn">Sign up</button></a>
+    </div>
 
+    <div class="mobile-logo-container">
+        <img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo"> <!--mobile logo-->
     </div>
 
     <div class="login-card">
@@ -37,7 +40,7 @@
 
         <form onsubmit="login(); return false;" class="login-card-content">
 
-            <div>
+            <div class="mobile-login-input-container">
 
                 <div class="login-single-input-container">
                     <input class="login-input" id="email" type="email" placeholder="Email" title="Please ensert a valid email adress!" required>
@@ -68,6 +71,12 @@
 
     </div>
 
+    <div class="mobile-sign-up-display">
+        <div class="sign-up-container mobile-sign-up"> <!--mobile-sign-up-->
+            <p class="sign-up-container-text">Not a Join user?</p>
+            <a href="sign_up.html"><button class="login-button sign-btn">Sign up</button></a>
+        </div>
+    </div>
 
 </body>
 
