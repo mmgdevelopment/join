@@ -1,46 +1,57 @@
-let users = [
-    {
-        'username': 'gigachad420',
-        'email': 'max@mustermann.com',
-        'password': 'fiffi321'
-    }
-];
+/**
+ * function loads all saved users
+ */
+ function loadUsers() {
+    let usersAsString = localStorage.getItem('allUsers');
+    users = JSON.parse(usersAsString);
+    console.log('Loaded Users ', users);
+}
 
 
 /**
  * function creates a new user and pushes him into users(Array).
- * SU => Sign Up
  */
-function signUp() {
-
-    let username = document.getElementById('usernameSU');
-    let email = document.getElementById('emailSU');
-    let password = document.getElementById('passwordSU');
+ function signUp() {
+    let username = document.getElementById('username');
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
 
     users.push({username: username.value, email: email.value, password: password.value});
 
-    //Weiterleitung zur Login-Seite oder direkt zu join?
+    saveNewUser();
 
-    document.getElementById('usernameSU').value = '';
-    document.getElementById('emailSU').value = '';
-    document.getElementById('passwordSU').value = '';
+    window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+}
 
+
+/**
+ * function saves new created user
+ */
+function saveNewUser() {
+    let usersAsString = JSON.stringify(users);
+    localStorage.setItem('allUsers', usersAsString);
 }
 
 
 /**
  * function logs existing user into page and denies entrance to none existig users.
- * LI => Log In
  */
 function login() {
-
-    let email = document.getElementById('emailLI');
-    let password = document.getElementById('passwordLI');
+    let email = document.getElementById('email');
+    let password = document.getElementById('password');
 
     let user = users.find(u => u.email == email.value && u.password == password.value);
     console.log(user);
     if(user) {
-        console.log('User gefunden');
+        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    } else {
+        password.value = '';
+        alert('Dein Passwort oder deine E-Mail ist nicht korrekt!');
     }
+}
 
+
+
+function sendPasswordResetMail() {
+    
 }
