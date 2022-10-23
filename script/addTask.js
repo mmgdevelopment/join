@@ -25,6 +25,30 @@ function resetButtons() {
     });
 }
 
-function openMenu(id) {
+function toggleMenu(id) {
     document.getElementById(id).classList.toggle('open');
+}
+
+function newCategory() {
+    document.getElementById('colorPicker').style.display = 'flex';
+    toggleMenu('category');
+    document.getElementById('category').innerHTML = newCategoryTemplate();
+}
+
+
+/***********************HTML Templates**************************/
+
+
+function newCategoryTemplate() {
+    return /*html*/`
+    <div class="newCategory">
+        <input class="noBorder" placeholder="New category name" type="text">
+        <div class="createClearContainer">
+            <img src="./assets/clear.svg" alt=""> |
+            <img src="./assets/createTask.svg" alt="">
+        </div>
+        
+    </div>
+    `
+
 }

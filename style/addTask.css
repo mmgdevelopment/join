@@ -88,6 +88,8 @@ label {
 
 .form {
     width: 515px;
+    height: 500px;
+    position: relative;
 }
 
 .form:first-child {
@@ -141,6 +143,9 @@ label {
     justify-content: flex-end;
     gap: 25px;
     margin-right: 35px;
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
 }
 
 
@@ -174,14 +179,23 @@ label {
     border-radius: 10px;
     background-color: #FFFFFF;
     cursor: pointer;
-    transition: all ease-in-out 400ms;
+    transition: all ease-in 400ms;
 
+}
+
+.placeholder {
+    justify-content: space-between;
 }
 
 .customSelect span {
     display: flex;
-    justify-content: space-between;
     padding: 12px;
+    gap: 25px;
+    align-items: center;
+}
+
+.selectable {
+    justify-content: flex-start;
 }
 
 .selectable:hover {
@@ -195,5 +209,89 @@ label {
 
 .open {
     height: calc(49px * 4);
-    transition: all ease-in-out 400ms;
+    transition: all ease-in 400ms;
+}
+
+.color {
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 2px solid white;
+
+}
+
+.pink {
+    background-color: #FC71FF;
+}
+
+.yellow {
+    background-color: #FFA800;
+}
+
+.ocean {
+    background-color: #29ABE2;
+}
+
+.blue {
+    background-color: #462F8A;
+}
+
+.colorPicker {
+    display: none;
+    gap: 15px;
+    padding: 15px;
+    align-items: center;
+}
+
+.colorPicker .color {
+    border: none;
+    cursor: pointer;
+    transition: all ease-in-out 125ms;
+}
+
+.colorPicker .color:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 5px 4px 1px rgba(0, 0, 0, 0.2);
+    transition: all ease-in-out 125ms;
+}
+
+.colorPicker .active {
+    border: 2px solid white;
+}
+
+.noBorder {
+    border: none;
+    width: -webkit-fill-available;
+    width: -moz-available;
+}
+
+.noBorder:focus {
+    outline: none;
+    border: none;
+}
+
+.createClearContainer {
+    color: #D1D1D1;
+    display: flex;
+    align-items: center;
+}
+
+.newCategory img:last-child {
+    filter: brightness(0);
+}
+
+.newCategory img {
+    padding: 10px;
+}
+
+.newCategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.newCategory {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }

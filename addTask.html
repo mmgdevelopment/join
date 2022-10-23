@@ -36,13 +36,26 @@
                 <div class="inputContainer">
                     <label for="customSelect">Category</label>
                     <div id="category" class="customSelect">
-                        <span onclick="openMenu('category')">
+                        <span id="categoryPlaceholder" class="placeholder" onclick="toggleMenu('category')">
                             Select task Category
                             <img src="./assets/selectArrow.svg" alt="">
                         </span>
-                        <span class="selectable">New Category</span>
-                        <span class="selectable">Sales</span>
-                        <span class="selectable">Backoffice</span>
+                        <span onclick="newCategory()" class="selectable">New Category</span>
+                        <span class="selectable">Sales
+                            <div class="color pink"></div>
+                        </span>
+                        <span class="selectable">Backoffice
+                            <div class="color yellow"></div>
+                        </span>
+                    </div>
+                    <div id="colorPicker" class="colorPicker">
+                        <div class="color yellow"></div>
+                        <div class="color red"></div>
+                        <div class="color green"></div>
+                        <div class="color blue"></div>
+                        <div class="color pink active"></div>
+                        <div class="color orange"></div>
+                        <div class="color ocean"></div>
                     </div>
                 </div>
 
@@ -50,7 +63,7 @@
                 <div class="inputContainer">
                     <label for="customSelect">Assigned</label>
                     <div id="assigned" class="customSelect">
-                        <span onclick="openMenu('assigned')">
+                        <span class="placeholder" onclick="toggleMenu('assigned')">
                             Select Contact
                             <img src="./assets/selectArrow.svg" alt="">
                         </span>
@@ -87,18 +100,20 @@
                     <label for="subtask">Subtasks</label>
                     <input type="text" placeholder="Add new subtask" id="subtask">
                 </div>
+
+                <div class="buttonContainer">
+                    <div class="button" id="clear">
+                        clear
+                        <img src="./assets/clear.svg" alt="">
+                    </div>
+                    <div class="button" id="createTask">
+                        create task
+                        <img src="./assets/createTask.svg" alt="">
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="buttonContainer">
-            <div class="button" id="clear">
-                clear
-                <img src="./assets/clear.svg" alt="">
-            </div>
-            <div class="button" id="createTask">
-                create task
-                <img src="./assets/createTask.svg" alt="">
-            </div>
-        </div>
+
     </div>
 </body>
 
