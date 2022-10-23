@@ -208,7 +208,7 @@ label {
 }
 
 .open {
-    height: calc(49px * 4);
+    height: auto;
     transition: all ease-in 400ms;
 }
 
@@ -218,6 +218,34 @@ label {
     border-radius: 50%;
     border: 2px solid white;
 
+}
+
+#pink {
+    background-color: #FC71FF;
+}
+
+#yellow {
+    background-color: #FFA800;
+}
+
+#ocean {
+    background-color: #29ABE2;
+}
+
+#blue {
+    background-color: #462F8A;
+}
+
+#red {
+    background-color: #FF3D00;
+}
+
+#orange {
+    background-color: #FFA800;
+}
+
+#green {
+    background-color: #7AE229;
 }
 
 .pink {
@@ -294,4 +322,10 @@ label {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+#firstValue {
+    display: flex;
+    align-items: center;
+    gap: 25px;
 }

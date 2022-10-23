@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), renderCategorys()">
     <div w3-include-html="./templates/sideBar.html"></div>
 
     <div class="container">
@@ -36,26 +36,26 @@
                 <div class="inputContainer">
                     <label for="customSelect">Category</label>
                     <div id="category" class="customSelect">
-                        <span id="categoryPlaceholder" class="placeholder" onclick="toggleMenu('category')">
+                        <!-- <span id="categoryPlaceholder" class="placeholder" onclick="toggleMenu('category')">
                             Select task Category
                             <img src="./assets/selectArrow.svg" alt="">
                         </span>
-                        <span onclick="newCategory()" class="selectable">New Category</span>
+                        <span onclick="renderNewCategory()" class="selectable">New Category</span>
                         <span class="selectable">Sales
                             <div class="color pink"></div>
                         </span>
                         <span class="selectable">Backoffice
                             <div class="color yellow"></div>
-                        </span>
+                        </span> -->
                     </div>
                     <div id="colorPicker" class="colorPicker">
-                        <div class="color yellow"></div>
-                        <div class="color red"></div>
-                        <div class="color green"></div>
-                        <div class="color blue"></div>
-                        <div class="color pink active"></div>
-                        <div class="color orange"></div>
-                        <div class="color ocean"></div>
+                        <div onclick="colorPicker('yellow')" id="yellow" class="color yellow"></div>
+                        <div onclick="colorPicker('red')" id="red" class="color red"></div>
+                        <div onclick="colorPicker('green')" id="green" class="color green"></div>
+                        <div onclick="colorPicker('blue')" id="blue" class="color blue"></div>
+                        <div onclick="colorPicker('pink')" id="pink" class="color pink"></div>
+                        <div onclick="colorPicker('orange')" id="orange" class="color orange"></div>
+                        <div onclick="colorPicker('ocean')" id="ocean" class="color ocean"></div>
                     </div>
                 </div>
 
