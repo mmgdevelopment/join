@@ -11,6 +11,12 @@ let categorys = [
     },
 ];
 
+let contacts = [
+    'You',
+    'Marcel Gregor',
+    'Steven Munk'
+];
+
 const colors = [
     'orange',
     'red',
@@ -65,7 +71,9 @@ function addCategory() {
             name: input.value,
             color: categoryColor
         })
-    };
+    } else {
+        /* Form validation -> input required*/
+    }
     categoryColor = '';
     renderCategorys();
     document.getElementById('colorPicker').style.display = 'none';
@@ -97,9 +105,34 @@ function showCategory(id) {
     let firstValue = document.getElementById('firstValue');
     firstValue.innerHTML = renderChoosenCategory(id);
     toggleMenu('category');
-
 }
 
+function renderInviteSelector() {
+    let assigned = document.getElementById('assigned');
+    assigned.innerHTML = assignedTemplate();
+
+    contacts.forEach(contact => {
+        assigned.innerHTML += assignedContactsTemplate(contact);
+    });
+
+    assigned.innerHTML += assignedInviteTemplate();
+}
+
+function renderInviteNewContact() {
+    document.getElementById('assigned').innerHTML = inviteContactTemplate();
+}
+
+function inviteContact() {
+    let value = document.getElementById('contactInput').value;
+    if (value) {
+        sendInviteMail(value);
+        renderInviteSelector();
+    } else {
+        /**form Validation -> input required */
+    }
+}
+
+function sendInviteMail(value) { }
 
 /***********************HTML Templates**************************/
 
@@ -114,13 +147,23 @@ function newCategoryTemplate() {
     </div>
     `;
 };
-
+function inviteContactTemplate() {
+    return /*html*/`
+    <div class="newCategory">
+        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
+        <div class="createClearContainer">
+            <img onclick="renderInviteSelector()" src="./assets/clear.svg" alt=""> |
+            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
+        </div>
+    </div>
+    `;
+};
 
 function renderSingleCategorys() {
     for (let i = 0; i < categorys.length; i++) {
         const category = categorys[i];
         document.getElementById('category').innerHTML += `
-       <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable">${category.name}
+       <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
        </span> 
        `
@@ -133,8 +176,33 @@ function categorysTemplate() {
             <div id="firstValue">Select task Category</div>
             <img src="./assets/selectArrow.svg" alt="">
         </span>
-        <span onclick="renderNewCategory()" class="selectable">New Category</span>
+        <span onclick="renderNewCategory()" class="selectable category">New Category</span>
 `}
+
+function assignedTemplate() {
+    return /*html*/`
+        <span class="placeholder" onclick="toggleMenu('assigned')">
+            Select Contact
+            <img src="./assets/selectArrow.svg" alt="">
+        </span>
+    `
+}
+
+function assignedContactsTemplate(name) {
+    return /*html*/`
+    <span class="selectable assigned">${name}
+        <input class="checkbox" type="checkbox" name="" id="">
+    </span>
+    `
+}
+
+function assignedInviteTemplate() {
+    return /*html*/`
+        <span onclick="renderInviteNewContact()" class="selectable assigned">Invite new Contact
+            </span id="contactImg" src="./assets/contacts.svg" alt="">
+        </span>
+    `
+}
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);

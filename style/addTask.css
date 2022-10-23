@@ -171,7 +171,7 @@ label {
 .customSelect {
     display: flex;
     flex-direction: column;
-    height: 46px;
+    max-height: 46px;
     overflow: hidden;
     border: 1px solid #D1D1D1;
     font-weight: 400;
@@ -179,7 +179,7 @@ label {
     border-radius: 10px;
     background-color: #FFFFFF;
     cursor: pointer;
-    transition: all ease-in 400ms;
+    transition: max-height ease-in-out 400ms;
 
 }
 
@@ -194,8 +194,12 @@ label {
     align-items: center;
 }
 
-.selectable {
+.category {
     justify-content: flex-start;
+}
+
+.assigned {
+    justify-content: space-between;
 }
 
 .selectable:hover {
@@ -208,8 +212,8 @@ label {
 }
 
 .open {
-    height: auto;
-    transition: all ease-in 400ms;
+    max-height: 500px;
+    transition: max-height ease-in-out 400ms;
 }
 
 .color {
@@ -318,14 +322,17 @@ label {
     justify-content: space-between;
 }
 
-.newCategory {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
 #firstValue {
     display: flex;
     align-items: center;
     gap: 25px;
+}
+
+.checkbox {
+    margin-right: 5px;
+}
+
+#contactImg {
+    filter: brightness(0);
+    padding: 2px;
 }

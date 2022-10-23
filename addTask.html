@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload="includeHTML(), renderCategorys()">
+<body onload="includeHTML(), renderCategorys(), renderInviteSelector()">
     <div w3-include-html="./templates/sideBar.html"></div>
 
     <div class="container">
@@ -63,13 +63,19 @@
                 <div class="inputContainer">
                     <label for="customSelect">Assigned</label>
                     <div id="assigned" class="customSelect">
-                        <span class="placeholder" onclick="toggleMenu('assigned')">
+                        <!-- <span class="placeholder" onclick="toggleMenu('assigned')">
                             Select Contact
                             <img src="./assets/selectArrow.svg" alt="">
+                        </span> -->
+                        <!-- <span class="selectable assigned">You
+                            <input class="checkbox" type="checkbox" name="" id="">
                         </span>
-                        <span class="selectable">You</span>
-                        <span class="selectable">Maximilian Vogel</span>
-                        <span class="selectable">Invite new Contact</span>
+                        <span class="selectable assigned">Maximilian Vogel
+                            <input class="checkbox" type="checkbox" name="" id="">
+                        </span> -->
+                        <!-- <span onclick="renderInviteNewContact()" class="selectable assigned">Invite new Contact
+                            <img id="contactImg" src="./assets/contacts.svg" alt="">
+                        </span> -->
                     </div>
                 </div>
             </div>
@@ -104,7 +110,7 @@
                 <div class="buttonContainer">
                     <div class="button" id="clear">
                         clear
-                        <img src="./assets/clear.svg" alt="">
+                        <img src="./assets/clear.svg" alt="">s
                     </div>
                     <div class="button" id="createTask">
                         create task
