@@ -6,41 +6,54 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <script src="mini_backend.js"></script>
     <script>
         setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
     </script>
     <script src="login.js"></script>
 
-
-
     <link rel="stylesheet" href="./style/login.css">
+    
     <link rel="stylesheet" href="./style/fonts.css">
     <title>Reset Password</title>
 </head>
 
 <body onload="loadUsers()">
 
+    <!--desktop logo-->
     <img class="logo" src="assets/join_logo.svg" alt="join_logo">
+
+    <!--mobile logo-->
+    <div class="mobile-logo-container">
+        <img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo">
+    </div>
 
     <div class="forgot-card">
 
+        <!--desktop back arrow-->
         <img class="place-blue-arrow" src="assets/left_arrow.svg" alt="left_arrow_blue">
+
+        <!--mobile back arrow-->
+        <div class="mobile-back-arrow">
+            <img src="assets/mobile_back_arrow.svg" alt="left_arrow_dark">
+        </div>
 
         <h1>Reset your password</h1>
         <div class="underline"></div>
 
-        <p class="forgot-text">Change your account password</p>
+        <p class="forgot-text only-dekstop">Change your account password</p>
+        <p class="forgot-text only-mobile">Change your account password here.</p>
 
         <form onsubmit="" class="login-card-content">
 
             <div class="login-single-input-container">
-                <input class="login-input" minlength="8" type="password" placeholder="New Password" title="Set a new password" required>
+                <input class="login-input" minlength="8" type="password" placeholder="New Password"
+                    title="Set a new password" required>
             </div>
 
             <div class="login-single-input-container">
-                <input class="login-input" minlength="8" type="password" placeholder="Confirm Password" title="Repeat the new password" required>
+                <input class="login-input" minlength="8" type="password" placeholder="Confirm Password"
+                    title="Repeat the new password" required>
             </div>
 
             <input class="login-button continue-btn" type="submit" value="Continue">
@@ -48,7 +61,6 @@
         </form>
 
     </div>
-
 
 </body>
 

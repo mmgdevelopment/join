@@ -236,6 +236,8 @@ h1 {
     opacity: 0.85;
 }
 
+/****************************MOBILE SECTION*************************/
+
 .mobile-backgound-first-page {
     display: none;
 }
@@ -245,6 +247,18 @@ h1 {
 }
 
 .mobile-sign-up {
+    display: none;
+}
+
+.mobile-back-arrow {
+    display: none;
+}
+
+.only-dekstop {
+    display: block;
+}
+
+.only-mobile {
     display: none;
 }
 
@@ -276,13 +290,38 @@ h1 {
         left: 20px;
     }
 
+    .forgot-card {
+        max-width: 90%;
+    }
+
+    h1 {
+        margin-inline: 16px;
+    }
+
+    .place-blue-arrow {
+        display: none;
+    }
+
+    .mobile-back-arrow {
+        display: flex;
+        width: 80%;
+    }
+
+    .only-dekstop {
+        display: none;
+    }
+
+    .only-mobile {
+        display: block;
+    }
+
 }
 
 @media (max-width: 800px) {
 
     body {
         flex-direction: column;
-        justify-content: space-between;
+        justify-content: flex-start;
     }
 
     .first-page {
@@ -300,7 +339,7 @@ h1 {
 
     h1 {
         font-size: 47px;
-        height: 40px;
+        height: auto;
     }
 
     .logo {
@@ -310,7 +349,7 @@ h1 {
     .mobile-logo-container {
         display: flex;
         width: 90%;
-        margin-bottom: 16px;
+        margin-bottom: 45px;
     }
 
     .logo-mobile {
@@ -319,10 +358,14 @@ h1 {
 
     .login-card {
         width: 90%;
+        max-width: 450px;
+        margin-bottom: 32px;
+        gap: 30px;
     }
 
     .login-card-content {
         width: 90%;
+        gap: 8px;
     }
 
     .mobile-login-input-container {
@@ -374,8 +417,32 @@ h1 {
         width: auto;
     }
 
+    .forgot-card {
+        width: 90%;
+        max-width: 450px;
+        gap: 21px;
+    }
 
+    .forgot-text {
+        margin-inline: 16px;
+    }
 
+    .login-button {
+        padding: 0px;
+    }
 
+}
+
+@media (max-width: 330px) {
+
+    .mobile-sign-up {
+        flex-direction: column;
+    }
+
+    .success-reset-button {
+        max-width: 95%;
+        width: auto;
+        height: auto;
+    }
 
 }

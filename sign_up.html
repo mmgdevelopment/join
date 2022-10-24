@@ -6,23 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
     <script src="mini_backend.js"></script>
     <script>
         setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
     </script>
     <script src="login.js"></script>
 
-
-
     <link rel="stylesheet" href="./style/login.css">
+
     <link rel="stylesheet" href="./style/fonts.css">
     <title>Sign up</title>
 </head>
 
 <body onload="loadUsers()">
 
+    <!--dektop logo-->
     <img class="logo" src="assets/join_logo.svg" alt="join_logo">
+
+    <!--mobile logo-->
+    <div class="mobile-logo-container">
+        <img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo"> 
+    </div>
 
     <div class="login-card">
 
@@ -56,7 +60,9 @@
 
     </div>
 
-
+    <!--invis. box to place card in middle-->
+    <div style="height: 99px;"></div>
+        
 </body>
 
 </html>
