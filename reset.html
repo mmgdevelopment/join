@@ -6,11 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="mini_backend.js"></script>
-    <script>
-        setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
-    </script>
-    <script src="login.js"></script>
+    <script src="./script/mini_backend.js"></script>
+    <script src="./script/login.js"></script>
 
     <link rel="stylesheet" href="./style/login.css">
     
@@ -18,14 +15,14 @@
     <title>Reset Password</title>
 </head>
 
-<body onload="loadUsers()">
+<body onload="init()">
 
-    <!--desktop logo-->
-    <img class="logo" src="assets/join_logo.svg" alt="join_logo">
+    <!--dektop logo-->
+    <a href="login.html"><img class="logo" src="assets/join_logo.svg" alt="join_logo"></a> 
 
     <!--mobile logo-->
     <div class="mobile-logo-container">
-        <img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo">
+        <a href="login.html"><img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo"></a> 
     </div>
 
     <div class="forgot-card">
@@ -44,15 +41,15 @@
         <p class="forgot-text only-dekstop">Change your account password</p>
         <p class="forgot-text only-mobile">Change your account password here.</p>
 
-        <form onsubmit="" class="login-card-content">
+        <form onsubmit="saveNewPassword(); return false;" class="login-card-content">
 
             <div class="login-single-input-container">
-                <input class="login-input" minlength="8" type="password" placeholder="New Password"
+                <input id="firstPassword" class="login-input" minlength="8" type="password" placeholder="New Password"
                     title="Set a new password" required>
             </div>
 
             <div class="login-single-input-container">
-                <input class="login-input" minlength="8" type="password" placeholder="Confirm Password"
+                <input id="secondPassword" class="login-input" minlength="8" type="password" placeholder="Confirm Password"
                     title="Repeat the new password" required>
             </div>
 

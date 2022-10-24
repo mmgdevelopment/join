@@ -1,13 +1,6 @@
 let jsonFromServer = {};
 let BASE_SERVER_URL;
 
-let users = [
-    {
-        'username': 'test-user',
-        'email': 'test@email.com',
-        'password': 'testpassword'
-    }
-];
 
 const backend = {
     setItem: function(key, item) {

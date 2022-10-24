@@ -1,3 +1,7 @@
+let users = [];
+setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+
+
 /**
  * function leads to login page with delay
  */
@@ -17,35 +21,24 @@ function goToLoginPage() {
 /**
  * function loads all saved users
  */
-function loadUsers() {
-    let usersAsString = localStorage.getItem('allUsers');
-    users = JSON.parse(usersAsString);
-    console.log('Loaded Users ', users);
+async function init() {
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
 }
 
 
 /**
  * function creates a new user and pushes him into users(Array).
  */
-function signUp() {
+async function signUp() {
     let username = document.getElementById('username');
     let email = document.getElementById('email');
     let password = document.getElementById('password');
 
-    users.push({ username: username.value, email: email.value, password: password.value });
-
-    saveNewUser();
+    users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
+    await backend.setItem('users', JSON.stringify(users));
 
     window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
-}
-
-
-/**
- * function saves new created user
- */
-function saveNewUser() {
-    let usersAsString = JSON.stringify(users);
-    localStorage.setItem('allUsers', usersAsString);
 }
 
 
@@ -87,19 +80,38 @@ function turnInputGray() {
 
 
 
-let noPassword = [];
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * function checks the email and leads the user to reset.html
  */
 function goToResetPage() {
-    let email = document.getElementById('email');
 
+    localStorage.removeItem('NoPasswordUser')
+    let email = document.getElementById('email');
     let user = users.find(u => u.email == email.value);
+    console.log(user);
+
     if (user) {
-        noPassword.push(user);
+
+        userJSON = JSON.stringify(user);
+        localStorage.setItem('NoPasswordUser', userJSON);
+
         window.location.href = 'reset.html?msg=Bitte gib ein neues Passwort ein!';
-        createANewPassword();
+
+
     } else {
         email.value = '';
         alert('Es existier kein Account mit dieser E-Mail!');
@@ -108,8 +120,61 @@ function goToResetPage() {
 
 
 
+function saveNewPassword() {
 
-function createANewPassword() {
-    let user = noPassword[0];
+    let NoPasswordUser = localStorage.getItem('NoPasswordUser');
+    let user = JSON.parse(NoPasswordUser);
     console.log(user);
+
+    let firstPassword = document.getElementById('firstPassword').value;
+    let secondPassword = document.getElementById('secondPassword').value;
+
+    if (firstPassword == secondPassword) {
+
+        let userEntrie = users.find(u => u.email == user['email']);
+        userEntrie['password'] = firstPassword;
+
+        const id = users.map(e => e.email).indexOf(userEntrie['email']);
+        deleteUser(id);
+
+
+        let NewUsername = userEntrie['username'];
+        let NewEmail = userEntrie['email'];
+        let newPassword = userEntrie['password'];
+
+
+
+
+        saveNewPasswordFor(NewUsername, NewEmail, newPassword);
+
+
+
+
+
+
+    } else {
+        firstPassword = '';
+        secondPassword = '';
+        alert('Dein neues Passwort stimmt nicht überein, oder ist bereits dein altes Passwort!');
+    }
+
+}
+
+async function saveNewPasswordFor(NewUsername, NewEmail, newPassword) {
+    users.push({ username: NewUsername, email: NewEmail, password: newPassword});
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+
+
+
+
+
+
+/**
+ * hidden function (delete user with number (name))
+ * @param {number} id 
+ */
+async function deleteUser(id) {
+    await backend.deleteItem('users');
 }
