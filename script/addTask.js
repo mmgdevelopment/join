@@ -38,28 +38,38 @@ window.addEventListener('click', (event) => {
             case 'category':
                 document.getElementById('category').classList.toggle('open');
                 document.getElementById('assigned').classList.remove('open');
+                scrollToTop();
                 break;
             case 'assigned':
                 document.getElementById('category').classList.remove('open');
                 document.getElementById('assigned').classList.toggle('open');
+                scrollToTop();
                 break;
             default:
                 console.log(event.target.className);
                 if (event.target.className == 'assigned') {
                     document.getElementById('assigned').classList.toggle('open');
                     document.getElementById('category').classList.remove('open');
+                    scrollToTop();
                 } else if (event.target.className == 'category') {
                     document.getElementById('category').classList.toggle('open');
                     document.getElementById('assigned').classList.remove('open');
+                    scrollToTop();
                 } else {
                     document.getElementById('category').classList.remove('open');
                     document.getElementById('assigned').classList.remove('open');
+                    scrollToTop();
                 }
                 break;
         }
     };
 
 })
+
+function scrollToTop() {
+    document.getElementById('assigned').scrollTop = 0;
+    document.getElementById('category').scrollTop = 0;
+}
 
 
 function prioButton(id) {
