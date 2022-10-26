@@ -1,6 +1,20 @@
 let users = [];
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
+let username;
+let email;
+let password;
+
+
+/**
+ * function defines user variables to inputfields
+ */
+function defineInputVariables() {
+    username = document.getElementById('username');
+    email = document.getElementById('email');
+    password = document.getElementById('password');
+}
+
 
 /**
  * function leads to login page with delay
@@ -31,9 +45,6 @@ async function init() {
  * function creates a new user and pushes him into users(Array).
  */
 async function signUp() {
-    let username = document.getElementById('username');
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
 
     if (users.find(u => u.username == username.value)) {
 
@@ -54,7 +65,7 @@ async function signUp() {
             users.push({username: username.value, email: email.value, password: password.value, tasks: ''});
             await backend.setItem('users', JSON.stringify(users));
             window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
-
+       
         }
     }
 }
@@ -64,8 +75,6 @@ async function signUp() {
  * function logs existing user into page and denies entrance to none existig users.
  */
 function login() {
-    let email = document.getElementById('email');
-    let password = document.getElementById('password');
 
     let user = users.find(u => u.email == email.value && u.password == password.value);
     console.log(user);
@@ -83,7 +92,6 @@ function login() {
  */
 function turnInputRed() {
     let elements = document.getElementsByClassName('login-single-input-container');
-    console.log(elements);
     for (let i = 0; i < elements.length; i++) {
         elements[i].style = 'border: 1px solid #ff0000;';
     }
@@ -134,9 +142,7 @@ function turnInputGray() {
 function goToResetPage() {
 
     localStorage.removeItem('NoPasswordUser')
-    let email = document.getElementById('email');
     let user = users.find(u => u.email == email.value);
-    console.log(user);
 
     if (user) {
 
