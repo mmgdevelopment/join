@@ -47,8 +47,10 @@ window.addEventListener('click', (event) => {
                 console.log(event.target.className);
                 if (event.target.className == 'assigned') {
                     document.getElementById('assigned').classList.toggle('open');
+                    document.getElementById('category').classList.remove('open');
                 } else if (event.target.className == 'category') {
                     document.getElementById('category').classList.toggle('open');
+                    document.getElementById('assigned').classList.remove('open');
                 } else {
                     document.getElementById('category').classList.remove('open');
                     document.getElementById('assigned').classList.remove('open');
