@@ -212,8 +212,9 @@ label {
 }
 
 .open {
-    max-height: 500px;
+    max-height: 200px;
     transition: max-height ease-in-out 400ms;
+    overflow: auto;
 }
 
 .color {

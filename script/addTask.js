@@ -1,4 +1,12 @@
-const buttons = ['urgent', 'medium', 'low'];
+const colors = [
+    'orange',
+    'red',
+    'green',
+    'blue',
+    'pink',
+    'yellow',
+    'ocean'
+];
 
 let categorys = [
     {
@@ -13,21 +21,44 @@ let categorys = [
 
 let contacts = [
     'You',
-    'Marcel Gregor',
+    'Kevin Lentz',
     'Steven Munk'
 ];
 
-const colors = [
-    'orange',
-    'red',
-    'green',
-    'blue',
-    'pink',
-    'yellow',
-    'ocean'
-];
-
 let categoryColor = '';
+
+
+/**
+ * open and close customized select inputs
+ */
+window.addEventListener('click', (event) => {
+    let id = event.target.parentNode.id
+    if (event.target.className != 'checkbox') {
+        switch (id) {
+            case 'category':
+                document.getElementById('category').classList.toggle('open');
+                document.getElementById('assigned').classList.remove('open');
+                break;
+            case 'assigned':
+                document.getElementById('category').classList.remove('open');
+                document.getElementById('assigned').classList.toggle('open');
+                break;
+            default:
+                console.log(event.target.className);
+                if (event.target.className == 'assigned') {
+                    document.getElementById('assigned').classList.toggle('open');
+                } else if (event.target.className == 'category') {
+                    document.getElementById('category').classList.toggle('open');
+                } else {
+                    document.getElementById('category').classList.remove('open');
+                    document.getElementById('assigned').classList.remove('open');
+                }
+                break;
+        }
+    };
+
+})
+
 
 function prioButton(id) {
     resetPrioButtons();
@@ -49,13 +80,14 @@ function prioButton(id) {
 }
 
 function resetPrioButtons() {
+    const buttons = ['urgent', 'medium', 'low'];
     buttons.forEach(button => {
         document.getElementById(button).classList = 'prioButton';
     });
 }
 
 function toggleMenu(id) {
-    document.getElementById(id).classList.toggle('open');
+    // document.getElementById(id).classList.toggle('open');
 }
 
 function renderNewCategory() {
@@ -174,7 +206,7 @@ function categorysTemplate() {
     return /*html*/`
         <span id="categoryPlaceholder" class="placeholder" onclick="toggleMenu('category')">
             <div id="firstValue">Select task Category</div>
-            <img src="./assets/selectArrow.svg" alt="">
+            <img class="category" src="./assets/selectArrow.svg" alt="">
         </span>
         <span onclick="renderNewCategory()" class="selectable category">New Category</span>
 `}
@@ -183,7 +215,7 @@ function assignedTemplate() {
     return /*html*/`
         <span class="placeholder" onclick="toggleMenu('assigned')">
             Select Contact
-            <img src="./assets/selectArrow.svg" alt="">
+            <img class="assigned" src="./assets/selectArrow.svg" alt="">
         </span>
     `
 }
