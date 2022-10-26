@@ -35,10 +35,28 @@ async function signUp() {
     let email = document.getElementById('email');
     let password = document.getElementById('password');
 
-    users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
-    await backend.setItem('users', JSON.stringify(users));
+    if (users.find(u => u.username == username.value)) {
 
-    window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+        alert('Dieser Benutzername ist bereits vergeben!');
+        clearAllInput();
+        turnInputRed();
+
+    } else {
+
+        if (users.find(u => u.email == email.value)) {
+
+            alert('Diese Email ist bereits vergeben!');
+            clearAllInput();
+            turnInputRed();
+
+        } else {
+
+            users.push({username: username.value, email: email.value, password: password.value, tasks: ''});
+            await backend.setItem('users', JSON.stringify(users));
+            window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+
+        }
+    }
 }
 
 
@@ -54,8 +72,8 @@ function login() {
     if (user) {
         window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
     } else {
+        clearAllInput();
         turnInputRed();
-        password.value = '';
     }
 }
 
@@ -64,9 +82,12 @@ function login() {
  * function turns inputborder red for a short duration
  */
 function turnInputRed() {
-    document.getElementById('email-container').style = 'border: 1px solid #ff0000;';
-    document.getElementById('password-container').style = 'border: 1px solid #ff0000;';
-    setTimeout(turnInputGray, 2500);
+    let elements = document.getElementsByClassName('login-single-input-container');
+    console.log(elements);
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style = 'border: 1px solid #ff0000;';
+    }
+    setTimeout(turnInputGray, 2000);
 }
 
 
@@ -74,8 +95,21 @@ function turnInputRed() {
  * function turns inputborder gray
  */
 function turnInputGray() {
-    document.getElementById('email-container').style = 'border: 1px solid #D1D1D1;';
-    document.getElementById('password-container').style = 'border: 1px solid #D1D1D1;';
+    let elements = document.getElementsByClassName('login-single-input-container');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].style = 'border: 1px solid #D1D1D1;';
+    }
+}
+
+
+/**
+ * function clears all input values
+ */
+ function clearAllInput() {
+    let elements = document.getElementsByClassName('login-input');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].value = '';
+    }
 }
 
 
@@ -171,10 +205,16 @@ async function saveNewPasswordFor(NewUsername, NewEmail, newPassword) {
 
 
 
+
+
+
+
+
+
+
 /**
- * hidden function (delete user with number (name))
- * @param {number} id 
+ * function deletes all user (only available in console)
  */
-async function deleteUser(id) {
+async function deleteUser() {
     await backend.deleteItem('users');
-}
+  }
