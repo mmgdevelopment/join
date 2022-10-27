@@ -71,6 +71,7 @@
     .mobile-back-arrow {
         display: flex;
         width: 80%;
+        cursor: pointer;
     }
 
     .only-dekstop {

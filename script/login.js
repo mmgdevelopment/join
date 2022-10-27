@@ -7,12 +7,36 @@ let password;
 
 
 /**
+ * function loads all saved users and defines user variables to inputfields
+ */
+async function init() {
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    defineInputVariables();
+}
+
+
+/**
  * function defines user variables to inputfields
  */
 function defineInputVariables() {
     username = document.getElementById('username');
     email = document.getElementById('email');
     password = document.getElementById('password');
+}
+
+
+/**
+ * function checks if auto log in is wanted and loggs previous user in or leads to login.html
+ */
+async function checkForAutoLogIn() {
+    let autoLogIn = localStorage.getItem('autoLogIn');
+    console.log(autoLogIn);
+    if(autoLogIn == 'false' || autoLogIn == 'null'){
+        goToLoginPageDelay();
+    } else {
+        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    }
 }
 
 
@@ -33,11 +57,35 @@ function goToLoginPage() {
 
 
 /**
- * function loads all saved users
+ * function logs existing user into page and denies entrance to none existig users.
  */
-async function init() {
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
+function logIn() {
+
+    let user = users.find(u => u.email == email.value && u.password == password.value);
+    if (user) {
+
+        setAutoLogIn();
+
+        localStorage.setItem('Logged in user-email ', user['email']);
+
+        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    } else {
+        clearAllInput();
+        turnInputRed();
+    }
+}
+
+
+/**
+ * function ckecks the checkbox and saves a value to the local storage, if user wants to be auto logged in next time or not
+ */
+function setAutoLogIn() {
+    let rememberMe = document.getElementById('remember-me');
+    if (rememberMe.checked == true) {
+        localStorage.setItem('autoLogIn', true)
+    } else {
+        localStorage.setItem('autoLogIn', false)
+    }
 }
 
 
@@ -48,7 +96,6 @@ async function signUp() {
 
     if (users.find(u => u.username == username.value)) {
 
-        alert('Dieser Benutzername ist bereits vergeben!');
         clearAllInput();
         turnInputRed();
 
@@ -56,34 +103,25 @@ async function signUp() {
 
         if (users.find(u => u.email == email.value)) {
 
-            alert('Diese Email ist bereits vergeben!');
             clearAllInput();
             turnInputRed();
 
         } else {
 
-            users.push({username: username.value, email: email.value, password: password.value, tasks: ''});
+            users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
             await backend.setItem('users', JSON.stringify(users));
             window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
-       
+
         }
     }
 }
 
 
 /**
- * function logs existing user into page and denies entrance to none existig users.
+ * function deletes all user
  */
-function login() {
-
-    let user = users.find(u => u.email == email.value && u.password == password.value);
-    console.log(user);
-    if (user) {
-        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
-    } else {
-        clearAllInput();
-        turnInputRed();
-    }
+async function deleteUser() {
+    await backend.deleteItem('users');
 }
 
 
@@ -113,7 +151,8 @@ function turnInputGray() {
 /**
  * function clears all input values
  */
- function clearAllInput() {
+function clearAllInput() {
+    document.getElementById('remember-me').checked = false;
     let elements = document.getElementsByClassName('login-input');
     for (let i = 0; i < elements.length; i++) {
         elements[i].value = '';
@@ -141,30 +180,29 @@ function turnInputGray() {
  */
 function goToResetPage() {
 
-    localStorage.removeItem('NoPasswordUser')
+
     let user = users.find(u => u.email == email.value);
+    console.log(user);
 
     if (user) {
 
-        userJSON = JSON.stringify(user);
+        let userJSON = JSON.stringify(user);
         localStorage.setItem('NoPasswordUser', userJSON);
 
         window.location.href = 'reset.html?msg=Bitte gib ein neues Passwort ein!';
 
-
     } else {
-        email.value = '';
-        alert('Es existier kein Account mit dieser E-Mail!');
+        clearAllInput();
+        turnInputRed();
     }
 }
 
 
 
-function saveNewPassword() {
+async function createNewPassword() {
 
-    let NoPasswordUser = localStorage.getItem('NoPasswordUser');
-    let user = JSON.parse(NoPasswordUser);
-    console.log(user);
+    let userJSON = localStorage.getItem('NoPasswordUser');
+    let user = JSON.parse(userJSON);
 
     let firstPassword = document.getElementById('firstPassword').value;
     let secondPassword = document.getElementById('secondPassword').value;
@@ -174,53 +212,20 @@ function saveNewPassword() {
         let userEntrie = users.find(u => u.email == user['email']);
         userEntrie['password'] = firstPassword;
 
-        const id = users.map(e => e.email).indexOf(userEntrie['email']);
-        deleteUser(id);
 
+        deleteUser();
 
-        let NewUsername = userEntrie['username'];
-        let NewEmail = userEntrie['email'];
-        let newPassword = userEntrie['password'];
+        await backend.setItem('users', JSON.stringify(users));
 
-
-
-
-        saveNewPasswordFor(NewUsername, NewEmail, newPassword);
-
-
-
+        goToLoginPage();
 
 
 
     } else {
         firstPassword = '';
         secondPassword = '';
-        alert('Dein neues Passwort stimmt nicht überein, oder ist bereits dein altes Passwort!');
+        clearAllInput();
+        turnInputRed();
     }
 
 }
-
-async function saveNewPasswordFor(NewUsername, NewEmail, newPassword) {
-    users.push({ username: NewUsername, email: NewEmail, password: newPassword});
-    await backend.setItem('users', JSON.stringify(users));
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/**
- * function deletes all user (only available in console)
- */
-async function deleteUser() {
-    await backend.deleteItem('users');
-  }
