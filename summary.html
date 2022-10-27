@@ -6,14 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="script.js"></script>
+    <script src="./script/login.js"></script>
     <script src="./script/templates.js"></script>
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <title>summary</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="includeHTML(), resetAutoLogIn()">
     <div w3-include-html="./templates/sideBar.html"></div>
+    <a href="login.html"><div style ="width: 200px;height: 200px;background-color: red;"></div></a>
+    
 
 </body>
 

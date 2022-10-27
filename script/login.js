@@ -1,6 +1,6 @@
-let users = [];
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
+let users = [];
 let username;
 let email;
 let password;
@@ -31,8 +31,7 @@ function defineInputVariables() {
  */
 async function checkForAutoLogIn() {
     let autoLogIn = localStorage.getItem('autoLogIn');
-    console.log(autoLogIn);
-    if(autoLogIn == 'false' || autoLogIn == 'null'){
+    if (autoLogIn == 'false' || autoLogIn == null) {
         goToLoginPageDelay();
     } else {
         window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
@@ -60,19 +59,30 @@ function goToLoginPage() {
  * function logs existing user into page and denies entrance to none existig users.
  */
 function logIn() {
-
-    let user = users.find(u => u.email == email.value && u.password == password.value);
+    let user = users.find(emailAndPasswordMatch());
     if (user) {
-
-        setAutoLogIn();
-
-        localStorage.setItem('Logged in user-email ', user['email']);
-
-        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+        userGetsLoggdIn(user);
     } else {
-        clearAllInput();
-        turnInputRed();
+        userDoesntGetLoggedIn();
     }
+}
+
+
+/**
+ * @returns is email and password matching?
+ */
+function emailAndPasswordMatch() {
+    return u => u.email == email.value && u.password == password.value
+}
+
+
+/**
+ * after correct email and passwor function loggs user into join
+ */
+function userGetsLoggdIn(user) {
+    setAutoLogIn();
+    localStorage.setItem('Logged in user-email ', user['email']);
+    goToSummary();
 }
 
 
@@ -90,38 +100,145 @@ function setAutoLogIn() {
 
 
 /**
+ * function sends the user to summary.html
+ */
+function goToSummary() {
+    window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+}
+
+
+/**
+ * after incorrect email and password the entrance to join will be denied and the inputs will be cleared
+ */
+function userDoesntGetLoggedIn() {
+    clearAllInput();
+    document.getElementById('remember-me').checked = false;
+    turnInputRed();
+}
+
+
+/**
  * function creates a new user and pushes him into users(Array).
  */
 async function signUp() {
-
-    if (users.find(u => u.username == username.value)) {
-
-        clearAllInput();
-        turnInputRed();
-
+    if (usernameAlreadyExists() || emailAlreadyExists()) {
+        deniedSignUp();
     } else {
-
-        if (users.find(u => u.email == email.value)) {
-
-            clearAllInput();
-            turnInputRed();
-
-        } else {
-
-            users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
-            await backend.setItem('users', JSON.stringify(users));
-            window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
-
-        }
+        createNewUser();
     }
 }
 
 
 /**
- * function deletes all user
+ * @returns looks in array for username
  */
-async function deleteUser() {
-    await backend.deleteItem('users');
+function usernameAlreadyExists() {
+    return users.find(u => u.username == username.value)
+}
+
+
+/**
+ * @returns looks in array for email
+ */
+function emailAlreadyExists() {
+    return users.find(u => u.email == email.value)
+}
+
+
+/**
+ * function deletes all inpust from sign up 
+ */
+function deniedSignUp() {
+    clearAllInput();
+    turnInputRed();
+}
+
+
+/**
+ * function creats a new user with input from sin_up.html and saves him on backend 
+ */
+async function createNewUser() {
+    users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
+    await backend.setItem('users', JSON.stringify(users));
+    window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+}
+
+
+/**
+ * function checks the email and leads the user to reset.html
+ */
+function goToResetPage() {
+    let user = emailAlreadyExists();
+    if (user) {
+        saveUserInLocalStorage(user);
+    } else {
+        clearAllInput();
+        turnInputRed();
+    }
+}
+
+
+/**
+ * funciton leads to reset.html and stores the user in local storage to change exactly his password
+ * @param {JSON} user 
+ */
+function saveUserInLocalStorage(user) {
+    let userJSON = JSON.stringify(user);
+    localStorage.setItem('NoPasswordUser', userJSON);
+    window.location.href = 'reset.html?msg=Bitte gib ein neues Passwort ein!';
+}
+
+
+/**
+ * function takes all information needed for confirming and creating a new password and then does so
+ */
+async function createNewPassword() {
+
+    let userJSON = localStorage.getItem('NoPasswordUser');
+    let user = JSON.parse(userJSON);
+    let firstPassword = document.getElementById('firstPassword').value;
+    let secondPassword = document.getElementById('secondPassword').value;
+
+    confirmTheNewPassword(user, firstPassword, secondPassword);
+
+}
+
+
+/**
+ * function checks if the passwords written are identical and if so the function changes the password
+ * @param {JSON} user 
+ * @param {any} firstPassword 
+ * @param {any} secondPassword 
+ */
+function confirmTheNewPassword(user, firstPassword, secondPassword) {
+    if (firstPassword == secondPassword) {
+        switchOldWithNewPassword(user);
+    } else {
+        clearAllInput();
+        turnInputRed();
+    }
+}
+
+
+/**
+ * function takes the old password and changes it with the new one (also in backend)
+ * @param {JSON} user 
+ */
+async function switchOldWithNewPassword(user) {
+    let userIndex = users.findIndex(u => u.email == user['email']);
+    users[userIndex]['password'] = firstPassword;
+    deleteUsers();
+    await backend.setItem('users', JSON.stringify(users));
+    localStorage.removeItem("NoPasswordUser"); 
+    goToLoginPage();
+}
+
+
+/**
+ * function leads to forgot page
+ */
+ function goToForgotPage() {
+    window.location.href = 'forgot_password.html';
 }
 
 
@@ -133,7 +250,7 @@ function turnInputRed() {
     for (let i = 0; i < elements.length; i++) {
         elements[i].style = 'border: 1px solid #ff0000;';
     }
-    setTimeout(turnInputGray, 2000);
+    setTimeout(turnInputGray, 1500);
 }
 
 
@@ -152,7 +269,6 @@ function turnInputGray() {
  * function clears all input values
  */
 function clearAllInput() {
-    document.getElementById('remember-me').checked = false;
     let elements = document.getElementsByClassName('login-input');
     for (let i = 0; i < elements.length; i++) {
         elements[i].value = '';
@@ -160,72 +276,9 @@ function clearAllInput() {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
- * function checks the email and leads the user to reset.html
+ * function deletes all user
  */
-function goToResetPage() {
-
-
-    let user = users.find(u => u.email == email.value);
-    console.log(user);
-
-    if (user) {
-
-        let userJSON = JSON.stringify(user);
-        localStorage.setItem('NoPasswordUser', userJSON);
-
-        window.location.href = 'reset.html?msg=Bitte gib ein neues Passwort ein!';
-
-    } else {
-        clearAllInput();
-        turnInputRed();
-    }
-}
-
-
-
-async function createNewPassword() {
-
-    let userJSON = localStorage.getItem('NoPasswordUser');
-    let user = JSON.parse(userJSON);
-
-    let firstPassword = document.getElementById('firstPassword').value;
-    let secondPassword = document.getElementById('secondPassword').value;
-
-    if (firstPassword == secondPassword) {
-
-        let userEntrie = users.find(u => u.email == user['email']);
-        userEntrie['password'] = firstPassword;
-
-
-        deleteUser();
-
-        await backend.setItem('users', JSON.stringify(users));
-
-        goToLoginPage();
-
-
-
-    } else {
-        firstPassword = '';
-        secondPassword = '';
-        clearAllInput();
-        turnInputRed();
-    }
-
+async function deleteUsers() {
+    await backend.deleteItem('users');
 }
