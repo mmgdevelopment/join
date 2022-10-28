@@ -10,12 +10,12 @@
     <script src="./script/login.js"></script>
 
     <link rel="stylesheet" href="./style/login.css">
-
+    <link rel="stylesheet" href="./style/loginMobile.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <title>Login</title>
 </head>
 
-<body onload="init()">
+<body onload="init(), defineInputVariables()">
 
     <!--dektop logo-->
     <a href="login.html"><img class="logo" src="assets/join_logo.svg" alt="join_logo"></a> 
@@ -28,7 +28,7 @@
 
     <!--mobile logo-->
     <div class="mobile-logo-container">
-        <a href="login.html"><img class="logo-mobile" src="assets/join_logo.svg" alt="join_logo"></a> 
+        <a href="login.html"><img class="mobile-logo" src="assets/join_logo.svg" alt="join_logo"></a> 
     </div>
 
     <div class="login-card">
@@ -36,7 +36,7 @@
         <h1>Log in</h1>
         <div class="underline"></div>
 
-        <form onsubmit="login(); return false;" class="login-card-content">
+        <form onsubmit="logIn(); return false;" class="login-card-content">
 
             <div class="mobile-login-input-container">
 
@@ -56,7 +56,7 @@
 
             <div class="login-text">
                 <div class="login-remember-container">
-                    <input class="remember-checkbox" type="checkbox">
+                    <input id="remember-me" class="remember-checkbox" type="checkbox">
                     <label class="login-remember-text">Remember me</label>
                 </div>
                 <a class="forgot-password" href="forgot_password.html">Forgot my password</a>
