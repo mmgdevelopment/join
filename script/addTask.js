@@ -1,3 +1,9 @@
+import tasks from './database.json' assert {type: 'json'};
+
+window.onload = function () {
+    includeHTML(), renderCategorys(), renderInviteSelector(), console.log(tasks);
+}
+
 const colors = [
     'orange',
     'red',
@@ -17,12 +23,47 @@ let categorys = [
         name: 'Backoffice',
         color: 'yellow'
     },
+    {
+        name: 'Marketing',
+        color: 'red'
+    },
+    {
+        name: 'Development',
+        color: 'orange'
+    },
+    {
+        name: 'Design',
+        color: 'green'
+    },
+    {
+        name: 'UI/UX',
+        color: 'ocean'
+    },
+    {
+        name: 'Sales',
+        color: 'blue'
+    },
 ];
 
 let contacts = [
     'You',
     'Kevin Lentz',
-    'Steven Munk'
+    'Steven Munk',
+    'You',
+    'Kevin Lentz',
+    'Steven Munk',
+    'You',
+    'Kevin Lentz',
+    'Steven Munk',
+    'You',
+    'Kevin Lentz',
+    'Steven Munk',
+    'You',
+    'Kevin Lentz',
+    'Steven Munk',
+    'You',
+    'Kevin Lentz',
+    'Steven Munk',
 ];
 
 let categoryColor = '';
