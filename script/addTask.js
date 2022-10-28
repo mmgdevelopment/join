@@ -1,7 +1,13 @@
 import database from './database.json' assert {type: 'json'};
 
+globalThis.database = database;
+
 window.onload = function () {
-    includeHTML(), renderCategorys(), renderInviteSelector(), console.log(database), console.log(database.tasks[1].prio);;
+    includeHTML();
+    renderCategorys();
+    renderInviteSelector();
+    console.log(database);
+    console.log(database.tasks[1].prio);
 };
 
 const colors = [
