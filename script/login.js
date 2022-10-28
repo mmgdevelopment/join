@@ -230,7 +230,7 @@ async function switchOldWithNewPassword(user) {
     deleteUsers();
     await backend.setItem('users', JSON.stringify(users));
     localStorage.removeItem("NoPasswordUser"); 
-    goToLoginPage();
+    goToSuccessReset();
 }
 
 
@@ -239,6 +239,14 @@ async function switchOldWithNewPassword(user) {
  */
  function goToForgotPage() {
     window.location.href = 'forgot_password.html';
+}
+
+
+/**
+ * function leads to success_reset.html
+ */
+function goToSuccessReset() {
+    window.location.href = 'success_reset.html';
 }
 
 
