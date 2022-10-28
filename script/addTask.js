@@ -1,8 +1,8 @@
-import tasks from './database.json' assert {type: 'json'};
+import database from './database.json' assert {type: 'json'};
 
 window.onload = function () {
-    includeHTML(), renderCategorys(), renderInviteSelector(), console.log(tasks);
-}
+    includeHTML(), renderCategorys(), renderInviteSelector(), console.log(database), console.log(database.tasks[1].prio);;
+};
 
 const colors = [
     'orange',
