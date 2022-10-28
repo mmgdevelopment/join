@@ -1,6 +1,6 @@
-import database from './database.json' assert {type: 'json'};
+// import database from './database' assert {type: 'json'};
 
-globalThis.database = database;
+// globalThis.database = database;
 
 window.onload = function () {
     includeHTML();
