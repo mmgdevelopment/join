@@ -1,3 +1,5 @@
+/****************************GENERAL*************************/
+
 body {
     margin: 0px;
     font-family: 'Inter';
@@ -38,6 +40,9 @@ body {
     margin-left: 32px;
 }
 
+/****************************GENERAL*************************/
+
+/****************************LOGIN PASSWORD SECTION*************************/
 
 .login-card {
     display: flex;
@@ -177,7 +182,9 @@ h1 {
     padding: 12px 14px;
 }
 
-/****************************FORGOT PASSWORD*************************/
+/****************************LOGIN PASSWORD SECTION*************************/
+
+/****************************FORGOT PASSWORD SECTION*************************/
 
 .forgot-card {
     display: flex;
@@ -205,6 +212,7 @@ h1 {
     position: absolute;
     top: 40px;
     left: 38px;
+    cursor: pointer;
 }
 
 .continue-btn {
@@ -237,213 +245,4 @@ h1 {
     opacity: 0.85;
 }
 
-/****************************MOBILE SECTION*************************/
-
-.mobile-backgound-first-page {
-    display: none;
-}
-
-.mobile-logo-container {
-    display: none;
-}
-
-.mobile-sign-up {
-    display: none;
-}
-
-.mobile-back-arrow {
-    display: none;
-}
-
-.only-dekstop {
-    display: block;
-}
-
-.only-mobile {
-    display: none;
-}
-
-/****************************FORGOT PASSWORD*************************/
-
-@media (max-width: 1300px) {  /** Version for small computer screens*/
-
-    .sign-up-container {
-        top: 30px;
-        right: 50px;
-    }
-
-    .logo {
-        transform: scale(0.8);
-    }
-
-}
-
-@media (max-width: 1000px) {  /** Version for very small computer screens*/
-
-    .sign-up-container {
-        top: 20px;
-        right: 20px;
-    }
-
-    .logo {
-        transform: scale(0.6);
-        top: 0px;
-        left: 20px;
-    }
-
-    .forgot-card {
-        max-width: 90%;
-    }
-
-    h1 {
-        margin-inline: 16px;
-    }
-
-    .place-blue-arrow {
-        display: none;
-    }
-
-    .mobile-back-arrow {
-        display: flex;
-        width: 80%;
-    }
-
-    .only-dekstop {
-        display: none;
-    }
-
-    .only-mobile {
-        display: block;
-    }
-
-}
-
-@media (max-width: 800px) {
-
-    body {
-        flex-direction: column;
-        justify-content: flex-start;
-    }
-
-    .first-page {
-        display: none;
-    }
-
-    .mobile-backgound-first-page {
-        width: 100%;
-        height: 100vh;
-        background-color: #2A3647;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    h1 {
-        font-size: 47px;
-        height: auto;
-    }
-
-    .logo {
-        display: none;
-    }
-
-    .mobile-logo-container {
-        display: flex;
-        width: 90%;
-        margin-bottom: 45px;
-    }
-
-    .logo-mobile {
-        transform: scale(80%);
-    }
-
-    .login-card {
-        width: 90%;
-        max-width: 450px;
-        margin-bottom: 32px;
-        gap: 30px;
-    }
-
-    .login-card-content {
-        width: 90%;
-        gap: 8px;
-    }
-
-    .mobile-login-input-container {
-        width: 100%;
-    }
-
-    .login-single-input-container {
-        width: auto;
-        height: 41px;
-        margin-bottom: 32px;
-    }
-
-    .login-input {
-        width: 80%;
-        height: 36px;
-    }
-
-    .login-text {
-        flex-direction: column-reverse;
-        gap: 24px;
-        width: 95%;
-        align-items: flex-start;
-    }
-
-    .login-button-container {
-        flex-direction: column;
-        gap: 21px;
-    }
-
-    .login-button {
-        font-size: 16px;
-        width: 180px;
-        height: 51px;
-    }
-
-    .mobile-sign-up {
-        display: flex;
-        position: relative;
-        padding-block: 16px;
-        top: 0px;
-        right: 0px;
-    }
-
-    .desktop-sign-up {
-        display: none;
-    }
-
-    .sign-btn {
-        width: auto;
-    }
-
-    .forgot-card {
-        width: 90%;
-        max-width: 450px;
-        gap: 21px;
-    }
-
-    .forgot-text {
-        margin-inline: 16px;
-    }
-
-    .login-button {
-        padding: 0px;
-    }
-
-}
-
-@media (max-width: 330px) {
-
-    .mobile-sign-up {
-        flex-direction: column;
-    }
-
-    .success-reset-button {
-        max-width: 95%;
-        width: auto;
-        height: auto;
-    }
-
-}
+/****************************FORGOT PASSWORD SECTION*************************/
