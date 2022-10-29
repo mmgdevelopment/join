@@ -59,25 +59,33 @@ function returnPrioState() {
 window.addEventListener('click', (event) => {
     let id = event.target.parentNode.id;
     if (event.target.className != 'checkbox') {
-        if (id == 'category' || id == 'assigned') {
-            openCustomSelector(id);
-            scrollToTop();
-        } else {
-            closeAllCustomSelectors();
-            scrollToTop();
-        }
+        if (!event.target.id.includes('category-'))
+            if (id == 'category' || id == 'assigned') {
+                openCustomSelector(id);
+            } else {
+                closeAllCustomSelectors();
+            }
+    };
+    id = event.target.className;
+    if (event.target.className != 'checkbox') {
+        if (!event.target.id.includes('category-'))
+            if (id == 'category' || id == 'assigned') {
+                openCustomSelector(id);
+            }
     };
 })
 
 function closeAllCustomSelectors() {
     document.getElementById('category').classList.remove('open');
     document.getElementById('assigned').classList.remove('open');
+    scrollToTop();
 }
 
 function openCustomSelector(id) {
     document.getElementById('assigned').classList.remove('open');
     document.getElementById('category').classList.remove('open');
     document.getElementById(id).classList.add('open');
+    scrollToTop();
 }
 
 function scrollToTop() {
@@ -158,7 +166,7 @@ function renderCategorys() {
 function showCategory(id) {
     let firstValue = document.getElementById('firstValue');
     firstValue.innerHTML = renderChoosenCategory(id);
-    toggleMenu('category');
+    closeAllCustomSelectors();
 }
 
 function renderInviteSelector() {
