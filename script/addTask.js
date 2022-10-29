@@ -1,11 +1,26 @@
-async function init() {
+const buttons = ['urgent', 'medium', 'low'];
+
+const colors = [
+    'orange',
+    'red',
+    'green',
+    'blue',
+    'pink',
+    'yellow',
+    'ocean'
+];
+
+let categoryColor = '';
+
+function init() {
     includeHTML();
     renderCategorys();
     renderInviteSelector();
 };
 
+
 function createTestTask() {
-    epics.forEach(epic => {
+    database.epics.forEach(epic => {
         if (epic.name == document.getElementById('firstValue').innerText) {
             const id = epic.name.slice(0, 4).toLowerCase() + (epic.tasks.length + 1).toString()
             console.log(id);
@@ -22,7 +37,7 @@ function createTestTask() {
             )
         }
     });
-    console.log(epics);
+    console.log(database.epics);
 }
 
 function returnPrioState() {
@@ -35,41 +50,7 @@ function returnPrioState() {
     return activeButton;
 };
 
-const buttons = ['urgent', 'medium', 'low'];
 
-
-const colors = [
-    'orange',
-    'red',
-    'green',
-    'blue',
-    'pink',
-    'yellow',
-    'ocean'
-];
-
-let contacts = [
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-    'You',
-    'Kevin Lentz',
-    'Steven Munk',
-];
-
-let categoryColor = '';
 
 
 /**
@@ -78,37 +59,26 @@ let categoryColor = '';
 window.addEventListener('click', (event) => {
     let id = event.target.parentNode.id;
     if (event.target.className != 'checkbox') {
-        switch (id) {
-            case 'category':
-                document.getElementById('category').classList.toggle('open');
-                document.getElementById('assigned').classList.remove('open');
-                scrollToTop();
-                break;
-            case 'assigned':
-                document.getElementById('category').classList.remove('open');
-                document.getElementById('assigned').classList.toggle('open');
-                scrollToTop();
-                break;
-            default:
-                console.log(event.target.className);
-                if (event.target.className == 'assigned') {
-                    document.getElementById('assigned').classList.toggle('open');
-                    document.getElementById('category').classList.remove('open');
-                    scrollToTop();
-                } else if (event.target.className == 'category') {
-                    document.getElementById('category').classList.toggle('open');
-                    document.getElementById('assigned').classList.remove('open');
-                    scrollToTop();
-                } else {
-                    document.getElementById('category').classList.remove('open');
-                    document.getElementById('assigned').classList.remove('open');
-                    scrollToTop();
-                }
-                break;
+        if (id == 'category' || id == 'assigned') {
+            openCustomSelector(id);
+            scrollToTop();
+        } else {
+            closeAllCustomSelectors();
+            scrollToTop();
         }
     };
-
 })
+
+function closeAllCustomSelectors() {
+    document.getElementById('category').classList.remove('open');
+    document.getElementById('assigned').classList.remove('open');
+}
+
+function openCustomSelector(id) {
+    document.getElementById('assigned').classList.remove('open');
+    document.getElementById('category').classList.remove('open');
+    document.getElementById(id).classList.add('open');
+}
 
 function scrollToTop() {
     document.getElementById('assigned').scrollTop = 0;
@@ -141,20 +111,16 @@ function resetPrioButtons() {
     });
 }
 
-function toggleMenu(id) {
-    // document.getElementById(id).classList.toggle('open');
-}
 
 function renderNewCategory() {
     document.getElementById('colorPicker').style.display = 'flex';
-    toggleMenu('category');
     document.getElementById('category').innerHTML = newCategoryTemplate();
 }
 
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        epics.push({
+        database.epics.push({
             "name": input.value,
             "color": categoryColor,
             "tasks": []
@@ -165,7 +131,7 @@ function addCategory() {
     categoryColor = '';
     renderCategorys();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (epics.length - 1).toString();
+    let index = (database.epics.length - 1).toString();
     showCategory(index);
     toggleMenu('category');
 }
@@ -199,7 +165,7 @@ function renderInviteSelector() {
     let assigned = document.getElementById('assigned');
     assigned.innerHTML = assignedTemplate();
 
-    contacts.forEach(contact => {
+    database.contacts.forEach(contact => {
         assigned.innerHTML += assignedContactsTemplate(contact);
     });
 
@@ -248,8 +214,8 @@ function inviteContactTemplate() {
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < epics.length; i++) {
-        const category = epics[i];
+    for (let i = 0; i < database.epics.length; i++) {
+        const category = database.epics[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
@@ -260,7 +226,7 @@ function renderSingleCategorys() {
 
 function categorysTemplate() {
     return /*html*/`
-        <span id="categoryPlaceholder" class="placeholder" onclick="toggleMenu('category')">
+        <span id="categoryPlaceholder" class="placeholder">
             <div id="firstValue">Select task Category</div>
             <img class="category" src="./assets/selectArrow.svg" alt="">
         </span>
@@ -269,16 +235,16 @@ function categorysTemplate() {
 
 function assignedTemplate() {
     return /*html*/`
-        <span class="placeholder" onclick="toggleMenu('assigned')">
+        <span class="placeholder">
             Select Contact
             <img class="assigned" src="./assets/selectArrow.svg" alt="">
         </span>
     `
 }
 
-function assignedContactsTemplate(name) {
+function assignedContactsTemplate(contact) {
     return /*html*/`
-    <span class="selectable assigned">${name}
+    <span class="selectable assigned">${contact.name}
         <input class="checkbox" type="checkbox" name="" id="">
     </span>
     `
@@ -294,7 +260,7 @@ function assignedInviteTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = epics[index]
+    let category = database.epics[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
