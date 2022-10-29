@@ -7,8 +7,11 @@ async function init() {
 function createTestTask() {
     epics.forEach(epic => {
         if (epic.name == document.getElementById('firstValue').innerText) {
+            const id = epic.name.slice(0, 4).toLowerCase() + (epic.tasks.length + 1).toString()
+            console.log(id);
             epic.tasks.push(
                 {
+                    id: id,
                     title: document.getElementById('title').value,
                     description: document.getElementById('description').value,
                     assignedTo: 'Marcel Gregor',
