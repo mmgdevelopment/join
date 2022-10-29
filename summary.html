@@ -5,18 +5,142 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
+
     <script src="./script/login.js"></script>
+    <script src="./script/summary.js"></script>
     <script src="./script/templates.js"></script>
+
     <link rel="stylesheet" href="./style/sideBar.css">
+    <link rel="stylesheet" href="./style/summary.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <title>summary</title>
 </head>
 
-<body onload="includeHTML(), resetAutoLogIn()">
+<!--resetAutoLogIn()-->
+
+<body onload="includeHTML()">
+
     <div w3-include-html="./templates/sideBar.html"></div>
-    <a href="login.html"><div style ="width: 200px;height: 200px;background-color: red;"></div></a>
-    
+
+    <div class="container">
+
+        <div class="title">
+            <h1>Summary</h1>
+            <img src="assets/blue_line_vertical.svg">
+            <p class="title-p">Everything in a nutshell!</p>
+        </div>
+
+        <div class="content">
+
+            <div class="overview">
+
+                <div class="top-row">
+
+                    <div class="overview-card top-row-card">
+                        <div class="card-number">
+                            5
+                        </div>
+                        <p class="card-text">
+                            Task in<br>Board
+                        </p>
+                    </div>
+
+                    <div class="overview-card top-row-card">
+                        <div class="card-number">
+                            2
+                        </div>
+                        <p class="card-text">
+                            Task in<br>Progress
+                        </p>
+                    </div>
+
+                    <div class="overview-card top-row-card">
+                        <div class="card-number">
+                            2
+                        </div>
+                        <p class="card-text">
+                            Awaiting<br>Feedback
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="overview-card mid-row-card">
+
+                    <img src="./assets/urgent_high_filled.svg">
+
+                    <div class="mid-card-urgent">
+
+                        <div class="mid-card-number">
+                            5
+                        </div>
+                        <p class="mid-card-text">
+                            Task in<br>Board
+                        </p>
+
+                    </div>
+
+                    <img class="gray-line" src="./assets/gray-line-vertical.svg">
+
+                    <div class="deadline">
+
+                        <p class="date">October 16, 2022</p>
+                        <p class="mid-card-text">Upcoming Deadline</p>
+
+                    </div>
+
+                </div>
+
+                <div class="bottom-row">
+
+                    <div class="overview-card bottom-row-card">
+
+                        <img src="./assets/pencil_filled.svg">
+                        <div style="text-align: center;">
+
+                            <div class="card-number">
+                                5
+                            </div>
+                            <p class="card-text">
+                                To-do
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="overview-card bottom-row-card">
+
+                        <img src="./assets/checked_filled.svg">
+
+                        <div style="text-align: center;">
+
+                            <div class="card-number">
+                                5
+                            </div>
+                            <p class="card-text">
+                                Done
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            </div>
+
+            <div class="greeting">
+
+            </div>
+
+        </div>
+
+    </div>
 
 </body>
 

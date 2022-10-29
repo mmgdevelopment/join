@@ -1,0 +1,139 @@
+body {
+    font-family: 'Inter';
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    margin: 0px;
+}
+
+.container {
+    width: 70%;
+    margin-top: 100px;
+    margin-left: 100px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 61px;
+    line-height: 120%;
+}
+
+.title-p {
+    font-weight: 400;
+    font-size: 27px;
+    line-height: 120%;
+}
+
+.content {
+    display: flex;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.overview-card {
+    background-color: white;
+
+    height: 170px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 26px;
+}
+
+
+
+
+
+
+.top-row {
+    display: flex;
+    gap: 40px;
+}
+
+.top-row-card {
+    flex-direction: column;
+    width: 170px;
+}
+
+.card-number {
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 120%;
+}
+
+.card-text {
+    font-size: 21px;
+    line-height: 120%;
+    margin: 0px;
+    text-align: center;
+}
+
+
+
+
+
+
+.mid-row-card {
+    gap: 30px;
+}
+
+.mid-card-urgent {
+    text-align: center;
+}
+
+.mid-card-number {
+    font-weight: 600;
+    font-size: 47px;
+    line-height: 120%;
+}
+
+.mid-card-text {
+    font-size: 16px;
+    line-height: 120%;
+    margin: 0px;
+    text-align: center;
+}
+
+.gray-line {
+    padding-inline: 36px;
+}
+
+.deadline {
+    display: flex;
+    flex-direction: column;
+}
+
+.date {
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 120%;
+    margin: 0px;
+}
+
+
+
+
+
+.bottom-row {
+    display: flex;
+    gap: 40px;
+}
+
+.bottom-row-card {
+    width: 272.5px;
+    height: 150px !important;
+    gap: 18px;
+}
