@@ -55,11 +55,6 @@ h1 {
     border-radius: 26px;
 }
 
-
-
-
-
-
 .top-row {
     display: flex;
     gap: 40px;
@@ -82,11 +77,6 @@ h1 {
     margin: 0px;
     text-align: center;
 }
-
-
-
-
-
 
 .mid-row-card {
     gap: 30px;
@@ -126,10 +116,6 @@ h1 {
     margin: 0px;
 }
 
-
-
-
-
 .bottom-row {
     display: flex;
     gap: 40px;
@@ -140,10 +126,6 @@ h1 {
     height: 150px !important;
     gap: 18px;
 }
-
-
-
-
 
 .greeting {
     display: flex;

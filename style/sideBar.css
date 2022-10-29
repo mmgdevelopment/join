@@ -72,15 +72,42 @@ a img {
     padding: 35px;
 }
 
+.mobile-logo {
+    display: none;
+}
+
 
 @media (max-width: 1100px) {
 
     header {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        height: 80px;
+        z-index: 999;
+        justify-content: center;
+    }
+
+    h3 {
+        display: none;
+    }
+
+    .profileContainer {
+        width: 90%;
+        margin: 0px;
+        justify-content: space-between;
+    }
+
+    .profileContainer img:first-child {
         display: none;
     }
 
     #logo {
         display: none;
+    }
+
+    .mobile-logo {
+        display: block;
     }
 
     .legal-notice {
