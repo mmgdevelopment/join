@@ -1,14 +1,39 @@
-// import database from './database' assert {type: 'json'};
-
-// globalThis.database = database;
-
-window.onload = function () {
+async function init() {
     includeHTML();
     renderCategorys();
     renderInviteSelector();
-    console.log(database);
-    console.log(database.tasks[1].prio);
 };
+
+function createTestTask() {
+    epics.forEach(epic => {
+        if (epic.name == document.getElementById('firstValue').innerText) {
+            epic.tasks.push(
+                {
+                    title: document.getElementById('title').value,
+                    description: document.getElementById('description').value,
+                    assignedTo: 'Marcel Gregor',
+                    dueDate: document.getElementById('dueDate').value,
+                    prio: returnPrioState(),
+                    subtasks: []
+                }
+            )
+        }
+    });
+    console.log(epics);
+}
+
+function returnPrioState() {
+    let activeButton = '';
+    buttons.forEach(button => {
+        if (document.getElementById(button).classList.contains('active')) {
+            activeButton = button;
+        };
+    });
+    return activeButton;
+};
+
+const buttons = ['urgent', 'medium', 'low'];
+
 
 const colors = [
     'orange',
@@ -18,37 +43,6 @@ const colors = [
     'pink',
     'yellow',
     'ocean'
-];
-
-let categorys = [
-    {
-        name: 'Sales',
-        color: 'pink'
-    },
-    {
-        name: 'Backoffice',
-        color: 'yellow'
-    },
-    {
-        name: 'Marketing',
-        color: 'red'
-    },
-    {
-        name: 'Development',
-        color: 'orange'
-    },
-    {
-        name: 'Design',
-        color: 'green'
-    },
-    {
-        name: 'UI/UX',
-        color: 'ocean'
-    },
-    {
-        name: 'Sales',
-        color: 'blue'
-    },
 ];
 
 let contacts = [
@@ -79,7 +73,7 @@ let categoryColor = '';
  * open and close customized select inputs
  */
 window.addEventListener('click', (event) => {
-    let id = event.target.parentNode.id
+    let id = event.target.parentNode.id;
     if (event.target.className != 'checkbox') {
         switch (id) {
             case 'category':
@@ -139,7 +133,6 @@ function prioButton(id) {
 }
 
 function resetPrioButtons() {
-    const buttons = ['urgent', 'medium', 'low'];
     buttons.forEach(button => {
         document.getElementById(button).classList = 'prioButton';
     });
@@ -158,9 +151,10 @@ function renderNewCategory() {
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        categorys.push({
-            name: input.value,
-            color: categoryColor
+        epics.push({
+            "name": input.value,
+            "color": categoryColor,
+            "tasks": []
         })
     } else {
         /* Form validation -> input required*/
@@ -168,7 +162,7 @@ function addCategory() {
     categoryColor = '';
     renderCategorys();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (categorys.length - 1).toString();
+    let index = (epics.length - 1).toString();
     showCategory(index);
     toggleMenu('category');
 }
@@ -251,8 +245,8 @@ function inviteContactTemplate() {
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < categorys.length; i++) {
-        const category = categorys[i];
+    for (let i = 0; i < epics.length; i++) {
+        const category = epics[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
@@ -297,7 +291,7 @@ function assignedInviteTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = categorys[index]
+    let category = epics[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>

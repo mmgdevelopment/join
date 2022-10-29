@@ -1,0 +1,68 @@
+{
+    "epics": [
+        {
+            "name": "backoffice",
+            "color": "yellow",
+            "tasks": [
+                {
+                    "id": "bo1",
+                    "name": "accounting invoice",
+                    "description": "check-invoice",
+                    "subtasks": [
+                        "null"
+                    ],
+                    "contacts": [
+                        "Peter",
+                        "Fritz"
+                    ],
+                    "priority": "low"
+                },
+                {
+                    "id": "bo2",
+                    "name": "accounting something",
+                    "description": "check-something",
+                    "subtasks": [
+                        "check one",
+                        "check the other"
+                    ],
+                    "contacts": [
+                        "Peter"
+                    ],
+                    "priority": "medium"
+                }
+            ]
+        },
+        {
+            "name": "sales",
+            "color": "pink",
+            "tasks": [
+                {
+                    "id": "s1",
+                    "name": "more sales",
+                    "description": "check how to get more sales on colors",
+                    "subtasks": [
+                        "null"
+                    ],
+                    "contacts": [
+                        "Peter",
+                        "Fritz"
+                    ],
+                    "priority": "high"
+                },
+                {
+                    "id": "s2",
+                    "name": "write recipe",
+                    "description": "write recipes in new database",
+                    "subtasks": [
+                        "check one",
+                        "check the other"
+                    ],
+                    "contacts": [
+                        "Peter"
+                    ],
+                    "priority": "medium"
+                }
+            ]
+        }
+    ]
+}
