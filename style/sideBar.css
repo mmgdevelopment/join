@@ -73,10 +73,48 @@ a img {
 }
 
 
-/* @media (max-width: 1100px) {
+@media (max-width: 1100px) {
 
     header {
         display: none;
     }
 
-} */
+    #logo {
+        display: none;
+    }
+
+    .legal-notice {
+        display: none;
+    }
+
+    nav {
+        position: fixed;
+        top: auto;
+        bottom: 0px;
+        right: 0px;
+        height: 80px;
+        z-index: 999;
+    }
+
+    .navbar {
+        height: inherit;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    a {
+        height: inherit;
+        width: 80px;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    a img {
+        padding: 0px;
+        height: 21px;
+    }
+
+
+}
