@@ -15,7 +15,8 @@ body {
 .title {
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
+    padding-block: 28px;
 }
 
 h1 {
@@ -32,6 +33,7 @@ h1 {
 
 .content {
     display: flex;
+    gap: 40px;
 }
 
 .overview {
@@ -88,6 +90,7 @@ h1 {
 
 .mid-row-card {
     gap: 30px;
+    height: 150px !important;
 }
 
 .mid-card-urgent {
@@ -136,4 +139,31 @@ h1 {
     width: 272.5px;
     height: 150px !important;
     gap: 18px;
+}
+
+
+
+
+
+.greeting {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 47px;
+    line-height: 120%;
+    margin: 0px;
+}
+
+.name {
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 120%;
+    margin: 0px;
+    color: #29ABE2;
+    ;
+
 }
