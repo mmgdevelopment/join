@@ -1,6 +1,7 @@
 let database = {
     tasks: [
         {
+            "id": "m1",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
@@ -20,6 +21,7 @@ let database = {
             ]
         },
         {
+            "id": "m2",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
@@ -39,6 +41,7 @@ let database = {
             ]
         },
         {
+            "id": "m3",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
@@ -58,6 +61,7 @@ let database = {
             ]
         },
         {
+            "id": "m4",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
@@ -77,6 +81,7 @@ let database = {
             ]
         },
         {
+            "id": "m5",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
@@ -96,6 +101,7 @@ let database = {
             ]
         },
         {
+            "id": "m6",
             title: "Test Titel",
             description: "TEst Description",
             categoryName: "Marketing",
