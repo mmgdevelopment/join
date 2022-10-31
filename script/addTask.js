@@ -1,3 +1,5 @@
+setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+
 const buttons = ['urgent', 'medium', 'low'];
 
 const colors = [
@@ -12,23 +14,35 @@ const colors = [
 
 let assignedTo = [];
 
+let users = [];
+
+let user;
+
 let categoryColor = '';
 
-function init() {
+async function init() {
+
     includeHTML();
     renderCategorys();
     renderInviteSelector();
     setCategoryEventListener();
     setAssignedEventListener();
+    await loadData();
 };
 
+async function loadData() {
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    let emailUser = localStorage.getItem('user-email');
+    user = users.find(u => u.email == emailUser);
+}
 
-function createTestTask() {
-    database.epics.forEach(epic => {
-        if (epic.name == document.getElementById('firstValue').innerText) {
-            const id = epic.name.slice(0, 4).toLowerCase() + (epic.tasks.length + 1).toString()
+async function createTestTask() {
+    user.tasks.forEach(task => {
+        if (task.name == document.getElementById('firstValue').innerText) {
+            const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
             console.log(id);
-            epic.tasks.push(
+            task.tasks.push(
                 {
                     id: id,
                     title: document.getElementById('title').value,
@@ -41,7 +55,12 @@ function createTestTask() {
             )
         }
     });
-    console.log(database.epics);
+    console.log(user.tasks);
+    let emailUser = localStorage.getItem('user-email');
+    const i = users.findIndex(u => u.email == emailUser);
+    users[i] = user;
+    await backend.setItem('users', JSON.stringify(users));
+
 }
 
 function returnPrioState() {
@@ -53,9 +72,6 @@ function returnPrioState() {
     });
     return activeButton;
 };
-
-
-
 
 /**
  * open and close customized select inputs
@@ -77,7 +93,6 @@ function setAssignedEventListener() {
 
     })
 }
-
 
 window.addEventListener('click', (event) => {
     if (event.target.className != 'placeholder' &&
