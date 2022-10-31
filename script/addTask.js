@@ -22,7 +22,6 @@ function init() {
     setAssignedEventListener();
 };
 
-
 function createTestTask() {
     database.epics.forEach(epic => {
         if (epic.name == document.getElementById('firstValue').innerText) {
@@ -54,9 +53,6 @@ function returnPrioState() {
     return activeButton;
 };
 
-
-
-
 /**
  * open and close customized select inputs
  */
@@ -77,7 +73,6 @@ function setAssignedEventListener() {
 
     })
 }
-
 
 window.addEventListener('click', (event) => {
     if (event.target.className != 'placeholder' &&
