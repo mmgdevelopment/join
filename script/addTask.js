@@ -16,6 +16,8 @@ function init() {
     includeHTML();
     renderCategorys();
     renderInviteSelector();
+    setCategoryEventListener();
+    setAssignedEventListener();
 };
 
 
@@ -56,22 +58,29 @@ function returnPrioState() {
 /**
  * open and close customized select inputs
  */
+
+function setCategoryEventListener() {
+    const categoryPlaceholder = document.getElementById('categoryPlaceholder');
+    categoryPlaceholder.addEventListener('click', () => {
+        document.getElementById('category').classList.toggle('open');
+        document.getElementById('assigned').classList.remove('open');
+    })
+}
+
+function setAssignedEventListener() {
+    const assignedPlaceholder = document.getElementById('assignedPlaceholder');
+    assignedPlaceholder.addEventListener('click', () => {
+        document.getElementById('assigned').classList.toggle('open');
+        document.getElementById('category').classList.remove('open');
+
+    })
+}
+
+
 window.addEventListener('click', (event) => {
-    let id = event.target.parentNode.id;
-    if (event.target.className != 'checkbox') {
-        if (!event.target.id.includes('category-'))
-            if (id == 'category' || id == 'assigned') {
-                openCustomSelector(id);
-            } else {
-                closeAllCustomSelectors();
-            }
-    };
-    id = event.target.className;
-    if (event.target.className != 'checkbox') {
-        if (!event.target.id.includes('category-'))
-            if (id == 'category' || id == 'assigned') {
-                openCustomSelector(id);
-            }
+    if (event.target.className != 'placeholder' && event.target.className != 'category' && event.target.className != 'selectable assigned') {
+        closeAllCustomSelectors();
+        console.log(event.target.className);
     };
 })
 
@@ -141,7 +150,7 @@ function addCategory() {
     document.getElementById('colorPicker').style.display = 'none';
     let index = (database.epics.length - 1).toString();
     showCategory(index);
-    toggleMenu('category');
+    setCategoryEventListener();
 }
 
 function colorPicker(id) {
@@ -192,6 +201,7 @@ function inviteContact() {
     } else {
         /**form Validation -> input required */
     }
+    setAssignedEventListener();
 }
 
 function sendInviteMail(value) { }
@@ -203,7 +213,7 @@ function newCategoryTemplate() {
     <div class="newCategory">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
-            <img onclick="renderCategorys()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderCategorys(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
             <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
@@ -214,7 +224,7 @@ function inviteContactTemplate() {
     <div class="newCategory">
         <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
         <div class="createClearContainer">
-            <img onclick="renderInviteSelector()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderInviteSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
             <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
@@ -243,7 +253,7 @@ function categorysTemplate() {
 
 function assignedTemplate() {
     return /*html*/`
-        <span class="placeholder">
+        <span id="assignedPlaceholder" class="placeholder">
             Select Contact
             <img class="assigned" src="./assets/selectArrow.svg" alt="">
         </span>
