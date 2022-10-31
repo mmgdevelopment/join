@@ -10,6 +10,8 @@ const colors = [
     'ocean'
 ];
 
+let assignedTo = [];
+
 let categoryColor = '';
 
 function init() {
@@ -78,7 +80,11 @@ function setAssignedEventListener() {
 
 
 window.addEventListener('click', (event) => {
-    if (event.target.className != 'placeholder' && event.target.className != 'category' && event.target.className != 'selectable assigned') {
+    if (event.target.className != 'placeholder' &&
+        event.target.className != 'category' &&
+        event.target.className != 'selectable assigned' &&
+        event.target.className != 'checkbox'
+    ) {
         closeAllCustomSelectors();
         console.log(event.target.className);
     };
@@ -90,12 +96,12 @@ function closeAllCustomSelectors() {
     scrollToTop();
 }
 
-function openCustomSelector(id) {
-    document.getElementById('assigned').classList.remove('open');
-    document.getElementById('category').classList.remove('open');
-    document.getElementById(id).classList.add('open');
-    scrollToTop();
-}
+// function openCustomSelector(id) {
+//     document.getElementById('assigned').classList.remove('open');
+//     document.getElementById('category').classList.remove('open');
+//     document.getElementById(id).classList.add('open');
+//     scrollToTop();
+// }
 
 function scrollToTop() {
     document.getElementById('assigned').scrollTop = 0;
@@ -181,9 +187,10 @@ function showCategory(id) {
 function renderInviteSelector() {
     let assigned = document.getElementById('assigned');
     assigned.innerHTML = assignedTemplate();
-
+    let id = 0
     database.contacts.forEach(contact => {
-        assigned.innerHTML += assignedContactsTemplate(contact);
+        assigned.innerHTML += assignedContactsTemplate(contact, id);
+        id++;
     });
 
     assigned.innerHTML += assignedInviteTemplate();
@@ -205,6 +212,34 @@ function inviteContact() {
 }
 
 function sendInviteMail(value) { }
+
+function toggleCheckbox(id) {
+    const checkbox = document.getElementById(`check-${id}`);
+    checkbox.toggleAttribute('checked',);
+    renderAssignedContacts();
+}
+
+function renderAssignedContacts() {
+    const checkboxes = document.getElementsByClassName('checkbox');
+    for (let i = 0; i < checkboxes.length; i++) {
+        const checkbox = checkboxes[i];
+        if (checkbox.checked) {
+            const id = checkbox.id.slice(-1);
+            const name = document.getElementById(`contact-${id}`).innerText;
+            const nameAsArray = name.split(' ');
+            const foreName = nameAsArray[0];
+            const lastName = nameAsArray[1];
+            assignedTo.push(foreName.slice(0, 1) + lastName.slice(0, 1));
+        }
+
+    };
+    document.getElementById('assignedTo').innerHTML = '';
+    assignedTo.forEach(contact => {
+        document.getElementById('assignedTo').innerHTML += assignedToAvatarsTemplate(contact);
+    });
+
+    assignedTo = [];
+}
 
 /***********************HTML Templates**************************/
 
@@ -260,10 +295,10 @@ function assignedTemplate() {
     `
 }
 
-function assignedContactsTemplate(contact) {
+function assignedContactsTemplate(contact, id) {
     return /*html*/`
-    <span class="selectable assigned">${contact.name}
-        <input class="checkbox" type="checkbox" name="" id="">
+    <span onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
+        <input class="checkbox" type="checkbox" name="" id="check-${id}">
     </span>
     `
 }
@@ -282,5 +317,11 @@ function renderChoosenCategory(id) {
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
+    `
+}
+
+function assignedToAvatarsTemplate(shortName) {
+    return /*html*/ `
+    <div class="assignedTo">${shortName}</div>
     `
 }

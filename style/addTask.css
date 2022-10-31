@@ -337,3 +337,16 @@ label {
     filter: brightness(0);
     padding: 2px;
 }
+
+#assignedTo {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px;
+}
+
+.assignedTo {
+    background-color: aquamarine;
+    padding: 15px;
+    border-radius: 50%;
+}
