@@ -1,3 +1,5 @@
+setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+
 const buttons = ['urgent', 'medium', 'low'];
 
 const colors = [
@@ -12,15 +14,26 @@ const colors = [
 
 let assignedTo = [];
 
+let useres = [];
+
 let categoryColor = '';
 
-function init() {
+async function init() {
+
     includeHTML();
     renderCategorys();
     renderInviteSelector();
     setCategoryEventListener();
     setAssignedEventListener();
+    await loadData();
 };
+
+async function loadData() {
+    await downloadFromServer();
+    users = JSON.parse(backend.getItem('users')) || [];
+    let emailUser = localStorage.getItem('user-email');
+    let user = users.find(u => u.email == emailUser);
+}
 
 function createTestTask() {
     database.epics.forEach(epic => {
