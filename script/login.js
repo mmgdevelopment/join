@@ -13,6 +13,7 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineInputVariables();
+    setTimeout(startAnimation, 500);
 }
 
 
@@ -27,7 +28,17 @@ function defineInputVariables() {
 
 
 /**
- * function checks if auto log in is wanted and loggs previous user in or leads to login.html
+ * function renders animation for first load of the site
+ */
+function startAnimation() {
+    document.getElementById('logo').classList.add('logo');
+    document.getElementById('login-card').classList.add('opacity-animation');
+    document.getElementById('sign-in').classList.add('opacity-animation');
+}
+
+
+/**
+ * function checks if auto log in is wanted and loggs previous user in or leads to index.html
  */
 async function checkForAutoLogIn() {
     let autoLogIn = localStorage.getItem('autoLogIn');
@@ -51,7 +62,7 @@ function goToLoginPageDelay() {
  * function leads to login page
  */
 function goToLoginPage() {
-    window.location.href = 'login.html';
+    window.location.href = 'index.html';
 }
 
 
@@ -171,7 +182,7 @@ function deniedSignUp() {
 async function createNewUser() {
     users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
     await backend.setItem('users', JSON.stringify(users));
-    window.location.href = 'login.html?msg=Du hast dich erfolgreich registriert!';
+    window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert!';
 }
 
 

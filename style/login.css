@@ -13,10 +13,19 @@ body {
 }
 
 
+.logo-big {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: scale(2.5);
+    transition: 500ms ease-in-out;    
+}
+
 .logo {
     position: absolute;
-    top: 50px;
-    left: 70px;
+    top: 80px;
+    left: 77px;
+    transform: scale(1);
     cursor: pointer;
 }
 
@@ -26,8 +35,11 @@ body {
     align-items: center;
 
     position: absolute;
-    top: 50px;
-    right: 70px;
+    top: 67px;
+    right: 114px;
+
+    opacity: 0;
+    transition: ease-in-out 500ms;
 }
 
 .sign-up-container-text {
@@ -37,7 +49,7 @@ body {
 .sign-btn {
     font-size: 16px !important;
     padding: 16px !important;
-    margin-left: 32px;
+    margin-left: 35px;
 }
 
 /****************************GENERAL*************************/
@@ -48,14 +60,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 
     width: 652px;
-    padding: 35px 0px;
-    gap: 35px;
+    height: 513px;
+    gap: 34px;
 
     background-color: #FFFFFF;
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
+
+    opacity: 0;
+    transition: ease-in-out 500ms;
+}
+
+.opacity-animation {
+    opacity: 1;
 }
 
 h1 {
@@ -65,8 +85,6 @@ h1 {
     line-height: 120%;
     margin: 0px;
     height: 64px;
-
-    text-align: center;
 }
 
 .underline {
@@ -88,7 +106,7 @@ h1 {
     justify-content: space-between;
     align-items: center;
     padding: 13px 21px;
-    margin-bottom: 50px;
+    margin-bottom: 49px;
 
     width: 422px;
     height: 51px;
@@ -141,10 +159,6 @@ h1 {
 .forgot-password {
     color: #29ABE2;
     text-decoration: none;
-}
-
-.forgot-password:hover {
-    text-decoration: underline #29ABE2;
 }
 
 .login-button-container {
@@ -246,3 +260,17 @@ h1 {
 }
 
 /****************************FORGOT PASSWORD SECTION*************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
+

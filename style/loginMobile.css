@@ -1,10 +1,6 @@
 /****************************MOBILE CSS*************************/
 
-
 /** Only mobile displayed*/
-.mobile-backgound-first-page {
-    display: none;
-}
 
 .mobile-logo-container {
     display: none;
@@ -28,7 +24,7 @@
 
 
 /** Version for small computer screens*/
-@media (max-width: 1300px) {  
+@media (max-width: 1100px) {  
 
     .sign-up-container {
         top: 30px;
@@ -36,6 +32,8 @@
     }
 
     .logo {
+        top: 20px;
+        left: 50px;
         transform: scale(0.8);
     }
 
@@ -44,17 +42,6 @@
 
 /** Version for Laptops*/
 @media (max-width: 1000px) {  
-
-    .sign-up-container {
-        top: 20px;
-        right: 20px;
-    }
-
-    .logo {
-        transform: scale(0.6);
-        top: 0px;
-        left: 20px;
-    }
 
     .forgot-card {
         max-width: 90%;
@@ -86,33 +73,25 @@
 
 
 /** Version for Cellphones*/
-@media (max-width: 800px) { 
+@media (max-width: 850px) { 
 
     body {
         flex-direction: column;
         justify-content: flex-start;
     }
 
-    .first-page {
+    .logo {
         display: none;
-    }
-
-    .mobile-backgound-first-page {
-        width: 100%;
-        height: 100vh;
-        background-color: #2A3647;
-        display: flex;
-        align-items: center;
-        justify-content: center;
     }
 
     h1 {
         font-size: 47px;
         height: auto;
+        line-height: 40px;
     }
 
-    .logo {
-        display: none;
+    .underline {
+        width: 80px;
     }
 
     .mobile-logo-container {
@@ -126,9 +105,8 @@
     }
 
     .login-card {
-        width: 90%;
-        max-width: 450px;
-        margin-bottom: 32px;
+        width: 372px;
+        height: 573px;
         gap: 30px;
     }
 
@@ -138,13 +116,16 @@
     }
 
     .mobile-login-input-container {
-        width: 100%;
+        margin-bottom: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 49px;
     }
 
     .login-single-input-container {
-        width: auto;
+        width: 327px;
         height: 41px;
-        margin-bottom: 32px;
+        margin: 0px;
     }
 
     .login-input {
@@ -154,9 +135,10 @@
 
     .login-text {
         flex-direction: column-reverse;
-        gap: 24px;
-        width: 95%;
         align-items: flex-start;
+        gap: 30px;
+        width: 327px;
+        margin-bottom: 30px;
     }
 
     .login-button-container {
@@ -211,9 +193,7 @@
     }
 
     .success-reset-button {
-        max-width: 95%;
-        width: auto;
-        height: auto;
+        width: 327px;
     }
 
 }
