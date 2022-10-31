@@ -81,7 +81,7 @@ function emailAndPasswordMatch() {
  */
 function userGetsLoggdIn(user) {
     setAutoLogIn();
-    localStorage.setItem('Logged in user-email ', user['email']);
+    localStorage.setItem('Logged in user-email', user['email']);
     goToSummary();
 }
 
