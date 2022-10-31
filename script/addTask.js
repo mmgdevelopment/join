@@ -33,7 +33,7 @@ function createTestTask() {
                     id: id,
                     title: document.getElementById('title').value,
                     description: document.getElementById('description').value,
-                    assignedTo: 'Marcel Gregor',
+                    assignedTo: assignedTo,
                     dueDate: document.getElementById('dueDate').value,
                     prio: returnPrioState(),
                     subtasks: []
@@ -83,7 +83,8 @@ window.addEventListener('click', (event) => {
     if (event.target.className != 'placeholder' &&
         event.target.className != 'category' &&
         event.target.className != 'selectable assigned' &&
-        event.target.className != 'checkbox'
+        event.target.className != 'checkbox' &&
+        event.target.className != 'assigned'
     ) {
         closeAllCustomSelectors();
         console.log(event.target.className);
@@ -96,18 +97,10 @@ function closeAllCustomSelectors() {
     scrollToTop();
 }
 
-// function openCustomSelector(id) {
-//     document.getElementById('assigned').classList.remove('open');
-//     document.getElementById('category').classList.remove('open');
-//     document.getElementById(id).classList.add('open');
-//     scrollToTop();
-// }
-
 function scrollToTop() {
     document.getElementById('assigned').scrollTop = 0;
     document.getElementById('category').scrollTop = 0;
 }
-
 
 function prioButton(id) {
     resetPrioButtons();
@@ -133,7 +126,6 @@ function resetPrioButtons() {
         document.getElementById(button).classList = 'prioButton';
     });
 }
-
 
 function renderNewCategory() {
     document.getElementById('colorPicker').style.display = 'flex';
@@ -220,25 +212,24 @@ function toggleCheckbox(id) {
 }
 
 function renderAssignedContacts() {
+    assignedTo = [];
     const checkboxes = document.getElementsByClassName('checkbox');
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         if (checkbox.checked) {
             const id = checkbox.id.slice(-1);
             const name = document.getElementById(`contact-${id}`).innerText;
-            const nameAsArray = name.split(' ');
-            const foreName = nameAsArray[0];
-            const lastName = nameAsArray[1];
-            assignedTo.push(foreName.slice(0, 1) + lastName.slice(0, 1));
+            assignedTo.push(name);
         }
-
     };
     document.getElementById('assignedTo').innerHTML = '';
     assignedTo.forEach(contact => {
-        document.getElementById('assignedTo').innerHTML += assignedToAvatarsTemplate(contact);
+        const nameAsArray = contact.split(' ');
+        const foreName = nameAsArray[0];
+        const lastName = nameAsArray[1];
+        document.getElementById('assignedTo').innerHTML += assignedToAvatarsTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
     });
 
-    assignedTo = [];
 }
 
 /***********************HTML Templates**************************/
