@@ -81,7 +81,7 @@ function emailAndPasswordMatch() {
  */
 function userGetsLoggdIn(user) {
     setAutoLogIn();
-    localStorage.setItem('Logged in user-email', user['email']);
+    saveLoggedInUser(user);
     goToSummary();
 }
 
@@ -96,6 +96,17 @@ function setAutoLogIn() {
     } else {
         localStorage.setItem('autoLogIn', false)
     }
+}
+
+
+/**
+ * function saves logged in user information to local storage
+ * @param {JSON} user 
+ */
+function saveLoggedInUser(user) {
+    localStorage.setItem('user-username', user['username']);
+    localStorage.setItem('user-email', user['email']);
+    localStorage.setItem('Go to summary from LogIn', true);
 }
 
 
@@ -229,7 +240,7 @@ async function switchOldWithNewPassword(user) {
     users[userIndex]['password'] = firstPassword;
     deleteUsers();
     await backend.setItem('users', JSON.stringify(users));
-    localStorage.removeItem("NoPasswordUser"); 
+    localStorage.removeItem("NoPasswordUser");
     goToSuccessReset();
 }
 
@@ -237,7 +248,7 @@ async function switchOldWithNewPassword(user) {
 /**
  * function leads to forgot page
  */
- function goToForgotPage() {
+function goToForgotPage() {
     window.location.href = 'forgot_password.html';
 }
 

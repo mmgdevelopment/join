@@ -9,6 +9,7 @@ body {
 }
 
 .container {
+    display: none;
     width: 86%;
 }
 
@@ -156,5 +157,16 @@ h2 {
 }
 
 .only-mobile {
+    display: none;
+}
+
+.mobile-good-morning-body {
+    height: 100vh;
+    align-items: center;
+    margin: 0px;
+    text-align: center;
+}
+
+#mobile-greeting {
     display: none;
 }
