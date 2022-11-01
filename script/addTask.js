@@ -21,13 +21,13 @@ let user;
 let categoryColor = '';
 
 async function init() {
-
+    await loadData();
     includeHTML();
     renderCategorys();
     renderInviteSelector();
     setCategoryEventListener();
     setAssignedEventListener();
-    await loadData();
+
 };
 
 async function loadData() {
@@ -35,6 +35,34 @@ async function loadData() {
     users = JSON.parse(backend.getItem('users')) || [];
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
+
+    checkIfCategorysExist();
+}
+
+function checkIfCategorysExist() {
+    if (user.tasks == '') {
+        user.tasks = taskTemplate();
+    }
+}
+
+function taskTemplate() {
+    return [
+        {
+            "name": "Backoffice",
+            "color": "blue",
+            "tasks": []
+        },
+        {
+            "name": 'Marketing',
+            "color": 'red',
+            "tasks": []
+        },
+        {
+            "name": 'Development',
+            "color": 'orange',
+            "tasks": []
+        }
+    ]
 }
 
 async function createTestTask() {
@@ -273,8 +301,8 @@ function inviteContactTemplate() {
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < database.epics.length; i++) {
-        const category = database.epics[i];
+    for (let i = 0; i < user.tasks.length; i++) {
+        const category = user.tasks[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
