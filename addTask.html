@@ -52,13 +52,13 @@
                     </div>
                 </div>
 
-
                 <div class="inputContainer">
                     <label for="customSelect">Assigned</label>
                     <div id="assigned" class="customSelect">
                         <!-- Content will be rendered by js-->
                     </div>
                     <div id="assignedTo">
+                        <!-- Content will be rendered by js-->
                     </div>
                 </div>
             </div>
@@ -87,7 +87,29 @@
                 </div>
                 <div class="inputContainer">
                     <label for="subtask">Subtasks</label>
-                    <input type="text" placeholder="Add new subtask" id="subtask">
+                    <div id="subtask">
+                        <div class="input" onclick="renderSubtaskInput()">
+                            Add new subtask
+                        </div>
+                    </div>
+                    <ul id="subtaskList">
+                        <div>
+                            <input type="checkbox" name="" id="">
+                            <span>Subtask 1</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="">
+                            <span>Subtask 1</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="">
+                            <span>Subtask 1</span>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="">
+                            <span>Subtask 1</span>
+                        </div>
+                    </ul>
                 </div>
 
                 <div class="buttonContainer">
@@ -101,9 +123,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 </body>
 
 </html>

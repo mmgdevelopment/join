@@ -12,7 +12,7 @@ h1 {
     font-size: 61px;
 }
 
-input, select, button {
+input, select, button, .input {
     border: 1px solid #D1D1D1;
     font-weight: 400;
     font-size: 21px;
@@ -20,6 +20,15 @@ input, select, button {
     background-color: #FFFFFF;
     padding: 12px;
     cursor: pointer;
+}
+
+
+.p-0 {
+    padding: 0;
+}
+
+#subtaskInput {
+    padding: 0;
 }
 
 input:focus {
@@ -309,15 +318,15 @@ label {
     align-items: center;
 }
 
-.newCategory img:last-child {
+.customSelectorInput img:last-child {
     filter: brightness(0);
 }
 
-.newCategory img {
+.customSelectorInput img {
     padding: 10px;
 }
 
-.newCategory {
+.customSelectorInput {
     display: flex;
     align-items: center;
     justify-content: space-between;

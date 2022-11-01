@@ -267,6 +267,18 @@ function renderAssignedContacts() {
         document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
     });
 
+};
+
+function renderSubtaskInput() {
+    document.getElementById('subtask').innerHTML = subtaskInputTemplate();
+}
+
+function renderAddSubtaskContainer() {
+    document.getElementById('subtask').innerHTML = addSubtaskContainerTemplate();
+}
+
+function addSubtask() {
+
 }
 
 /***********************HTML Templates**************************/
@@ -282,7 +294,7 @@ function categorySelectorTemplate() {
 
 function newCategoryTemplate() {
     return /*html*/`
-    <div class="newCategory">
+    <div class="customSelectorInput">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
             <img onclick="renderCategorySelector(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
@@ -305,7 +317,7 @@ function renderSingleCategorys() {
 
 function inviteContactInputTemplate() {
     return /*html*/`
-    <div class="newCategory">
+    <div class="customSelectorInput">
         <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
         <div class="createClearContainer">
             <img onclick="renderContactSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
@@ -352,6 +364,26 @@ function renderChoosenCategory(id) {
 function assignedToContactCircleTemplate(shortName) {
     return /*html*/ `
     <div class="assignedTo">${shortName}</div>
+    `
+}
+
+function subtaskInputTemplate() {
+    return /*html*/ `
+      <div class="customSelectorInput input p-0">
+        <input id="categoryInput" class="noBorder" placeholder="Add new subtask" type="text">
+        <div class="createClearContainer">
+            <img onclick="renderAddSubtaskContainer()" src="./assets/clear.svg" alt=""> |
+            <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
+        </div>
+    </div>
+    `
+}
+
+function addSubtaskContainerTemplate() {
+    return /*html*/ `
+        <div class="input" onclick="renderSubtaskInput()">
+            Add new subtask
+        </div>
     `
 }
 
