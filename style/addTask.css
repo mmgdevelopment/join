@@ -27,10 +27,6 @@ input, select, button, .input {
     padding: 0;
 }
 
-#subtaskInput {
-    padding: 0;
-}
-
 input:focus {
     outline: none;
     border: 1px solid black;
@@ -358,4 +354,10 @@ label {
     background-color: aquamarine;
     padding: 15px;
     border-radius: 50%;
+}
+
+ul {
+    padding: 0;
+    max-height: 120px;
+    overflow: auto;
 }

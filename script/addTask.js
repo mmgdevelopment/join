@@ -72,7 +72,7 @@ async function createTestTask() {
                     assignedTo: assignedTo,
                     dueDate: document.getElementById('dueDate').value,
                     prio: returnPrioState(),
-                    subtasks: []
+                    subtasks: getSubtasks()
                 }
             )
         }
@@ -168,6 +168,7 @@ function resetPrioButtons() {
 function renderNewCategoryInput() {
     document.getElementById('colorPicker').style.display = 'flex';
     document.getElementById('category').innerHTML = newCategoryTemplate();
+    document.getElementById('categoryInput').focus();
 }
 
 function addCategory() {
@@ -227,6 +228,8 @@ function renderContactSelector() {
 
 function renderInviteContactInput() {
     document.getElementById('assigned').innerHTML = inviteContactInputTemplate();
+    document.getElementById('contactInput').focus();
+
 }
 
 function inviteContact() {
@@ -271,6 +274,8 @@ function renderAssignedContacts() {
 
 function renderSubtaskInput() {
     document.getElementById('subtask').innerHTML = subtaskInputTemplate();
+    document.getElementById('subtaskInput').focus();
+
 }
 
 function renderAddSubtaskContainer() {
@@ -278,7 +283,24 @@ function renderAddSubtaskContainer() {
 }
 
 function addSubtask() {
+    let subtask = document.getElementById('subtaskInput').value;
+    let id = document.getElementsByClassName('subtaskCheckbox').length
+    document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask, id);
+    renderSubtaskInput();
+}
 
+function getSubtasks() {
+    let subtasks = [];
+    let allSubtasks = document.getElementsByClassName('subtaskCheckbox');
+    for (let i = 0; i < allSubtasks.length; i++) {
+        const subtask = allSubtasks[i];
+        if (subtask.checked) {
+            let id = subtask.id.slice(-1);
+            let value = document.getElementById(`subtask-${id}`).innerText;
+            subtasks.push(value);
+        };
+    };
+    return subtasks;
 }
 
 /***********************HTML Templates**************************/
@@ -370,10 +392,10 @@ function assignedToContactCircleTemplate(shortName) {
 function subtaskInputTemplate() {
     return /*html*/ `
       <div class="customSelectorInput input p-0">
-        <input id="categoryInput" class="noBorder" placeholder="Add new subtask" type="text">
+        <input id="subtaskInput" class="noBorder" placeholder="Add new subtask" type="text">
         <div class="createClearContainer">
             <img onclick="renderAddSubtaskContainer()" src="./assets/clear.svg" alt=""> |
-            <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
+            <img onclick="addSubtask()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
     `
@@ -383,6 +405,15 @@ function addSubtaskContainerTemplate() {
     return /*html*/ `
         <div class="input" onclick="renderSubtaskInput()">
             Add new subtask
+        </div>
+    `
+}
+
+function subtasklistTemplate(subtask, id) {
+    return /*html*/ `
+        <div>
+            <input checked="true" type="checkbox" id="subCheck-${id}" class="subtaskCheckbox">
+            <span id="subtask-${id}">${subtask}</span>
         </div>
     `
 }
