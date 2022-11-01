@@ -27,7 +27,6 @@ async function init() {
     renderInviteSelector();
     setCategoryEventListener();
     setAssignedEventListener();
-
 };
 
 async function loadData() {
@@ -35,41 +34,31 @@ async function loadData() {
     users = JSON.parse(backend.getItem('users')) || [];
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
-
-    checkIfCategorysExist();
+    setInitialCategorysIfNotExist();
 }
 
-function checkIfCategorysExist() {
+async function saveData() {
+    let emailUser = localStorage.getItem('user-email');
+    const i = users.findIndex(u => u.email == emailUser);
+    users[i] = user;
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+async function deleteTasks() {
+    user.tasks = '';
+    await loadData();
+}
+
+function setInitialCategorysIfNotExist() {
     if (user.tasks == '') {
         user.tasks = taskTemplate();
     }
-}
-
-function taskTemplate() {
-    return [
-        {
-            "name": "Backoffice",
-            "color": "blue",
-            "tasks": []
-        },
-        {
-            "name": 'Marketing',
-            "color": 'red',
-            "tasks": []
-        },
-        {
-            "name": 'Development',
-            "color": 'orange',
-            "tasks": []
-        }
-    ]
 }
 
 async function createTestTask() {
     user.tasks.forEach(task => {
         if (task.name == document.getElementById('firstValue').innerText) {
             const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
-            console.log(id);
             task.tasks.push(
                 {
                     id: id,
@@ -83,12 +72,7 @@ async function createTestTask() {
             )
         }
     });
-    console.log(user.tasks);
-    let emailUser = localStorage.getItem('user-email');
-    const i = users.findIndex(u => u.email == emailUser);
-    users[i] = user;
-    await backend.setItem('users', JSON.stringify(users));
-
+    saveData();
 }
 
 function returnPrioState() {
@@ -130,7 +114,6 @@ window.addEventListener('click', (event) => {
         event.target.className != 'assigned'
     ) {
         closeAllCustomSelectors();
-        console.log(event.target.className);
     };
 })
 
@@ -358,4 +341,24 @@ function assignedToAvatarsTemplate(shortName) {
     return /*html*/ `
     <div class="assignedTo">${shortName}</div>
     `
+}
+
+function taskTemplate() {
+    return [
+        {
+            "name": "Backoffice",
+            "color": "blue",
+            "tasks": []
+        },
+        {
+            "name": 'Marketing',
+            "color": 'red',
+            "tasks": []
+        },
+        {
+            "name": 'Development',
+            "color": 'orange',
+            "tasks": []
+        }
+    ]
 }
