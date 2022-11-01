@@ -332,7 +332,7 @@ function assignedInviteTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = database.epics[index]
+    let category = user.tasks[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
