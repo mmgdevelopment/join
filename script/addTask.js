@@ -48,6 +48,7 @@ async function deleteTasks() {
     user.tasks = '';
     await saveData();
     await loadData();
+    renderCategorys();
 }
 
 function setInitialCategorysIfNotExist() {
@@ -162,7 +163,7 @@ function renderNewCategory() {
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        database.epics.push({
+        user.tasks.push({
             "name": input.value,
             "color": categoryColor,
             "tasks": []
@@ -173,7 +174,7 @@ function addCategory() {
     categoryColor = '';
     renderCategorys();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (database.epics.length - 1).toString();
+    let index = (user.tasks.length - 1).toString();
     showCategory(index);
     setCategoryEventListener();
 }
