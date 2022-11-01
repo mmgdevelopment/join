@@ -15,7 +15,7 @@
     <title>board</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <div w3-include-html="./templates/sideBar.html"></div>
 
     <main>
@@ -29,20 +29,7 @@
                 <div class="d-flex-jc-sb">
                     <h2>To do</h2><button class="btn-square-add-task"> <img src="assets/plus-black.svg"></button>
                 </div>
-                <div class="task-card">
-                    <span class="epic">Design</span>
-                    <h4 class="task-name">Websseite redesign</h4>
-                    <p class="task-description">Modify the contents of the main website</p>
-                    <div class="d-flex-jc-sb w-100">
-                        <div class="bar"></div><span>1/2</span>
-                    </div>
-                    <div class="d-flex-jc-sb w-100">
-                        <div class="contacts">
-                            <div class="contact">MC</div>
-                            <div class="contact">Tt</div>
-                        </div><img class="priority" src="assets/low.svg">
-                    </div>
-                </div>
+                <div id="todo-tasks"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb">
