@@ -46,6 +46,7 @@ async function saveData() {
 
 async function deleteTasks() {
     user.tasks = '';
+    await saveData();
     await loadData();
 }
 
