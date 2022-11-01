@@ -1,7 +1,6 @@
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
 const buttons = ['urgent', 'medium', 'low'];
-
 const colors = [
     'orange',
     'red',
@@ -13,22 +12,22 @@ const colors = [
 ];
 
 let assignedTo = [];
-
 let users = [];
-
 let user;
-
 let categoryColor = '';
 
 async function init() {
     await loadData();
     includeHTML();
-    renderCategorys();
-    renderInviteSelector();
+    renderCategorySelector();
+    renderContactSelector();
     setCategoryEventListener();
     setAssignedEventListener();
 };
 
+/**
+ * Backend Functions
+*/
 async function loadData() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
@@ -48,7 +47,8 @@ async function deleteTasks() {
     user.tasks = '';
     await saveData();
     await loadData();
-    renderCategorys();
+    renderCategorySelector();
+    setCategoryEventListener();
 }
 
 function setInitialCategorysIfNotExist() {
@@ -57,6 +57,9 @@ function setInitialCategorysIfNotExist() {
     }
 }
 
+/**
+ * AddTask to JSON
+ */
 async function createTestTask() {
     user.tasks.forEach(task => {
         if (task.name == document.getElementById('firstValue').innerText) {
@@ -104,7 +107,6 @@ function setAssignedEventListener() {
     assignedPlaceholder.addEventListener('click', () => {
         document.getElementById('assigned').classList.toggle('open');
         document.getElementById('category').classList.remove('open');
-
     })
 }
 
@@ -125,11 +127,19 @@ function closeAllCustomSelectors() {
     scrollToTop();
 }
 
+/**
+ * necessary while closing the custome selectors
+ */
 function scrollToTop() {
     document.getElementById('assigned').scrollTop = 0;
     document.getElementById('category').scrollTop = 0;
 }
 
+
+/**
+ * Prio Button Function 
+ * @param {string} id id from HTML Element
+ */
 function prioButton(id) {
     resetPrioButtons();
     let button = document.getElementById(id);
@@ -155,7 +165,7 @@ function resetPrioButtons() {
     });
 }
 
-function renderNewCategory() {
+function renderNewCategoryInput() {
     document.getElementById('colorPicker').style.display = 'flex';
     document.getElementById('category').innerHTML = newCategoryTemplate();
 }
@@ -172,7 +182,7 @@ function addCategory() {
         /* Form validation -> input required*/
     }
     categoryColor = '';
-    renderCategorys();
+    renderCategorySelector();
     document.getElementById('colorPicker').style.display = 'none';
     let index = (user.tasks.length - 1).toString();
     showCategory(index);
@@ -192,8 +202,8 @@ function resetPicker() {
     });
 }
 
-function renderCategorys() {
-    document.getElementById('category').innerHTML = categorysTemplate();
+function renderCategorySelector() {
+    document.getElementById('category').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
 }
@@ -204,27 +214,26 @@ function showCategory(id) {
     closeAllCustomSelectors();
 }
 
-function renderInviteSelector() {
+function renderContactSelector() {
     let assigned = document.getElementById('assigned');
-    assigned.innerHTML = assignedTemplate();
+    assigned.innerHTML = contactSelectorTemplate();
     let id = 0
     database.contacts.forEach(contact => {
-        assigned.innerHTML += assignedContactsTemplate(contact, id);
+        assigned.innerHTML += singleContactTemplate(contact, id);
         id++;
     });
-
-    assigned.innerHTML += assignedInviteTemplate();
+    assigned.innerHTML += inviteContactSelectorTemplate();
 }
 
-function renderInviteNewContact() {
-    document.getElementById('assigned').innerHTML = inviteContactTemplate();
+function renderInviteContactInput() {
+    document.getElementById('assigned').innerHTML = inviteContactInputTemplate();
 }
 
 function inviteContact() {
     let value = document.getElementById('contactInput').value;
     if (value) {
         sendInviteMail(value);
-        renderInviteSelector();
+        renderContactSelector();
     } else {
         /**form Validation -> input required */
     }
@@ -255,31 +264,29 @@ function renderAssignedContacts() {
         const nameAsArray = contact.split(' ');
         const foreName = nameAsArray[0];
         const lastName = nameAsArray[1];
-        document.getElementById('assignedTo').innerHTML += assignedToAvatarsTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
+        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
     });
 
 }
 
 /***********************HTML Templates**************************/
 
+function categorySelectorTemplate() {
+    return /*html*/`
+        <span id="categoryPlaceholder" class="placeholder">
+            <div id="firstValue">Select task Category</div>
+            <img class="category" src="./assets/selectArrow.svg" alt="">
+        </span>
+        <span onclick="renderNewCategoryInput()" class="selectable category">New Category</span>
+`}
+
 function newCategoryTemplate() {
     return /*html*/`
     <div class="newCategory">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
-            <img onclick="renderCategorys(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderCategorySelector(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
             <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
-        </div>
-    </div>
-    `;
-};
-function inviteContactTemplate() {
-    return /*html*/`
-    <div class="newCategory">
-        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
-        <div class="createClearContainer">
-            <img onclick="renderInviteSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
-            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
     `;
@@ -296,16 +303,19 @@ function renderSingleCategorys() {
     }
 }
 
-function categorysTemplate() {
+function inviteContactInputTemplate() {
     return /*html*/`
-        <span id="categoryPlaceholder" class="placeholder">
-            <div id="firstValue">Select task Category</div>
-            <img class="category" src="./assets/selectArrow.svg" alt="">
-        </span>
-        <span onclick="renderNewCategory()" class="selectable category">New Category</span>
-`}
+    <div class="newCategory">
+        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
+        <div class="createClearContainer">
+            <img onclick="renderContactSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
+        </div>
+    </div>
+    `;
+};
 
-function assignedTemplate() {
+function contactSelectorTemplate() {
     return /*html*/`
         <span id="assignedPlaceholder" class="placeholder">
             Select Contact
@@ -314,7 +324,7 @@ function assignedTemplate() {
     `
 }
 
-function assignedContactsTemplate(contact, id) {
+function singleContactTemplate(contact, id) {
     return /*html*/`
     <span onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
         <input class="checkbox" type="checkbox" name="" id="check-${id}">
@@ -322,9 +332,9 @@ function assignedContactsTemplate(contact, id) {
     `
 }
 
-function assignedInviteTemplate() {
+function inviteContactSelectorTemplate() {
     return /*html*/`
-        <span onclick="renderInviteNewContact()" class="selectable assigned">Invite new Contact
+        <span onclick="renderInviteContactInput()" class="selectable assigned">Invite new Contact
             </span id="contactImg" src="./assets/contacts.svg" alt="">
         </span>
     `
@@ -339,7 +349,7 @@ function renderChoosenCategory(id) {
     `
 }
 
-function assignedToAvatarsTemplate(shortName) {
+function assignedToContactCircleTemplate(shortName) {
     return /*html*/ `
     <div class="assignedTo">${shortName}</div>
     `
