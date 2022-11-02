@@ -9,10 +9,11 @@ main {
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 70vw;
-  left: 267px;
-  top: 157px;
+  left: 230px;
+  right: 60px;
+  top: 100px;
   color: black;
+  width: 79vw;
 }
 
 h1 {
@@ -94,7 +95,6 @@ h2 {
   justify-content: center;
   align-items: flex-start;
   padding: 18px 19px;
-  width: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
@@ -170,17 +170,61 @@ h2 {
 }
 
 .red {
-  background-color: #FF3D00;
+  background-color: #ff3d00;
 }
 
 .orange {
-  background-color: #FFA800;
+  background-color: #ffa800;
 }
 
 .green {
-  background-color: #7AE229;
+  background-color: #7ae229;
 }
 
 .pink {
   background-color: #e229cc;
+}
+
+.kanban-clm {
+  min-height: 100%;
+}
+
+.area-highlight {
+  background-color: #e5e5e5;
+}
+
+@media only screen and (max-width: 950px) {
+  .kanban {
+    flex-direction: column;
+  }
+
+@media only screen and (max-width: 850px) {
+
+
+  main {
+    left: 20px;
+    right: 20px;
+    width: unset;
+  }
+
+  #btn-add-task {
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 47px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  .kanban-clm {
+    min-height: 50px;
+  }
 }
