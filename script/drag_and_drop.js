@@ -224,7 +224,7 @@ function renderDesktopView() {
   console.log("big");
   console.log(document.getElementById("desktop-search"));
   document.getElementById("btn-add-task").innerHTML = "";
-  document.getElementById("btn-add-task").innerHTML = "Add Task";
+  document.getElementById("btn-add-task").innerHTML = 'Add Task <img src="assets/plus-white.svg">';
   document.getElementById("mobile-search").innerHTML = "";
   document.getElementById("desktop-search").innerHTML =
     '<input id="search" placeholder="Find task" type="text"></input>';
