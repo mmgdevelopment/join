@@ -10,10 +10,10 @@ let password;
  * function loads all saved users and defines user variables to inputfields
  */
 async function init() {
+    playAnimationOnIndex();    
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineInputVariables();
-    setTimeout(startAnimation, 500);
 }
 
 
@@ -28,13 +28,23 @@ function defineInputVariables() {
 
 
 /**
+ * function plays animation, if user is on index.html
+ */
+function playAnimationOnIndex() {
+    if(window.location.href.endsWith('index.html')){
+        setTimeout(startAnimation, 500);
+    }
+}
+
+
+/**
  * function renders animation for first load
  */
  function startAnimation() {
-    if(screen.width > 850) {
-        startDesktopAnimation();
-    } else {
+    if(screen.width <= 850) {
         startMobileAnimation();
+    } else {
+        startDesktopAnimation();
     }
 }
 
@@ -43,10 +53,9 @@ function defineInputVariables() {
  * function renders animation for first load of the desktop site
  */
 function startDesktopAnimation() {
-    document.getElementById('logo-dektop').classList.add('logo');
-    document.getElementById('login-card').classList.add('opacity-animation');
-    document.getElementById('sign-up-desktop').classList.add('opacity-animation');
-    document.getElementById('sign-in-mobile').classList.add('opacity-animation');
+    document.getElementById('logo-dektop').classList.add('logo-after');
+    document.getElementById('card').classList.remove('opacity-zero');
+    document.getElementById('sign-up-desktop').classList.remove('opacity-zero');
 }
 
 
@@ -54,10 +63,20 @@ function startDesktopAnimation() {
  * function renders animation for first load of the mobile site
  */
  function startMobileAnimation() {
-    document.getElementById('logo-dektop').classList.add('logo');
-    document.getElementById('logo-mobile').classList.add('logo');
-    document.getElementById('login-card').classList.add('opacity-animation');
-    document.getElementById('sign-in-mobile').classList.add('opacity-animation');
+    document.getElementById('logo-mobile').classList.add('mobile-logo-after');
+    document.getElementById('card').classList.remove('opacity-zero');
+    document.getElementById('sign-up-mobile').classList.remove('opacity-zero');
+
+    document.getElementById('logo-mobile-cover').classList.add('mobile-logo-after');
+    document.getElementById('screen-cover').classList.add('opacity-zero');
+    setTimeout(removeScreenCover, 500);
+}
+
+/**
+ * funciton removes screen cover for mobile animation
+ */
+function removeScreenCover() {
+    document.getElementById('screen-cover').style="display:none;";
 }
 
 
@@ -118,6 +137,45 @@ function userGetsLoggdIn(user) {
     setAutoLogIn();
     saveLoggedInUser(user);
     goToSummary();
+}
+
+
+/**
+ * function loggs in user as guest
+ */
+function guestLogin() {
+    localStorage.setItem('autoLogIn', false);
+    localStorage.setItem('user-username', 'Guest');
+    localStorage.setItem('user-email', '');
+    localStorage.setItem('Go to summary from LogIn', true);
+    goToSummary();
+}
+
+
+/**
+ * function changes lock to closed eye if password gets input
+ */
+function changePasswordIcon() {
+    if(document.getElementById('password').value == '') {
+        document.getElementById('password-icon').src='./assets/lock.svg';
+    } else {
+        document.getElementById('password-icon').src='./assets/icons8-unsichtbar.png';
+    }
+}
+
+
+/**
+ * function toggles password visibility
+ */
+function makePasswordVisible() {
+    let icon = document.getElementById('password-icon').src;
+    if(icon.endsWith('unsichtbar.png')) {
+        document.getElementById('password-icon').src='./assets/icons8-sichtbar.png';
+        document.getElementById('password').type = "text";
+    } else {
+        document.getElementById('password-icon').src='./assets/icons8-unsichtbar.png';
+        document.getElementById('password').type = "password";
+    }
 }
 
 

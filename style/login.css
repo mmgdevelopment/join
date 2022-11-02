@@ -12,7 +12,6 @@ body {
     align-items: center;
 }
 
-
 .logo-before {
     position: absolute;
     top: 50%;
@@ -29,7 +28,6 @@ body {
     cursor: pointer;
 }
 
-
 .sign-up-container {
     display: flex;
     align-items: center;
@@ -38,7 +36,6 @@ body {
     top: 67px;
     right: 114px;
 
-    opacity: 0;
     transition: ease-in-out 500ms;
 }
 
@@ -48,7 +45,6 @@ body {
     height: 51px !important;
     margin-left: 35px;
 }
-
 
 .dark-btn {
     font-weight: 700;
@@ -67,10 +63,21 @@ body {
     cursor: pointer;
 }
 
+.dark-btn:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
 .bright-btn {
     font-weight: 700;
     font-size: 21px;
     line-height: 120%;
+    width: 161px;
+    height: 51px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     color: #2A3647;
     background-color: #FFFFFF;
@@ -88,6 +95,12 @@ body {
     cursor: pointer;
 }
 
+.bright-btn:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+    box-shadow: 0px 3px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
 .card {
     display: flex;
     flex-direction: column;
@@ -102,8 +115,7 @@ body {
     box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
     border-radius: 30px;
 
-    /* opacity: 0;
-    transition: ease-in-out 500ms; */
+    transition: ease-in-out 500ms; 
 }
 
 .text {
@@ -111,10 +123,6 @@ body {
     line-height: 120%;
     text-align: center;
     margin: 0px;
-}
-
-.opacity-animation {
-    opacity: 1 !important;
 }
 
 .opacity-zero {
@@ -213,11 +221,6 @@ h1 {
 .login-button-container {
     display: flex;
     gap: 35px;
-}
-
-.guest-btn {
-    width: 161px;
-    height: 51px;
 }
 
 /****************************LOGIN SECTION*************************/

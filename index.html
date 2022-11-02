@@ -18,34 +18,28 @@
 <body onload="init(), defineInputVariables()">
 
 
-    <!--Dark screen cover for mobile login-->
-    <!-- <div class="screen-cover only-mobile">
-        <img id="logo-mobile" class="screen-cover-logo" src="./assets/mobile_animation_logo.svg">
-    </div> -->
-
-
-
-    <!--dektop logo-->                        <!--change to logo after-->
-    <a href="login.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg" alt="join_logo"></a>
+    <!--dektop logo-->                        
+    <a href="index.html"><img id="logo-dektop" class="logo-before only-dekstop" src="./assets/join_logo.svg" alt="join_logo"></a>
 
 
     <!--mobile logo-->
-    <a href="login.html"><img class="mobile-logo only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
+    <a href="index.html"><img id="logo-mobile" class="mobile-logo-before only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
 
 
-
-
+    <!--screen cover for login effect-->
+    <div id="screen-cover" class="screen-cover only-mobile">
+        <img id="logo-mobile-cover" class="mobile-logo-before" src="./assets/mobile_animation_logo.svg">
+    </div>
 
 
     <!--desktop sign in-->
-    <div id="sign-up-desktop" class="sign-up-container only-dekstop">
+    <div id="sign-up-desktop" class="sign-up-container only-dekstop opacity-zero">
         <p style="font-size: 21px;">Not a Join user?</p>
         <a href="sign_up.html"><button class="dark-btn sign-btn">Sign up</button></a>
     </div>
 
 
-
-    <div id="login-card" class="card">
+    <div id="card" class="card opacity-zero">
 
         <h1>Log in</h1>
         <div class="underline"></div>
@@ -61,9 +55,9 @@
                 </div>
 
                 <div id="password-container" class="inputfield">
-                    <input class="input" id="password" minlength="8" type="password" placeholder="Password"
+                    <input oninput="changePasswordIcon()" class="input" id="password" minlength="8" type="password" placeholder="Password"
                         title="Please ensert your password" required>
-                    <img src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
+                    <img onclick="makePasswordVisible()" style="cursor: pointer;" id="password-icon" src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                 </div>
 
             </div>
@@ -78,16 +72,16 @@
 
             <div class="login-button-container">
                 <input class="dark-btn" type="submit" value="Log in">
-                <button class="bright-btn guest-btn">Guest Log in</button>
-                <!--Guest Log in doesn't require an email or password-->
+                <div onclick="guestLogin()" class="bright-btn">Guest Log in</div>
             </div>
 
         </form>
 
     </div>
 
+
     <!--mobile-sign-up-->
-    <div id="sign-up-mobile" class="mobile-sign-up only-mobile">
+    <div id="sign-up-mobile" class="mobile-sign-up only-mobile opacity-zero">
         <p class="sign-up-container-text">Not a Join user?</p>
         <a href="sign_up.html"><button class="dark-btn sign-btn">Sign up</button></a>
     </div>

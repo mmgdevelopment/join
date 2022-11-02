@@ -12,7 +12,6 @@ let username;
 async function init() {
     loadUser();
     renderGreeting();
-    renderName();
 
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
@@ -33,8 +32,12 @@ function loadUser() {
  */
 function renderGreeting() {
 
-    if (userComesFromLogin() && userHasMobileDevice()) {
-        renderMobileGreeting();
+    if (userComesFromLogin()) {
+        if(userHasMobileDevice()) {
+            renderMobileGreeting();
+        } else {
+            renderDesktopGreeting();
+        }
     } else {
         renderSummary();
     }
@@ -65,9 +68,17 @@ function renderMobileGreeting() {
     document.getElementById('mobile-greeting').style.display = "block";
     document.getElementById('body').classList.add("mobile-good-morning-body");
     document.getElementById('mobileGreeting-title').style="font-size: 36px;";
-    document.getElementById('name').style="font-size: 47px;";
+    document.getElementById('name-mobile').style="font-size: 47px;";
+    renderName();
     localStorage.setItem('Go to summary from LogIn', false);
     setTimeout(renderSummary, 2000);
+}
+
+
+function renderDesktopGreeting() {
+    document.getElementById('container').style.display = "block";
+    renderName();
+    localStorage.setItem('Go to summary from LogIn', false);
 }
 
 
@@ -75,7 +86,9 @@ function renderMobileGreeting() {
  * function renders summary
  */
 function renderSummary() {
+    document.getElementById('body').classList.remove("mobile-good-morning-body");
     document.getElementById('mobile-greeting').style.display = "none";
+    document.getElementById('greeting').style.display = "none";
     document.getElementById('container').style.display = "block";
 }
 
@@ -84,5 +97,10 @@ function renderSummary() {
  * function renders username 
  */
 function renderName() {
-    document.getElementById('name').innerHTML = username;
+    if (username == !'Guest') {
+        document.getElementById('name-desktop').innerHTML = username;
+    } else {
+        document.getElementById('greeting-title').innerHTML = 'Good morning';
+        document.getElementById('mobileGreeting-title').innerHTML = 'Good morning';
+    }
 }

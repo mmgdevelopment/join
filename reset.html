@@ -17,28 +17,27 @@
 
 <body onload="init()">
 
+
     <!--dektop logo-->
     <a href="index.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg"
             alt="join_logo"></a>
 
 
     <!--mobile logo-->
-    <a href="index.html"><img class="mobile-logo only-mobile" src="./assets/join_logo.svg"
-            alt="join_logo"></a>
+    <a href="index.html"><img class="mobile-logo-after only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
 
 
     <div class="card reset-card">
 
         <!--desktop back arrow-->
-        <a href="forgot_password.html">
-            <img class="blue-arrow only-dekstop" src="./assets/arrow-left-blue.svg">
+        <a class="blue-arrow only-dekstop" href="forgot_password.html">
+            <img src="./assets/arrow-left-blue.svg">
         </a>
 
         <!--mobile back arrow-->
-        <a href="forgot_password.html">
-            <img class="dark-arrow only-mobile" src="./assets/mobile_back_arrow.svg">
+        <a class="dark-arrow only-mobile" href="forgot_password.html">
+            <img src="./assets/mobile_back_arrow.svg">
         </a>
-
 
         <h1 style="height: auto;">Reset your password</h1>
         <div class="underline"></div>
@@ -54,10 +53,10 @@
                     <input id="firstPassword" class="input" minlength="8" type="password" placeholder="New Password"
                         title="Set a new password" required>
                 </div>
-    
+
                 <div class="inputfield">
-                    <input id="secondPassword" class="input" minlength="8" type="password" placeholder="Confirm Password"
-                        title="Repeat the new password" required>
+                    <input id="secondPassword" class="input" minlength="8" type="password"
+                        placeholder="Confirm Password" title="Repeat the new password" required>
                 </div>
 
             </div>

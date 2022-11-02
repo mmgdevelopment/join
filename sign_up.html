@@ -18,23 +18,24 @@
 <body onload="init(), defineInputVariables()">
 
     <!--dektop logo-->
-    <a href="login.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg" alt="join_logo"></a>
-    
-    
+    <a href="index.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg"
+            alt="join_logo"></a>
+
+
     <!--mobile logo-->
-    <a href="login.html"><img class="mobile-logo only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
+    <a href="index.html"><img class="mobile-logo-after only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
 
 
     <div class="card sign-up-card">
 
         <!--desktop back arrow-->
-        <a href="index.html">
-            <img class="blue-arrow only-dekstop" src="./assets/arrow-left-blue.svg">
+        <a class="blue-arrow only-dekstop" href="index.html">
+            <img src="./assets/arrow-left-blue.svg">
         </a>
 
         <!--mobile back arrow-->
-        <a href="index.html">
-            <img class="dark-arrow only-mobile" src="./assets/mobile_back_arrow.svg">
+        <a class="dark-arrow only-mobile" href="index.html">
+            <img src="./assets/mobile_back_arrow.svg">
         </a>
 
         <h1>Sign up</h1>
@@ -45,18 +46,21 @@
             <div class="all-inputfields">
 
                 <div class="inputfield">
-                    <input class="input" id="username" type="text" minlength="2" placeholder="Name" title="Please ensert a username" required>
+                    <input class="input" id="username" type="text" minlength="2" placeholder="Name"
+                        title="Please ensert a username" required>
                     <img src="./assets/profile.svg" alt="profile-icon" title="Please ensert a username">
                 </div>
 
                 <div class="inputfield">
-                    <input class="input" id="email" type="email" placeholder="Email" title="Please ensert a valid email adress" required>
+                    <input class="input" id="email" type="email" placeholder="Email"
+                        title="Please ensert a valid email adress" required>
                     <img src="./assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress">
                 </div>
-    
-                <div class="inputfield">
-                    <input class="input" id="password" type="password" minlength="8" placeholder="Password" title="Please ensert a new password" required>
-                    <img src="./assets/lock.svg" alt="lock-icon" title="Please ensert a new password">
+
+                <div id="password-container" class="inputfield">
+                    <input oninput="changePasswordIcon()" class="input" id="password" minlength="8" type="password" placeholder="Password"
+                        title="Please ensert your password" required>
+                    <img onclick="makePasswordVisible()" style="cursor: pointer;" id="password-icon" src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                 </div>
 
             </div>
@@ -66,7 +70,7 @@
         </form>
 
     </div>
-        
+
 </body>
 
 </html>
