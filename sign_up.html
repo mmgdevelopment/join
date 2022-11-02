@@ -18,40 +18,50 @@
 <body onload="init(), defineInputVariables()">
 
     <!--dektop logo-->
-    <a href="index.html"><img class="logo" src="./assets/join_logo.svg" alt="join_logo"></a> 
-
+    <a href="login.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg" alt="join_logo"></a>
+    
+    
     <!--mobile logo-->
-    <div class="mobile-logo-container">
-        <a href="index.html"><img class="mobile-logo" src="./assets/join_logo.svg" alt="join_logo"></a> 
-    </div>
+    <a href="login.html"><img class="mobile-logo only-mobile" src="./assets/join_logo.svg" alt="join_logo"></a>
 
-    <div class="login-card">
+
+    <div class="card sign-up-card">
+
+        <!--desktop back arrow-->
+        <a href="index.html">
+            <img class="blue-arrow only-dekstop" src="./assets/arrow-left-blue.svg">
+        </a>
+
+        <!--mobile back arrow-->
+        <a href="index.html">
+            <img class="dark-arrow only-mobile" src="./assets/mobile_back_arrow.svg">
+        </a>
 
         <h1>Sign up</h1>
         <div class="underline"></div>
 
-        <form onsubmit="signUp(); return false;" class="login-card-content">
+        <form onsubmit="signUp(); return false;" class="card-content">
 
-            <div class="login-input-container">
+            <div class="all-inputfields">
 
-                <div class="login-single-input-container">
-                    <input class="login-input" id="username" type="text" minlength="2" placeholder="Name" title="Please ensert a username" required>
+                <div class="inputfield">
+                    <input class="input" id="username" type="text" minlength="2" placeholder="Name" title="Please ensert a username" required>
                     <img src="./assets/profile.svg" alt="profile-icon" title="Please ensert a username">
                 </div>
 
-                <div class="login-single-input-container">
-                    <input class="login-input" id="email" type="email" placeholder="Email" title="Please ensert a valid email adress" required>
+                <div class="inputfield">
+                    <input class="input" id="email" type="email" placeholder="Email" title="Please ensert a valid email adress" required>
                     <img src="./assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress">
                 </div>
     
-                <div class="login-single-input-container">
-                    <input class="login-input" id="password" type="password" minlength="8" placeholder="Password" title="Please ensert a new password" required>
+                <div class="inputfield">
+                    <input class="input" id="password" type="password" minlength="8" placeholder="Password" title="Please ensert a new password" required>
                     <img src="./assets/lock.svg" alt="lock-icon" title="Please ensert a new password">
                 </div>
 
             </div>
 
-            <input class="login-button" type="submit" value="Sign up" title="Create a new account!">
+            <input class="dark-btn new-acc-btn" type="submit" value="Sign up" title="Create a new account!">
 
         </form>
 

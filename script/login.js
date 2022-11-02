@@ -28,12 +28,36 @@ function defineInputVariables() {
 
 
 /**
- * function renders animation for first load of the site
+ * function renders animation for first load
  */
-function startAnimation() {
-    document.getElementById('logo').classList.add('logo');
+ function startAnimation() {
+    if(screen.width > 850) {
+        startDesktopAnimation();
+    } else {
+        startMobileAnimation();
+    }
+}
+
+
+/**
+ * function renders animation for first load of the desktop site
+ */
+function startDesktopAnimation() {
+    document.getElementById('logo-dektop').classList.add('logo');
     document.getElementById('login-card').classList.add('opacity-animation');
-    document.getElementById('sign-in').classList.add('opacity-animation');
+    document.getElementById('sign-up-desktop').classList.add('opacity-animation');
+    document.getElementById('sign-in-mobile').classList.add('opacity-animation');
+}
+
+
+/**
+ * function renders animation for first load of the mobile site
+ */
+ function startMobileAnimation() {
+    document.getElementById('logo-dektop').classList.add('logo');
+    document.getElementById('logo-mobile').classList.add('logo');
+    document.getElementById('login-card').classList.add('opacity-animation');
+    document.getElementById('sign-in-mobile').classList.add('opacity-animation');
 }
 
 

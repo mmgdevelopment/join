@@ -1,18 +1,4 @@
-/****************************MOBILE CSS*************************/
-
-/** Only mobile displayed*/
-
-.mobile-logo-container {
-    display: none;
-}
-
-.mobile-sign-up {
-    display: none;
-}
-
-.mobile-back-arrow {
-    display: none;
-}
+/****************************OUTSEIDE OF CARD*************************/
 
 .only-dekstop {
     display: block;
@@ -22,43 +8,13 @@
     display: none;
 }
 
+/** Version for Cellphones*/
+@media (max-width: 850px) {
 
-/** Version for small computer screens*/
-@media (max-width: 1100px) {  
-
-    .sign-up-container {
-        top: 30px;
-        right: 50px;
-    }
-
-    .logo {
-        top: 20px;
-        left: 50px;
-        transform: scale(0.8);
-    }
-
-}
-
-
-/** Version for Laptops*/
-@media (max-width: 1000px) {  
-
-    .forgot-card {
-        max-width: 90%;
-    }
-
-    h1 {
-        margin-inline: 16px;
-    }
-
-    .place-blue-arrow {
-        display: none;
-    }
-
-    .mobile-back-arrow {
-        display: flex;
-        width: 80%;
-        cursor: pointer;
+    body {
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 200px;
     }
 
     .only-dekstop {
@@ -69,76 +25,78 @@
         display: block;
     }
 
-}
-
-
-/** Version for Cellphones*/
-@media (max-width: 850px) { 
-
-    body {
-        flex-direction: column;
-        justify-content: flex-start;
+    .mobile-logo {
+        position: absolute;
+        top: 37px;
+        left: 38px;
+        transform: scale(0.8);
     }
 
-    .logo {
+    .mobile-sign-up {
+        display: flex;
+        align-items: center;
+
+        top: 50%;
+        left: 50%;
+    }
+
+    .dark-arrow {
+        position: absolute;
+        top: 32px;
+        left: 27px;
+        cursor: pointer;
+    }
+
+    .desktop-sign-up {
         display: none;
     }
 
+    .card {
+        width: 372px;
+        height: 573px;
+        margin-bottom: 49px;
+    }
+
+    .dark-btn {
+        font-size: 16px;
+        width: 180px;
+        height: 51px;
+    }
+
+    .bright-btn {
+        font-size: 16px;
+        width: 180px;
+        height: 51px;
+    }
+
+    /****************************OUTSEIDE OF CARD*************************/
+
+    /****************************INSIDE OF CARD*************************/
+
     h1 {
         font-size: 47px;
-        height: auto;
-        line-height: 40px;
+        height: 41px;
     }
 
     .underline {
         width: 80px;
     }
 
-    .mobile-logo-container {
-        display: flex;
-        width: 90%;
-        margin-bottom: 45px;
-    }
-
-    .mobile-logo {
-        transform: scale(80%);
-    }
-
-    .login-card {
-        width: 372px;
-        height: 573px;
-        gap: 30px;
-    }
-
-    .login-card-content {
-        width: 90%;
-        gap: 8px;
-    }
-
-    .mobile-login-input-container {
-        margin-bottom: 30px;
-        display: flex;
-        flex-direction: column;
-        gap: 49px;
-    }
-
-    .login-single-input-container {
+    .inputfield {
         width: 327px;
         height: 41px;
-        margin: 0px;
     }
 
-    .login-input {
+    .input {
         width: 80%;
         height: 36px;
     }
 
-    .login-text {
+    .memorie-container {
         flex-direction: column-reverse;
         align-items: flex-start;
         gap: 30px;
         width: 327px;
-        margin-bottom: 30px;
     }
 
     .login-button-container {
@@ -146,56 +104,64 @@
         gap: 21px;
     }
 
-    .login-button {
-        font-size: 16px;
-        width: 180px;
-        height: 51px;
+    /****************************INSIDE OF CARD*************************/
+
+    /****************************SIGN UP SECTION*************************/
+
+    .sign-up-card {
+        height: 501px;
     }
 
-    .mobile-sign-up {
-        display: flex;
-        position: relative;
-        padding-block: 16px;
-        top: 0px;
-        right: 0px;
-    }
+    /****************************SIGN UP SECTION*************************/
 
-    .desktop-sign-up {
-        display: none;
-    }
-
-    .sign-btn {
-        width: auto;
-    }
+    /****************************FORGOT SECTION*************************/
 
     .forgot-card {
-        width: 90%;
-        max-width: 450px;
-        gap: 21px;
+        height: 502px;
+        gap: 24px;
+        text-align: center;
     }
 
-    .forgot-text {
-        margin-inline: 16px;
+    .text {
+        width: 322px;
     }
 
-    .login-button {
-        padding: 0px;
+    /****************************FORGOT SECTION*************************/
+
+    /****************************RESET SECTION*************************/
+
+    .reset-card{
+        text-align: center;
+        height: 525px;
     }
+
+    /****************************RESET SECTION*************************/
+
+
+    /****************************MOBILE CSS*************************/
+
+
+
+
 
 }
 
 
-/** Version for Galaxy Fold*/
-@media (max-width: 330px) {
 
-    .mobile-sign-up {
-        flex-direction: column;
+/* .screen-cover-logo {
+        position: absolute;
+        top: 44%;
+        left: 44%;
+        transform: scale(1.5);
     }
 
-    .success-reset-button {
-        width: 327px;
-    }
-
-}
-
-/****************************MOBILE CSS*************************/
+    .screen-cover {
+        z-index: 100;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        bottom: 0px;
+        background-color: #2A3647;
+        transition: 500ms ease-in-out;
+    } */
