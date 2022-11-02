@@ -120,7 +120,13 @@ function allowDrop(ev) {
        
 
     }
-  
+
+    function highlight(id){
+        document.getElementById(id).classList.add('area-highlight');
+    }
+    function removeHighlight(id){
+        document.getElementById(id).classList.remove('area-highlight');
+    }
 
 /**
  * This function is used to render the tasks in HTML

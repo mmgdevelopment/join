@@ -9,10 +9,10 @@ main {
   display: flex;
   flex-direction: column;
   position: absolute;
-  width: 70vw;
-  left: 267px;
-  top: 157px;
+  left: 230px;
+  top: 100px;
   color: black;
+  width: 79vw;
 }
 
 h1 {
@@ -94,7 +94,6 @@ h2 {
   justify-content: center;
   align-items: flex-start;
   padding: 18px 19px;
-  width: 250px;
   background: #ffffff;
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
@@ -185,27 +184,13 @@ h2 {
   background-color: #e229cc;
 }
 
-
-#todo-tasks{
-  background-color: green;
-  min-height: 50vh;
+.kanban-clm{
+  min-height: 100%;
 }
 
-#progress-tasks{
-  background-color: green;
-  min-height: 50vh;
+.area-highlight{
+  background-color:  #e5e5e5;;
 }
-
-#feedback-tasks{
-  background-color: green;
-  min-height: 50vh;
-}
-
-#done-tasks{
-  background-color: green;
-  min-height: 50vh;
-}
-
 
 
 
