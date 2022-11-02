@@ -41,11 +41,12 @@ async function saveData() {
     await backend.setItem('users', JSON.stringify(users));
 }
 
-async function deleteTasks() {
-    user.epics = '';
+async function deleteAllTasks() {
+    user.epics.forEach(epic => {
+        epic.tasks = [];
+    });
     await saveData();
     await loadData();
-    renderCategorySelector();
 }
 
 function setInitialCategorysIfNotExist() {
@@ -58,27 +59,44 @@ function setInitialCategorysIfNotExist() {
  * AddTask to JSON
  */
 async function createTestTask() {
-    user.epics.forEach(task => {
-        if (task.name == document.getElementById('firstValue').innerText) {
-            const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
-            task.tasks.push(
-                {
-                    id: id,
-                    title: document.getElementById('title').value,
-                    description: document.getElementById('description').value,
-                    assignedTo: assignedTo,
-                    dueDate: document.getElementById('dueDate').value,
-                    prio: returnPrioState(),
-                    subtasks: getSubtasks(),
-                    category: 'todo'
-                }
-            )
-        }
-    });
-    saveData();
-    console.log(user);
-    alert('task saved');
-    clearAllInput();
+    if (!checkIfSomeInputIsEmpty()) {
+        user.epics.forEach(task => {
+            if (task.name == document.getElementById('firstValue').innerText) {
+                const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
+                task.tasks.push(
+                    {
+                        id: id,
+                        title: document.getElementById('title').value,
+                        description: document.getElementById('description').value,
+                        assignedTo: assignedTo,
+                        dueDate: document.getElementById('dueDate').value,
+                        prio: returnPrioState(),
+                        subtasks: getSubtasks(),
+                        category: 'todo'
+                    }
+                )
+            }
+        });
+        saveData();
+        console.log(user);
+        clearAllInput();
+        alert('task saved');
+    } else {
+        alert('Es müssen alle Felder ausgefüllt sein')
+    }
+}
+
+function checkIfSomeInputIsEmpty() {
+    if (document.getElementById('title').value == '' ||
+        document.getElementById('description').value == '' ||
+        assignedTo == [] ||
+        document.getElementById('dueDate').value == '' ||
+        returnPrioState == ''
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function returnPrioState() {
@@ -318,7 +336,7 @@ function clearAllInput() {
     renderAssignedContacts();
     document.getElementById('dueDate').value = '';
     resetPrioButtons();
-    renderSubtaskInput();
+    renderAddSubtaskContainer();
     document.getElementById('subtaskList').innerHTML = '';
 }
 

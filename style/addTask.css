@@ -156,10 +156,16 @@ label {
 .button {
     border-radius: 10px;
     padding: 12px;
+    cursor: pointer;
 }
 
 .button img {
     padding-left: 5px;
+}
+
+.button:hover {
+    transform: scale(1.05);
+    border: 2px solid #2A3647;
 }
 
 #clear {
