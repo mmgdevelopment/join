@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <script src="script.js"></script>
     <title>addTask</title>
     <link rel="stylesheet" href="./style/addTask.css">
@@ -52,13 +52,13 @@
                     </div>
                 </div>
 
-
                 <div class="inputContainer">
                     <label for="customSelect">Assigned</label>
                     <div id="assigned" class="customSelect">
                         <!-- Content will be rendered by js-->
                     </div>
                     <div id="assignedTo">
+                        <!-- Content will be rendered by js-->
                     </div>
                 </div>
             </div>
@@ -87,11 +87,18 @@
                 </div>
                 <div class="inputContainer">
                     <label for="subtask">Subtasks</label>
-                    <input type="text" placeholder="Add new subtask" id="subtask">
+                    <div id="subtask">
+                        <div class="input" onclick="renderSubtaskInput()">
+                            Add new subtask
+                        </div>
+                    </div>
+                    <ul id="subtaskList">
+                        <!-- Content will be rendered by js-->
+                    </ul>
                 </div>
 
                 <div class="buttonContainer">
-                    <div class="button" id="clear">
+                    <div onclick="deleteTasks()" class="button" id="clear">
                         clear
                         <img src="./assets/clear.svg" alt="">
                     </div>
@@ -101,9 +108,8 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-    </div>
+        </div>
 </body>
 
 </html>

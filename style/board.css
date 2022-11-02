@@ -168,3 +168,19 @@ h2 {
   transform: translateX(-15%);
   background-color: green;
 }
+
+.red {
+  background-color: #FF3D00;
+}
+
+.orange {
+  background-color: #FFA800;
+}
+
+.green {
+  background-color: #7AE229;
+}
+
+.pink {
+  background-color: #e229cc;
+}

@@ -1,7 +1,6 @@
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
 const buttons = ['urgent', 'medium', 'low'];
-
 const colors = [
     'orange',
     'red',
@@ -13,35 +12,58 @@ const colors = [
 ];
 
 let assignedTo = [];
-
 let users = [];
-
 let user;
-
 let categoryColor = '';
 
 async function init() {
-
+    await loadData();
     includeHTML();
-    renderCategorys();
-    renderInviteSelector();
+    renderCategorySelector();
+    renderContactSelector();
     setCategoryEventListener();
     setAssignedEventListener();
-    await loadData();
 };
 
+/**
+ * Backend Functions
+*/
 async function loadData() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
+    setInitialCategorysIfNotExist();
 }
 
+async function saveData() {
+    let emailUser = localStorage.getItem('user-email');
+    const i = users.findIndex(u => u.email == emailUser);
+    users[i] = user;
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+async function deleteTasks() {
+    user.tasks = '';
+    await saveData();
+    await loadData();
+    renderCategorySelector();
+    setCategoryEventListener();
+}
+
+function setInitialCategorysIfNotExist() {
+    if (user.tasks == '') {
+        user.tasks = taskTemplate();
+    }
+}
+
+/**
+ * AddTask to JSON
+ */
 async function createTestTask() {
     user.tasks.forEach(task => {
         if (task.name == document.getElementById('firstValue').innerText) {
             const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
-            console.log(id);
             task.tasks.push(
                 {
                     id: id,
@@ -50,17 +72,12 @@ async function createTestTask() {
                     assignedTo: assignedTo,
                     dueDate: document.getElementById('dueDate').value,
                     prio: returnPrioState(),
-                    subtasks: []
+                    subtasks: getSubtasks()
                 }
             )
         }
     });
-    console.log(user.tasks);
-    let emailUser = localStorage.getItem('user-email');
-    const i = users.findIndex(u => u.email == emailUser);
-    users[i] = user;
-    await backend.setItem('users', JSON.stringify(users));
-
+    saveData();
 }
 
 function returnPrioState() {
@@ -90,7 +107,6 @@ function setAssignedEventListener() {
     assignedPlaceholder.addEventListener('click', () => {
         document.getElementById('assigned').classList.toggle('open');
         document.getElementById('category').classList.remove('open');
-
     })
 }
 
@@ -102,7 +118,6 @@ window.addEventListener('click', (event) => {
         event.target.className != 'assigned'
     ) {
         closeAllCustomSelectors();
-        console.log(event.target.className);
     };
 })
 
@@ -112,11 +127,19 @@ function closeAllCustomSelectors() {
     scrollToTop();
 }
 
+/**
+ * necessary while closing the custome selectors
+ */
 function scrollToTop() {
     document.getElementById('assigned').scrollTop = 0;
     document.getElementById('category').scrollTop = 0;
 }
 
+
+/**
+ * Prio Button Function 
+ * @param {string} id id from HTML Element
+ */
 function prioButton(id) {
     resetPrioButtons();
     let button = document.getElementById(id);
@@ -142,15 +165,16 @@ function resetPrioButtons() {
     });
 }
 
-function renderNewCategory() {
+function renderNewCategoryInput() {
     document.getElementById('colorPicker').style.display = 'flex';
     document.getElementById('category').innerHTML = newCategoryTemplate();
+    document.getElementById('categoryInput').focus();
 }
 
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        database.epics.push({
+        user.tasks.push({
             "name": input.value,
             "color": categoryColor,
             "tasks": []
@@ -159,9 +183,9 @@ function addCategory() {
         /* Form validation -> input required*/
     }
     categoryColor = '';
-    renderCategorys();
+    renderCategorySelector();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (database.epics.length - 1).toString();
+    let index = (user.tasks.length - 1).toString();
     showCategory(index);
     setCategoryEventListener();
 }
@@ -179,8 +203,8 @@ function resetPicker() {
     });
 }
 
-function renderCategorys() {
-    document.getElementById('category').innerHTML = categorysTemplate();
+function renderCategorySelector() {
+    document.getElementById('category').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
 }
@@ -191,27 +215,28 @@ function showCategory(id) {
     closeAllCustomSelectors();
 }
 
-function renderInviteSelector() {
+function renderContactSelector() {
     let assigned = document.getElementById('assigned');
-    assigned.innerHTML = assignedTemplate();
+    assigned.innerHTML = contactSelectorTemplate();
     let id = 0
     database.contacts.forEach(contact => {
-        assigned.innerHTML += assignedContactsTemplate(contact, id);
+        assigned.innerHTML += singleContactTemplate(contact, id);
         id++;
     });
-
-    assigned.innerHTML += assignedInviteTemplate();
+    assigned.innerHTML += inviteContactSelectorTemplate();
 }
 
-function renderInviteNewContact() {
-    document.getElementById('assigned').innerHTML = inviteContactTemplate();
+function renderInviteContactInput() {
+    document.getElementById('assigned').innerHTML = inviteContactInputTemplate();
+    document.getElementById('contactInput').focus();
+
 }
 
 function inviteContact() {
     let value = document.getElementById('contactInput').value;
     if (value) {
         sendInviteMail(value);
-        renderInviteSelector();
+        renderContactSelector();
     } else {
         /**form Validation -> input required */
     }
@@ -242,39 +267,68 @@ function renderAssignedContacts() {
         const nameAsArray = contact.split(' ');
         const foreName = nameAsArray[0];
         const lastName = nameAsArray[1];
-        document.getElementById('assignedTo').innerHTML += assignedToAvatarsTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
+        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
     });
 
+};
+
+function renderSubtaskInput() {
+    document.getElementById('subtask').innerHTML = subtaskInputTemplate();
+    document.getElementById('subtaskInput').focus();
+
+}
+
+function renderAddSubtaskContainer() {
+    document.getElementById('subtask').innerHTML = addSubtaskContainerTemplate();
+}
+
+function addSubtask() {
+    let subtask = document.getElementById('subtaskInput').value;
+    let id = document.getElementsByClassName('subtaskCheckbox').length
+    document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask, id);
+    renderSubtaskInput();
+}
+
+function getSubtasks() {
+    let subtasks = [];
+    let allSubtasks = document.getElementsByClassName('subtaskCheckbox');
+    for (let i = 0; i < allSubtasks.length; i++) {
+        const subtask = allSubtasks[i];
+        if (subtask.checked) {
+            let id = subtask.id.slice(-1);
+            let value = document.getElementById(`subtask-${id}`).innerText;
+            subtasks.push(value);
+        };
+    };
+    return subtasks;
 }
 
 /***********************HTML Templates**************************/
 
+function categorySelectorTemplate() {
+    return /*html*/`
+        <span id="categoryPlaceholder" class="placeholder">
+            <div id="firstValue">Select task Category</div>
+            <img class="category" src="./assets/selectArrow.svg" alt="">
+        </span>
+        <span onclick="renderNewCategoryInput()" class="selectable category">New Category</span>
+`}
+
 function newCategoryTemplate() {
     return /*html*/`
-    <div class="newCategory">
+    <div class="customSelectorInput">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
-            <img onclick="renderCategorys(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderCategorySelector(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
             <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
-        </div>
-    </div>
-    `;
-};
-function inviteContactTemplate() {
-    return /*html*/`
-    <div class="newCategory">
-        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
-        <div class="createClearContainer">
-            <img onclick="renderInviteSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
-            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
     `;
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < database.epics.length; i++) {
-        const category = database.epics[i];
+    for (let i = 0; i < user.tasks.length; i++) {
+        const category = user.tasks[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
@@ -283,16 +337,19 @@ function renderSingleCategorys() {
     }
 }
 
-function categorysTemplate() {
+function inviteContactInputTemplate() {
     return /*html*/`
-        <span id="categoryPlaceholder" class="placeholder">
-            <div id="firstValue">Select task Category</div>
-            <img class="category" src="./assets/selectArrow.svg" alt="">
-        </span>
-        <span onclick="renderNewCategory()" class="selectable category">New Category</span>
-`}
+    <div class="customSelectorInput">
+        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
+        <div class="createClearContainer">
+            <img onclick="renderContactSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
+        </div>
+    </div>
+    `;
+};
 
-function assignedTemplate() {
+function contactSelectorTemplate() {
     return /*html*/`
         <span id="assignedPlaceholder" class="placeholder">
             Select Contact
@@ -301,7 +358,7 @@ function assignedTemplate() {
     `
 }
 
-function assignedContactsTemplate(contact, id) {
+function singleContactTemplate(contact, id) {
     return /*html*/`
     <span onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
         <input class="checkbox" type="checkbox" name="" id="check-${id}">
@@ -309,9 +366,9 @@ function assignedContactsTemplate(contact, id) {
     `
 }
 
-function assignedInviteTemplate() {
+function inviteContactSelectorTemplate() {
     return /*html*/`
-        <span onclick="renderInviteNewContact()" class="selectable assigned">Invite new Contact
+        <span onclick="renderInviteContactInput()" class="selectable assigned">Invite new Contact
             </span id="contactImg" src="./assets/contacts.svg" alt="">
         </span>
     `
@@ -319,15 +376,64 @@ function assignedInviteTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = database.epics[index]
+    let category = user.tasks[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
     `
 }
 
-function assignedToAvatarsTemplate(shortName) {
+function assignedToContactCircleTemplate(shortName) {
     return /*html*/ `
     <div class="assignedTo">${shortName}</div>
     `
+}
+
+function subtaskInputTemplate() {
+    return /*html*/ `
+      <div class="customSelectorInput input p-0">
+        <input id="subtaskInput" class="noBorder" placeholder="Add new subtask" type="text">
+        <div class="createClearContainer">
+            <img onclick="renderAddSubtaskContainer()" src="./assets/clear.svg" alt=""> |
+            <img onclick="addSubtask()" src="./assets/createTask.svg" alt="">
+        </div>
+    </div>
+    `
+}
+
+function addSubtaskContainerTemplate() {
+    return /*html*/ `
+        <div class="input" onclick="renderSubtaskInput()">
+            Add new subtask
+        </div>
+    `
+}
+
+function subtasklistTemplate(subtask, id) {
+    return /*html*/ `
+        <div>
+            <input checked="true" type="checkbox" id="subCheck-${id}" class="subtaskCheckbox">
+            <span id="subtask-${id}">${subtask}</span>
+        </div>
+    `
+}
+
+function taskTemplate() {
+    return [
+        {
+            "name": "Backoffice",
+            "color": "blue",
+            "tasks": []
+        },
+        {
+            "name": 'Marketing',
+            "color": 'red',
+            "tasks": []
+        },
+        {
+            "name": 'Development',
+            "color": 'orange',
+            "tasks": []
+        }
+    ]
 }
