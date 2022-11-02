@@ -184,3 +184,28 @@ h2 {
 .pink {
   background-color: #e229cc;
 }
+
+
+#todo-tasks{
+  background-color: green;
+  min-height: 50vh;
+}
+
+#progress-tasks{
+  background-color: green;
+  min-height: 50vh;
+}
+
+#feedback-tasks{
+  background-color: green;
+  min-height: 50vh;
+}
+
+#done-tasks{
+  background-color: green;
+  min-height: 50vh;
+}
+
+
+
+

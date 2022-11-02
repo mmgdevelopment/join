@@ -5,7 +5,7 @@
             "color": "yellow",
             "tasks": [
                 {
-                    "id": "bo1",
+                    "id": "4",
                     "name": "accounting invoice",
                     "description": "check-invoice",
                     "subtasks": [
@@ -15,10 +15,11 @@
                         "Peter",
                         "Fritz"
                     ],
-                    "priority": "low"
+                    "priority": "low",
+                    "category": "todo"
                 },
                 {
-                    "id": "bo2",
+                    "id": "3",
                     "name": "accounting something",
                     "description": "check-something",
                     "subtasks": [
@@ -28,7 +29,8 @@
                     "contacts": [
                         "Peter"
                     ],
-                    "priority": "medium"
+                    "priority": "medium",
+                    "category": "todo"
                 }
             ]
         },
@@ -37,7 +39,7 @@
             "color": "pink",
             "tasks": [
                 {
-                    "id": "s1",
+                    "id": "1",
                     "name": "more sales",
                     "description": "check how to get more sales on colors",
                     "subtasks": [
@@ -47,10 +49,11 @@
                         "Peter",
                         "Fritz"
                     ],
-                    "priority": "urgent"
+                    "priority": "urgent",
+                    "category": "done"
                 },
                 {
-                    "id": "s2",
+                    "id": "2",
                     "name": "write recipe",
                     "description": "write recipes in new database",
                     "subtasks": [
@@ -60,7 +63,8 @@
                     "contacts": [
                         "Peter"
                     ],
-                    "priority": "medium"
+                    "priority": "medium",
+                    "category": "todo"
                 }
             ]
         }
