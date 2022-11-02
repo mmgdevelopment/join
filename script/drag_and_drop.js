@@ -1,5 +1,8 @@
 let currentDraggedTask;
 let tasksDatabase;
+let x = window.matchMedia("(max-width: 850px)");
+// Call listener function at run time
+x.addListener(myFunction); // Attach listener function on state changes
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -9,15 +12,15 @@ async function init() {
   includeHTML();
   await readDatabase();
   startRender();
+  myFunction(x);
 }
-
 
 /**
  * This function starts the rendering process
- * 
+ *
  */
 function startRender() {
-    getAllEpics();
+  getAllEpics();
 }
 
 /**
@@ -33,11 +36,11 @@ async function readDatabase() {
 /**
  * This function clears the HTML and goes through all epics of the database.
  *
- * 
+ *
  */
 
 function getAllEpics() {
-    clearColumns();
+  clearColumns();
   let epics = tasksDatabase["epics"];
   for (let i = 0; i < epics.length; i++) {
     const epic = epics[i];
@@ -60,9 +63,9 @@ function getAllTasks(epic) {
 
 /**
  * This function checks the category of the task and starts the render process
- * 
- * @param {object} task 
- * @param {object} epic 
+ *
+ * @param {object} task
+ * @param {object} epic
  */
 
 function readTasksCategory(task, epic) {
@@ -82,29 +85,29 @@ function readTasksCategory(task, epic) {
 
 /**
  * These following functions render the tasks in the specific kanban column
- * 
- * @param {object} task 
- * @param {object} epic 
+ *
+ * @param {object} task
+ * @param {object} epic
  */
 function renderCategoryTodo(task, epic) {
-    document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
-  }
-  
-  function renderCategoryProgress(task, epic) {
-    document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
-  }
-  
-  function renderCategoryFeedback(task, epic) {
-    document.getElementById("feedback-tasks").innerHTML += renderTask(task, epic);
-  }
-  
-  function renderCategoryDone(task, epic) {
-    document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
-  }
+  document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
+}
+
+function renderCategoryProgress(task, epic) {
+  document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
+}
+
+function renderCategoryFeedback(task, epic) {
+  document.getElementById("feedback-tasks").innerHTML += renderTask(task, epic);
+}
+
+function renderCategoryDone(task, epic) {
+  document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
+}
 
 /**
  * This function clears the content of every column of the kanban
- * 
+ *
  */
 
 function clearColumns() {
@@ -116,29 +119,27 @@ function clearColumns() {
 
 /**
  * This function changes the ID of the currentDraggedTaske to the dragged item ones
- * 
- * @param {string} id 
+ *
+ * @param {string} id
  */
 
 function startDragging(id) {
   currentDraggedTask = id;
 }
 
-
 /**
  * This function change the behaivior to be able to drop an item
- * 
- * @param {event} ev 
+ *
+ * @param {event} ev
  */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
-
 /**
  * This function changes the category to the one its dropped in
- * 
- * @param {string} category 
+ *
+ * @param {string} category
  */
 function moveTo(category) {
   let draggedTask = findTask();
@@ -148,7 +149,7 @@ function moveTo(category) {
 
 /**
  * This function gets the array of the task to make the category accessable
- * 
+ *
  * @returns task array
  */
 
@@ -165,11 +166,10 @@ function findTask() {
   }
 }
 
-
 /**
  * This function adds a css class as highlight for the kanban column which is dragged over
- * 
- * @param {string} id 
+ *
+ * @param {string} id
  */
 
 function highlight(id) {
@@ -178,12 +178,57 @@ function highlight(id) {
 
 /**
  * This function removes a css class of the kanban column which was used to higlight while dragged over
- * 
- * @param {string} id 
+ *
+ * @param {string} id
  */
 
 function removeHighlight(id) {
   document.getElementById(id).classList.remove("area-highlight");
+}
+
+/**
+ *This function compares the query witdh choosen with the window witdh of the user
+ *
+ * @param {mediaquery} x
+ */
+function myFunction(x) {
+  if (x.matches) {
+    // If media query matches
+    renderMobileView();
+  } else {
+    renderDesktopView();
+  }
+}
+
+/**
+ * This function removes the searchbar and puts it in Mobile view and changes the wording of the Addtask-Button
+ *
+ *
+ */
+function renderMobileView() {
+  console.log("smal");
+  console.log(document.getElementById("mobile-search"));
+  document.getElementById("btn-add-task").innerHTML = "";
+  document.getElementById("btn-add-task").innerHTML =
+    '<img src="assets/plus-white.svg">';
+  document.getElementById("desktop-search").innerHTML = "";
+  document.getElementById("mobile-search").innerHTML =
+    '<input id="search" placeholder="Find task" type="text"></input>';
+}
+
+/**
+ * This function removes the searchbar and puts it in Desktop view and changes the wording of the Addtask-Button
+ *
+ *
+ */
+function renderDesktopView() {
+  console.log("big");
+  console.log(document.getElementById("desktop-search"));
+  document.getElementById("btn-add-task").innerHTML = "";
+  document.getElementById("btn-add-task").innerHTML = "Add Task";
+  document.getElementById("mobile-search").innerHTML = "";
+  document.getElementById("desktop-search").innerHTML =
+    '<input id="search" placeholder="Find task" type="text"></input>';
 }
 
 /**

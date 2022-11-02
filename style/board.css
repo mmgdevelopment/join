@@ -10,6 +10,7 @@ main {
   flex-direction: column;
   position: absolute;
   left: 230px;
+  right: 60px;
   top: 100px;
   color: black;
   width: 79vw;
@@ -190,4 +191,37 @@ h2 {
 
 .area-highlight {
   background-color: #e5e5e5;
+}
+
+@media only screen and (max-width: 850px) {
+  .kanban {
+    flex-direction: column;
+  }
+
+  main {
+    left: 20px;
+    right: 20px;
+    width: unset;
+  }
+
+  #btn-add-task {
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+  }
+
+  h1 {
+    font-size: 47px;
+  }
+
+  h2 {
+    font-size: 21px;
+  }
+
+  .kanban-clm {
+    min-height: 50px;
+  }
 }
