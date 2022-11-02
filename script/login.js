@@ -22,6 +22,8 @@ let epicsArray = [
     }
 ]
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 
 /**
  * function loads all saved users and defines user variables to inputfields
@@ -31,16 +33,6 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineInputVariables();
-}
-
-
-/**
- * function defines user variables to inputfields
- */
-function defineInputVariables() {
-    username = document.getElementById('username');
-    email = document.getElementById('email');
-    password = document.getElementById('password');
 }
 
 
@@ -67,16 +59,6 @@ function startAnimation() {
 
 
 /**
- * function renders animation for first load of the desktop site
- */
-function startDesktopAnimation() {
-    document.getElementById('logo-dektop').classList.add('logo-after');
-    document.getElementById('card').classList.remove('opacity-zero');
-    document.getElementById('sign-up-desktop').classList.remove('opacity-zero');
-}
-
-
-/**
  * function renders animation for first load of the mobile site
  */
 function startMobileAnimation() {
@@ -89,6 +71,7 @@ function startMobileAnimation() {
     setTimeout(removeScreenCover, 500);
 }
 
+
 /**
  * funciton removes screen cover for mobile animation
  */
@@ -98,23 +81,35 @@ function removeScreenCover() {
 
 
 /**
- * function checks if auto log in is wanted and loggs previous user in or leads to index.html
+ * function renders animation for first load of the desktop site
  */
-async function checkForAutoLogIn() {
-    let autoLogIn = localStorage.getItem('autoLogIn');
-    if (autoLogIn == 'false' || autoLogIn == null) {
-        goToLoginPageDelay();
-    } else {
-        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
-    }
+function startDesktopAnimation() {
+    document.getElementById('logo-dektop').classList.add('logo-after');
+    document.getElementById('card').classList.remove('opacity-zero');
+    document.getElementById('sign-up-desktop').classList.remove('opacity-zero');
 }
 
 
 /**
- * function leads to login page with delay
+ * function defines user variables to inputfields
  */
-function goToLoginPageDelay() {
-    setTimeout(goToLoginPage, 500);
+ function defineInputVariables() {
+    username = document.getElementById('username');
+    email = document.getElementById('email');
+    password = document.getElementById('password');
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * function checks if auto log in is wanted and loggs previous user in
+ */
+async function checkForAutoLogIn() {
+    let autoLogIn = localStorage.getItem('autoLogIn');
+    if (autoLogIn == !'false' || autoLogIn == !null) {
+        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    }
 }
 
 
@@ -163,7 +158,7 @@ function userGetsLoggdIn(user) {
 function guestLogin() {
     localStorage.setItem('autoLogIn', false);
     localStorage.setItem('user-username', 'Guest');
-    localStorage.setItem('user-email', '');
+    localStorage.setItem('user-email', 'guest@mail.com');
     localStorage.setItem('Go to summary from LogIn', true);
     goToSummary();
 }
