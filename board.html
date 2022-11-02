@@ -17,7 +17,6 @@
 
 <body onload="init()">
     <div w3-include-html="./templates/sideBar.html"></div>
-
     <main>
         <div class="d-flex-jc-sb">
             <h1>Board</h1>
@@ -29,29 +28,36 @@
                 <div class="d-flex-jc-sb">
                     <h2>To do</h2><button class="btn-square-add-task"> <img src="assets/plus-black.svg"></button>
                 </div>
-                <div ondragover="allowDrop(event); highlight('todo-tasks')" ondrop="moveTo('todo'); removeHighlight('todo-tasks')" ondragleave="removeHighlight('todo-tasks')" id="todo-tasks" class="kanban-clm"> </div>
+                <div ondragover="allowDrop(event); highlight('todo-tasks')"
+                    ondrop="moveTo('todo'); removeHighlight('todo-tasks')" ondragleave="removeHighlight('todo-tasks')"
+                    id="todo-tasks" class="kanban-clm"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb">
                     <h2>In progress</h2><button class="btn-square-add-task"> <img src="assets/plus-black.svg"></button>
                 </div>
-                <div ondragover="allowDrop(event); highlight('progress-tasks')" ondrop="moveTo('progress'); removeHighlight('progress-tasks')" ondragleave="removeHighlight('progress-tasks')" id="progress-tasks" class="kanban-clm"> </div>
-              
+                <div ondragover="allowDrop(event); highlight('progress-tasks')"
+                    ondrop="moveTo('progress'); removeHighlight('progress-tasks')"
+                    ondragleave="removeHighlight('progress-tasks')" id="progress-tasks" class="kanban-clm"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb">
-                    <h2>Awaiting Feedback</h2><button class="btn-square-add-task"> <img src="assets/plus-black.svg"></button>
+                    <h2>Awaiting Feedback</h2><button class="btn-square-add-task"> <img
+                            src="assets/plus-black.svg"></button>
                 </div>
-                <div ondragover="allowDrop(event); highlight('feedback-tasks')" ondrop="moveTo('feedback'); removeHighlight('feedback-tasks')" ondragleave="removeHighlight('feedback-tasks')" id="feedback-tasks" class="kanban-clm"> </div>
+                <div ondragover="allowDrop(event); highlight('feedback-tasks')"
+                    ondrop="moveTo('feedback'); removeHighlight('feedback-tasks')"
+                    ondragleave="removeHighlight('feedback-tasks')" id="feedback-tasks" class="kanban-clm"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb">
                     <h2>Done</h2><button class="btn-square-add-task"> <img src="assets/plus-black.svg"></button>
                 </div>
-                <div ondragover="allowDrop(event); highlight('done-tasks')" ondrop="moveTo('done'); removeHighlight('done-tasks')" ondragleave="removeHighlight('done-tasks')" id="done-tasks" class="kanban-clm"> </div>
+                <div ondragover="allowDrop(event); highlight('done-tasks')"
+                    ondrop="moveTo('done'); removeHighlight('done-tasks')" ondragleave="removeHighlight('done-tasks')"
+                    id="done-tasks" class="kanban-clm"> </div>
             </div>
         </div>
     </main>
 </body>
-
 </html>
