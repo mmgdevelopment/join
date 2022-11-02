@@ -5,9 +5,19 @@ let tasksDatabase;
  * This function is used to start all functions included by visiting the webpage
  *
  */
-function init() {
+async function init() {
   includeHTML();
-  readDatabase();
+  await readDatabase();
+  startRender();
+}
+
+
+/**
+ * This function starts the rendering process
+ * 
+ */
+function startRender() {
+    getAllEpics();
 }
 
 /**
@@ -18,18 +28,17 @@ async function readDatabase() {
   let url = `./script/tasks.json`;
   let response = await fetch(url);
   tasksDatabase = await response.json();
-  getAllEpics(tasksDatabase);
 }
 
 /**
- * This function gets all epics of the database
+ * This function clears the HTML and goes through all epics of the database.
  *
- * @param {object} allTasks
+ * 
  */
 
-function getAllEpics(allTasks) {
-  clearColumns();
-  let epics = allTasks["epics"];
+function getAllEpics() {
+    clearColumns();
+  let epics = tasksDatabase["epics"];
   for (let i = 0; i < epics.length; i++) {
     const epic = epics[i];
     getAllTasks(epic);
@@ -49,6 +58,13 @@ function getAllTasks(epic) {
   }
 }
 
+/**
+ * This function checks the category of the task and starts the render process
+ * 
+ * @param {object} task 
+ * @param {object} epic 
+ */
+
 function readTasksCategory(task, epic) {
   if (task["category"] == "todo") {
     renderCategoryTodo(task, epic);
@@ -64,6 +80,33 @@ function readTasksCategory(task, epic) {
   }
 }
 
+/**
+ * These following functions render the tasks in the specific kanban column
+ * 
+ * @param {object} task 
+ * @param {object} epic 
+ */
+function renderCategoryTodo(task, epic) {
+    document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
+  }
+  
+  function renderCategoryProgress(task, epic) {
+    document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
+  }
+  
+  function renderCategoryFeedback(task, epic) {
+    document.getElementById("feedback-tasks").innerHTML += renderTask(task, epic);
+  }
+  
+  function renderCategoryDone(task, epic) {
+    document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
+  }
+
+/**
+ * This function clears the content of every column of the kanban
+ * 
+ */
+
 function clearColumns() {
   document.getElementById("todo-tasks").innerHTML = "";
   document.getElementById("progress-tasks").innerHTML = "";
@@ -71,36 +114,43 @@ function clearColumns() {
   document.getElementById("done-tasks").innerHTML = "";
 }
 
-function renderCategoryTodo(task, epic) {
-  document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
-}
-
-function renderCategoryProgress(task, epic) {
-  document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
-}
-
-function renderCategoryFeedback(task, epic) {
-  document.getElementById("feedback-tasks").innerHTML += renderTask(task, epic);
-}
-
-function renderCategoryDone(task, epic) {
-  document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
-}
+/**
+ * This function changes the ID of the currentDraggedTaske to the dragged item ones
+ * 
+ * @param {string} id 
+ */
 
 function startDragging(id) {
   currentDraggedTask = id;
 }
 
+
+/**
+ * This function change the behaivior to be able to drop an item
+ * 
+ * @param {event} ev 
+ */
 function allowDrop(ev) {
   ev.preventDefault();
 }
 
+
+/**
+ * This function changes the category to the one its dropped in
+ * 
+ * @param {string} category 
+ */
 function moveTo(category) {
   let draggedTask = findTask();
   draggedTask["category"] = category;
-  console.log(draggedTask["category"]);
   getAllEpics(tasksDatabase);
 }
+
+/**
+ * This function gets the array of the task to make the category accessable
+ * 
+ * @returns task array
+ */
 
 function findTask() {
   for (let j = 0; j < tasksDatabase["epics"].length; j++) {
@@ -115,9 +165,23 @@ function findTask() {
   }
 }
 
+
+/**
+ * This function adds a css class as highlight for the kanban column which is dragged over
+ * 
+ * @param {string} id 
+ */
+
 function highlight(id) {
   document.getElementById(id).classList.add("area-highlight");
 }
+
+/**
+ * This function removes a css class of the kanban column which was used to higlight while dragged over
+ * 
+ * @param {string} id 
+ */
+
 function removeHighlight(id) {
   document.getElementById(id).classList.remove("area-highlight");
 }
