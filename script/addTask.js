@@ -72,7 +72,8 @@ async function createTestTask() {
                     assignedTo: assignedTo,
                     dueDate: document.getElementById('dueDate').value,
                     prio: returnPrioState(),
-                    subtasks: getSubtasks()
+                    subtasks: getSubtasks(),
+                    category: 'todo'
                 }
             )
         }
@@ -297,7 +298,13 @@ function getSubtasks() {
         if (subtask.checked) {
             let id = subtask.id.slice(-1);
             let value = document.getElementById(`subtask-${id}`).innerText;
-            subtasks.push(value);
+            subtasks.push(
+                {
+                    name: value,
+                    checked: false
+                }
+
+            );
         };
     };
     return subtasks;
