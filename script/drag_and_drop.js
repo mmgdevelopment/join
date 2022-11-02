@@ -1,8 +1,7 @@
 let currentDraggedTask;
 let tasksDatabase;
 let x = window.matchMedia("(max-width: 850px)");
-// Call listener function at run time
-x.addListener(myFunction); // Attach listener function on state changes
+x.addListener(checkWitdh); // Attach listener function on state changes
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -12,7 +11,7 @@ async function init() {
   includeHTML();
   await readDatabase();
   startRender();
-  myFunction(x);
+  checkWitdh(x);
 }
 
 /**
@@ -191,7 +190,7 @@ function removeHighlight(id) {
  *
  * @param {mediaquery} x
  */
-function myFunction(x) {
+function checkWitdh(x) {
   if (x.matches) {
     // If media query matches
     renderMobileView();

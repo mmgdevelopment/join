@@ -193,10 +193,13 @@ h2 {
   background-color: #e5e5e5;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 950px) {
   .kanban {
     flex-direction: column;
   }
+
+@media only screen and (max-width: 850px) {
+
 
   main {
     left: 20px;
