@@ -21,8 +21,6 @@ async function init() {
     includeHTML();
     renderCategorySelector();
     renderContactSelector();
-    setCategoryEventListener();
-    setAssignedEventListener();
 };
 
 /**
@@ -48,7 +46,6 @@ async function deleteTasks() {
     await saveData();
     await loadData();
     renderCategorySelector();
-    setCategoryEventListener();
 }
 
 function setInitialCategorysIfNotExist() {
@@ -79,6 +76,9 @@ async function createTestTask() {
         }
     });
     saveData();
+    console.log(user);
+    alert('task saved');
+    clearAllInput();
 }
 
 function returnPrioState() {
@@ -188,7 +188,6 @@ function addCategory() {
     document.getElementById('colorPicker').style.display = 'none';
     let index = (user.epics.length - 1).toString();
     showCategory(index);
-    setCategoryEventListener();
 }
 
 function colorPicker(id) {
@@ -208,6 +207,7 @@ function renderCategorySelector() {
     document.getElementById('category').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
+    setCategoryEventListener();
 }
 
 function showCategory(id) {
@@ -225,6 +225,7 @@ function renderContactSelector() {
         id++;
     });
     assigned.innerHTML += inviteContactSelectorTemplate();
+    setAssignedEventListener();
 }
 
 function renderInviteContactInput() {
@@ -241,7 +242,6 @@ function inviteContact() {
     } else {
         /**form Validation -> input required */
     }
-    setAssignedEventListener();
 }
 
 function sendInviteMail(value) { }
@@ -310,6 +310,18 @@ function getSubtasks() {
     return subtasks;
 }
 
+function clearAllInput() {
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    renderCategorySelector();
+    renderContactSelector();
+    renderAssignedContacts();
+    document.getElementById('dueDate').value = '';
+    resetPrioButtons();
+    renderSubtaskInput();
+    document.getElementById('subtaskList').innerHTML = '';
+}
+
 /***********************HTML Templates**************************/
 
 function categorySelectorTemplate() {
@@ -326,7 +338,7 @@ function newCategoryTemplate() {
     <div class="customSelectorInput">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
-            <img onclick="renderCategorySelector(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderCategorySelector()" src="./assets/clear.svg" alt=""> |
             <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
@@ -349,7 +361,7 @@ function inviteContactInputTemplate() {
     <div class="customSelectorInput">
         <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
         <div class="createClearContainer">
-            <img onclick="renderContactSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderContactSelector()" src="./assets/clear.svg" alt=""> |
             <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
