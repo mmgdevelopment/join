@@ -4,13 +4,30 @@ let users = [];
 let username;
 let email;
 let password;
+let epicsArray = [
+    {
+        "name": "Backoffice",
+        "color": "blue",
+        "tasks": []
+    },
+    {
+        "name": 'Marketing',
+        "color": 'red',
+        "tasks": []
+    },
+    {
+        "name": 'Development',
+        "color": 'orange',
+        "tasks": []
+    }
+]
 
 
 /**
  * function loads all saved users and defines user variables to inputfields
  */
 async function init() {
-    playAnimationOnIndex();    
+    playAnimationOnIndex();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineInputVariables();
@@ -31,7 +48,7 @@ function defineInputVariables() {
  * function plays animation, if user is on index.html
  */
 function playAnimationOnIndex() {
-    if(window.location.href.endsWith('index.html')){
+    if (window.location.href.endsWith('index.html')) {
         setTimeout(startAnimation, 500);
     }
 }
@@ -40,8 +57,8 @@ function playAnimationOnIndex() {
 /**
  * function renders animation for first load
  */
- function startAnimation() {
-    if(screen.width <= 850) {
+function startAnimation() {
+    if (screen.width <= 850) {
         startMobileAnimation();
     } else {
         startDesktopAnimation();
@@ -62,7 +79,7 @@ function startDesktopAnimation() {
 /**
  * function renders animation for first load of the mobile site
  */
- function startMobileAnimation() {
+function startMobileAnimation() {
     document.getElementById('logo-mobile').classList.add('mobile-logo-after');
     document.getElementById('card').classList.remove('opacity-zero');
     document.getElementById('sign-up-mobile').classList.remove('opacity-zero');
@@ -76,7 +93,7 @@ function startDesktopAnimation() {
  * funciton removes screen cover for mobile animation
  */
 function removeScreenCover() {
-    document.getElementById('screen-cover').style="display:none;";
+    document.getElementById('screen-cover').style = "display:none;";
 }
 
 
@@ -156,10 +173,10 @@ function guestLogin() {
  * function changes lock to closed eye if password gets input
  */
 function changePasswordIcon() {
-    if(document.getElementById('password').value == '') {
-        document.getElementById('password-icon').src='./assets/lock.svg';
+    if (document.getElementById('password').value == '') {
+        document.getElementById('password-icon').src = './assets/lock.svg';
     } else {
-        document.getElementById('password-icon').src='./assets/icons8-unsichtbar.png';
+        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
     }
 }
 
@@ -169,11 +186,11 @@ function changePasswordIcon() {
  */
 function makePasswordVisible() {
     let icon = document.getElementById('password-icon').src;
-    if(icon.endsWith('unsichtbar.png')) {
-        document.getElementById('password-icon').src='./assets/icons8-sichtbar.png';
+    if (icon.endsWith('unsichtbar.png')) {
+        document.getElementById('password-icon').src = './assets/icons8-sichtbar.png';
         document.getElementById('password').type = "text";
     } else {
-        document.getElementById('password-icon').src='./assets/icons8-unsichtbar.png';
+        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
         document.getElementById('password').type = "password";
     }
 }
@@ -262,7 +279,7 @@ function deniedSignUp() {
  * function creats a new user with input from sin_up.html and saves him on backend 
  */
 async function createNewUser() {
-    users.push({ username: username.value, email: email.value, password: password.value, tasks: '' });
+    users.push({ username: username.value, email: email.value, password: password.value, epics: epicsArray});
     await backend.setItem('users', JSON.stringify(users));
     window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert!';
 }
