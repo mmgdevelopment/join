@@ -33,7 +33,7 @@ async function loadData() {
     users = JSON.parse(backend.getItem('users')) || [];
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
-    setInitialCategorysIfNotExist();
+    // setInitialCategorysIfNotExist();
 }
 
 async function saveData() {
