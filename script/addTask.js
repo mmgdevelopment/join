@@ -44,7 +44,7 @@ async function saveData() {
 }
 
 async function deleteTasks() {
-    user.tasks = '';
+    user.epics = '';
     await saveData();
     await loadData();
     renderCategorySelector();
@@ -52,8 +52,8 @@ async function deleteTasks() {
 }
 
 function setInitialCategorysIfNotExist() {
-    if (user.tasks == '') {
-        user.tasks = taskTemplate();
+    if (user.epics == '') {
+        user.epics = taskTemplate();
     }
 }
 
@@ -61,7 +61,7 @@ function setInitialCategorysIfNotExist() {
  * AddTask to JSON
  */
 async function createTestTask() {
-    user.tasks.forEach(task => {
+    user.epics.forEach(task => {
         if (task.name == document.getElementById('firstValue').innerText) {
             const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
             task.tasks.push(
@@ -175,7 +175,7 @@ function renderNewCategoryInput() {
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        user.tasks.push({
+        user.epics.push({
             "name": input.value,
             "color": categoryColor,
             "tasks": []
@@ -186,7 +186,7 @@ function addCategory() {
     categoryColor = '';
     renderCategorySelector();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (user.tasks.length - 1).toString();
+    let index = (user.epics.length - 1).toString();
     showCategory(index);
     setCategoryEventListener();
 }
@@ -334,8 +334,8 @@ function newCategoryTemplate() {
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < user.tasks.length; i++) {
-        const category = user.tasks[i];
+    for (let i = 0; i < user.epics.length; i++) {
+        const category = user.epics[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
@@ -383,7 +383,7 @@ function inviteContactSelectorTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = user.tasks[index]
+    let category = user.epics[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
