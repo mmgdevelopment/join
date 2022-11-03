@@ -1,9 +1,9 @@
 setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
 
 let currentDraggedTask;
+let doneSubtasks;
 let user;
 let users = [];
-let tasksDatabase;
 let x = window.matchMedia("(max-width: 850px)");
 x.addListener(checkWitdh); // Attach listener function on state changes
 
@@ -77,7 +77,6 @@ function getAllTasks(epic) {
 function readTasksCategory(task, epic) {
   if (task["category"] == "todo") {
     renderCategoryTodo(task, epic);
-    getAssignedContact(task);
   }
   if (task["category"] == "progress") {
     renderCategoryProgress(task, epic);
@@ -88,7 +87,10 @@ function readTasksCategory(task, epic) {
   if (task["category"] == "done") {
     renderCategoryDone(task, epic);
   }
+  getAssignedContact(task);
+  checkSubtaskAmount(task);
 }
+
 
 /**
  * These following functions render the tasks in the specific kanban column
@@ -151,7 +153,7 @@ function allowDrop(ev) {
 function moveTo(category) {
   let draggedTask = findTask();
   draggedTask["category"] = category;
-  getAllEpics(tasksDatabase);
+  getAllEpics(user);
 }
 
 /**
@@ -161,8 +163,8 @@ function moveTo(category) {
  */
 
 function findTask() {
-  for (let j = 0; j < tasksDatabase["epics"].length; j++) {
-    const epic = tasksDatabase["epics"][j];
+  for (let j = 0; j < user["epics"].length; j++) {
+    const epic = user["epics"][j];
 
     for (let i = 0; i < epic["tasks"].length; i++) {
       const task = epic["tasks"][i];
@@ -214,6 +216,7 @@ function checkWitdh(x) {
  */
 
 function getAssignedContact(task) {
+    console.log(task['subtasks']);
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i];
     contact = fullContact.split(" ");
@@ -222,4 +225,24 @@ function getAssignedContact(task) {
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
     renderAssignedContactsHTML(contactInitials, task);
   }
+}
+
+
+function checkSubtaskAmount(task){
+    if(task['subtasks'].length){
+        checkSubtasksDone(task);
+        renderSubtaskHTML(task['id'], task, doneSubtasks);}
+}
+
+function checkSubtasksDone(task){
+    doneSubtasks = 0
+ for (let i = 0; i < task['subtasks'].length; i++) {
+    const subtask =  task['subtasks'][i];
+    if(subtask['checked']){
+        doneSubtasks++
+    
+    }
+    
+ }
+
 }

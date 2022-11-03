@@ -12,6 +12,10 @@
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
   
+
+      <div id="subtasks${task["id"]}" class="d-flex-jc-sb w-100">
+      
+      </div>
   
       <div class="d-flex-jc-sb w-100">
           <div id="assigned${task['id']}" class="contacts">
@@ -19,12 +23,11 @@
       </div>
   </div>`;
   }
-  
-  /*
-  <!-- //// <div class="d-flex-jc-sb w-100">
-  // <div class="bar"></div><span>1/${task["subTask"].length}</span>
-  // </div> --> --> */
-
+ 
+function renderSubtaskHTML(id, task, done){
+        document.getElementById('subtasks'+ id).innerHTML = `
+        <div class="bar"></div><span>${done}/${task['subtasks'].length}</span>`
+}
 
   /**
  * This function is used to render the assigned people on board.html
@@ -58,7 +61,6 @@
  *
  */
 function renderMobileView() {
-    console.log(document.getElementById("mobile-search"));
     document.getElementById("btn-add-task").innerHTML = "";
     document.getElementById("btn-add-task").innerHTML =
       '<img src="assets/plus-white.svg">';
