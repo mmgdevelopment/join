@@ -45,7 +45,6 @@
  *
  */
  function renderDesktopView() {
-    console.log(document.getElementById("desktop-search"));
     document.getElementById("btn-add-task").innerHTML = "";
     document.getElementById("btn-add-task").innerHTML = 'Add Task <img src="assets/plus-white.svg">';
     document.getElementById("mobile-search").innerHTML = "";
