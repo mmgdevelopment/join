@@ -1,4 +1,8 @@
+setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
+
 let currentDraggedTask;
+let user;
+let users = [];
 let tasksDatabase;
 let x = window.matchMedia("(max-width: 850px)");
 x.addListener(checkWitdh); // Attach listener function on state changes
@@ -8,8 +12,9 @@ x.addListener(checkWitdh); // Attach listener function on state changes
  *
  */
 async function init() {
+  await loadData();
   includeHTML();
-  await readDatabase();
+  //   await readDatabase();
   startRender();
   checkWitdh(x);
 }
@@ -23,13 +28,15 @@ function startRender() {
 }
 
 /**
- * This function is used to load a Json containing all tasks
+ * This function is used to load a Json containing all users and the tasks of the user
  *
  */
-async function readDatabase() {
-  let url = `./script/tasks.json`;
-  let response = await fetch(url);
-  tasksDatabase = await response.json();
+async function loadData() {
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem("users")) || [];
+  let emailUser = localStorage.getItem("user-email");
+  user = users.find((u) => u.email == emailUser);
+  // setInitialCategorysIfNotExist();
 }
 
 /**
@@ -40,7 +47,7 @@ async function readDatabase() {
 
 function getAllEpics() {
   clearColumns();
-  let epics = tasksDatabase["epics"];
+  let epics = user["epics"];
   for (let i = 0; i < epics.length; i++) {
     const epic = epics[i];
     getAllTasks(epic);
@@ -70,6 +77,7 @@ function getAllTasks(epic) {
 function readTasksCategory(task, epic) {
   if (task["category"] == "todo") {
     renderCategoryTodo(task, epic);
+    getAssignedContact(task);
   }
   if (task["category"] == "progress") {
     renderCategoryProgress(task, epic);
@@ -200,61 +208,18 @@ function checkWitdh(x) {
 }
 
 /**
- * This function removes the searchbar and puts it in Mobile view and changes the wording of the Addtask-Button
- *
- *
- */
-function renderMobileView() {
-  console.log("smal");
-  console.log(document.getElementById("mobile-search"));
-  document.getElementById("btn-add-task").innerHTML = "";
-  document.getElementById("btn-add-task").innerHTML =
-    '<img src="assets/plus-white.svg">';
-  document.getElementById("desktop-search").innerHTML = "";
-  document.getElementById("mobile-search").innerHTML =
-    '<input id="search" placeholder="Find task" type="text"></input>';
-}
-
-/**
- * This function removes the searchbar and puts it in Desktop view and changes the wording of the Addtask-Button
- *
- *
- */
-function renderDesktopView() {
-  console.log("big");
-  console.log(document.getElementById("desktop-search"));
-  document.getElementById("btn-add-task").innerHTML = "";
-  document.getElementById("btn-add-task").innerHTML = 'Add Task <img src="assets/plus-white.svg">';
-  document.getElementById("mobile-search").innerHTML = "";
-  document.getElementById("desktop-search").innerHTML =
-    '<input id="search" placeholder="Find task" type="text"></input>';
-}
-
-/**
- * This function is used to render the tasks in HTML
- *
- * @param {object} task
- * @param {object} epic
+ * This function takes the username and gives out the initials e.g. Kevin Lentz = KL
+ * 
+ * @param {object} task 
  */
 
-function renderTask(task, epic) {
-  return `
-    <div draggable="true" ondragstart="startDragging('${task["id"]}')" class="task-card">
-    <span class="epic ${epic["color"]}">${epic["name"]}</span>
-    <h4 class="task-name">${task["name"]}</h4>
-    <p class="task-description">${task["description"]}</p>
-
-
-    <div class="d-flex-jc-sb w-100">
-        <div class="contacts">
-            <div class="contact">MC</div>
-            <div class="contact">Tt</div>
-        </div><img class="priority" src="assets/${task["priority"]}.svg">
-    </div>
-</div>`;
+function getAssignedContact(task) {
+  for (let i = 0; i < task["assignedTo"].length; i++) {
+    const fullContact = task["assignedTo"][i];
+    contact = fullContact.split(" ");
+    const sureName = contact[0];
+    const lastName = contact[1];
+    let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
+    renderAssignedContactsHTML(contactInitials, task);
+  }
 }
-
-/*
-<!-- //// <div class="d-flex-jc-sb w-100">
-// <div class="bar"></div><span>1/${task["subTask"].length}</span>
-// </div> --> --> */
