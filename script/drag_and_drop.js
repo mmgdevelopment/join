@@ -216,7 +216,6 @@ function checkWitdh(x) {
  */
 
 function getAssignedContact(task) {
-    console.log(task['subtasks']);
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i];
     contact = fullContact.split(" ");
@@ -231,7 +230,9 @@ function getAssignedContact(task) {
 function checkSubtaskAmount(task){
     if(task['subtasks'].length){
         checkSubtasksDone(task);
-        renderSubtaskHTML(task['id'], task, doneSubtasks);}
+        
+        renderSubtaskHTML(task['id'], task, doneSubtasks, calcBarProgress(task))
+    }
 }
 
 function checkSubtasksDone(task){
@@ -245,4 +246,9 @@ function checkSubtasksDone(task){
     
  }
 
+}
+
+function calcBarProgress(task){
+    let barProgress = doneSubtasks / task['subtasks'].length * 100
+    return barProgress
 }

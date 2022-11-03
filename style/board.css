@@ -134,6 +134,7 @@ h2 {
   height: 8px;
   width: 170px;
   background: #f4f4f4;
+  background-repeat: no-repeat;
 }
 
 .w-100 {

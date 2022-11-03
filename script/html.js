@@ -24,9 +24,9 @@
   </div>`;
   }
  
-function renderSubtaskHTML(id, task, done){
+function renderSubtaskHTML(id, task, done, barProgress){
         document.getElementById('subtasks'+ id).innerHTML = `
-        <div class="bar"></div><span>${done}/${task['subtasks'].length}</span>`
+        <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${barProgress/100}px, #f4f4f4 0%)"></div><span>${done}/${task['subtasks'].length}</span>`
 }
 
   /**
