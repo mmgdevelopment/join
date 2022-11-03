@@ -32,6 +32,7 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineInputVariables();
+    checkForAutoLogIn();
 }
 
 
@@ -48,7 +49,7 @@ async function init() {
 /**
  * function plays animation, if user loaded index.html for the first time
  */
-function playAnimationOnIndex() {
+async function playAnimationOnIndex() {
     if (firstLoadOfPage()) {
         setTimeout(startAnimation, 500);
         localStorage.setItem('First load of index.html', 'loaded index.html already')
@@ -163,17 +164,19 @@ function startDesktopAnimation() {
  */
 async function checkForAutoLogIn() {
     let autoLogIn = localStorage.getItem('autoLogIn');
-    if (autoLogIn == !'false' || autoLogIn == !null) {
-        window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    if (autoLogIn == 'true') {
+        document.getElementById('remember-me').checked = true;
+        insertLoginMailPassword();
     }
 }
 
 
-/**
- * function leads to login page
- */
-function goToLoginPage() {
-    window.location.href = 'index.html';
+function insertLoginMailPassword() {
+    let localMail = localStorage.getItem('user-email');
+    let user = users.find(u => u.email == localMail);
+
+    email.value = localMail;
+    password.value = user['password'];
 }
 
 
@@ -209,6 +212,30 @@ function userGetsLoggdIn(user) {
 
 
 /**
+ * function ckecks the checkbox and saves a value to the local storage, if user wants to be auto logged in next time or not
+ */
+function setAutoLogIn() {
+    let checkbox = document.getElementById('remember-me');
+    if (checkbox.checked == true) {
+        localStorage.setItem('autoLogIn', true)
+    } else {
+        localStorage.setItem('autoLogIn', false)
+    }
+}
+
+
+/**
+ * function saves logged in user information to local storage
+ * @param {JSON} user 
+ */
+function saveLoggedInUser(user) {
+    localStorage.setItem('user-username', user['username']);
+    localStorage.setItem('user-email', user['email']);
+    localStorage.setItem('Go to summary from LogIn', true);
+}
+
+
+/**
  * function loggs in user as guest
  */
 function guestLogin() {
@@ -218,6 +245,35 @@ function guestLogin() {
     localStorage.setItem('Go to summary from LogIn', true);
     goToSummary();
 }
+
+
+/**
+ * function sends the user to summary.html
+ */
+function goToSummary() {
+    window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+}
+
+
+/**
+ * after incorrect email and password the entrance to join will be denied and the inputs will be cleared
+ */
+function userDoesntGetLoggedIn() {
+    clearAllInput();
+    document.getElementById('remember-me').checked = false;
+    turnInputRed();
+}
+
+
+
+
+
+
+
+
+
+
+
 
 
 /**
@@ -244,48 +300,6 @@ function makePasswordVisible() {
         document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
         document.getElementById('password').type = "password";
     }
-}
-
-
-/**
- * function ckecks the checkbox and saves a value to the local storage, if user wants to be auto logged in next time or not
- */
-function setAutoLogIn() {
-    let rememberMe = document.getElementById('remember-me');
-    if (rememberMe.checked == true) {
-        localStorage.setItem('autoLogIn', true)
-    } else {
-        localStorage.setItem('autoLogIn', false)
-    }
-}
-
-
-/**
- * function saves logged in user information to local storage
- * @param {JSON} user 
- */
-function saveLoggedInUser(user) {
-    localStorage.setItem('user-username', user['username']);
-    localStorage.setItem('user-email', user['email']);
-    localStorage.setItem('Go to summary from LogIn', true);
-}
-
-
-/**
- * function sends the user to summary.html
- */
-function goToSummary() {
-    window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
-}
-
-
-/**
- * after incorrect email and password the entrance to join will be denied and the inputs will be cleared
- */
-function userDoesntGetLoggedIn() {
-    clearAllInput();
-    document.getElementById('remember-me').checked = false;
-    turnInputRed();
 }
 
 
@@ -423,6 +437,17 @@ function goToSuccessReset() {
 
 
 /**
+ * function clears all input values
+ */
+function clearAllInput() {
+    let elements = document.getElementsByClassName('login-input');
+    for (let i = 0; i < elements.length; i++) {
+        elements[i].value = '';
+    }
+}
+
+
+/**
  * function turns inputborder red for a short duration
  */
 function turnInputRed() {
@@ -441,17 +466,6 @@ function turnInputGray() {
     let elements = document.getElementsByClassName('login-single-input-container');
     for (let i = 0; i < elements.length; i++) {
         elements[i].style = 'border: 1px solid #D1D1D1;';
-    }
-}
-
-
-/**
- * function clears all input values
- */
-function clearAllInput() {
-    let elements = document.getElementsByClassName('login-input');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].value = '';
     }
 }
 
