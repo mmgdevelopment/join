@@ -134,6 +134,7 @@ h2 {
   height: 8px;
   width: 170px;
   background: #f4f4f4;
+  background-repeat: no-repeat;
 }
 
 .w-100 {
@@ -182,8 +183,21 @@ h2 {
 }
 
 .pink {
-  background-color: #e229cc;
+  background-color: #FC71FF;
 }
+
+.yellow {
+  background-color: #FFA800;
+}
+
+.ocean {
+  background-color: #29ABE2;
+}
+
+.blue {
+  background-color: #462F8A;
+}
+
 
 .kanban-clm {
   min-height: 100%;

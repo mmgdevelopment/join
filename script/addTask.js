@@ -21,8 +21,6 @@ async function init() {
     includeHTML();
     renderCategorySelector();
     renderContactSelector();
-    setCategoryEventListener();
-    setAssignedEventListener();
 };
 
 /**
@@ -33,7 +31,7 @@ async function loadData() {
     users = JSON.parse(backend.getItem('users')) || [];
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
-    setInitialCategorysIfNotExist();
+    // setInitialCategorysIfNotExist();
 }
 
 async function saveData() {
@@ -43,17 +41,17 @@ async function saveData() {
     await backend.setItem('users', JSON.stringify(users));
 }
 
-async function deleteTasks() {
-    user.tasks = '';
+async function deleteAllTasks() {
+    user.epics.forEach(epic => {
+        epic.tasks = [];
+    });
     await saveData();
     await loadData();
-    renderCategorySelector();
-    setCategoryEventListener();
 }
 
 function setInitialCategorysIfNotExist() {
-    if (user.tasks == '') {
-        user.tasks = taskTemplate();
+    if (user.epics == '') {
+        user.epics = taskTemplate();
     }
 }
 
@@ -61,24 +59,44 @@ function setInitialCategorysIfNotExist() {
  * AddTask to JSON
  */
 async function createTestTask() {
-    user.tasks.forEach(task => {
-        if (task.name == document.getElementById('firstValue').innerText) {
-            const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
-            task.tasks.push(
-                {
-                    id: id,
-                    title: document.getElementById('title').value,
-                    description: document.getElementById('description').value,
-                    assignedTo: assignedTo,
-                    dueDate: document.getElementById('dueDate').value,
-                    prio: returnPrioState(),
-                    subtasks: getSubtasks(),
-                    category: 'todo'
-                }
-            )
-        }
-    });
-    saveData();
+    if (!checkIfSomeInputIsEmpty()) {
+        user.epics.forEach(task => {
+            if (task.name == document.getElementById('firstValue').innerText) {
+                const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
+                task.tasks.push(
+                    {
+                        id: id,
+                        title: document.getElementById('title').value,
+                        description: document.getElementById('description').value,
+                        assignedTo: assignedTo,
+                        dueDate: document.getElementById('dueDate').value,
+                        prio: returnPrioState(),
+                        subtasks: getSubtasks(),
+                        category: 'todo'
+                    }
+                )
+            }
+        });
+        saveData();
+        console.log(user);
+        clearAllInput();
+        alert('task saved');
+    } else {
+        alert('Es müssen alle Felder ausgefüllt sein')
+    }
+}
+
+function checkIfSomeInputIsEmpty() {
+    if (document.getElementById('title').value == '' ||
+        document.getElementById('description').value == '' ||
+        assignedTo == [] ||
+        document.getElementById('dueDate').value == '' ||
+        returnPrioState == ''
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 function returnPrioState() {
@@ -175,7 +193,7 @@ function renderNewCategoryInput() {
 function addCategory() {
     let input = document.getElementById('categoryInput');
     if (input.value) {
-        user.tasks.push({
+        user.epics.push({
             "name": input.value,
             "color": categoryColor,
             "tasks": []
@@ -186,9 +204,8 @@ function addCategory() {
     categoryColor = '';
     renderCategorySelector();
     document.getElementById('colorPicker').style.display = 'none';
-    let index = (user.tasks.length - 1).toString();
+    let index = (user.epics.length - 1).toString();
     showCategory(index);
-    setCategoryEventListener();
 }
 
 function colorPicker(id) {
@@ -208,6 +225,7 @@ function renderCategorySelector() {
     document.getElementById('category').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
+    setCategoryEventListener();
 }
 
 function showCategory(id) {
@@ -225,6 +243,7 @@ function renderContactSelector() {
         id++;
     });
     assigned.innerHTML += inviteContactSelectorTemplate();
+    setAssignedEventListener();
 }
 
 function renderInviteContactInput() {
@@ -241,7 +260,6 @@ function inviteContact() {
     } else {
         /**form Validation -> input required */
     }
-    setAssignedEventListener();
 }
 
 function sendInviteMail(value) { }
@@ -310,6 +328,18 @@ function getSubtasks() {
     return subtasks;
 }
 
+function clearAllInput() {
+    document.getElementById('title').value = '';
+    document.getElementById('description').value = '';
+    renderCategorySelector();
+    renderContactSelector();
+    renderAssignedContacts();
+    document.getElementById('dueDate').value = '';
+    resetPrioButtons();
+    renderAddSubtaskContainer();
+    document.getElementById('subtaskList').innerHTML = '';
+}
+
 /***********************HTML Templates**************************/
 
 function categorySelectorTemplate() {
@@ -326,7 +356,7 @@ function newCategoryTemplate() {
     <div class="customSelectorInput">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
-            <img onclick="renderCategorySelector(), setCategoryEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderCategorySelector()" src="./assets/clear.svg" alt=""> |
             <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
@@ -334,8 +364,8 @@ function newCategoryTemplate() {
 };
 
 function renderSingleCategorys() {
-    for (let i = 0; i < user.tasks.length; i++) {
-        const category = user.tasks[i];
+    for (let i = 0; i < user.epics.length; i++) {
+        const category = user.epics[i];
         document.getElementById('category').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
@@ -349,7 +379,7 @@ function inviteContactInputTemplate() {
     <div class="customSelectorInput">
         <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
         <div class="createClearContainer">
-            <img onclick="renderContactSelector(), setAssignedEventListener()" src="./assets/clear.svg" alt=""> |
+            <img onclick="renderContactSelector()" src="./assets/clear.svg" alt=""> |
             <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
@@ -383,7 +413,7 @@ function inviteContactSelectorTemplate() {
 
 function renderChoosenCategory(id) {
     index = id.slice(-1);
-    let category = user.tasks[index]
+    let category = user.epics[index]
     return /*html*/ `
             ${category.name}
             <div class="color ${category.color}"></div>
