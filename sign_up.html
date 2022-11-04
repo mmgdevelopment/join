@@ -15,7 +15,7 @@
     <title>Sign up</title>
 </head>
 
-<body onload="init(), defineInputVariables()">
+<body onload="init()">
 
     <!--dektop logo-->
     <a href="index.html"><img id="logo-dektop" class="logo-after only-dekstop" src="./assets/join_logo.svg"
@@ -49,12 +49,15 @@
                     <input class="input" id="username" type="text" minlength="2" placeholder="Name"
                         title="Please ensert a username" required>
                     <img src="./assets/profile.svg" alt="profile-icon" title="Please ensert a username">
+                    <span id="wrong-username" class="wrong-input opacity-zero">Name already exists</span>
+
                 </div>
 
                 <div class="inputfield">
                     <input class="input" id="email" type="email" placeholder="Email"
                         title="Please ensert a valid email adress" required>
                     <img src="./assets/mail.svg" alt="mail-icon" title="Please ensert a valid email adress">
+                    <span id="wrong-email" class="wrong-input opacity-zero">Email already exists</span>
                 </div>
 
                 <div id="password-container" class="inputfield">

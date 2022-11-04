@@ -15,7 +15,7 @@
     <title>Login</title>
 </head>
 
-<body onload="init(), playAnimationOnIndex()">
+<body onload="init(), initIndexHTML()">
 
 
     <!--dektop logo-->                        
@@ -58,6 +58,7 @@
                     <input oninput="changePasswordIcon()" class="input" id="password" minlength="8" type="password" placeholder="Password"
                         title="Please ensert your password" required>
                     <img onclick="makePasswordVisible()" style="cursor: pointer;" id="password-icon" src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
+                    <span id="wrong-password" class="wrong-input opacity-zero">Wrong Password</span>
                 </div>
 
             </div>

@@ -22,6 +22,7 @@ let epicsArray = [
     }
 ]
 
+
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -29,10 +30,9 @@ let epicsArray = [
  * function loads all saved users and defines user variables to inputfields
  */
 async function init() {
+    defineInputVariables();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    defineInputVariables();
-    checkForAutoLogIn();
 }
 
 
@@ -49,13 +49,14 @@ async function init() {
 /**
  * function plays animation, if user loaded index.html for the first time
  */
-async function playAnimationOnIndex() {
+async function initIndexHTML() {
     if (firstLoadOfPage()) {
         setTimeout(startAnimation, 500);
         localStorage.setItem('First load of index.html', 'loaded index.html already')
     } else {
         noAnimation();
     }
+    setTimeout(checkForAutoLogIn, 600);
 }
 
 
@@ -156,7 +157,10 @@ function startDesktopAnimation() {
     document.getElementById('sign-up-desktop').classList.remove('opacity-zero');
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -174,6 +178,7 @@ async function checkForAutoLogIn() {
 function insertLoginMailPassword() {
     let localMail = localStorage.getItem('user-email');
     let user = users.find(u => u.email == localMail);
+    console.log(password.value);
 
     email.value = localMail;
     password.value = user['password'];
@@ -260,57 +265,32 @@ function goToSummary() {
  */
 function userDoesntGetLoggedIn() {
     clearAllInput();
+    wrongPassword();
     document.getElementById('remember-me').checked = false;
-    turnInputRed();
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-/**
- * function changes lock to closed eye if password gets input
- */
-function changePasswordIcon() {
-    if (document.getElementById('password').value == '') {
-        document.getElementById('password-icon').src = './assets/lock.svg';
-    } else {
-        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
-    }
-}
-
-
-/**
- * function toggles password visibility
- */
-function makePasswordVisible() {
-    let icon = document.getElementById('password-icon').src;
-    if (icon.endsWith('unsichtbar.png')) {
-        document.getElementById('password-icon').src = './assets/icons8-sichtbar.png';
-        document.getElementById('password').type = "text";
-    } else {
-        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
-        document.getElementById('password').type = "password";
-    }
-}
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /**
  * function creates a new user and pushes him into users(Array).
  */
 async function signUp() {
-    if (usernameAlreadyExists() || emailAlreadyExists()) {
-        deniedSignUp();
+    if (usernameAlreadyExists()) {
+        clearAllInput();
+        wrongUsername();
     } else {
-        createNewUser();
+        if (emailAlreadyExists()) {
+            clearAllInput();
+            wrongEmail();
+        } else {
+            createNewUser();
+        }
     }
 }
 
@@ -328,16 +308,7 @@ function usernameAlreadyExists() {
  */
 function emailAlreadyExists() {
     return users.find(u => u.email == email.value)
-}
-
-
-/**
- * function deletes all inpust from sign up 
- */
-function deniedSignUp() {
-    clearAllInput();
-    turnInputRed();
-}
+}  
 
 
 /**
@@ -350,16 +321,25 @@ async function createNewUser() {
 }
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 /**
  * function checks the email and leads the user to reset.html
  */
-function goToResetPage() {
+function checkIfEmailExists() {
     let user = emailAlreadyExists();
     if (user) {
         saveUserInLocalStorage(user);
+        goToPesetPage()
     } else {
         clearAllInput();
-        turnInputRed();
+        wrongEmail();
     }
 }
 
@@ -370,8 +350,7 @@ function goToResetPage() {
  */
 function saveUserInLocalStorage(user) {
     let userJSON = JSON.stringify(user);
-    localStorage.setItem('NoPasswordUser', userJSON);
-    window.location.href = 'reset.html?msg=Bitte gib ein neues Passwort ein!';
+    localStorage.setItem('User who forgot password', userJSON);
 }
 
 
@@ -379,14 +358,11 @@ function saveUserInLocalStorage(user) {
  * function takes all information needed for confirming and creating a new password and then does so
  */
 async function createNewPassword() {
-
-    let userJSON = localStorage.getItem('NoPasswordUser');
+    let userJSON = localStorage.getItem('User who forgot password');
     let user = JSON.parse(userJSON);
     let firstPassword = document.getElementById('firstPassword').value;
     let secondPassword = document.getElementById('secondPassword').value;
-
     confirmTheNewPassword(user, firstPassword, secondPassword);
-
 }
 
 
@@ -398,10 +374,11 @@ async function createNewPassword() {
  */
 function confirmTheNewPassword(user, firstPassword, secondPassword) {
     if (firstPassword == secondPassword) {
-        switchOldWithNewPassword(user);
+        switchOldWithNewPassword(user, firstPassword);
     } else {
         clearAllInput();
-        turnInputRed();
+        wrongEmail();
+        wrongPassword();
     }
 }
 
@@ -410,21 +387,21 @@ function confirmTheNewPassword(user, firstPassword, secondPassword) {
  * function takes the old password and changes it with the new one (also in backend)
  * @param {JSON} user 
  */
-async function switchOldWithNewPassword(user) {
+async function switchOldWithNewPassword(user, firstPassword) {
+    console.log(user);
     let userIndex = users.findIndex(u => u.email == user['email']);
     users[userIndex]['password'] = firstPassword;
-    deleteUsers();
     await backend.setItem('users', JSON.stringify(users));
-    localStorage.removeItem("NoPasswordUser");
+    localStorage.removeItem("User who forgot password");
     goToSuccessReset();
 }
 
 
 /**
- * function leads to forgot page
+ * function leads to success_reset.html
  */
-function goToForgotPage() {
-    window.location.href = 'forgot_password.html';
+ function goToPesetPage() {
+    window.location.href = 'reset.html?msg=Bitte erstelle ein neues Passwort!';
 }
 
 
@@ -436,11 +413,45 @@ function goToSuccessReset() {
 }
 
 
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * function changes lock to closed eye if password gets input
+ */
+ function changePasswordIcon() {
+    if (document.getElementById('password').value == '') {
+        document.getElementById('password-icon').src = './assets/lock.svg';
+    } else {
+        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
+    }
+}
+
+
+/**
+ * function toggles password visibility
+ */
+ function makePasswordVisible() {
+    let icon = document.getElementById('password-icon').src;
+    if (icon.endsWith('unsichtbar.png')) {
+        document.getElementById('password-icon').src = './assets/icons8-sichtbar.png';
+        document.getElementById('password').type = "text";
+    } else {
+        document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
+        document.getElementById('password').type = "password";
+    }
+}
+
+
 /**
  * function clears all input values
  */
 function clearAllInput() {
-    let elements = document.getElementsByClassName('login-input');
+    let elements = document.getElementsByClassName('input');
     for (let i = 0; i < elements.length; i++) {
         elements[i].value = '';
     }
@@ -448,25 +459,56 @@ function clearAllInput() {
 
 
 /**
- * function turns inputborder red for a short duration
+ * function displays wrong username message for 3 seconds
  */
-function turnInputRed() {
-    let elements = document.getElementsByClassName('login-single-input-container');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style = 'border: 1px solid #ff0000;';
-    }
-    setTimeout(turnInputGray, 1500);
+function wrongUsername() {
+    document.getElementById('wrong-username').classList.remove('opacity-zero');
+    setTimeout((hideWrongUsername), 3000);  
 }
 
 
 /**
- * function turns inputborder gray
+ * function hieds wrong username message 
  */
-function turnInputGray() {
-    let elements = document.getElementsByClassName('login-single-input-container');
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style = 'border: 1px solid #D1D1D1;';
-    }
+ function hideWrongUsername() {
+    document.getElementById('wrong-username').classList.add('opacity-zero');
+
+}
+
+
+/**
+ * function displays wrong email message for 3 seconds
+ */
+ function wrongEmail() {
+    document.getElementById('wrong-email').classList.remove('opacity-zero');
+    setTimeout((hideWrongEmail), 3000);  
+}
+
+
+/**
+ * function hieds wrong email message 
+ */
+function hideWrongEmail() {
+    document.getElementById('wrong-email').classList.add('opacity-zero');
+
+}
+
+
+/**
+ * function displays wrong password message for 3 seconds
+ */
+ function wrongPassword() {
+    document.getElementById('wrong-password').classList.remove('opacity-zero');
+    setTimeout(hideWrongPassword, 3000);
+}
+
+
+/**
+ * function hieds wrong password message 
+ */
+function hideWrongPassword() {
+    document.getElementById('wrong-password').classList.add('opacity-zero');
+
 }
 
 

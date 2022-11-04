@@ -147,6 +147,10 @@
         height: 36px;
     }
 
+    .wrong-input {
+        top: 50px;
+    }
+
     .memorie-container {
         flex-direction: column-reverse;
         align-items: flex-start;
