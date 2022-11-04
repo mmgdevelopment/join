@@ -4,6 +4,7 @@ let currentDraggedTask;
 let doneSubtasks;
 let user;
 let users = [];
+let cardWasOpened = false;
 let x = window.matchMedia("(max-width: 850px)");
 x.addListener(checkWitdh); // Attach listener function on state changes
 
@@ -151,9 +152,10 @@ function allowDrop(ev) {
  * @param {string} category
  */
 function moveTo(category) {
-  let draggedTask = findTask();
+  let draggedTask = findTaskId(currentDraggedTask);
   draggedTask["category"] = category;
   getAllEpics(user);
+  saveData();
 }
 
 /**
@@ -162,18 +164,37 @@ function moveTo(category) {
  * @returns task array
  */
 
-function findTask() {
+function findTaskId(id) {
   for (let j = 0; j < user["epics"].length; j++) {
     const epic = user["epics"][j];
 
     for (let i = 0; i < epic["tasks"].length; i++) {
       const task = epic["tasks"][i];
-      if (currentDraggedTask == task["id"]) {
+      if (id == task["id"]) {
         return task;
       }
     }
   }
 }
+
+/**
+ * This function returns the epic which contains the given ID
+ *
+ * @returns epic
+ */
+
+ function findTaskEpic(id) {
+    for (let j = 0; j < user["epics"].length; j++) {
+      const epic = user["epics"][j];
+  
+      for (let i = 0; i < epic["tasks"].length; i++) {
+        const task = epic["tasks"][i];
+        if (id == task["id"]) {
+          return epic;
+        }
+      }
+    }
+  }
 
 /**
  * This function adds a css class as highlight for the kanban column which is dragged over
@@ -222,8 +243,17 @@ function getAssignedContact(task) {
     const sureName = contact[0];
     const lastName = contact[1];
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    renderAssignedContactsHTML(contactInitials, task);
+    checkLocation(contactInitials, task, fullContact);
   }
+}
+
+function checkLocation(contactInitials, task, contactName){
+    if (cardWasOpened) {
+        renderCardContactsHTML(contactInitials, task, contactName);
+    }else{
+        renderAssignedContactsHTML(contactInitials, task);
+    }
+
 }
 
 
@@ -251,4 +281,31 @@ function checkSubtasksDone(task){
 function calcBarProgress(task){
     let barProgress = doneSubtasks / task['subtasks'].length * 100
     return barProgress
+}
+
+async function saveData() {
+    let emailUser = localStorage.getItem('user-email');
+    const i = users.findIndex(u => u.email == emailUser);
+    users[i] = user;
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+function openCard(id){
+    cardWasOpened = true;
+    let task = findTaskId(id);
+    let epic = findTaskEpic(id)
+document.getElementById('opened-card-container').classList.remove('d-none');
+document.getElementById('opened-card-container').innerHTML = renderTaskCard(task, epic)
+getAssignedContact(task)
+
+
+
+}
+
+function closeCard(){
+    document.getElementById('opened-card-container').classList.add('d-none');
+}
+
+function dontClose(event){
+    event.stopPropagation();
 }
