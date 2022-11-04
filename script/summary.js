@@ -12,9 +12,9 @@ let username;
 async function init() {
     loadUser();
     renderGreeting();
-
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+    checkForGuestUser();
 }
 
 
@@ -103,4 +103,22 @@ function renderName() {
         document.getElementById('greeting-title').innerHTML = 'Good morning';
         document.getElementById('mobileGreeting-title').innerHTML = 'Good morning';
     }
+}
+
+
+/**
+ * if guest is logged in, a guest account is pushed into users
+ */
+function checkForGuestUser() {
+    if (username == 'Guest') {
+        addGuestToUsers();
+    }
+}
+
+
+/**
+ * function adds guest account on first place in users JSON
+ */
+ function addGuestToUsers() {
+    users.unshift({username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: Array(7)});
 }
