@@ -15,6 +15,9 @@ async function init() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     checkForGuestUser();
+
+
+    console.log(users);
 }
 
 
@@ -33,7 +36,7 @@ function loadUser() {
 function renderGreeting() {
 
     if (userComesFromLogin()) {
-        if(userHasMobileDevice()) {
+        if (userHasMobileDevice()) {
             renderMobileGreeting();
         } else {
             renderDesktopGreeting();
@@ -67,8 +70,8 @@ function userHasMobileDevice() {
 function renderMobileGreeting() {
     document.getElementById('mobile-greeting').style.display = "block";
     document.getElementById('body').classList.add("mobile-good-morning-body");
-    document.getElementById('mobileGreeting-title').style="font-size: 36px;";
-    document.getElementById('name-mobile').style="font-size: 47px;";
+    document.getElementById('mobileGreeting-title').style = "font-size: 36px;";
+    document.getElementById('name-mobile').style = "font-size: 47px;";
     renderName();
     localStorage.setItem('Go to summary from LogIn', false);
     setTimeout(renderSummary, 2000);
@@ -120,13 +123,9 @@ function checkForGuestUser() {
 /**
  * function adds guest account on first place in users JSON
  */
- function addGuestToUsers() {
-    users.unshift({username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: Array(7)});
+function addGuestToUsers() {
+    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: Array(7) });
 }
-
-
-
-
 
 
 /**
@@ -134,4 +133,193 @@ function checkForGuestUser() {
  */
 function goToBorad() {
     window.location.href = "board.html";
+}
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+
+let taskInBoard;
+let taskInProgress;
+let awaitingFeedback;
+
+let urgency = [];
+
+let toDo;
+let done;
+
+
+
+
+
+
+
+function renderMidCard() {
+    let indexOfUser = users.findIndex(u => u.email == email);
+    let epics = users[indexOfUser]['epics'];
+
+    for (let i = 0; i < epics.length; i++) {
+        const epic = epics[i];
+        // getAllTasks(epic);
+        for (let i = 0; i < epic["tasks"].length; i++) {
+            const task = epic["tasks"][i];
+            urgency.push({ 'prio': task['prio'], 'date': task['dueDate'] });
+        }
+    }
+    showHighestPrio();
+}
+
+
+
+function showHighestPrio() {
+    if (urgencyContains('urgent') > 0) {
+        displayHighestPrioTask('urgent');
+    } else {
+        if (urgencyContains('medium') > 0) {
+            displayHighestPrioTask('medium');
+        } else {
+            if (urgencyContains('low') > 0) {
+                displayHighestPrioTask('low');
+            } else {
+                displayNoTasks();
+            }
+        }
+    }
+}
+
+function urgencyContains(value) {
+    return urgency.filter((v) => (v.prio === value)).length;
+}
+
+
+function displayHighestPrioTask(value) {
+
+    let prio = value.charAt(0).toUpperCase() + value.slice(1);
+    let prioAmount = urgencyContains(value);
+
+    document.getElementById('prio').innerHTML = prio;
+    document.getElementById('prio-amount').innerHTML = prioAmount;
+    document.getElementById('prio-img').src = `./assets/${value}.svg`;
+    document.getElementById('prio-img-container').classList.add(value);
+
+
+
+
+    let d = urgency.filter((v) => (v.prio === value));
+    let dates = [];
+
+    for (let i = 0; i < urgencyContains(value); i++) {
+        const element = d[i]['date'];
+        dates.push(element);
+    }
+    dates = dates.sort();
+
+    let dateInNumbers = dates[0];
+
+    let year = dateInNumbers.substr(0, 4);
+
+
+    let day = dateInNumbers.substr(8, 2);
+
+
+    let monthNumber = + (dateInNumbers.substr(5, 2) - 1);
+    let allMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    let month;
+
+    for (let i = 0; i < 12; i++) {
+        if (monthNumber == i) {
+            month = allMonths[i];
+        }
+
+    }
+
+
+    let nearestDeadline = `${month} ${day}, ${year}`
+
+    document.getElementById('deadline').innerHTML = nearestDeadline;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function displayNoTasks() {
+    console.log('will be designed later');
 }

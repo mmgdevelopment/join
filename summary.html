@@ -77,14 +77,17 @@
 
                 <div onclick="goToBorad()" class="overview-card mid-row-card">
 
-                    <img class="img-scale" src="./assets/urgent_high_filled.svg">
+
+                    <div id="prio-img-container" class="prio-img-container urgent">
+                        <img id="prio-img" class="prio-img" src="./assets/urgent.svg">
+                    </div>
 
                     <div class="mid-card-urgent">
 
-                        <div class="mid-card-number">
+                        <div id="prio-amount" class="mid-card-number">
                             1
                         </div>
-                        <p class="mid-card-text">
+                        <p id="prio" class="mid-card-text">
                             Urgent
                         </p>
 
@@ -94,7 +97,7 @@
 
                     <div class="deadline">
 
-                        <p class="date">October 16, 2022</p>
+                        <p id="deadline" class="date">October 16, 2022</p>
                         <p class="mid-card-text">Upcoming Deadline</p>
 
                     </div>
