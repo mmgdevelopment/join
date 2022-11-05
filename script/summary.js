@@ -97,11 +97,12 @@ function renderSummary() {
  * function renders username 
  */
 function renderName() {
-    if (username == !'Guest') {
-        document.getElementById('name-desktop').innerHTML = username;
-    } else {
+    if (username == 'Guest') {
         document.getElementById('greeting-title').innerHTML = 'Good morning';
         document.getElementById('mobileGreeting-title').innerHTML = 'Good morning';
+    } else {
+        document.getElementById('name-desktop').innerHTML = username;
+        document.getElementById('name-mobile').innerHTML = username;
     }
 }
 
@@ -121,4 +122,16 @@ function checkForGuestUser() {
  */
  function addGuestToUsers() {
     users.unshift({username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: Array(7)});
+}
+
+
+
+
+
+
+/**
+ * function leads to board
+ */
+function goToBorad() {
+    window.location.href = "board.html";
 }

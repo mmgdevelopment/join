@@ -33,6 +33,7 @@ async function init() {
     defineInputVariables();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+    deleteTheGuestUser();
 }
 
 
@@ -43,6 +44,18 @@ async function init() {
     username = document.getElementById('username');
     email = document.getElementById('email');
     password = document.getElementById('password');
+}
+
+
+/**
+ * function deletes the guest user
+ */
+async function deleteTheGuestUser() {
+    let firstPlaceInUsers = users[0]['username'];
+    if (firstPlaceInUsers == 'Guest') {
+        users.splice(0, 1);
+        await backend.setItem('users', JSON.stringify(users));
+    }
 }
 
 
@@ -257,6 +270,7 @@ function guestLogin() {
  */
 function goToSummary() {
     window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
+    localStorage.removeItem('First load of index.html');
 }
 
 
