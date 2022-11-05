@@ -131,7 +131,7 @@ function giveLogoRightPos() {
  * function renders animation for first load
  */
 function startAnimation() {
-    if (screen.width <= 850) {
+    if (screen.width <= 1080) {
         startMobileAnimation();
     } else {
         startDesktopAnimation();

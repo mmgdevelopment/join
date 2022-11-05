@@ -57,7 +57,7 @@ function userComesFromLogin() {
  * @returns if user has mobile device or not
  */
 function userHasMobileDevice() {
-    return screen.width <= 1100
+    return screen.width <= 1080
 }
 
 

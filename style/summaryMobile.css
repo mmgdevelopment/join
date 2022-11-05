@@ -1,17 +1,12 @@
-@media (max-width: 1100px) {
-
-    .greeting {
-        display: none;
-    }
-
-}
-
-
-@media (max-width: 850px) {
+@media (max-width: 1080px) {
 
     body {
         margin: 0px;
         margin-top: 80px;
+    }
+
+    .greeting {
+        display: none;
     }
 
     .only-mobile {
