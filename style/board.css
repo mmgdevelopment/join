@@ -32,6 +32,13 @@ h2 {
   align-items: center;
 }
 
+.d-flex-gap-20 {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 25px;
+}
+
 #btn-add-task {
   display: flex;
   justify-content: space-between;
@@ -80,6 +87,19 @@ h2 {
   margin-right: 50px;
 }
 
+#opened-card-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.284);
+  z-index: 4;
+}
+
 .kanban {
   display: flex;
   gap: 26px;
@@ -99,6 +119,9 @@ h2 {
   box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
   border-radius: 30px;
   margin-bottom: 35px;
+  cursor: pointer;
+  max-width: 50vw;
+  min-width: 400px;
 }
 
 .epic {
@@ -106,7 +129,6 @@ h2 {
   background-color: orange;
   color: white;
   border-radius: 8px;
-
   font-weight: 400;
   font-size: 16px;
   line-height: 120%;
@@ -142,6 +164,21 @@ h2 {
 }
 
 .priority {
+  display: flex;
+  padding: 4px 18px;
+  gap: 10px;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-weight: 400;
+font-size: 21px;
+line-height: 120%;
+color: #FFFFFF;
+align-items: center;
+justify-content: center;
+}
+
+.prio_img{
+  max-height: 32px;
 }
 
 .contacts {
@@ -165,11 +202,103 @@ h2 {
   font-weight: 400;
   font-size: 12px;
 }
-.contact:nth-child(n + 2) {
+.contact:nth-child(2) {
   transform: translateX(-15%);
   background-color: green;
 }
 
+.contact:nth-child(3) {
+  transform: translateX(-30%);
+  background-color: green;
+}
+
+#opened-card-container > .task-card {
+  position: relative;
+}
+
+#opened-card-container > .task-card > .close-btn{
+  position: absolute;
+right: 0px;
+top: 0px;
+padding: 25px 40px 0 0;
+}
+
+#opened-card-container > .task-card > .edit-btn{
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
+
+
+#opened-card-container > .task-card > .epic {
+  padding: 4px 36.5px;
+  font-size: 27px;
+}
+
+#opened-card-container > .task-card >.task-name {
+  font-size: 61px;
+  margin: unset;
+  margin-top: 25px;
+}
+
+#opened-card-container > .task-card >.task-description {
+  font-size: 21px;
+}
+
+#opened-card-container > .task-card > div > div > span {
+  font-size: 21px;
+}
+
+#opened-card-container > .task-card > div >div:nth-child(2)  {
+margin-top: 20px;
+display: flex;
+flex-direction: row;
+}
+
+
+#opened-card-container > .task-card > div > div {
+  margin-top: 30px;
+
+}
+
+#opened-card-container > .task-card > div > div > span {
+  font-size: 21px;
+  margin-right: 25px;
+
+
+}
+
+
+.contacts-on-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-on-card {
+  display: flex;
+ 
+  justify-content: center;
+  align-items: center;
+  padding: 10px 8px;
+  gap: 10px;
+  width: 20px;
+  height: 20px;
+  background: #0190e0;
+  border: 1px solid #ffffff;
+  border-radius: 58px;
+  color: white;
+  font-weight: 400;
+  font-size: 12px;
+}
+
+.contact-name{
+  font-weight: 400;
+  font-size: 21px;
+
+}
+
+
+.urgent,
 .red {
   background-color: #ff3d00;
 }
@@ -178,6 +307,7 @@ h2 {
   background-color: #ffa800;
 }
 
+.low,
 .green {
   background-color: #7ae229;
 }
@@ -186,6 +316,7 @@ h2 {
   background-color: #FC71FF;
 }
 
+.medium,
 .yellow {
   background-color: #FFA800;
 }
@@ -207,10 +338,15 @@ h2 {
   background-color: #e5e5e5;
 }
 
+.d-none{
+  display: none !important;
+}
+
 @media only screen and (max-width: 950px) {
   .kanban {
     flex-direction: column;
   }
+}
 
 @media only screen and (max-width: 850px) {
 
@@ -240,5 +376,10 @@ h2 {
 
   .kanban-clm {
     min-height: 50px;
+  }
+
+  .task-card {
+    max-width: 80vw;
+    min-width: none;
   }
 }

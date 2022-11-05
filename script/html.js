@@ -7,7 +7,7 @@
 
  function renderTask(task, epic) {
     return `
-      <div draggable="true" ondragstart="startDragging('${task["id"]}')" class="task-card">
+      <div onclick="openCard('${task["id"]}')" draggable="true" ondragstart="startDragging('${task["id"]}')" class="task-card">
       <span class="epic ${epic["color"]}">${epic["name"]}</span>
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
@@ -19,11 +19,41 @@
   
       <div class="d-flex-jc-sb w-100">
           <div id="assigned${task['id']}" class="contacts">
-          </div><img class="priority" src="assets/${task["prio"]}.svg">
+          </div><img src="assets/${task["prio"]}.svg">
       </div>
   </div>`;
   }
  
+
+
+  function renderTaskCard(task, epic) {
+    return `
+      <div onclick="dontClose(event)" class="task-card">
+      <span class="epic ${epic["color"]}">${epic["name"]}</span>
+      <h4 class="task-name">${task["title"]}</h4>
+      <p class="task-description">${task["description"]}</p>
+      <div>
+      <div><span>Due date:</span> ${task["dueDate"]}</div>
+      <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}_high_filled.svg"</img></span></div>
+      <div><span>Assigned To:</span><div id="assignedCard${task['id']}" class="contacts-on-card">
+      </div> </div>
+      
+
+      <div id="subtasks${task["id"]}" class="d-flex-jc-sb w-100">
+      
+      </div>
+  
+      <div class="d-flex-jc-sb w-100">
+          
+      </div>
+
+     
+  </div> <div>   </div><img onclick="closeCard()" class="close-btn" src="assets/close.svg"</img>
+  <img onclick="closeCard()" class="edit-btn" src="assets/pencil_filled_square.svg"</img>`
+  
+  }
+
+
 function renderSubtaskHTML(id, task, done, barProgress){
         document.getElementById('subtasks'+ id).innerHTML = `
         <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${barProgress/100}px, #f4f4f4 0%)"></div><span>${done}/${task['subtasks'].length}</span>`
@@ -39,6 +69,12 @@ function renderSubtaskHTML(id, task, done, barProgress){
   function renderAssignedContactsHTML(contact, task){      
     document.getElementById('assigned'+ task['id']).innerHTML += `
     <div class="contact">${contact}</div>`
+    
+}
+
+function renderCardContactsHTML(contact, task, contactName){      
+    document.getElementById('assignedCard'+ task['id']).innerHTML += `
+   <div class="d-flex-gap-20"><div class="contact-on-card">${contact}</div><span class="contact-name">${contactName}</span></div>  `
     
 }
 
