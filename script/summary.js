@@ -227,9 +227,19 @@ function displayAllTaksNumbers() {
 
 
 /**
- * function renders the task with the highest priority
+ * function renders the task with the highest priority, if there is any
  */
 function renderHighestPrio() {
+    if(!inBoard == 0) {
+        renderMidCard();
+    }
+}
+
+
+/**
+ * function renders mid card
+ */
+function renderMidCard() {
     if (urgencyContains('urgent') > 0) {
         displayHighestPrioTask('urgent');
     } else {
