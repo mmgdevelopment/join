@@ -328,6 +328,7 @@ function displayDueDate(value) {
     getNearestDueDate();
     let nearestDeadline = `${month} ${day}, ${year}`
     document.getElementById('deadline').innerHTML = nearestDeadline;
+    document.getElementById('deadlineText').innerHTML = 'Upcoming Deadline';
 }
 
 
