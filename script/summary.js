@@ -213,12 +213,11 @@ function getAllInfoFromUsers() {
    */
 
 function getAllTasks(epic) {
-    console.log(epic["tasks"].length);
-    // for (let i = 0; i < epic["tasks"].length; i++) {
-    //     const task = epic["tasks"][i];
-    //     pushPrioAndDate(task);
-    //     pushAllWorkingStages(task);
-    // }
+    for (let i = 0; i < epic["tasks"].length; i++) {
+        const task = epic["tasks"][i];
+        pushPrioAndDate(task);
+        pushAllWorkingStages(task);
+    }
 }
 
 
