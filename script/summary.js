@@ -1,27 +1,8 @@
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
-
 let users = [];
 let email;
 let username;
-
-let epicsArray = [
-    {
-        "name": "Backoffice",
-        "color": "blue",
-        "tasks": []
-    },
-    {
-        "name": 'Marketing',
-        "color": 'red',
-        "tasks": []
-    },
-    {
-        "name": 'Development',
-        "color": 'orange',
-        "tasks": []
-    }
-]
 
 
 /**
@@ -32,7 +13,7 @@ async function init() {
     renderGreeting();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    checkForGuestUser();
+    console.log(users);
     renderPage();
 }
 
@@ -127,24 +108,6 @@ function renderName() {
 
 
 /**
- * if guest is logged in, a guest account is pushed into users
- */
-function checkForGuestUser() {
-    if (username == 'Guest') {
-        addGuestToUsers();
-    }
-}
-
-
-/**
- * function adds guest account on first place in users JSON
- */
-function addGuestToUsers() {
-    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray });
-}
-
-
-/**
  * function leads to board
  */
 function goToBorad() {
@@ -173,15 +136,6 @@ let month;
 
 let toDo;
 let done;
-
-
-/**
- * function renders the whole summary page
- * init
- */
-function x() {
-    renderPage();
-}
 
 
 /**
@@ -284,8 +238,6 @@ function renderHighestPrio() {
         } else {
             if (urgencyContains('low') > 0) {
                 displayHighestPrioTask('low');
-            } else {
-                displayNoTasks();
             }
         }
     }
@@ -378,8 +330,3 @@ function getMonthInLetters(dateInNumbers) {
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////
-
-
-function displayNoTasks() {
-    console.log('will be designed later');
-}

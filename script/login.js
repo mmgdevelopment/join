@@ -33,7 +33,7 @@ async function init() {
     defineInputVariables();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    deleteTheGuestUser();
+    deleteAllExistingGuests();
 }
 
 
@@ -44,18 +44,6 @@ async function init() {
     username = document.getElementById('username');
     email = document.getElementById('email');
     password = document.getElementById('password');
-}
-
-
-/**
- * function deletes the guest user
- */
-async function deleteTheGuestUser() {
-    let firstPlaceInUsers = users[0]['username'];
-    if (firstPlaceInUsers == 'Guest') {
-        users.splice(0, 1);
-        await backend.setItem('users', JSON.stringify(users));
-    }
 }
 
 
@@ -257,11 +245,45 @@ function saveLoggedInUser(user) {
  * function loggs in user as guest
  */
 function guestLogin() {
+    saveGuestToLocalStorage();
+    addGuestToUsers();
+    goToSummary();
+}
+
+
+/**
+ * function saves some data of guest user to local storage for summary.html to work
+ */
+function saveGuestToLocalStorage() {
     localStorage.setItem('autoLogIn', false);
     localStorage.setItem('user-username', 'Guest');
     localStorage.setItem('user-email', 'guest@mail.com');
     localStorage.setItem('Go to summary from LogIn', true);
-    goToSummary();
+}
+
+
+/**
+ * function adds guest account on first place in users JSON
+ */
+async function addGuestToUsers() {
+    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray });
+    console.log(users); 
+    await backend.setItem('users', JSON.stringify(users));
+}
+
+
+/**
+ * function deletes all existing guests
+ */
+function deleteAllExistingGuests() {
+    let amountOfGuests = 0;
+    for (let i = 0; i < users.length; i++) {
+        const element = users[i]['username'];
+        if(element == 'Guest'){
+            amountOfGuests = amountOfGuests + 1;
+        }   
+    }
+    users.splice(0, amountOfGuests);
 }
 
 
@@ -527,7 +549,7 @@ function hideWrongPassword() {
 
 
 /**
- * function deletes all user
+ * function deletes users json from backend
  */
 async function deleteUsers() {
     await backend.deleteItem('users');
