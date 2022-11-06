@@ -247,7 +247,7 @@ function saveLoggedInUser(user) {
 function guestLogin() {
     saveGuestToLocalStorage();
     addGuestToUsers();
-    goToSummary();
+    setTimeout(goToSummary, 500);
 }
 
 
@@ -291,8 +291,8 @@ function deleteAllExistingGuests() {
  * function sends the user to summary.html
  */
 function goToSummary() {
-    window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
     localStorage.removeItem('First load of index.html');
+    window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
 }
 
 
