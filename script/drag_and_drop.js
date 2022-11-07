@@ -111,12 +111,17 @@ function readTasksCategory(task, epic) {
 
 
 function renderDummys(){
+  
 
 kanbanCategorys.forEach(category => {
-   let peter = document.getElementById(category +"-tasks")
-   peter.innerHTML += dummyCardHTML(category);
+    if (findTaskId(currentDraggedTask)['category'] != category) {
+        let peter = document.getElementById(category +"-tasks")
+        peter.innerHTML += dummyCardHTML(category);
+    }
+
   
 });
+
 }
 
 /**
