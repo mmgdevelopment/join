@@ -103,11 +103,11 @@ function renderMobileView() {
     document.getElementById("desktop-search").innerHTML = "";
     document.getElementById("mobile-search").innerHTML =
       '<input id="search" placeholder="Find task" type="text"></input>';
-  }dummyCardHTML()
+  }
   
   
-  function dummyCardHTML(){
-    return `<div class="dummy-card">
+  function dummyCardHTML(id){
+    return `<div class="dummy-card" id="dummy-card${id}-tasks">
     <div>
     </div>
     </div>`

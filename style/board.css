@@ -13,7 +13,7 @@ main {
   right: 60px;
   top: 100px;
   color: black;
-  width: 100%;
+  width: 88vw;
 }
 
 h1 {
@@ -364,6 +364,10 @@ flex-direction: row;
 .d-none{
   display: none !important;
 
+}
+
+.d-hidden{
+  visibility: hidden !important;
 }
 
 @media only screen and (max-width: 800px) {

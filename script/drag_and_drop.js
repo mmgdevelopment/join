@@ -5,8 +5,8 @@ let doneSubtasks;
 let user;
 let users = [];
 let cardWasOpened = false;
-let x = window.matchMedia("(max-width: 850px)");
-x.addListener(checkWitdh); // Attach listener function on state changes
+let x = window.matchMedia("(max-width: 800px)");
+x.addListener(checkWitdh);
 let dummysPrinted = false
 let kanbanCategorys = ["todo", "progress", "feedback", "done"]
 
@@ -27,15 +27,14 @@ async function init() {
 addEventListener('drag', (event) => {
     if(!dummysPrinted){
         renderDummys();
-    console.log('hey');
-    dummysPrinted = true}
+    dummysPrinted = true
+  }
 
 });
 
 addEventListener('drop', (event) => {
 
     if(dummysPrinted){
-        console.log('hey there');
         dummysPrinted = false}
 });
 /**
@@ -115,7 +114,7 @@ function renderDummys(){
 
 kanbanCategorys.forEach(category => {
    let peter = document.getElementById(category +"-tasks")
-   peter.innerHTML += dummyCardHTML();
+   peter.innerHTML += dummyCardHTML(category);
   
 });
 }
@@ -227,25 +226,6 @@ function findTaskId(id) {
     }
   }
 
-/**
- * This function adds a css class as highlight for the kanban column which is dragged over
- *
- * @param {string} id
- */
-
-function highlight(id) {
-  document.getElementById(id).classList.add("area-highlight");
-}
-
-/**
- * This function removes a css class of the kanban column which was used to higlight while dragged over
- *
- * @param {string} id
- */
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove("area-highlight");
-}
 
 /**
  *This function compares the query witdh choosen with the window witdh of the user
