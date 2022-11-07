@@ -7,6 +7,10 @@ let users = [];
 let cardWasOpened = false;
 let x = window.matchMedia("(max-width: 850px)");
 x.addListener(checkWitdh); // Attach listener function on state changes
+let dummysPrinted = false
+let kanbanCategorys = ["todo", "progress", "feedback", "done"]
+
+
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -20,6 +24,20 @@ async function init() {
   checkWitdh(x);
 }
 
+addEventListener('drag', (event) => {
+    if(!dummysPrinted){
+        renderDummys();
+    console.log('hey');
+    dummysPrinted = true}
+
+});
+
+addEventListener('drop', (event) => {
+
+    if(dummysPrinted){
+        console.log('hey there');
+        dummysPrinted = false}
+});
 /**
  * This function starts the rendering process
  *
@@ -93,15 +111,26 @@ function readTasksCategory(task, epic) {
 }
 
 
+function renderDummys(){
+
+kanbanCategorys.forEach(category => {
+   let peter = document.getElementById(category +"-tasks")
+   peter.innerHTML += dummyCardHTML();
+  
+});
+}
+
 /**
  * These following functions render the tasks in the specific kanban column
  *
  * @param {object} task
  * @param {object} epic
  */
+
 function renderCategoryTodo(task, epic) {
-  document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
-}
+    document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
+  }
+
 
 function renderCategoryProgress(task, epic) {
   document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
@@ -114,6 +143,7 @@ function renderCategoryFeedback(task, epic) {
 function renderCategoryDone(task, epic) {
   document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
 }
+
 
 /**
  * This function clears the content of every column of the kanban
@@ -135,6 +165,7 @@ function clearColumns() {
 
 function startDragging(id) {
   currentDraggedTask = id;
+ 
 }
 
 /**

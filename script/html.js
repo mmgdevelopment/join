@@ -103,6 +103,12 @@ function renderMobileView() {
     document.getElementById("desktop-search").innerHTML = "";
     document.getElementById("mobile-search").innerHTML =
       '<input id="search" placeholder="Find task" type="text"></input>';
+  }dummyCardHTML()
+  
+  
+  function dummyCardHTML(){
+    return `<div class="dummy-card">
+    <div>
+    </div>
+    </div>`
   }
-  
-  
