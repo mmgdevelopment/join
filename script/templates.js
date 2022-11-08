@@ -12,13 +12,22 @@ async function includeHTML() {
     }
 }
 
-let displayLogOut = false;
+
+/**
+ * function displays the log out button if profile pic is clicked
+ */
 function showLogOut() {
-    if (displayLogOut = false) {
-        document.getElementById('log-out').style='display:flex;';
-        displayLogOut = true;
+    let logOut = document.getElementById('log-out');
+    if (logOut.classList.contains('d-none')) {
+        document.getElementById('log-out').classList.remove('d-none');
+        console.log('hallo')
     } else {
-        document.getElementById('log-out').style='display:none;';   
-        displayLogOut = false;
+        document.getElementById('log-out').classList.add('d-none');
     }
 }
+
+
+function logOut() {
+    window.location.href='index.html';
+}
+

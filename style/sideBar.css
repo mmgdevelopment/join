@@ -40,6 +40,21 @@ h3 {
     background-color: #2A3647;
     border-radius: 10px;
     border-top-right-radius: 0px;
+    cursor: pointer;
+}
+
+.log-out:hover {
+    color:#2A3647;
+    background-color: white;
+    border: 2px solid #2A3647;
+}
+
+.d-none {
+    display: none;
+}
+
+.d-flex {
+    display: flex;
 }
 
 .profileContainer img:last-child {
