@@ -21,15 +21,32 @@ h3 {
 }
 
 .profileContainer {
+    position: relative;
     display: flex;
     gap: 35px;
     margin-right: 45px;
+}
+
+.log-out {
+    position: absolute;
+    top: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 105px;
+    height: 45px;
+    font-size: 14px;
+    color: white;
+    background-color: #2A3647;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
 }
 
 .profileContainer img:last-child {
     border-radius: 50%;
     border: 1px solid transparent;
     outline: 3px solid #2A3647;
+    cursor: pointer;
 }
 
 nav {
@@ -39,7 +56,7 @@ nav {
     bottom: 0;
     display: flex;
     flex-direction: column;
-    gap: 85px;
+    justify-content: space-between;
     background-color: #2A3647;
     z-index: 3;
 }
@@ -76,6 +93,10 @@ a img {
 
 .mobile-logo {
     display: none;
+}
+
+.legal-notice {
+    margin-block: 100px;
 }
 
 

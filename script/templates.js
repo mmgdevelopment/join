@@ -1,4 +1,3 @@
-
 async function includeHTML() {
     let includeElements = document.querySelectorAll('[w3-include-html]');
     for (let i = 0; i < includeElements.length; i++) {
@@ -10,5 +9,16 @@ async function includeHTML() {
         } else {
             element.innerHTML = 'Page not found';
         }
+    }
+}
+
+let displayLogOut = false;
+function showLogOut() {
+    if (displayLogOut = false) {
+        document.getElementById('log-out').style='display:flex;';
+        displayLogOut = true;
+    } else {
+        document.getElementById('log-out').style='display:none;';   
+        displayLogOut = false;
     }
 }
