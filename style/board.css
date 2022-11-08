@@ -222,6 +222,7 @@ justify-content: center;
 
 #opened-card-container > .task-card {
   position: relative;
+  padding: 50px;
 }
 
 #opened-card-container > .task-card > .close-btn{
@@ -279,10 +280,8 @@ padding: 25px 40px 0 0;
 }
 
 .edit-btn{
-  position: absolute;
-  top: 160px;
-  right: 10px;
   padding: 20px;
+  align-self: flex-end;
  
 }
 
@@ -295,8 +294,9 @@ padding: 25px 40px 0 0;
 .wrapper > div > div {
   margin-top: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   margin-right: 10px;
+  align-items: baseline
 }
 .wrapper > div > div > span{
   margin-right: 40px;
@@ -310,12 +310,12 @@ padding: 25px 40px 0 0;
 
 #openCardSubtasks > div{
   display: flex;
-  flex-direction: row-reverse;
+  
   
 }
 
 
-.contacts-on-card {
+#contacts-on-card {
   display: flex;
   flex-direction: column;
 }
