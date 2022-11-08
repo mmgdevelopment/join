@@ -271,20 +271,25 @@ function checkLocationContacts(contactInitials, task, contactName, i){
         renderCardContactsHTML(contactInitials, task, contactName);
     }
 
-    if(!cardWasOpened && printExtraContactOnes){
-        if(i == 2){
-            let extraContacts = '+' + (task["assignedTo"].length - 2)
-           console.log(typeof extraContacts);
-           document.getElementById('assigned'+ task['id']).innerHTML += `
-           <div class="contact">${extraContacts}</div>`
-          
-            
-            printExtraContactOnes = false;
-    }else{
-   
-        renderAssignedContactsHTML(contactInitials, task);
-    }}
+    
 
+    if(!cardWasOpened && printExtraContactOnes){
+        if (i <= 2 && task["assignedTo"].length <= 3 ) {
+            renderAssignedContactsHTML(contactInitials, task)
+            return 
+        }
+        if (i == 2 && task["assignedTo"].length >= 2 ) {
+            printExtraContact(task);}else{
+                
+                renderAssignedContactsHTML(contactInitials, task)}
+        }
+}
+
+function printExtraContact(task){
+    let extraContacts = '+' + (task["assignedTo"].length - 2)
+    document.getElementById('assigned'+ task['id']).innerHTML += `
+    <div class="extra-contact contact">${extraContacts}</div>`
+     printExtraContactOnes = false;
 }
 
 function getAllSubtasks(task){

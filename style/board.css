@@ -343,6 +343,10 @@ padding: 25px 40px 0 0;
 
 }
 
+.extra-contact{
+  background-color: #2A3647 !important;
+  transform: translateX(-30%);
+}
 
 .urgent,
 .red {
