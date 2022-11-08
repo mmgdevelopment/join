@@ -1,0 +1,74 @@
+body {
+    margin: 0px;
+    margin-top: 90px;
+    margin-left: 172px;
+    font-family: 'Inter';
+    font-style: normal;
+    background-color: #F5F5F5;
+    height: calc(100vh - 90px);
+}
+
+p {
+    margin: 0px;
+    font-size: 21px;
+}
+
+img {
+    margin-block: 24px;
+}
+
+.contact-page {
+    display: flex;
+}
+
+.list {
+    width: 453px;
+    height: calc(100vh - 90px);
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    overflow-y: scroll;
+}
+
+.letter-entrie {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
+
+.single-contact {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    width: 357px;
+    height: 79px;
+    padding-left: 8px;
+    border-radius: 10px;
+    background-color: linear-gradient(red, yellow);
+    cursor: pointer;
+}
+
+.initials {
+    font-size: 12px;
+    color: white;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-and-mail {
+    display: flex;
+    flex-direction: column;
+}
+
+.mail {
+    font-size: 16px;
+    color: #007CEE;
+}
