@@ -71,7 +71,7 @@ function renderSubtaskHTML(name, i, id) {
  * @param {object} task
  * @param {string} contact
  */
-  function renderAssignedContactsHTML(contact, task){      
+  function renderAssignedContactsHTML(contact, task){     
     document.getElementById('assigned'+ task['id']).innerHTML += `
     <div class="contact">${contact}</div>`
     

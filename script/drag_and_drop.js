@@ -3,6 +3,7 @@ setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
 let currentDraggedTask;
 let doneSubtasks;
 let subtaskDone;
+let printExtraContactOnes;
 let user;
 let users = [];
 let cardWasOpened = false;
@@ -254,22 +255,35 @@ function checkWitdh(x) {
  */
 
 function getAssignedContact(task) {
+    printExtraContactOnes = true;
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i];
     contact = fullContact.split(" ");
     const sureName = contact[0];
     const lastName = contact[1];
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    checkLocationContacts(contactInitials, task, fullContact);
+    checkLocationContacts(contactInitials, task, fullContact, i);
   }
 }
 
-function checkLocationContacts(contactInitials, task, contactName){
+function checkLocationContacts(contactInitials, task, contactName, i){
     if (cardWasOpened) {
         renderCardContactsHTML(contactInitials, task, contactName);
-    }else{
-        renderAssignedContactsHTML(contactInitials, task);
     }
+
+    if(!cardWasOpened && printExtraContactOnes){
+        if(i == 2){
+            let extraContacts = '+' + (task["assignedTo"].length - 2)
+           console.log(typeof extraContacts);
+           document.getElementById('assigned'+ task['id']).innerHTML += `
+           <div class="contact">${extraContacts}</div>`
+          
+            
+            printExtraContactOnes = false;
+    }else{
+   
+        renderAssignedContactsHTML(contactInitials, task);
+    }}
 
 }
 
