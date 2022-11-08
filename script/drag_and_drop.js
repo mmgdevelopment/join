@@ -2,11 +2,17 @@ setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
 
 let currentDraggedTask;
 let doneSubtasks;
+let subtaskDone;
+let printExtraContactOnes;
 let user;
 let users = [];
 let cardWasOpened = false;
-let x = window.matchMedia("(max-width: 850px)");
-x.addListener(checkWitdh); // Attach listener function on state changes
+let x = window.matchMedia("(max-width: 800px)");
+x.addListener(checkWitdh);
+let dummysPrinted = false
+let kanbanCategorys = ["todo", "progress", "feedback", "done"]
+
+
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -20,6 +26,19 @@ async function init() {
   checkWitdh(x);
 }
 
+addEventListener('drag', (event) => {
+    if(!dummysPrinted){
+        renderDummys();
+    dummysPrinted = true
+  }
+
+});
+
+addEventListener('drop', (event) => {
+
+    if(dummysPrinted){
+        dummysPrinted = false}
+});
 /**
  * This function starts the rendering process
  *
@@ -93,15 +112,31 @@ function readTasksCategory(task, epic) {
 }
 
 
+function renderDummys(){
+  
+
+kanbanCategorys.forEach(category => {
+    if (findTaskId(currentDraggedTask)['category'] != category) {
+        let peter = document.getElementById(category +"-tasks")
+        peter.innerHTML += dummyCardHTML(category);
+    }
+
+  
+});
+
+}
+
 /**
  * These following functions render the tasks in the specific kanban column
  *
  * @param {object} task
  * @param {object} epic
  */
+
 function renderCategoryTodo(task, epic) {
-  document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
-}
+    document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
+  }
+
 
 function renderCategoryProgress(task, epic) {
   document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
@@ -114,6 +149,7 @@ function renderCategoryFeedback(task, epic) {
 function renderCategoryDone(task, epic) {
   document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
 }
+
 
 /**
  * This function clears the content of every column of the kanban
@@ -135,6 +171,7 @@ function clearColumns() {
 
 function startDragging(id) {
   currentDraggedTask = id;
+ 
 }
 
 /**
@@ -196,25 +233,6 @@ function findTaskId(id) {
     }
   }
 
-/**
- * This function adds a css class as highlight for the kanban column which is dragged over
- *
- * @param {string} id
- */
-
-function highlight(id) {
-  document.getElementById(id).classList.add("area-highlight");
-}
-
-/**
- * This function removes a css class of the kanban column which was used to higlight while dragged over
- *
- * @param {string} id
- */
-
-function removeHighlight(id) {
-  document.getElementById(id).classList.remove("area-highlight");
-}
 
 /**
  *This function compares the query witdh choosen with the window witdh of the user
@@ -237,31 +255,92 @@ function checkWitdh(x) {
  */
 
 function getAssignedContact(task) {
+    printExtraContactOnes = true;
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i];
     contact = fullContact.split(" ");
     const sureName = contact[0];
     const lastName = contact[1];
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    checkLocation(contactInitials, task, fullContact);
+    checkLocationContacts(contactInitials, task, fullContact, i);
   }
 }
 
-function checkLocation(contactInitials, task, contactName){
+function checkLocationContacts(contactInitials, task, contactName, i){
     if (cardWasOpened) {
         renderCardContactsHTML(contactInitials, task, contactName);
-    }else{
-        renderAssignedContactsHTML(contactInitials, task);
     }
+
+    
+
+    if(!cardWasOpened && printExtraContactOnes){
+        if (i <= 2 && task["assignedTo"].length <= 3 ) {
+            renderAssignedContactsHTML(contactInitials, task)
+            return 
+        }
+        if (i == 2 && task["assignedTo"].length >= 2 ) {
+            printExtraContact(task);}else{
+                
+                renderAssignedContactsHTML(contactInitials, task)}
+        }
+}
+
+function printExtraContact(task){
+    let extraContacts = '+' + (task["assignedTo"].length - 2)
+    document.getElementById('assigned'+ task['id']).innerHTML += `
+    <div class="extra-contact contact">${extraContacts}</div>`
+     printExtraContactOnes = false;
+}
+
+function getAllSubtasks(task){
+
+  let i = 0
+
+    task["subtasks"].forEach(element => {
+        document.getElementById(`openCardSubtasks`).innerHTML += renderSubtaskHTML(element.name, i, task["id"])
+        i++ 
+  });
+  tickCheckBox(task)
 
 }
 
+function tickCheckBox(task){
+
+
+    let i = 0
+
+    task["subtasks"].forEach(element => {
+        if (element.checked) {
+            subtaskDone = true
+            document.getElementById("subtaskCheckbox" + i).checked = true;
+        }else{
+            subtaskDone = false
+            document.getElementById("subtaskCheckbox" + i).checked = false;
+        }
+        i++
+  });
+    
+}
+
+function taskIsDone(id){
+    let task = findTaskId(id.toString().slice(1));
+    let subtaskNumber = id.toString().slice(0,1);
+   console.log(task["subtasks"][subtaskNumber].checked); 
+    if(task["subtasks"][subtaskNumber].checked){
+        task["subtasks"][subtaskNumber].checked = false
+    }
+    else{
+        task["subtasks"][subtaskNumber].checked = true
+        }
+       
+    saveData();
+}
 
 function checkSubtaskAmount(task){
     if(task['subtasks'].length){
         checkSubtasksDone(task);
         
-        renderSubtaskHTML(task['id'], task, doneSubtasks, calcBarProgress(task))
+        renderSubtaskBarHTML(task['id'], task, doneSubtasks, calcBarProgress(task))
     }
 }
 
@@ -296,7 +375,8 @@ function openCard(id){
     let epic = findTaskEpic(id)
 document.getElementById('opened-card-container').classList.remove('d-none');
 document.getElementById('opened-card-container').innerHTML = renderTaskCard(task, epic)
-getAssignedContact(task)
+getAssignedContact(task);
+getAllSubtasks(task);
 
 
 

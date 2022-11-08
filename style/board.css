@@ -13,7 +13,7 @@ main {
   right: 60px;
   top: 100px;
   color: black;
-  width: 79vw;
+  width: 88vw;
 }
 
 h1 {
@@ -107,7 +107,15 @@ h2 {
 
 .kanban > * {
   flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
 }
+
+
+.kanban-clm {
+  min-height: 40%;
+}
+
 
 .task-card {
   display: flex;
@@ -214,6 +222,7 @@ justify-content: center;
 
 #opened-card-container > .task-card {
   position: relative;
+  padding: 50px;
 }
 
 #opened-card-container > .task-card > .close-btn{
@@ -249,12 +258,6 @@ padding: 25px 40px 0 0;
   font-size: 21px;
 }
 
-#opened-card-container > .task-card > div >div:nth-child(2)  {
-margin-top: 20px;
-display: flex;
-flex-direction: row;
-}
-
 
 #opened-card-container > .task-card > div > div {
   margin-top: 30px;
@@ -268,8 +271,51 @@ flex-direction: row;
 
 }
 
+.close-btn{
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 20px;
+ 
+}
 
-.contacts-on-card {
+.edit-btn{
+  padding: 20px;
+  align-self: flex-end;
+ 
+}
+
+.wrapper{
+  display: flex;
+  width: 100%;
+  justify-content:space-between 
+}
+
+.wrapper > div > div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-right: 10px;
+  align-items: baseline
+}
+.wrapper > div > div > span{
+  margin-right: 40px;
+}
+
+#openCardSubtasks{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+#openCardSubtasks > div{
+  display: flex;
+  
+  
+}
+
+
+#contacts-on-card {
   display: flex;
   flex-direction: column;
 }
@@ -297,6 +343,10 @@ flex-direction: row;
 
 }
 
+.extra-contact{
+  background-color: #2A3647 !important;
+  transform: translateX(-30%);
+}
 
 .urgent,
 .red {
@@ -330,33 +380,57 @@ flex-direction: row;
 }
 
 
-.kanban-clm {
-  min-height: 100%;
-}
-
 .area-highlight {
   background-color: #e5e5e5;
 }
 
+.underlined{
+  text-decoration: underline;
+}
+
+.subtask-titel{
+  font-weight: 400;
+font-size: 21px;
+}
+
+
+.checkbox{
+  padding: 30px;
+  background-color: green;
+}
+
+.dummy-card{
+  border: solid rgba(0, 0, 0, 0.148) 7px;
+  border-style: dotted ;
+  background-color: rgba(201, 201, 201, 0.189);
+  align-self: center;
+  padding: 18px 19px;
+  box-shadow: 0px 0px 14px 3px rgba(0, 0, 0, 0.04);
+  border-radius: 30px;
+  margin-bottom: 35px;
+  max-width: 100%;
+  min-width: 400px;
+  z-index: 0;
+  }
+
+  .dummy-card > div{
+    min-height: 180px;
+
+  }
+
 .d-none{
   display: none !important;
+
 }
 
-@media only screen and (max-width: 950px) {
-  .kanban {
-    flex-direction: column;
-  }
+.d-hidden{
+  visibility: hidden !important;
 }
 
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 800px) {
 
 
-  main {
-    left: 20px;
-    right: 20px;
-    width: unset;
-  }
-
+  
   #btn-add-task {
     display: flex;
     justify-content: center;
@@ -365,6 +439,21 @@ flex-direction: row;
     height: 40px;
     border-radius: 10px;
   }
+}
+
+@media only screen and (max-width: 1080px) {
+  .kanban {
+    flex-direction: column;
+    margin-bottom: 100px;
+  }
+
+
+  main {
+    left: 20px;
+    right: 20px;
+    width: unset;
+  }
+
 
   h1 {
     font-size: 47px;
@@ -379,7 +468,7 @@ flex-direction: row;
   }
 
   .task-card {
-    max-width: 80vw;
+    max-width: 100%;
     min-width: none;
   }
 }
