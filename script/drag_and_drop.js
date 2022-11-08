@@ -2,6 +2,7 @@ setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
 
 let currentDraggedTask;
 let doneSubtasks;
+let subtaskDone;
 let user;
 let users = [];
 let cardWasOpened = false;
@@ -259,11 +260,11 @@ function getAssignedContact(task) {
     const sureName = contact[0];
     const lastName = contact[1];
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    checkLocation(contactInitials, task, fullContact);
+    checkLocationContacts(contactInitials, task, fullContact);
   }
 }
 
-function checkLocation(contactInitials, task, contactName){
+function checkLocationContacts(contactInitials, task, contactName){
     if (cardWasOpened) {
         renderCardContactsHTML(contactInitials, task, contactName);
     }else{
@@ -272,12 +273,55 @@ function checkLocation(contactInitials, task, contactName){
 
 }
 
+function getAllSubtasks(task){
+
+  let i = 0
+
+    task["subtasks"].forEach(element => {
+        document.getElementById(`openCardSubtasks`).innerHTML += renderSubtaskHTML(element.name, i, task["id"])
+        i++ 
+  });
+  tickCheckBox(task)
+
+}
+
+function tickCheckBox(task){
+
+
+    let i = 0
+
+    task["subtasks"].forEach(element => {
+        if (element.checked) {
+            subtaskDone = true
+            document.getElementById("subtaskCheckbox" + i).checked = true;
+        }else{
+            subtaskDone = false
+            document.getElementById("subtaskCheckbox" + i).checked = false;
+        }
+        i++
+  });
+    
+}
+
+function taskIsDone(id){
+    let task = findTaskId(id.toString().slice(1));
+    let subtaskNumber = id.toString().slice(0,1);
+   console.log(task["subtasks"][subtaskNumber].checked); 
+    if(task["subtasks"][subtaskNumber].checked){
+        task["subtasks"][subtaskNumber].checked = false
+    }
+    else{
+        task["subtasks"][subtaskNumber].checked = true
+        }
+       
+    saveData();
+}
 
 function checkSubtaskAmount(task){
     if(task['subtasks'].length){
         checkSubtasksDone(task);
         
-        renderSubtaskHTML(task['id'], task, doneSubtasks, calcBarProgress(task))
+        renderSubtaskBarHTML(task['id'], task, doneSubtasks, calcBarProgress(task))
     }
 }
 
@@ -312,7 +356,8 @@ function openCard(id){
     let epic = findTaskEpic(id)
 document.getElementById('opened-card-container').classList.remove('d-none');
 document.getElementById('opened-card-container').innerHTML = renderTaskCard(task, epic)
-getAssignedContact(task)
+getAssignedContact(task);
+getAllSubtasks(task);
 
 
 

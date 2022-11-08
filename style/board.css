@@ -257,12 +257,6 @@ padding: 25px 40px 0 0;
   font-size: 21px;
 }
 
-#opened-card-container > .task-card > div >div:nth-child(2)  {
-margin-top: 20px;
-display: flex;
-flex-direction: row;
-}
-
 
 #opened-card-container > .task-card > div > div {
   margin-top: 30px;
@@ -274,6 +268,50 @@ flex-direction: row;
   margin-right: 25px;
 
 
+}
+
+.close-btn{
+  position: absolute;
+  top: 0;
+  right: 10px;
+  padding: 20px;
+ 
+}
+
+.edit-btn{
+  position: absolute;
+  top: 160px;
+  right: 10px;
+  padding: 20px;
+ 
+}
+
+.wrapper{
+  display: flex;
+  width: 100%;
+  justify-content:space-between 
+}
+
+.wrapper > div > div {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+.wrapper > div > div > span{
+  margin-right: 40px;
+}
+
+#openCardSubtasks{
+  display: flex;
+  flex-direction: column;
+  margin-left: 30px;
+}
+
+#openCardSubtasks > div{
+  display: flex;
+  flex-direction: row-reverse;
+  
 }
 
 
@@ -340,6 +378,21 @@ flex-direction: row;
 
 .area-highlight {
   background-color: #e5e5e5;
+}
+
+.underlined{
+  text-decoration: underline;
+}
+
+.subtask-titel{
+  font-weight: 400;
+font-size: 21px;
+}
+
+
+.checkbox{
+  padding: 30px;
+  background-color: green;
 }
 
 .dummy-card{
