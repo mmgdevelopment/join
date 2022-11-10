@@ -97,15 +97,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
         <button class="add-btn">
             <p>New contact</p>
             <img src="./assets/add-contact.svg">
@@ -115,9 +106,8 @@
 
 
 
-        <div class="pop-up-container">
-            <div class="pop-up-window">
-
+        <addContact class="pop-up-container d-none">
+            <div class="pop-up-window hidden">
                 <div class="pop-up-left">
                     <div class="left-content">
                         <img src="./assets/add-contact-logo.svg">
@@ -129,37 +119,35 @@
 
                 <div class="pop-up-right">
 
+                    <img class="pop-up-exit" src="./assets/pop-up-cross.svg">
+
                     <div>
                         <img src="./assets/add-contact-img.svg">
                     </div>
+
                     <div class="all-inputfields">
 
                         <div class="pop-up-inputfield">
-
-                            <input class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name" required>
+                            <input class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name">
                             <img src="./assets/profile.svg">
-
                         </div>
 
                         <div class="pop-up-inputfield">
-
-                            <input class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email" required>
+                            <input class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email">
                             <img src="./assets/mail.svg">
-
                         </div>
 
                         <div class="pop-up-inputfield">
-
-                            <input class="pop-up-input" type="tel" placeholder="Phone" title="Please ensert a phone number" required>
+                            <input class="pop-up-input" type="tel" placeholder="Phone"
+                                title="Please ensert a phone number">
                             <img src="./assets/phone.svg">
-
                         </div>
 
                         <div class="pop-up-btn">
 
                             <button class="bright-btn">
                                 Cancel
-                                <img src="./assets/cancel-x.svg">
+                                <p class="x">+</p>
                             </button>
 
                             <button class="dark-btn">
@@ -168,47 +156,64 @@
                             </button>
 
                         </div>
+                    </div>
 
+                </div>
+            </div>
+        </addContact>
+
+
+
+
+
+        <editContact class="pop-up-container d-none">
+            <div class="pop-up-window hidden">
+                <div class="pop-up-left">
+                    <div class="left-content">
+                        <img src="./assets/add-contact-logo.svg">
+                        <h2 class="pop-up-title">Edit contact</h2>
+                        <img src="./assets/add-contact-blue-line.svg">
+                    </div>
+                </div>
+
+                <div class="pop-up-right">
+
+                    <img class="pop-up-exit" src="./assets/pop-up-cross.svg">
+
+                    <div>
+                        <img src="./assets/add-contact-img.svg">
+                    </div>
+
+                    <div class="all-inputfields">
+
+                        <div class="pop-up-inputfield">
+                            <input class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name">
+                            <img src="./assets/profile.svg">
+                        </div>
+
+                        <div class="pop-up-inputfield">
+                            <input class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email">
+                            <img src="./assets/mail.svg">
+                        </div>
+
+                        <div class="pop-up-inputfield">
+                            <input class="pop-up-input" type="tel" placeholder="Phone"
+                                title="Please ensert a phone number">
+                            <img src="./assets/phone.svg">
+                        </div>
+
+                        <button class="dark-btn save-btn">
+                            Save
+                        </button>
 
 
                     </div>
 
                 </div>
-
-
             </div>
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
+        </editContact>
 
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 
