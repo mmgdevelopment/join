@@ -368,6 +368,7 @@ ul {
 
 .formValidation {
     color: #FF3D00;
+    display: none;
 }
 
 @media (max-width: 1230px) {
