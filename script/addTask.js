@@ -79,10 +79,12 @@ async function createTestTask() {
                 )
             }
         });
+        createTasktouched = false;
         saveData();
         console.log(user);
         clearAllInput();
         alert('task saved');
+
     }
 }
 
@@ -242,14 +244,15 @@ function addCategory() {
             "color": categoryColor,
             "tasks": []
         })
+        categoryColor = '';
+        renderCategorySelector();
+        document.getElementById('colorPicker').style.display = 'none';
+        let index = (user.epics.length - 1).toString();
+        showCategory(index);
+        document.getElementById('categoryValidation').style.display = 'none'
     } else {
-        /* Form validation -> input required*/
+        document.getElementById('categoryValidation').style.display = 'block'
     }
-    categoryColor = '';
-    renderCategorySelector();
-    document.getElementById('colorPicker').style.display = 'none';
-    let index = (user.epics.length - 1).toString();
-    showCategory(index);
 }
 
 function colorPicker(id) {
@@ -270,6 +273,7 @@ function renderCategorySelector() {
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
     setCategoryEventListener();
+    document.getElementById('categoryValidation').style.display = 'none'
 }
 
 function showCategory(id) {
@@ -288,6 +292,7 @@ function renderContactSelector() {
     });
     assigned.innerHTML += inviteContactSelectorTemplate();
     setAssignedEventListener();
+    document.getElementById('assignedToValidation').style.display = 'none';
 }
 
 function renderInviteContactInput() {
@@ -301,8 +306,9 @@ function inviteContact() {
     if (value) {
         sendInviteMail(value);
         renderContactSelector();
+        document.getElementById('assignedToValidation').style.display = 'none';
     } else {
-        /**form Validation -> input required */
+        document.getElementById('assignedToValidation').style.display = 'block';
     }
 }
 
