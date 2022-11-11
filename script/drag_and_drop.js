@@ -221,7 +221,6 @@ function moveTo(category) {
 function findTaskId(id) {
   for (let j = 0; j < user["epics"].length; j++) {
     const epic = user["epics"][j];
-
     for (let i = 0; i < epic["tasks"].length; i++) {
       const task = epic["tasks"][i];
       if (id == task["id"]) {
@@ -240,7 +239,6 @@ function findTaskId(id) {
 function findTaskEpic(id) {
   for (let j = 0; j < user["epics"].length; j++) {
     const epic = user["epics"][j];
-
     for (let i = 0; i < epic["tasks"].length; i++) {
       const task = epic["tasks"][i];
       if (id == task["id"]) {
@@ -295,7 +293,7 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
     renderCardContactsHTML(contactInitials, task, contactName);
   }
   if (!cardWasOpened && printExtraContactOnes) {
-    newname(contactInitials, task, contactName, i);
+    checkContactsToRender(contactInitials, task, contactName, i);
   }
 }
 
@@ -306,10 +304,10 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
  * @param {object} task
  * @param {string} contactName
  * @param {number} i
- * @returns
+ * @return just ends the loop
  */
 
-function newname(contactInitials, task, contactName, i) {
+function checkContactsToRender(contactInitials, task, contactName, i) {
   if (i <= 2 && task["assignedTo"].length <= 3) {
     renderAssignedContactsHTML(contactInitials, task);
     return;
@@ -442,13 +440,14 @@ async function saveData() {
 }
 
 /**
- * This function opens the taskcard you clock on
+ * This function opens the taskcard you click on
  *
  */
 function openCard(id) {
   cardWasOpened = true;
   let task = findTaskId(id);
   let epic = findTaskEpic(id);
+  document.getElementById('opened-card-container').setAttribute('onclick',`closeCard('${id}')`);
   document.getElementById("opened-card-container").classList.remove("d-none");
   document.getElementById("opened-card-container").innerHTML = renderTaskCard(
     task,
@@ -462,8 +461,9 @@ function openCard(id) {
  * This function closes the taskcard.
  *
  */
-function closeCard() {
+function closeCard(id) {
   document.getElementById("opened-card-container").classList.add("d-none");
+  checkSubtaskAmount(findTaskId(id))
 }
 
 /**

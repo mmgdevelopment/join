@@ -24,7 +24,12 @@
   </div>`;
   }
  
-
+/**
+ * This function is used to render the tasks on the opened card board.html
+ *
+ * @param {object} task
+ * @param {object} epic
+ */
 
   function renderTaskCard(task, epic) {
     return `
@@ -47,7 +52,7 @@
   <div id="openCardSubtasks">
 
   </div>
-   <img onclick="closeCard()" class="close-btn" src="assets/close.svg"</img>
+   <img onclick="closeCard('${task["id"]}')" class="close-btn" src="assets/close.svg"</img>
   <img onclick="closeCard()" class="edit-btn" src="assets/pencil_filled_square.svg"</img>`
   
   }
