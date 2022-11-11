@@ -474,4 +474,8 @@ function dontClose(event) {
   event.stopPropagation();
 }
 
+function openCardEdit(id){
+
+}
+
 

@@ -43,7 +43,7 @@ function renderTaskCard(task, epic) {
   <div id="openCardSubtasks">
   </div>
    <img onclick="closeCard('${task["id"]}')" class="close-btn" src="assets/close.svg"</img>
-  <img onclick="closeCard()" class="edit-btn" src="assets/pencil_filled_square.svg"</img>`;
+  <img onclick="openCardEdit('${task["id"]}')" class="edit-btn" src="assets/pencil_filled_square.svg"</img>`;
 }
 /*<span class="underlined" >Subtasks</span>*/
 
