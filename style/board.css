@@ -177,7 +177,7 @@ font-size: 38px;
 
 .bar {
   height: 8px;
-  width: 170px;
+  width: 50%;
   background: #f4f4f4;
   background-repeat: no-repeat;
 }
