@@ -186,7 +186,7 @@ justify-content: center;
 }
 
 .prio_img{
-  max-height: 32px;
+  filter: brightness(0) invert(1);
 }
 
 .contacts {

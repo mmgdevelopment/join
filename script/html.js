@@ -41,7 +41,7 @@
       <div>
     
       <div><span>Due date:</span> ${task["dueDate"]}</div>
-      <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}_high_filled.svg"</img></span></div>
+      <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}.svg"</img></span></div>
       <div  id="contacts-on-card"><span>Assigned To:</span><div id="assignedCard${task['id']}">
       </div> </div>
          
