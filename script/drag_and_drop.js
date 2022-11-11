@@ -139,7 +139,7 @@ function getTasksCategory(task, epic) {
  */
 function renderDummys() {
   kanbanCategorys.forEach((category) => {
-    if (findTaskId(currentDraggedTask)["category"] != category) {
+    if (findTaskById(currentDraggedTask)["category"] != category) {
       document.getElementById(category + "-tasks").innerHTML +=
         dummyCardHTML(category);
     }
@@ -206,7 +206,7 @@ function allowDrop(ev) {
  * @param {string} category
  */
 function moveTo(category) {
-  let draggedTask = findTaskId(currentDraggedTask);
+  let draggedTask = findTaskById(currentDraggedTask);
   draggedTask["category"] = category;
   getAllEpics(user);
   saveData();
@@ -218,7 +218,7 @@ function moveTo(category) {
  * @returns task array
  */
 
-function findTaskId(id) {
+function findTaskById(id) {
   for (let j = 0; j < user["epics"].length; j++) {
     const epic = user["epics"][j];
     for (let i = 0; i < epic["tasks"].length; i++) {
@@ -236,7 +236,7 @@ function findTaskId(id) {
  * @returns epic
  */
 
-function findTaskEpic(id) {
+function findEpicById(id) {
   for (let j = 0; j < user["epics"].length; j++) {
     const epic = user["epics"][j];
     for (let i = 0; i < epic["tasks"].length; i++) {
@@ -378,7 +378,7 @@ function tickCheckBox(task) {
  */
 
 function taskIsDone(id) {
-  let task = findTaskId(id.toString().slice(1));
+  let task = findTaskById(id.toString().slice(1));
   let subtaskNumber = id.toString().slice(0, 1);
   if (task["subtasks"][subtaskNumber].checked) {
     task["subtasks"][subtaskNumber].checked = false;
@@ -431,7 +431,6 @@ function calcBarProgress(task) {
 /**
  * This function saves the Data on the server
  *
- * 
  */
 async function saveData() {
   let emailUser = localStorage.getItem("user-email");
@@ -446,8 +445,8 @@ async function saveData() {
  */
 function openCard(id) {
   cardWasOpened = true;
-  let task = findTaskId(id);
-  let epic = findTaskEpic(id);
+  let task = findTaskById(id);
+  let epic = findEpicById(id);
   document.getElementById('opened-card-container').setAttribute('onclick',`closeCard('${id}')`);
   document.getElementById("opened-card-container").classList.remove("d-none");
   document.getElementById("opened-card-container").innerHTML = renderTaskCard(
@@ -464,7 +463,7 @@ function openCard(id) {
  */
 function closeCard(id) {
   document.getElementById("opened-card-container").classList.add("d-none");
-  checkSubtaskAmount(findTaskId(id))
+  checkSubtaskAmount(findTaskById(id))
 }
 
 /**
@@ -474,3 +473,9 @@ function closeCard(id) {
 function dontClose(event) {
   event.stopPropagation();
 }
+
+function openCardEdit(id){
+console.log('hey');
+}
+
+
