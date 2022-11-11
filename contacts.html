@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/contacts.css">
+    <link rel="stylesheet" href="./style/contactMobile.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    
+    
     <script src="./script/templates.js"></script>
     <title>Contacts</title>
 </head>
@@ -18,12 +22,13 @@
 
     <div class="contact-page">
 
-        <div class="list">
-
-
+        <div class="list d-none">
             <div class="letter-entrie">
-                <p style="padding-left: 21px;">A</p>
-                <img style="margin-block: 24px;" src="./assets/contact-break-line.svg">
+                <div class="letter-container">
+                    <p class="letter">A</p>
+                    <div class="only-desktop"></div>
+                </div>
+                <img class="horizontal-line" src="./assets/contact-break-line.svg">
 
                 <div class="single-contact">
                     <span class="initials">SM</span>
@@ -40,27 +45,32 @@
                         <p class="mail">s.f.munk@gmx.de</p>
                     </div>
                 </div>
-
             </div>
-
-
         </div>
 
+        <button class="add-btn d-none">
+            <p>New contact</p>
+            <img src="./assets/add-contact.svg">
+        </button>
 
 
 
-        <div class="contact-entrie hidden">
+        <div class="contact-entrie">
 
+            <span class="only-mobile" style="margin-top: 35px;">Kanban Project Management Tool</span>
+
+            <img class="mobile-back-arrow only-mobile" src="./assets/mobile-back-arrow.svg">
+           
+            <img class="mobile-edit-btn only-mobile" src="./assets/mobile-contact-edir.svg">
+            
             <div class="title">
                 <h1>Contacts</h1>
-                <img src="assets/blue_line_vertical.svg">
+                <img class="only-desktop" src="assets/blue_line_vertical.svg">
                 <p>Better with a team</p>
+                <img style="margin-top: 12px;" class="only-mobile" src="./assets/blue_line_horizontal.svg">
             </div>
 
-
             <div class="contact-info">
-
-
                 <div class="huge-contact">
                     <span class="huge-initials">SM</span>
                     <div class="huge-name-add-task">
@@ -72,15 +82,13 @@
                     </div>
                 </div>
 
-
                 <div class="edit-div">
                     <p>Contact Information</p>
-                    <div class="edit">
+                    <div class="edit only-desktop">
                         <img src="./assets/pen-small.svg">
                         <p style="font-size: 16px;">Edit Contact</p>
                     </div>
                 </div>
-
 
                 <p class="mail-and-phone">Email</p>
 
@@ -97,10 +105,7 @@
 
 
 
-        <button class="add-btn">
-            <p>New contact</p>
-            <img src="./assets/add-contact.svg">
-        </button>
+
 
 
 

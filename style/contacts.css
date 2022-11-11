@@ -37,14 +37,28 @@ p {
 .letter-entrie {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     margin-top: 20px;
+}
+
+.letter-container {
+    display: block;
+    width: auto;
+}
+
+.letter {
+    padding-left: 21px;
+}
+
+.horizontal-line {
+    margin-block: 24px;
 }
 
 .single-contact {
     display: flex;
     align-items: center;
     gap: 35px;
-    width: 357px;
+    width: 323px;
     height: 79px;
     padding-left: 8px;
     border-radius: 10px;
