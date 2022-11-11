@@ -419,6 +419,7 @@ function checkSubtasksDone(task) {
 /**
  * This function calc the progress in percent
  *
+ * 
  * @param {object} task
  * @returns {number} how long the progressbar is
  */
