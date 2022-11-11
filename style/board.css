@@ -13,7 +13,7 @@ main {
   right: 60px;
   top: 100px;
   color: black;
-  width: 88vw;
+  /* width: 88vw; */
 }
 
 h1 {
@@ -59,8 +59,8 @@ h2 {
 }
 .btn-square-add-task {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+
   padding: 3px;
   width: 30px;
   height: 30px;
@@ -71,6 +71,19 @@ h2 {
 
 .btn-square-add-task:hover {
   border-color: #29abe2;
+  color: #29abe2;
+
+}
+
+.plus{
+position: absolute;
+top: 0;
+left: 0.5px;
+font-size: 38px;
+ transform: translateY(-28%);
+ font-size: 38px;
+
+
 }
 
 #search {
@@ -129,7 +142,6 @@ h2 {
   margin-bottom: 35px;
   cursor: pointer;
   max-width: 50vw;
-  min-width: 400px;
 }
 
 .epic {
@@ -413,10 +425,9 @@ font-size: 21px;
   z-index: 0;
   }
 
-  .dummy-card > div{
+.dummy-card > div{
     min-height: 180px;
-
-  }
+}
 
 .d-none{
   display: none !important;
@@ -428,9 +439,7 @@ font-size: 21px;
 }
 
 @media only screen and (max-width: 800px) {
-
-
-  
+ 
   #btn-add-task {
     display: flex;
     justify-content: center;
@@ -451,7 +460,7 @@ font-size: 21px;
   main {
     left: 20px;
     right: 20px;
-    width: unset;
+    width: 90vw;
   }
 
 
@@ -469,6 +478,6 @@ font-size: 21px;
 
   .task-card {
     max-width: 100%;
-    min-width: none;
+    min-width: unset;
   }
 }

@@ -366,6 +366,10 @@ ul {
     overflow: auto;
 }
 
+.formValidation {
+    color: #FF3D00;
+}
+
 @media (max-width: 1230px) {
 
     .forms {

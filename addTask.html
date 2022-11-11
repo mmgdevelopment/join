@@ -30,10 +30,16 @@
                 <div class="inputContainer">
                     <label for="title">Title</label>
                     <input type="text" placeholder="Enter a title" id="title">
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
                 <div class="inputContainer">
                     <label for="description">Description</label>
                     <textarea id="description" placeholder="Enter a Description" cols="30" rows="5"></textarea>
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
 
                 <div class="inputContainer">
@@ -50,6 +56,9 @@
                         <div onclick="colorPicker('orange')" id="orange" class="color orange"></div>
                         <div onclick="colorPicker('ocean')" id="ocean" class="color ocean"></div>
                     </div>
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
 
                 <div class="inputContainer">
@@ -60,12 +69,18 @@
                     <div id="assignedTo">
                         <!-- Content will be rendered by js-->
                     </div>
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
             </div>
             <div class="form">
                 <div class="inputContainer">
                     <label for="dueDate">Due Date</label>
                     <input type="date" placeholder="" id="dueDate">
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
                 <div class="inputContainer">
                     <label>Prio</label>
@@ -83,7 +98,9 @@
                             <img src="./assets/low.svg" alt="">
                         </button>
                     </div>
-
+                    <div class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                 </div>
                 <div class="inputContainer">
                     <label for="subtask">Subtasks</label>
