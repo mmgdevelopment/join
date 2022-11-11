@@ -87,17 +87,17 @@ let database = {
             "phone": "+49 11 11 1111"
         },
         {
-            "name": "Steven Munk",
-            "email": "antom@gmail.com",
-            "phone": "+49 11 11 1111"
-        },
-        {
             "name": "Kevin Lentz",
             "email": "antom@gmail.com",
             "phone": "+49 11 11 1111"
         },
         {
             "name": "Steven Munk",
+            "email": "antom@gmail.com",
+            "phone": "+49 11 11 1111"
+        }
+        {
+            "name": "Marcel Gregor",
             "email": "antom@gmail.com",
             "phone": "+49 11 11 1111"
         }
