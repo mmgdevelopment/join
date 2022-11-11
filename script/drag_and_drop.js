@@ -129,8 +129,8 @@ function getTasksCategory(task, epic) {
       );
     }
   });
-  getAssignedContact(task);
-  checkSubtaskAmount(task);
+//   getAssignedContact(task);
+//   checkSubtaskAmount(task);
 }
 
 /**
@@ -474,16 +474,4 @@ function dontClose(event) {
   event.stopPropagation();
 }
 
-function filterTask(){
-        let search = document.getElementById("search").value;
-        search = search.toLowerCase();
-        for (let i = 0; i < allPokemon["count"]; i++) {
-          const pokemon = allPokemon["results"][i]["name"];
-      
-          if (printSearch < 10) {
-            searchData(pokemon, search);
-          }
-        }
-     
-      
-}
+

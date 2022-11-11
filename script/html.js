@@ -100,7 +100,7 @@ function renderDesktopView() {
     'Add Task <img src="assets/plus-white.svg">';
   document.getElementById("mobile-search").innerHTML = "";
   document.getElementById("desktop-search").innerHTML =
-    '<input id="search" placeholder="Find task" type="text"></input>';
+    '<input id="search" placeholder="Find task" type="text" onkeyup="searchTask()"></input>';
 }
 
 /**
@@ -114,7 +114,7 @@ function renderMobileView() {
     '<img src="assets/plus-white.svg">';
   document.getElementById("desktop-search").innerHTML = "";
   document.getElementById("mobile-search").innerHTML =
-    '<input id="search" placeholder="Find task" type="text"></input>';
+    '<input id="search" placeholder="Find task" type="text" onkeyup="searchTask()"></input>';
 }
 
 function dummyCardHTML(id) {
