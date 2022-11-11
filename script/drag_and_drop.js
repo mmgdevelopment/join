@@ -129,8 +129,8 @@ function getTasksCategory(task, epic) {
       );
     }
   });
-//   getAssignedContact(task);
-//   checkSubtaskAmount(task);
+  getAssignedContact(task);
+  checkSubtaskAmount(task);
 }
 
 /**
@@ -475,7 +475,7 @@ function dontClose(event) {
 }
 
 function openCardEdit(id){
-
+console.log('hey');
 }
 
 
