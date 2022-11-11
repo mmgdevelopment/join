@@ -431,7 +431,6 @@ function calcBarProgress(task) {
 /**
  * This function saves the Data on the server
  *
- * 
  */
 async function saveData() {
   let emailUser = localStorage.getItem("user-email");
