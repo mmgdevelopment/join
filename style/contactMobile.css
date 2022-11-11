@@ -124,6 +124,15 @@
 
 
 
+
+
+
+
+
+
+
+
+
     .contact-entrie {
         margin: 0px;
         width: 90%;
@@ -167,13 +176,123 @@
 
 
 
-
     .add-btn {
         top: 97px;
         right: 10px;
         left: auto;
         bottom: auto;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    .pop-up-container {
+        z-index: 9990;
+    }
+
+    .hidden {
+        left: auto;
+        top: 100vh;
+    }
+
+    .pop-up-window {
+        z-index: 9999;
+        width: 381px;
+        height: 761px;
+        flex-direction: column;
+        position: relative;
+    }
+
+    .mobile-pop-up-cross {
+        position: absolute;
+        top: 26px;
+        right: 16px;
+    }
+
+    .pop-up-left {
+        border-bottom-left-radius: 0px;
+        border-top-right-radius: 30px;
+        width: 381px;
+        height: 351px;
+    }
+
+    .pop-up-title {
+        font-size: 47px;
+    }
+
+    .pop-up-subtitle {
+        font-size: 21px;
+    }
+
+
+
+
+
+
+
+
+    .pop-up-right {
+        border-top-right-radius: 0px;
+        border-bottom-left-radius: 30px;
+        flex-direction: column;
+        gap: 0px;
+        width: 381px;
+        height: 410px;
+    }
+
+    .pop-up-profile-pic {
+        margin-bottom: 13px;
+        position: relative;
+        bottom: 70px;
+    }
+
+    .pop-up-initials {
+        width: 120px;
+        height: 120px;
+        position: relative;
+        bottom: 70px;
+    }
+
+    .all-inputfields {
+        gap: 35px;
+        position: relative;
+        bottom: 70px;
+    }
+
+    .pop-up-inputfield {
+        width: 327px;
+        height: 41px;
+    }
+
+    .pop-up-input {
+        width: 80%;
+    }
+
+    .dark-btn {
+        width: 212px;
+        height: 51px;
+        margin-top: 34px;
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

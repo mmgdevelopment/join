@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/contacts.css">
     <link rel="stylesheet" href="./style/contactMobile.css">
     <link rel="stylesheet" href="./style/fonts.css">
-    
-    
+
+
     <script src="./script/templates.js"></script>
     <title>Contacts</title>
 </head>
@@ -21,6 +21,9 @@
     <div w3-include-html="./templates/sideBar.html"></div>
 
     <div class="contact-page">
+
+
+
 
         <div class="list d-none">
             <div class="letter-entrie">
@@ -48,6 +51,7 @@
             </div>
         </div>
 
+
         <button class="add-btn d-none">
             <p>New contact</p>
             <img src="./assets/add-contact.svg">
@@ -55,14 +59,14 @@
 
 
 
-        <div class="contact-entrie">
+        <div class="contact-entrie d-none">
 
             <span class="only-mobile" style="margin-top: 35px;">Kanban Project Management Tool</span>
 
             <img class="mobile-back-arrow only-mobile" src="./assets/mobile-back-arrow.svg">
-           
+
             <img class="mobile-edit-btn only-mobile" src="./assets/mobile-contact-edir.svg">
-            
+
             <div class="title">
                 <h1>Contacts</h1>
                 <img class="only-desktop" src="assets/blue_line_vertical.svg">
@@ -106,29 +110,28 @@
 
 
 
-
-
-
-
-
         <addContact class="pop-up-container d-none">
             <div class="pop-up-window hidden">
+
+                <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+
+
                 <div class="pop-up-left">
                     <div class="left-content">
-                        <img src="./assets/add-contact-logo.svg">
+                        <img class="only-desktop" src="./assets/add-contact-logo.svg">
                         <h2 class="pop-up-title">Add contact</h2>
-                        <p style="font-size: 27px;">Tasks are better with a team!</p>
+                        <p class="pop-up-subtask">Tasks are better with a team!</p>
                         <img src="./assets/add-contact-blue-line.svg">
                     </div>
                 </div>
 
+
+
                 <div class="pop-up-right">
 
-                    <img class="pop-up-exit" src="./assets/pop-up-cross.svg">
+                    <img class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
-                    <div>
-                        <img src="./assets/add-contact-img.svg">
-                    </div>
+                    <img class="pop-up-profile-pic" src="./assets/add-contact-img.svg">
 
                     <div class="all-inputfields">
 
@@ -150,7 +153,7 @@
 
                         <div class="pop-up-btn">
 
-                            <button class="bright-btn">
+                            <button class="bright-btn only-desktop">
                                 Cancel
                                 <p class="x">+</p>
                             </button>
@@ -162,8 +165,10 @@
 
                         </div>
                     </div>
-
                 </div>
+
+
+
             </div>
         </addContact>
 
@@ -173,21 +178,30 @@
 
         <editContact class="pop-up-container d-none">
             <div class="pop-up-window hidden">
+
+                <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+
+
                 <div class="pop-up-left">
                     <div class="left-content">
-                        <img src="./assets/add-contact-logo.svg">
+                        <img class="only-desktop" src="./assets/add-contact-logo.svg">
                         <h2 class="pop-up-title">Edit contact</h2>
                         <img src="./assets/add-contact-blue-line.svg">
                     </div>
                 </div>
 
+
+
                 <div class="pop-up-right">
 
-                    <img class="pop-up-exit" src="./assets/pop-up-cross.svg">
+                    <img class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
-                    <div>
-                        <img src="./assets/add-contact-img.svg">
+
+                    <!--initials-->
+                    <div class="only-mobile" style="margin-bottom: 13px;">
+                        <span class="huge-initials pop-up-initials">SM</span>
                     </div>
+
 
                     <div class="all-inputfields">
 

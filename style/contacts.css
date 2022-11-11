@@ -263,7 +263,6 @@ h1 {
 
 .pop-up-window {
     height: 594px;
-    background-color: blue;
     border-radius: 30px;
     display: flex;
 }
@@ -298,6 +297,10 @@ h1 {
     margin: 0px;
 }
 
+.pop-up-subtitle {
+    font-size: 27px;
+}
+
 .pop-up-right {
     position: relative;
     width: 749px;
@@ -311,6 +314,10 @@ h1 {
 
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
+}
+
+.pop-up-profile-pic {
+    margin-bottom: 0px;
 }
 
 .all-inputfields {
