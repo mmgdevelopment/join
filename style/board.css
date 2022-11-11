@@ -2,7 +2,6 @@ body {
   background-color: #f5f5f5;
   font-family: "Inter";
   font-style: normal;
-  font-weight: 700;
 }
 
 main {
@@ -30,6 +29,10 @@ h2 {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.fw-700{
+  font-weight: 700;
 }
 
 .d-flex-gap-20 {
