@@ -13,7 +13,7 @@ main {
   right: 60px;
   top: 100px;
   color: black;
-  width: 88vw;
+  /* width: 88vw; */
 }
 
 h1 {
@@ -129,7 +129,6 @@ h2 {
   margin-bottom: 35px;
   cursor: pointer;
   max-width: 50vw;
-  min-width: 400px;
 }
 
 .epic {
