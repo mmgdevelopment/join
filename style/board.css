@@ -428,9 +428,7 @@ font-size: 21px;
 }
 
 @media only screen and (max-width: 800px) {
-
-
-  
+ 
   #btn-add-task {
     display: flex;
     justify-content: center;
@@ -451,7 +449,7 @@ font-size: 21px;
   main {
     left: 20px;
     right: 20px;
-    width: unset;
+    width: 90vw;
   }
 
 
@@ -469,6 +467,6 @@ font-size: 21px;
 
   .task-card {
     max-width: 100%;
-    min-width: none;
+    min-width: unset;
   }
 }
