@@ -30,14 +30,14 @@
                 <div class="inputContainer">
                     <label for="title">Title</label>
                     <input type="text" placeholder="Enter a title" id="title">
-                    <div class="formValidation">
+                    <div id="titleValidation" class="formValidation">
                         <span>This field is required</span>
                     </div>
                 </div>
                 <div class="inputContainer">
                     <label for="description">Description</label>
                     <textarea id="description" placeholder="Enter a Description" cols="30" rows="5"></textarea>
-                    <div class="formValidation">
+                    <div id="descriptionValidation" class="formValidation">
                         <span>This field is required</span>
                     </div>
                 </div>
@@ -46,6 +46,9 @@
                     <label for="customSelect">Category</label>
                     <div id="category" class="customSelect">
                         <!-- Content will be rendered by js -->
+                    </div>
+                    <div id="categoryValidation" class="formValidation">
+                        <span>This field is required</span>
                     </div>
                     <div id="colorPicker" class="colorPicker">
                         <div onclick="colorPicker('yellow')" id="yellow" class="color yellow"></div>
@@ -56,9 +59,7 @@
                         <div onclick="colorPicker('orange')" id="orange" class="color orange"></div>
                         <div onclick="colorPicker('ocean')" id="ocean" class="color ocean"></div>
                     </div>
-                    <div class="formValidation">
-                        <span>This field is required</span>
-                    </div>
+
                 </div>
 
                 <div class="inputContainer">
@@ -66,11 +67,11 @@
                     <div id="assigned" class="customSelect">
                         <!-- Content will be rendered by js-->
                     </div>
+                    <div id="assignedToValidation" class="formValidation">
+                        <span>This field is required</span>
+                    </div>
                     <div id="assignedTo">
                         <!-- Content will be rendered by js-->
-                    </div>
-                    <div class="formValidation">
-                        <span>This field is required</span>
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
                 <div class="inputContainer">
                     <label for="dueDate">Due Date</label>
                     <input type="date" placeholder="" id="dueDate">
-                    <div class="formValidation">
+                    <div id="dueDateValidation" class="formValidation">
                         <span>This field is required</span>
                     </div>
                 </div>
@@ -98,7 +99,7 @@
                             <img src="./assets/low.svg" alt="">
                         </button>
                     </div>
-                    <div class="formValidation">
+                    <div id="prioStateValidation" class="formValidation">
                         <span>This field is required</span>
                     </div>
                 </div>
