@@ -211,7 +211,7 @@ function selectetContactHTML(name) {
 
     <div class="edit-div">
         <p>Contact Information</p>
-        <div class="edit only-desktop">
+        <div onclick="editPopUp('${name}')" class="edit only-desktop">
             <img src="./assets/pen-small.svg">
             <p style="font-size: 16px;">Edit Contact</p>
         </div>
@@ -226,6 +226,169 @@ function selectetContactHTML(name) {
     <a href="tel:${contactPhone}" class="phone-number">${contactPhone}</a>
     `;
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+/**
+ * function creates and saves a new contact
+ */
+async function createNewContact() {
+    let name = document.getElementById('newName').value;
+    let email = document.getElementById('newEmail').value;
+    let phone = document.getElementById('newPhone').value;
+    let color = colors[Math.floor(Math.random() * 8)];
+
+    contacts.push({'name': name, 'email': email, 'phone': phone, 'color': color})
+    await backend.setItem('users', JSON.stringify(users));
+    closePopUp();
+    renderList();
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+function editPopUp(name) {
+    showEditWindow();
+    ensertContactInfo(name);
+}
+
+
+function showEditWindow() {
+    document.getElementById('pop-up-edit').classList.remove('d-none');
+    setTimeout(animateEditWindow, 100);
+}
+
+
+function animateEditWindow() {
+    document.getElementById('pop-up-edit-window').classList.add('not-hidden');
+}
+
+
+function closeEdit() {
+    document.getElementById('pop-up-edit').classList.add('d-none');
+    document.getElementById('pop-up-edit-window').classList.remove('not-hidden');
+}
+
+
+
+
+
+
+
+function ensertContactInfo(name) {
+    getVariablesForContact(name);
+
+
+    document.getElementById('edit-content').innerHTML =`
+        <img onclick="closeEdit()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
+
+        <div class="only-mobile" style="margin-bottom: 13px;">
+            <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
+        </div>
+    
+        <div class="only-dektop">
+            <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
+        </div>
+    
+        <div class="all-inputfields">
+    
+            <div class="pop-up-inputfield">
+                <input id="editName" class="pop-up-input" type="text" placeholder="Name" title="Change name">
+                <img src="./assets/profile.svg">
+            </div>
+    
+            <div class="pop-up-inputfield">
+                <input id="editEmail" class="pop-up-input" type="email" placeholder="Email" title="Change email">
+                <img src="./assets/mail.svg">
+            </div>
+    
+            <div class="pop-up-inputfield">
+                <input id="editPhone" class="pop-up-input" type="tel" placeholder="Phone"
+                    title="Change phone number">
+                <img src="./assets/phone.svg">
+            </div>
+    
+            <button onclick="saveContactChanges()" class="dark-btn save-btn">
+                Save
+            </button>
+
+        </div>
+    `;
+    document.getElementById('editName').value = name;
+    document.getElementById('editEmail').value = contactMail;
+    document.getElementById('editPhone').value = contactPhone;
+    IDOfContact = contacts.findIndex(u => u.name == name);
+}
+
+
+let IDOfContact;
+
+async function saveContactChanges() {
+    let oldContact = contacts[IDOfContact];
+    let newName = document.getElementById('editName').value;
+    oldContact['name'] = newName;
+    oldContact['email'] = document.getElementById('editEmail').value;
+    oldContact['phone'] = document.getElementById('editPhone').value;
+    await backend.setItem('users', JSON.stringify(users));
+    closeEdit();
+    //reload page
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+function newContactWindow() {
+    document.getElementById('pop-up-container').classList.remove('d-none');
+    setTimeout(animatePopUpWindow, 1);
+}
+
+function animatePopUpWindow() {
+    document.getElementById('pop-up-window').classList.add('not-hidden');
+}
+
+function closePopUp() {
+    document.getElementById('pop-up-container').classList.add('d-none');
+    document.getElementById('pop-up-window').classList.remove('not-hidden');
+}
+
+
+
+
+
+
+
 
 
 

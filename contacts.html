@@ -30,7 +30,7 @@
         </div>
 
 
-        <button class="add-btn">
+        <button onclick="newContactWindow()" class="add-btn">
             <p>New contact</p>
             <img src="./assets/add-contact.svg">
         </button>
@@ -61,11 +61,22 @@
 
 
 
-        <addContact class="pop-up-container d-none">
-            <div class="pop-up-window hidden">
+
+
+
+
+
+
+
+
+
+
+
+
+        <addContact id="pop-up-container" class="pop-up-container d-none">
+            <div id="pop-up-window" class="pop-up-window hidden">
 
                 <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
-
 
                 <div class="pop-up-left">
                     <div class="left-content">
@@ -76,35 +87,33 @@
                     </div>
                 </div>
 
-
-
                 <div class="pop-up-right">
 
-                    <img class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
+                    <img onclick="closePopUp()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
                     <img class="pop-up-profile-pic" src="./assets/add-contact-img.svg">
 
-                    <div class="all-inputfields">
+                    <form onsubmit="createNewContact(); return false;" class="all-inputfields">
 
                         <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name">
+                            <input id="newName" class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name" required>
                             <img src="./assets/profile.svg">
                         </div>
 
                         <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email">
+                            <input id="newEmail" class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email" required>
                             <img src="./assets/mail.svg">
                         </div>
 
                         <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="tel" placeholder="Phone"
-                                title="Please ensert a phone number">
+                            <input id="newPhone" class="pop-up-input" type="tel" placeholder="Phone"
+                                title="Please ensert a phone number" required>
                             <img src="./assets/phone.svg">
                         </div>
 
                         <div class="pop-up-btn">
 
-                            <button class="bright-btn only-desktop">
+                            <button onclick="closePopUp()" class="bright-btn only-desktop">
                                 Cancel
                                 <p class="x">+</p>
                             </button>
@@ -115,11 +124,8 @@
                             </button>
 
                         </div>
-                    </div>
+                    </form>
                 </div>
-
-
-
             </div>
         </addContact>
 
@@ -127,11 +133,10 @@
 
 
 
-        <editContact class="pop-up-container d-none">
-            <div class="pop-up-window hidden">
+        <editContact id="pop-up-edit" class="pop-up-container d-none">
+            <div id="pop-up-edit-window" class="pop-up-window hidden">
 
                 <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
-
 
                 <div class="pop-up-left">
                     <div class="left-content">
@@ -141,45 +146,9 @@
                     </div>
                 </div>
 
-
-
-                <div class="pop-up-right">
-
-                    <img class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
-
-
-                    <!--initials-->
-                    <div class="only-mobile" style="margin-bottom: 13px;">
-                        <span class="huge-initials pop-up-initials">SM</span>
-                    </div>
-
-
-                    <div class="all-inputfields">
-
-                        <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name">
-                            <img src="./assets/profile.svg">
-                        </div>
-
-                        <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email">
-                            <img src="./assets/mail.svg">
-                        </div>
-
-                        <div class="pop-up-inputfield">
-                            <input class="pop-up-input" type="tel" placeholder="Phone"
-                                title="Please ensert a phone number">
-                            <img src="./assets/phone.svg">
-                        </div>
-
-                        <button class="dark-btn save-btn">
-                            Save
-                        </button>
-
-
-                    </div>
-
+                <div id="edit-content" class="pop-up-right">
                 </div>
+
             </div>
         </editContact>
 
