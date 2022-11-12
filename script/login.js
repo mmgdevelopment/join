@@ -22,6 +22,63 @@ let epicsArray = [
     }
 ]
 
+let exampleContacts = [
+    {
+        "name": "Anton Mayer",
+        "email": "antom@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#FF7A00"
+    },
+    {
+        "name": "Anja Schulz",
+        "email": "schulz@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#9327FF"
+    },
+    {
+        "name": "Benedikt Ziegler",
+        "email": "benedikt@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#29ABE2"
+    },
+    {
+        "name": "David Eisenberg",
+        "email": "david@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#FC71FF"
+    },
+    {
+        "name": "Eva Fischer",
+        "email": "eva@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#02CF2F"
+    },
+    {
+        "name": "Emanuel Mauer",
+        "email": "emanuel@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#AF1616"
+    },
+    {
+        "name": "Marcel Bauer",
+        "email": "marcel@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#462F8A"
+    },
+    {
+        "name": "Steven Munk",
+        "email": "steven@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#FFC700"
+    },
+    {
+        "name": "Kevin Lentz",
+        "email": "kevin@gmail.com",
+        "phone": "+49 11 11 1111",
+        "color": "#FF7A00"
+    },
+];
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -266,7 +323,7 @@ function saveGuestToLocalStorage() {
  * function adds guest account on first place in users JSON
  */
 async function addGuestToUsers() {
-    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray });
+    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray, contacts: exampleContacts });
     console.log(users); 
     await backend.setItem('users', JSON.stringify(users));
 }
@@ -351,7 +408,7 @@ function emailAlreadyExists() {
  * function creats a new user with input from sin_up.html and saves him on backend 
  */
 async function createNewUser() {
-    users.push({ username: username.value, email: email.value, password: password.value, epics: epicsArray});
+    users.push({ username: username.value, email: email.value, password: password.value, epics: epicsArray, contacts: exampleContacts });
     await backend.setItem('users', JSON.stringify(users));
     window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert!';
 }

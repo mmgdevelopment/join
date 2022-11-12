@@ -86,7 +86,6 @@ p {
     height: 42px;
     border: 2px solid white;
     border-radius: 50%;
-    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
