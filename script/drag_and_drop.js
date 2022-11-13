@@ -462,6 +462,7 @@ function openCard(id) {
  *
  */
 function closeCard(id) {
+  cardWasOpened = false;
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
 }
