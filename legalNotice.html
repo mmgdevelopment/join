@@ -8,12 +8,21 @@
     <script src="script.js"></script>
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    <script src="./script/mini_backend.js"></script>
     <script src="./script/templates.js"></script>
+    <script src="./script/addTask.js"></script>
+    <script src="./script/database.js"></script>
+
+    <link rel="stylesheet" href="./style/addTask.css">
     <title>legalNotice</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <div w3-include-html="./templates/sideBar.html"></div>
+    <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div>
+
+    <button style="margin:500px;"
+        onclick="document.getElementById('fullscreen').style.display = 'block'">TEMPLATE</button>
 
 </body>
 

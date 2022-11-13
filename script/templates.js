@@ -28,6 +28,6 @@ function showLogOut() {
 
 
 function logOut() {
-    window.location.href='index.html';
+    window.location.href = 'index.html';
 }
 

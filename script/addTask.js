@@ -19,7 +19,7 @@ let createTasktouched = false;
 
 async function init() {
     await loadData();
-    includeHTML();
+    await includeHTML();
     renderCategorySelector();
     renderContactSelector();
 };
@@ -81,8 +81,9 @@ async function createTestTask() {
         });
         createTasktouched = false;
         await saveData();
+        document.body.style.overflowY = 'hidden';
         document.getElementById('addedToBoard').classList.add('comeFromBottom');
-        setTimeout(goToBoard, 3000);
+        setTimeout(goToBoard, 2000);
     }
 }
 
@@ -391,6 +392,22 @@ function clearAllInput() {
     renderAddSubtaskContainer();
     document.getElementById('subtaskList').innerHTML = '';
 }
+
+function closeTemplate() {
+    clearAllInput();
+    resetInputRequiredMessages()
+    document.getElementById('fullscreen').style.display = 'none';
+}
+
+function resetInputRequiredMessages() {
+    let requiredMessages = document.getElementsByClassName('formValidation')
+    let messagesAsArray = [...requiredMessages];
+    messagesAsArray.forEach(message =>
+        message.style.display = 'none'
+    )
+    createTasktouched = false;
+}
+
 
 /***********************HTML Templates**************************/
 
