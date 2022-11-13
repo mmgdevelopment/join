@@ -3,6 +3,7 @@ body {
     justify-content: center;
     font-family: 'Inter';
     background-color: #F5F5F5;
+    margin: 0;
 }
 
 h1 {
@@ -78,7 +79,7 @@ label {
 }
 
 .container {
-    display: flex;
+    display: none;
     flex-direction: column;
     margin-top: 90px;
     margin-left: 180px;
@@ -91,7 +92,7 @@ label {
 
 .form {
     width: 515px;
-    height: 500px;
+    height: 650px;
     position: relative;
 }
 
@@ -372,7 +373,7 @@ ul {
 }
 
 #addedToBoard {
-    display: flex;
+    display: none;
     flex-direction: row;
     justify-content: center;
     align-items: center;
@@ -390,16 +391,47 @@ ul {
 }
 
 .comeFromBottom {
-    animation: comeFromBottom 2500ms 500ms 1;
+    display: flex !important;
+    animation: comeFromBottom 2500ms;
 }
 
 #addedToBoard img {
     filter: brightness(100);
 }
 
+.templateContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 30px;
+}
+
+#close {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+}
+
+#fullscreen {
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 0;
+    right: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    z-index: 2;
+}
+
 @keyframes comeFromBottom {
     0% {
         bottom: -150px;
+    }
+
+    50% {
+        bottom: 100px;
     }
 
     100% {
