@@ -86,7 +86,6 @@ p {
     height: 42px;
     border: 2px solid white;
     border-radius: 50%;
-    background-color: red;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -151,7 +150,6 @@ h1 {
 
 .huge-initials {
     color: white;
-    background-color: red;
     width: 117px;
     height: 117px;
     font-size: 47px;
@@ -199,6 +197,7 @@ h1 {
     display: flex;
     align-items: center;
     gap: 3px;
+    cursor: pointer;
 }
 
 .mail-and-phone {
@@ -231,6 +230,13 @@ h1 {
 
 .phone-number {
     font-size: 16px;
+    color: black;
+    flex-direction: row;
+    width: 200px;
+}
+
+.phone-number:hover {
+    background: none;
 }
 
 
@@ -246,6 +252,16 @@ h1 {
     left: 100vw;
 }
 
+.not-hidden {
+    position: relative;
+    left: 0vw !important;
+}
+
+.not-hidden-mobile {
+    position: relative;
+    top: 0vw !important;
+}
+
 .pop-up-container {
     position: absolute;
     top: 0px;
@@ -258,14 +274,13 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .pop-up-window {
     height: 594px;
-    background-color: blue;
     border-radius: 30px;
     display: flex;
+    transition: 350ms ease-in-out;
 }
 
 .pop-up-left {
@@ -298,6 +313,10 @@ h1 {
     margin: 0px;
 }
 
+.pop-up-subtitle {
+    font-size: 27px;
+}
+
 .pop-up-right {
     position: relative;
     width: 749px;
@@ -313,11 +332,16 @@ h1 {
     border-bottom-right-radius: 30px;
 }
 
+.pop-up-profile-pic {
+    margin-bottom: 0px;
+}
+
 .all-inputfields {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 49px;
+    margin-top: 40px;
 }
 
 .pop-up-inputfield {

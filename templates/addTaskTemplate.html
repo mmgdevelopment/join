@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="de">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <script src="script.js"></script>
-    <title>addTask</title>
-    <link rel="stylesheet" href="./style/addTask.css">
-    <link rel="stylesheet" href="./style/sideBar.css">
-    <link rel="stylesheet" href="./style/fonts.css">
-    <script src="./script/mini_backend.js"></script>
-    <script src="./script/templates.js"></script>
-    <script src="./script/addTask.js"></script>
-    <script src="./script/database.js"></script>
-</head>
-
-<body onload="init()">
-    <div w3-include-html="./templates/sideBar.html"></div>
-    <div class="container">
+<div id="fullscreen">
+    <div class="templateContainer">
+        <img onclick="closeTemplate()" id="close" src="./assets/close.svg" alt="">
 
         <h1>Add Task</h1>
         <div class="forms">
@@ -129,6 +111,4 @@
             <img src="./assets/board.svg" alt="">
         </div>
     </div>
-</body>
-
-</html>
+</div>

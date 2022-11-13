@@ -15,10 +15,11 @@ let assignedTo = [];
 let users = [];
 let user;
 let categoryColor = '';
+let createTasktouched = false;
 
 async function init() {
     await loadData();
-    includeHTML();
+    await includeHTML();
     renderCategorySelector();
     renderContactSelector();
 };
@@ -59,7 +60,8 @@ function setInitialCategorysIfNotExist() {
  * AddTask to JSON
  */
 async function createTestTask() {
-    if (!checkIfSomeInputIsEmpty()) {
+    createTasktouched = true;
+    if (allInputsFilled()) {
         user.epics.forEach(task => {
             if (task.name == document.getElementById('firstValue').innerText) {
                 const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
@@ -77,26 +79,70 @@ async function createTestTask() {
                 )
             }
         });
-        saveData();
-        console.log(user);
-        clearAllInput();
-        alert('task saved');
-    } else {
-        alert('Es müssen alle Felder ausgefüllt sein')
+        createTasktouched = false;
+        await saveData();
+        document.body.style.overflowY = 'hidden';
+        document.getElementById('addedToBoard').classList.add('comeFromBottom');
+        setTimeout(goToBoard, 2000);
     }
 }
 
-function checkIfSomeInputIsEmpty() {
-    if (document.getElementById('title').value == '' ||
-        document.getElementById('description').value == '' ||
-        assignedTo == [] ||
-        document.getElementById('dueDate').value == '' ||
-        returnPrioState == ''
-    ) {
+function goToBoard() {
+    window.location.href = 'board.html'
+}
+
+function allInputsFilled() {
+    let validateAll = [
+        !isEmpty('title'),
+        !isEmpty('description'),
+        !isEmpty('dueDate'),
+        !prioStateIsEmpty(),
+        !assignedToIsEmpty(),
+        !categoryIsEmpty()
+    ]
+    return validateAll.every(Boolean);
+}
+
+function isEmpty(id) {
+    if (document.getElementById(id).value == '') {
+        document.getElementById(id + 'Validation').style.display = 'block';
+        return true
+    } else {
+        document.getElementById(id + 'Validation').style.display = 'none';
+        return false
+    }
+}
+
+function prioStateIsEmpty() {
+    if (returnPrioState() == '') {
+        document.getElementById('prioStateValidation').style.display = 'block';
         return true;
     } else {
+        document.getElementById('prioStateValidation').style.display = 'none';
         return false;
     }
+}
+
+function assignedToIsEmpty() {
+    if (assignedTo.length == 0) {
+        document.getElementById('assignedToValidation').style.display = 'block';
+        return true;
+    } else {
+        document.getElementById('assignedToValidation').style.display = 'none';
+        return false;
+    }
+
+}
+
+function categoryIsEmpty() {
+    if (document.getElementById('firstValue').innerText == 'Select task Category') {
+        document.getElementById('categoryValidation').style.display = 'block';
+        return true;
+    } else {
+        document.getElementById('categoryValidation').style.display = 'none';
+        return false;
+    }
+
 }
 
 function returnPrioState() {
@@ -130,6 +176,9 @@ function setAssignedEventListener() {
 }
 
 window.addEventListener('click', (event) => {
+    if (createTasktouched) {
+        allInputsFilled();
+    }
     if (event.target.className != 'placeholder' &&
         event.target.className != 'category' &&
         event.target.className != 'selectable assigned' &&
@@ -198,14 +247,15 @@ function addCategory() {
             "color": categoryColor,
             "tasks": []
         })
+        categoryColor = '';
+        renderCategorySelector();
+        document.getElementById('colorPicker').style.display = 'none';
+        let index = (user.epics.length - 1).toString();
+        showCategory(index);
+        document.getElementById('categoryValidation').style.display = 'none'
     } else {
-        /* Form validation -> input required*/
+        document.getElementById('categoryValidation').style.display = 'block'
     }
-    categoryColor = '';
-    renderCategorySelector();
-    document.getElementById('colorPicker').style.display = 'none';
-    let index = (user.epics.length - 1).toString();
-    showCategory(index);
 }
 
 function colorPicker(id) {
@@ -226,6 +276,7 @@ function renderCategorySelector() {
     renderSingleCategorys();
     document.getElementById('colorPicker').style.display = 'none';
     setCategoryEventListener();
+    document.getElementById('categoryValidation').style.display = 'none'
 }
 
 function showCategory(id) {
@@ -244,6 +295,7 @@ function renderContactSelector() {
     });
     assigned.innerHTML += inviteContactSelectorTemplate();
     setAssignedEventListener();
+    document.getElementById('assignedToValidation').style.display = 'none';
 }
 
 function renderInviteContactInput() {
@@ -257,8 +309,9 @@ function inviteContact() {
     if (value) {
         sendInviteMail(value);
         renderContactSelector();
+        document.getElementById('assignedToValidation').style.display = 'none';
     } else {
-        /**form Validation -> input required */
+        document.getElementById('assignedToValidation').style.display = 'block';
     }
 }
 
@@ -339,6 +392,22 @@ function clearAllInput() {
     renderAddSubtaskContainer();
     document.getElementById('subtaskList').innerHTML = '';
 }
+
+function closeTemplate() {
+    clearAllInput();
+    resetInputRequiredMessages()
+    document.getElementById('fullscreen').style.display = 'none';
+}
+
+function resetInputRequiredMessages() {
+    let requiredMessages = document.getElementsByClassName('formValidation')
+    let messagesAsArray = [...requiredMessages];
+    messagesAsArray.forEach(message =>
+        message.style.display = 'none'
+    )
+    createTasktouched = false;
+}
+
 
 /***********************HTML Templates**************************/
 

@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    <script src="./script/mini_backend.js"></script>
     <script src="./script/templates.js"></script>
+    <script src="./script/addTask.js"></script>
+    <script src="./script/database.js"></script>
     <link rel="stylesheet" href="./style/addTask.css">
-
     <title>legalNotice</title>
 </head>
 
-<body onload="includeHTML()">
+<body onload="init()">
     <div w3-include-html="./templates/sideBar.html"></div>
     <div class="container">
    <h1>Impressum</h1>
@@ -51,6 +52,9 @@ Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten d
 
 
 </div>
+    <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div>
+    <button style="margin:500px;"
+        onclick="document.getElementById('fullscreen').style.display = 'block'">TEMPLATE</button>
 
 </body>
 

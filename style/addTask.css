@@ -1,8 +1,9 @@
 body {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     font-family: 'Inter';
     background-color: #F5F5F5;
+    margin: 0;
 }
 
 h1 {
@@ -80,8 +81,8 @@ label {
 .container {
     display: flex;
     flex-direction: column;
-    margin-top: 90px;
-    margin-left: 180px;
+    margin-top: 120px;
+    margin-left: 270px;
 }
 
 .forms {
@@ -91,7 +92,7 @@ label {
 
 .form {
     width: 515px;
-    height: 500px;
+    height: 650px;
     position: relative;
 }
 
@@ -364,6 +365,102 @@ ul {
     padding: 0;
     max-height: 120px;
     overflow: auto;
+}
+
+.formValidation {
+    color: #FF3D00;
+    display: none;
+}
+
+#addedToBoard {
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    color: #FFFFFF;
+    font-size: 21px;
+    background-color: #2A3647;
+    border-radius: 20px;
+    width: 326px;
+    height: 74px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -150px;
+}
+
+.comeFromBottom {
+    display: flex !important;
+    animation: comeFromBottom 2500ms;
+}
+
+#addedToBoard img {
+    filter: brightness(100);
+}
+
+.templateContainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #FFFFFF;
+    padding: 30px;
+    border-radius: 30px;
+    animation: comeFromRight 2000ms 1 alternate;
+}
+
+
+#close {
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    cursor: pointer;
+}
+
+#close:hover {
+    transform: scale(1.2);
+}
+
+#fullscreen {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    position: relative;
+    top: 0;
+    right: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+}
+
+#addTaskTemplate {
+    position: fixed;
+    z-index: 3;
+}
+
+@keyframes comeFromBottom {
+    0% {
+        bottom: -150px;
+    }
+
+    50% {
+        bottom: 100px;
+    }
+
+    100% {
+        bottom: 100px;
+    }
+}
+
+@keyframes comeFromRight {
+    0% {
+        left: 2500px;
+    }
+
+    100% {
+        left: 50%;
+    }
+
+
 }
 
 @media (max-width: 1230px) {
