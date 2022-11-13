@@ -80,12 +80,14 @@ async function createTestTask() {
             }
         });
         createTasktouched = false;
-        saveData();
-        console.log(user);
-        clearAllInput();
-        alert('task saved');
-
+        await saveData();
+        document.getElementById('addedToBoard').classList.add('comeFromBottom');
+        setTimeout(goToBoard, 3000);
     }
+}
+
+function goToBoard() {
+    window.location.href = 'board.html'
 }
 
 function allInputsFilled() {
