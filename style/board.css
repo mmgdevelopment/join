@@ -235,6 +235,10 @@ justify-content: center;
   background-color: green;
 }
 
+#opened-card-container{
+  position: fixed
+} 
+
 #opened-card-container > .task-card {
   position: relative;
   padding: 50px;
