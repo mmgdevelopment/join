@@ -394,7 +394,18 @@ function clearAllInput() {
 }
 
 function closeTemplate() {
+    clearAllInput();
+    resetInputRequiredMessages()
     document.getElementById('fullscreen').style.display = 'none';
+}
+
+function resetInputRequiredMessages() {
+    let requiredMessages = document.getElementsByClassName('formValidation')
+    let messagesAsArray = [...requiredMessages];
+    messagesAsArray.forEach(message =>
+        message.style.display = 'none'
+    )
+    createTasktouched = false;
 }
 
 
