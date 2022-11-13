@@ -28,7 +28,7 @@
         </div>
 
 
-        <button onclick="newContactWindow()" class="add-btn">
+        <button onclick="newContactWindow()" id="add-btn" class="add-btn">
             <p>New contact</p>
             <img src="./assets/add-contact.svg">
         </button>
@@ -38,10 +38,6 @@
 
             <span class="only-mobile" style="margin-top: 35px;">Kanban Project Management Tool</span>
 
-            <img class="mobile-back-arrow only-mobile" src="./assets/mobile-back-arrow.svg">
-
-            <img class="mobile-edit-btn only-mobile" src="./assets/mobile-contact-edir.svg">
-
             <div class="title">
                 <h1>Contacts</h1>
                 <img class="only-desktop" src="assets/blue_line_vertical.svg">
@@ -49,7 +45,7 @@
                 <img style="margin-top: 12px;" class="only-mobile" src="./assets/blue_line_horizontal.svg">
             </div>
 
-            <div id="selected-contact" class="contact-info">
+            <div id="selected-contact" class="contact-info d-none">
             </div>
 
         </div>
@@ -59,7 +55,7 @@
 
             <div id="pop-up-window" class="pop-up-window hidden">
 
-                <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+                <img onclick="closeNewContact()" class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
 
                 <div class="pop-up-left">
                     <div class="left-content">
@@ -116,7 +112,7 @@
 
             <div id="pop-up-edit-window" class="pop-up-window hidden">
 
-                <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+                <img onclick="closeEdit()" class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
 
                 <div class="pop-up-left">
                     <div class="left-content">

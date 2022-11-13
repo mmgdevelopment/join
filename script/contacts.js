@@ -195,7 +195,28 @@ function listContactHTML(name, letter) {
  */
 function showContactEntrie(name) {
     getVariablesForContact(name);
+    checkForMobileView();
     selectetContactHTML(name);
+}
+
+
+/**
+ * function hides list on mobile devices, so that contact entrie can be seen
+ */
+function checkForMobileView() {
+    document.getElementById('selected-contact').classList.remove('d-none')
+    if (screen.width <= 1080) {
+        document.getElementById('list').classList.add('d-none')
+        document.getElementById('add-btn').classList.add('d-none')
+    }
+}
+
+
+
+function openMobileList() {
+    document.getElementById('list').classList.remove('d-none')
+    document.getElementById('add-btn').classList.remove('d-none')
+    document.getElementById('selected-contact').classList.add('d-none')
 }
 
 
@@ -205,6 +226,8 @@ function showContactEntrie(name) {
  */
 function selectetContactHTML(name) {
     document.getElementById('selected-contact').innerHTML = `
+    <img onclick="openMobileList()" class="mobile-back-arrow only-mobile" src="./assets/mobile-back-arrow.svg">
+    <img onclick="editPopUp('${name}')" class="mobile-edit-btn only-mobile" src="./assets/mobile-contact-edir.svg">
     <div class="huge-contact">
         <span class="huge-initials" style="background-color:${contactColor};">${initials}</span>
         <div class="huge-name-add-task">
@@ -251,9 +274,9 @@ async function createNewContact() {
     let phone = document.getElementById('newPhone').value;
     let color = colors[Math.floor(Math.random() * 8)];
 
-    contacts.push({'name': name, 'email': email, 'phone': phone, 'color': color})
+    contacts.push({ 'name': name, 'email': email, 'phone': phone, 'color': color })
     await backend.setItem('users', JSON.stringify(users));
-    window.location.href=`contacts.html?msg=Du hast ${name} in deinen Kontakten gespeichet`
+    window.location.href = `contacts.html?msg=Du hast ${name} in deinen Kontakten gespeichet`
 }
 
 
@@ -270,6 +293,7 @@ function newContactWindow() {
  * function animates new contact window
  */
 function animateNewContact() {
+    document.getElementById('pop-up-window').classList.add('not-hidden-mobile');
     document.getElementById('pop-up-window').classList.add('not-hidden');
 }
 
@@ -280,6 +304,7 @@ function animateNewContact() {
 function closeNewContact() {
     document.getElementById('pop-up-container').classList.add('d-none');
     document.getElementById('pop-up-window').classList.remove('not-hidden');
+    document.getElementById('pop-up-window').classList.remove('not-hidden-mobile');
 }
 
 
@@ -314,6 +339,7 @@ function showEditWindow() {
  */
 function animateEditWindow() {
     document.getElementById('pop-up-edit-window').classList.add('not-hidden');
+    document.getElementById('pop-up-edit-window').classList.add('not-hidden-mobile');
 }
 
 
@@ -332,14 +358,14 @@ function renderEditWindow(name) {
  * function renders the HTML for the edit window
  */
 function renderEditHTML() {
-    document.getElementById('edit-content').innerHTML =`
+    document.getElementById('edit-content').innerHTML = `
         <img onclick="closeEdit()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
-        <div class="only-mobile" style="margin-bottom: 13px;">
+        <div class="only-mobile">
             <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
         </div>
     
-        <div class="only-dektop">
+        <div class="only-desktop">
             <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
         </div>
     
@@ -393,7 +419,7 @@ async function saveContactChanges() {
     oldContact['phone'] = document.getElementById('editPhone').value;
 
     await backend.setItem('users', JSON.stringify(users));
-    window.location.href=`contacts.html?msg=Du hast deinen Kontakt erfolgreich geändert!`
+    window.location.href = `contacts.html?msg=Du hast deinen Kontakt erfolgreich geändert!`
 }
 
 

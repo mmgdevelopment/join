@@ -231,6 +231,8 @@ h1 {
 .phone-number {
     font-size: 16px;
     color: black;
+    flex-direction: row;
+    width: 200px;
 }
 
 .phone-number:hover {
@@ -252,7 +254,12 @@ h1 {
 
 .not-hidden {
     position: relative;
-    left: 0vw;
+    left: 0vw !important;
+}
+
+.not-hidden-mobile {
+    position: relative;
+    top: 0vw !important;
 }
 
 .pop-up-container {
