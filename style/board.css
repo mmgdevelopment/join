@@ -428,8 +428,7 @@ font-size: 21px;
   border-radius: 30px;
   margin-bottom: 35px;
   max-width: 100%;
-  min-width: 400px;
-  z-index: 0;
+    z-index: 0;
   }
 
 .dummy-card > div{
