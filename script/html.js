@@ -61,7 +61,7 @@ function renderSubtaskBarHTML(id, task, done, barProgress) {
   document.getElementById("subtasks" + id).innerHTML = `
         <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${
     barProgress / 100
-  }px, #f4f4f4 0%)"></div><span>${done}/${task["subtasks"].length} Done</span>`;
+  }px, #f4f4f4 0%)"></div><span class="fw-700">${done}/${task["subtasks"].length} Done</span>`;
 }
 
 function renderSubtaskHTML(name, i, id) {
