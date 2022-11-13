@@ -154,6 +154,13 @@ function getVariablesForContact(name) {
 }
 
 
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
 /**
  * function renders a single contact into list
  * @param {string} letter 
@@ -246,8 +253,33 @@ async function createNewContact() {
 
     contacts.push({'name': name, 'email': email, 'phone': phone, 'color': color})
     await backend.setItem('users', JSON.stringify(users));
-    closePopUp();
-    renderList();
+    window.location.href=`contacts.html?msg=Du hast ${name} in deinen Kontakten gespeichet`
+}
+
+
+/**
+ * function opens pop up for new contact
+ */
+function newContactWindow() {
+    document.getElementById('pop-up-container').classList.remove('d-none');
+    setTimeout(animateNewContact, 1);
+}
+
+
+/**
+ * function animates new contact window
+ */
+function animateNewContact() {
+    document.getElementById('pop-up-window').classList.add('not-hidden');
+}
+
+
+/**
+ * function closes new contact pop up
+ */
+function closeNewContact() {
+    document.getElementById('pop-up-container').classList.add('d-none');
+    document.getElementById('pop-up-window').classList.remove('not-hidden');
 }
 
 
@@ -258,38 +290,48 @@ async function createNewContact() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
+/**
+ * function renders edit pop up
+ * @param {string} name 
+ */
 function editPopUp(name) {
     showEditWindow();
-    ensertContactInfo(name);
+    renderEditWindow(name);
 }
 
 
+/**
+ * function renders gray screen and animarion of edit window
+ */
 function showEditWindow() {
     document.getElementById('pop-up-edit').classList.remove('d-none');
     setTimeout(animateEditWindow, 100);
 }
 
 
+/**
+ * function animates edit window
+ */
 function animateEditWindow() {
     document.getElementById('pop-up-edit-window').classList.add('not-hidden');
 }
 
 
-function closeEdit() {
-    document.getElementById('pop-up-edit').classList.add('d-none');
-    document.getElementById('pop-up-edit-window').classList.remove('not-hidden');
+/**
+ * function renders the HTML and all information for the edit window
+* @param {string} name 
+ */
+function renderEditWindow(name) {
+    getVariablesForContact(name);
+    renderEditHTML();
+    ensertInfoIntoEdit(name);
 }
 
 
-
-
-
-
-
-function ensertContactInfo(name) {
-    getVariablesForContact(name);
-
-
+/**
+ * function renders the HTML for the edit window
+ */
+function renderEditHTML() {
     document.getElementById('edit-content').innerHTML =`
         <img onclick="closeEdit()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
@@ -325,63 +367,52 @@ function ensertContactInfo(name) {
 
         </div>
     `;
+}
+
+
+/**
+ * function enserts info of contact into edit HTML
+ * @param {string} name 
+ */
+function ensertInfoIntoEdit(name) {
     document.getElementById('editName').value = name;
     document.getElementById('editEmail').value = contactMail;
     document.getElementById('editPhone').value = contactPhone;
-    IDOfContact = contacts.findIndex(u => u.name == name);
+    IDOfEditContact = contacts.findIndex(u => u.name == name);
 }
 
 
-let IDOfContact;
-
+let IDOfEditContact;
+/**
+ * function changes infos of contacts, based on the id of the contact
+ */
 async function saveContactChanges() {
-    let oldContact = contacts[IDOfContact];
-    let newName = document.getElementById('editName').value;
-    oldContact['name'] = newName;
+    let oldContact = contacts[IDOfEditContact];
+    oldContact['name'] = document.getElementById('editName').value;
     oldContact['email'] = document.getElementById('editEmail').value;
     oldContact['phone'] = document.getElementById('editPhone').value;
+
     await backend.setItem('users', JSON.stringify(users));
-    closeEdit();
-    //reload page
+    window.location.href=`contacts.html?msg=Du hast deinen Kontakt erfolgreich geändert!`
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////
-
-function newContactWindow() {
-    document.getElementById('pop-up-container').classList.remove('d-none');
-    setTimeout(animatePopUpWindow, 1);
+/**
+ * function closes edit window
+ */
+function closeEdit() {
+    document.getElementById('pop-up-edit').classList.add('d-none');
+    document.getElementById('pop-up-edit-window').classList.remove('not-hidden');
 }
 
-function animatePopUpWindow() {
-    document.getElementById('pop-up-window').classList.add('not-hidden');
-}
 
-function closePopUp() {
-    document.getElementById('pop-up-container').classList.add('d-none');
-    document.getElementById('pop-up-window').classList.remove('not-hidden');
-}
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////
+
+
 
 
 

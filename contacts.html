@@ -24,8 +24,6 @@
     <div class="contact-page">
 
 
-
-
         <div id="list" class="list">
         </div>
 
@@ -34,7 +32,6 @@
             <p>New contact</p>
             <img src="./assets/add-contact.svg">
         </button>
-
 
 
         <div class="contact-entrie">
@@ -58,22 +55,8 @@
         </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         <addContact id="pop-up-container" class="pop-up-container d-none">
+
             <div id="pop-up-window" class="pop-up-window hidden">
 
                 <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
@@ -89,7 +72,7 @@
 
                 <div class="pop-up-right">
 
-                    <img onclick="closePopUp()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
+                    <img onclick="closeNewContact()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
                     <img class="pop-up-profile-pic" src="./assets/add-contact-img.svg">
 
@@ -113,7 +96,7 @@
 
                         <div class="pop-up-btn">
 
-                            <button onclick="closePopUp()" class="bright-btn only-desktop">
+                            <button onclick="closeNewContact()" class="bright-btn only-desktop">
                                 Cancel
                                 <p class="x">+</p>
                             </button>
@@ -122,7 +105,6 @@
                                 Create contact
                                 <img src="./assets/little-check.svg">
                             </button>
-
                         </div>
                     </form>
                 </div>
@@ -130,10 +112,8 @@
         </addContact>
 
 
-
-
-
         <editContact id="pop-up-edit" class="pop-up-container d-none">
+
             <div id="pop-up-edit-window" class="pop-up-window hidden">
 
                 <img class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
@@ -148,7 +128,6 @@
 
                 <div id="edit-content" class="pop-up-right">
                 </div>
-
             </div>
         </editContact>
 
