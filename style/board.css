@@ -25,6 +25,11 @@ h2 {
   margin-inline: 5px;
 }
 
+form{
+  display: flex;
+  flex-direction: column;
+}
+
 .d-flex-jc-sb {
   display: flex;
   justify-content: space-between;
@@ -473,6 +478,15 @@ background-color: rgb(245, 245, 245);
 z-index: 1;
 }
 
+#edit-assigned{
+  display: flex;
+
+}
+
+#edit-assigned > div{
+  transform: unset;
+  margin-inline: 2px;
+}
 
 
 @media only screen and (max-width: 800px) {

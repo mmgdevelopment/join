@@ -9,6 +9,7 @@ let x = window.matchMedia("(max-width: 800px)");
 x.addListener(checkWitdh);
 let dummysPrinted = false;
 let kanbanCategorys = ["todo", "progress", "feedback", "done"];
+let onEdit = false
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -288,7 +289,14 @@ function getAssignedContact(task) {
  */
 function checkLocationContacts(contactInitials, task, contactName, i) {
   if (cardWasOpened) {
-    renderCardContactsHTML(contactInitials, task, contactName);
+    if(onEdit){
+      document.getElementById("edit-assigned").innerHTML +=renderAssignedContactsHTML(contactInitials, task)
+    }else{
+   
+      document.getElementById("assignedContactCard" + task["id"]).innerHTML +=  renderCardContactsHTML(contactInitials, task, contactName);
+      
+    }
+    
   }
   if (!cardWasOpened && printExtraContactOnes) {
     checkContactsToRender(contactInitials, task, contactName, i);
@@ -307,13 +315,13 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
 
 function checkContactsToRender(contactInitials, task, contactName, i) {
   if (i <= 2 && task["assignedTo"].length <= 3) {
-    renderAssignedContactsHTML(contactInitials, task);
+    document.getElementById("assigned" + task["id"]).innerHTML += renderAssignedContactsHTML(contactInitials, task);
     return;
   }
   if (i == 2 && task["assignedTo"].length >= 2) {
     printExtraContact(task);
   } else {
-    renderAssignedContactsHTML(contactInitials, task);
+    document.getElementById("assigned" + task["id"]).innerHTML += renderAssignedContactsHTML(contactInitials, task);
   }
 }
 
@@ -346,7 +354,9 @@ function getAllSubtasks(task) {
     );
     i++;
   });
-  tickCheckBox(task);
+  if(!onEdit){tickCheckBox(task);}
+  
+
 }
 
 /**
@@ -461,6 +471,7 @@ function openCard(id) {
  */
 function closeCard(id) {
   cardWasOpened = false;
+  onEdit = false
   document.getElementById('fullscreen').style.display = 'none'
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
@@ -470,7 +481,21 @@ function closeCard(id) {
 
 
 function openCardEdit(id){
-console.log('hey');
+  
+  onEdit = true
+  let taskInEdit = findTaskById(id);
+  document.getElementById('edit-area').innerHTML = editTaskHTML(taskInEdit);
+  fillAllInputs(taskInEdit);
+  
+}
+function fillAllInputs(task){
+  document.getElementById('edit-title').value = task['title']
+  document.getElementById('edit-description').value = task['description']
+  document.getElementById('edit-dueDate').value = task['dueDate']
+  getAllSubtasks(task);
+getAssignedContact(task);
+
+
 }
 
 function showAddTask() {

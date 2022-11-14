@@ -29,7 +29,7 @@ function renderTask(task, epic) {
 
 function renderTaskCard(task, epic) {
   return /*html*/ `
-      <div onclick="dontClose(event)" class="task-card">
+      <div id="edit-area" onclick="dontClose(event)" class="task-card">
       <span class="epic ${epic["color"]}">${epic["name"]}</span>
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
@@ -37,7 +37,7 @@ function renderTaskCard(task, epic) {
       <div>
       <div><span>Due date:</span> ${task["dueDate"]}</div>
       <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}.svg"</img></span></div>
-      <div  id="contacts-on-card"><span>Assigned To:</span><div id="assignedCard${task["id"]}">
+      <div  id="contacts-on-card"><span>Assigned To:</span><div id="assignedContactCard${task["id"]}">
       </div> </div>
   </div> 
   <div id="openCardSubtasks">
@@ -65,7 +65,6 @@ function renderSubtaskBarHTML(id, task, done, barProgress) {
 }
 
 function renderSubtaskHTML(name, i, id) {
-  openCardSubtasks;
   return /* html*/ `
     <div class="d-flex-gap-20"><input id="subtaskCheckbox${i}" class="checkbox" type="checkbox" onclick="taskIsDone('${
     i + id
@@ -80,12 +79,12 @@ function renderSubtaskHTML(name, i, id) {
  * @param {string} contact
  */
 function renderAssignedContactsHTML(contact, task) {
-  document.getElementById("assigned" + task["id"]).innerHTML += `
+  return `
     <div class="contact">${contact}</div>`;
 }
 
 function renderCardContactsHTML(contact, task, contactName) {
-  document.getElementById("assignedCard" + task["id"]).innerHTML += `
+return`
    <div class="d-flex-gap-20"><div class="contact-on-card">${contact}</div><span class="contact-name">${contactName}</span></div>  `;
 }
 
@@ -122,4 +121,58 @@ function dummyCardHTML(id) {
     <div>
     </div>
     </div>`;
+}
+
+function editTaskHTML(task){
+  return /* html */ `
+  <form>
+  <label for="edit-title">Title</label>
+                    <input type="text" placeholder="Enter a title" id="edit-title">
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description" placeholder="Enter a Description" cols="30" rows="5"></textarea>
+                    <label for="edit-dueDate">Due Date</label>
+                    <input type="date" placeholder="" id="edit-dueDate">
+                    <label>Prio</label>
+                    <div class="row">
+                        <!-- <button id="urgent" class="prioButton" onclick="prioButton('urgent')"> -->
+                            Urgent
+                            <img src="./assets/urgent.svg" alt="">
+                        </button>
+                        <!-- <button id="medium" class="prioButton" onclick="prioButton('medium')"> -->
+                            Medium
+                            <img src="./assets/medium.svg" alt="">
+                        </button>
+                        <!-- <button id="low" class="prioButton" onclick="prioButton('low')"> -->
+                            Low
+                            <img src="./assets/low.svg" alt="">
+                        </button>
+
+                        
+                    </div>
+                    
+                    <label for="customSelect">Assigned</label>
+                 
+                    <!-- <div id="assigned" class="customSelect"> -->
+<!--                     
+                    </div> -->
+                  
+                    </div>
+                    <div id="edit-assigned">
+                        <!-- Content will be rendered by js-->
+                    </div>
+
+                    <label for="subtask">Subtasks</label>
+                    <div id="subtask">
+                        <div class="input" onclick="renderSubtaskInput()">
+                            Add new subtask
+                        </div>
+                    </div>
+                    <ul id="openCardSubtasks">
+                        <!-- Content will be rendered by js-->
+                    </ul>
+  </form>
+  
+  
+  `
+
 }
