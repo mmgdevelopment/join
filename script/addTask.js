@@ -88,7 +88,12 @@ async function createTestTask() {
 }
 
 function goToBoard() {
-    window.location.href = 'board.html'
+    if (window.location.href == 'board.html') {
+        closeTemplate()
+    } else {
+        window.location.href = 'board.html'
+    }
+
 }
 
 function allInputsFilled() {
@@ -172,6 +177,7 @@ function setAssignedEventListener() {
     assignedPlaceholder.addEventListener('click', () => {
         document.getElementById('assigned').classList.toggle('open');
         document.getElementById('category').classList.remove('open');
+        renderAssignedContactsIfClosed()
     })
 }
 
@@ -192,7 +198,16 @@ window.addEventListener('click', (event) => {
 function closeAllCustomSelectors() {
     document.getElementById('category').classList.remove('open');
     document.getElementById('assigned').classList.remove('open');
+    renderAssignedContactsIfClosed()
     scrollToTop();
+}
+
+function renderAssignedContactsIfClosed() {
+    if (document.getElementById('assigned').offsetHeight < 50) {
+        document.getElementById('assignedTo').style.display = 'none';
+    } else {
+        document.getElementById('assignedTo').style.display = 'flex'
+    }
 }
 
 /**
@@ -412,9 +427,9 @@ function resetInputRequiredMessages() {
  * This function prevents open cards to be closed
  *
  */
- function dontClose(event) {
+function dontClose(event) {
     event.stopPropagation();
-  }
+}
 
 
 /***********************HTML Templates**************************/
