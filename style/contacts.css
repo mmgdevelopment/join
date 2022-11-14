@@ -177,7 +177,17 @@ h1 {
 .add-task {
     display: flex;
     align-items: center;
-    gap: 13px;
+    gap: 0px;
+    cursor: pointer;
+}
+
+.add-task:hover {
+    background: none;
+}
+
+.add-task-img {
+    width: auto;
+    height: auto;
 }
 
 .add-task-text {

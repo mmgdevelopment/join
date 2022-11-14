@@ -232,10 +232,10 @@ function selectetContactHTML(name) {
         <span class="huge-initials" style="background-color:${contactColor};">${initials}</span>
         <div class="huge-name-add-task">
             <p class="huge-name">${name}</p>
-            <div class="add-task">
-                <img src="./assets/blue-plus.svg">
+            <a href="addTask.html" class="add-task">
+                <img class="add-task-img" src="./assets/blue-plus.svg">
                 <p class="add-task-text">Add Task</p>
-            </div>
+            </a>
         </div>
     </div>
 
