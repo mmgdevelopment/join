@@ -408,6 +408,14 @@ function resetInputRequiredMessages() {
     createTasktouched = false;
 }
 
+/**
+ * This function prevents open cards to be closed
+ *
+ */
+ function dontClose(event) {
+    event.stopPropagation();
+  }
+
 
 /***********************HTML Templates**************************/
 

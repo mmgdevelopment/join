@@ -4,8 +4,6 @@ let currentDraggedTask;
 let doneSubtasks;
 let subtaskDone;
 let printExtraContactOnes;
-let user;
-let users = [];
 let cardWasOpened = false;
 let x = window.matchMedia("(max-width: 800px)");
 x.addListener(checkWitdh);
@@ -462,20 +460,21 @@ function openCard(id) {
  *
  */
 function closeCard(id) {
+  cardWasOpened = false;
+  document.getElementById('fullscreen').style.display = 'none'
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
+  
 }
 
-/**
- * This function prevents the taskcard to be closed.
- *
- */
-function dontClose(event) {
-  event.stopPropagation();
-}
+
 
 function openCardEdit(id){
 console.log('hey');
+}
+
+function showAddTask() {
+  document.getElementById('fullscreen').style.display = 'block'
 }
 
 
