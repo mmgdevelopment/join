@@ -6,14 +6,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/sideBar.css">
+    <link rel="stylesheet" href="./style/addTask.css">
     <link rel="stylesheet" href="./style/board.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <script src="./script/mini_backend.js"></script>
+    <script src="./script/database.js"></script>
     <script src="./script/html.js"></script>
     <script src="./script/templates.js"></script>
-    <script src="./script/database.js"></script>
+    <script src="script/addTask.js"></script>
     <script src="./script/drag_and_drop.js"></script>
     <script src="./script/search.js"></script>
+   
     <title>board</title>
 </head>
 
@@ -25,35 +28,35 @@
             <h1>Board</h1>
             <div class="d-flex-jc-sb">
                 <div id="desktop-search"></div>
-                <button id="btn-add-task">Add task <img src="assets/plus-white.svg"></button>
+                <button id="btn-add-task" onclick="showAddTask()">Add task <img src="assets/plus-white.svg"></button>
             </div>
         </div>
         <div id="mobile-search" class="sticky-mobile"></div>
         <div class="kanban">
             <div>
                 <div class="d-flex-jc-sb sticky-250">
-                    <h2>To do</h2><button class="btn-square-add-task"> <span class="plus">+</span></button>
+                    <h2>To do</h2><button class="btn-square-add-task"> <span class="plus" onclick="showAddTask()">+</span></button>
                 </div>
                 <div ondragover="allowDrop(event);" ondrop="moveTo('todo'); " ondragleave="" id="todo-tasks"
                     class="kanban-clm"></div>
             </div>
             <div>
                 <div class="d-flex-jc-sb sticky-250">
-                    <h2>In progress</h2><button class="btn-square-add-task"> <span class="plus">+</span></button>
+                    <h2>In progress</h2><button class="btn-square-add-task"> <span class="plus" onclick="showAddTask()">+</span></button>
                 </div>
                 <div ondragover="allowDrop(event);" ondrop="moveTo('progress');" ondragleave="" id="progress-tasks"
                     class="kanban-clm"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb sticky-250">
-                    <h2>Feedback</h2><button class="btn-square-add-task"><span class="plus">+</span></button>
+                    <h2>Feedback</h2><button class="btn-square-add-task"><span class="plus" onclick="showAddTask()">+</span></button>
                 </div>
                 <div ondragover="allowDrop(event);" ondrop="moveTo('feedback');" ondragleave="" id="feedback-tasks"
                     class="kanban-clm"> </div>
             </div>
             <div>
                 <div class="d-flex-jc-sb sticky-250">
-                    <h2>Done</h2><button class="btn-square-add-task"><span class="plus">+</span></button>
+                    <h2>Done</h2><button class="btn-square-add-task"><span class="plus" onclick="showAddTask()">+</span></button>
                 </div>
                 <div ondragover="allowDrop(event);" ondrop="moveTo('done');" ondragleave="" id="done-tasks"
                     class="kanban-clm"> </div>
@@ -62,6 +65,7 @@
         </div>
     </main>
     <div class="sticky-helper"> </div>
+    <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div> 
 </body>
 
 </html>
