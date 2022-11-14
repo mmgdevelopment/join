@@ -29,7 +29,7 @@ function renderTask(task, epic) {
 
 function renderTaskCard(task, epic) {
   return /*html*/ `
-      <div onclick="dontClose(event)" class="task-card">
+      <div onclick="dontClose(event)" id="edit-area" class="task-card">
       <span class="epic ${epic["color"]}">${epic["name"]}</span>
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
@@ -89,6 +89,11 @@ function renderCardContactsHTML(contact, task, contactName) {
    <div class="d-flex-gap-20"><div class="contact-on-card">${contact}</div><span class="contact-name">${contactName}</span></div>  `;
 }
 
+
+function renderEditContactsHTML(contact, task) {
+  document.getElementById("edit-assignedTo").innerHTML += `
+    <div class="contact">${contact}</div>`;
+}
 /**
  * This function removes the searchbar and puts it in Desktop view and changes the wording of the Addtask-Button
  * On board.html
