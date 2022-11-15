@@ -110,6 +110,8 @@ font-size: 38px;
 
 }
 
+
+
 #search {
   background-image: url("/assets/search.svg");
   background-repeat: no-repeat;
@@ -134,7 +136,7 @@ font-size: 38px;
   top: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.284);
-  z-index: 4;
+  z-index: 9999999999;
 }
 
 .kanban {
@@ -494,6 +496,12 @@ background-color: rgb(245, 245, 245);
 z-index: 1;
 }
 
+.f-end{
+  display: flex;
+align-items: flex-end;
+gap: 25px;
+margin-right: 35px;
+}
 
 
 @media only screen and (max-width: 800px) {

@@ -131,9 +131,9 @@ function dummyCardHTML(id) {
 
 function askDeleteHTML(id){
   return `
-  <div onclick="dontClose(event)" class="task-card">
+  <div onclick="dontClose(event)" class="task-card f-end">
     <h2>Are you sure you wanna delete this task?</h2>
-    <div onclick="deleteTask('${id}')" class="button" id="delete">Delete</div><div onclick="closeCard()" class="button" id="createTask">Keep</div>
+    <div class="d-flex-gap-20"> <div onclick="deleteTask('${id}')" class="button" id="delete">Delete</div><div onclick="closeCard()" class="button" id="createTask">Keep</div></div>
   </div>
 `
 }
