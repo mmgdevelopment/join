@@ -292,10 +292,11 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
 
 
   if (cardWasOpened) {
-    if(openEdit){
+    if (openEdit) {
       renderEditContactsHTML(contactInitials, task)
-    }else{
-    renderCardContactsHTML(contactInitials, task, contactName);}
+    } else {
+      renderCardContactsHTML(contactInitials, task, contactName);
+    }
   }
 
   if (!cardWasOpened && printExtraContactOnes) {
@@ -453,7 +454,7 @@ function openCard(id) {
   cardWasOpened = true;
   let task = findTaskById(id);
   let epic = findEpicById(id);
-  document.getElementById('opened-card-container').setAttribute('onclick',`closeCard('${id}')`);
+  document.getElementById('opened-card-container').setAttribute('onclick', `closeCard('${id}')`);
   document.getElementById("opened-card-container").classList.remove("d-none");
   document.getElementById("opened-card-container").innerHTML = renderTaskCard(
     task,
@@ -473,12 +474,12 @@ function closeCard(id) {
   document.getElementById('fullscreen').style.display = 'none'
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
-  
+
 }
 
 
 
-function openCardEdit(id){
+function openCardEdit(id) {
   openEdit = true
   document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
   let task = findTaskById(id);
@@ -487,47 +488,50 @@ function openCardEdit(id){
   getAllSubtasks(task);
 }
 
-function showAddTask() {
-  document.getElementById('fullscreen').style.display = 'block'
+function showAddTask(category) {
+  document.getElementById('fullscreen').style.display = 'block';
+  document.getElementById('createTask').onclick = () => { createTestTask(category) };
+  renderCategorySelector();
+  renderContactSelector();
 }
 
 
 
 
 
-function fillAllInputs(task){
- document.getElementById('edit-title').value = task["title"];
- document.getElementById('edit-description').value = task["description"]
- document.getElementById('edit-dueDate').value = task["dueDate"]
- 
-
-}
-
-function deleteTask(id){
-let epic = findEpicById(id)
-let cuttedID = id.match(/[0-9]/)[0];
-let task = +cuttedID -1
-epic.tasks.splice(task, 1)
-saveData();
-closeCard(id);
-startRender();
-
+function fillAllInputs(task) {
+  document.getElementById('edit-title').value = task["title"];
+  document.getElementById('edit-description').value = task["description"]
+  document.getElementById('edit-dueDate').value = task["dueDate"]
 
 
 }
 
-function askDeleteTask(id){
+function deleteTask(id) {
+  let epic = findEpicById(id)
+  let cuttedID = id.match(/[0-9]/)[0];
+  let task = +cuttedID - 1
+  epic.tasks.splice(task, 1)
+  saveData();
+  closeCard(id);
+  startRender();
+
+
+
+}
+
+function askDeleteTask(id) {
   document.getElementById(`opened-card-container`).innerHTML = askDeleteHTML(id);
 }
 
-function editTask(id){
+function editTask(id) {
   let task = findTaskById(id)
-  task.title = document.getElementById('edit-title').value 
+  task.title = document.getElementById('edit-title').value
   task.description = document.getElementById('edit-description').value
   task.dueDate = document.getElementById('edit-dueDate').value
   saveData();
- closeCard(id);
- startRender();
+  closeCard(id);
+  startRender();
 
 }
 
@@ -549,7 +553,7 @@ function editTask(id){
 
 
 function editTaskHTML(id) {
-return /* html */ `
+  return /* html */ `
 
   <img onclick="closeCard('${id}')" id="close" src="./assets/close.svg" alt="">
   <div>

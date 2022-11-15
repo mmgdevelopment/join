@@ -7,16 +7,19 @@ let password;
 let epicsArray = [
     {
         "name": "Backoffice",
+        "totalTasks": 0,
         "color": "blue",
         "tasks": []
     },
     {
         "name": 'Marketing',
+        "totalTasks": 0,
         "color": 'red',
         "tasks": []
     },
     {
         "name": 'Development',
+        "totalTasks": 0,
         "color": 'orange',
         "tasks": []
     }
@@ -97,7 +100,7 @@ async function init() {
 /**
  * function defines user variables to inputfields
  */
- function defineInputVariables() {
+function defineInputVariables() {
     username = document.getElementById('username');
     email = document.getElementById('email');
     password = document.getElementById('password');
@@ -146,7 +149,7 @@ function noAnimation() {
 function giveAllElementsNoTransition(animationElements) {
     for (let i = 0; i < animationElements.length; i++) {
         const element = animationElements[i];
-        document.getElementById(element).style='transition: 0ms;';
+        document.getElementById(element).style = 'transition: 0ms;';
     }
 }
 
@@ -324,7 +327,7 @@ function saveGuestToLocalStorage() {
  */
 async function addGuestToUsers() {
     users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray, contacts: exampleContacts });
-    console.log(users); 
+    console.log(users);
     await backend.setItem('users', JSON.stringify(users));
 }
 
@@ -336,9 +339,9 @@ function deleteAllExistingGuests() {
     let amountOfGuests = 0;
     for (let i = 0; i < users.length; i++) {
         const element = users[i]['username'];
-        if(element == 'Guest'){
+        if (element == 'Guest') {
             amountOfGuests = amountOfGuests + 1;
-        }   
+        }
     }
     users.splice(0, amountOfGuests);
 }
@@ -401,7 +404,7 @@ function usernameAlreadyExists() {
  */
 function emailAlreadyExists() {
     return users.find(u => u.email == email.value)
-}  
+}
 
 
 /**
@@ -493,7 +496,7 @@ async function switchOldWithNewPassword(user, firstPassword) {
 /**
  * function leads to success_reset.html
  */
- function goToPesetPage() {
+function goToPesetPage() {
     window.location.href = 'reset.html?msg=Bitte erstelle ein neues Passwort!';
 }
 
@@ -516,7 +519,7 @@ function goToSuccessReset() {
 /**
  * function changes lock to closed eye if password gets input
  */
- function changePasswordIcon() {
+function changePasswordIcon() {
     if (document.getElementById('password').value == '') {
         document.getElementById('password-icon').src = './assets/lock.svg';
     } else {
@@ -528,7 +531,7 @@ function goToSuccessReset() {
 /**
  * function toggles password visibility
  */
- function makePasswordVisible() {
+function makePasswordVisible() {
     let icon = document.getElementById('password-icon').src;
     if (icon.endsWith('unsichtbar.png')) {
         document.getElementById('password-icon').src = './assets/icons8-sichtbar.png';
@@ -556,14 +559,14 @@ function clearAllInput() {
  */
 function wrongUsername() {
     document.getElementById('wrong-username').classList.remove('opacity-zero');
-    setTimeout((hideWrongUsername), 3000);  
+    setTimeout((hideWrongUsername), 3000);
 }
 
 
 /**
  * function hieds wrong username message 
  */
- function hideWrongUsername() {
+function hideWrongUsername() {
     document.getElementById('wrong-username').classList.add('opacity-zero');
 
 }
@@ -572,9 +575,9 @@ function wrongUsername() {
 /**
  * function displays wrong email message for 3 seconds
  */
- function wrongEmail() {
+function wrongEmail() {
     document.getElementById('wrong-email').classList.remove('opacity-zero');
-    setTimeout((hideWrongEmail), 3000);  
+    setTimeout((hideWrongEmail), 3000);
 }
 
 
@@ -590,7 +593,7 @@ function hideWrongEmail() {
 /**
  * function displays wrong password message for 3 seconds
  */
- function wrongPassword() {
+function wrongPassword() {
     document.getElementById('wrong-password').classList.remove('opacity-zero');
     setTimeout(hideWrongPassword, 3000);
 }

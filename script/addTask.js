@@ -50,21 +50,21 @@ async function deleteAllTasks() {
     await loadData();
 }
 
-function setInitialCategorysIfNotExist() {
-    if (user.epics == '') {
-        user.epics = taskTemplate();
-    }
-}
+// function setInitialCategorysIfNotExist() {
+//     if (user.epics == '') {
+//         user.epics = taskTemplate();
+//     }
+// }
 
 /**
  * AddTask to JSON
  */
-async function createTestTask() {
+async function createTestTask(category) {
     createTasktouched = true;
     if (allInputsFilled()) {
         user.epics.forEach(task => {
             if (task.name == document.getElementById('firstValue').innerText) {
-                const id = task.name.slice(0, 4).toLowerCase() + (task.tasks.length + 1).toString()
+                const id = task.name.slice(0, 4).toLowerCase() + (task.totalTasks);
                 task.tasks.push(
                     {
                         id: id,
@@ -74,9 +74,10 @@ async function createTestTask() {
                         dueDate: document.getElementById('dueDate').value,
                         prio: returnPrioState(),
                         subtasks: getSubtasks(),
-                        category: 'todo'
+                        category: category
                     }
                 )
+                task.totalTasks++;
             }
         });
         createTasktouched = false;
@@ -259,6 +260,7 @@ function addCategory() {
     if (input.value) {
         user.epics.push({
             "name": input.value,
+            "totalTasks": 0,
             "color": categoryColor,
             "tasks": []
         })
@@ -304,7 +306,7 @@ function renderContactSelector() {
     let assigned = document.getElementById('assigned');
     assigned.innerHTML = contactSelectorTemplate();
     let id = 0
-    database.contacts.forEach(contact => {
+    user.contacts.forEach(contact => {
         assigned.innerHTML += singleContactTemplate(contact, id);
         id++;
     });
