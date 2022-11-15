@@ -293,7 +293,6 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
 
   if (cardWasOpened) {
     if(openEdit){
-      console.log(contactInitials, task);
       renderEditContactsHTML(contactInitials, task)
     }else{
     renderCardContactsHTML(contactInitials, task, contactName);}
@@ -470,6 +469,7 @@ function openCard(id) {
  */
 function closeCard(id) {
   cardWasOpened = false;
+  openEdit = false;
   document.getElementById('fullscreen').style.display = 'none'
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
@@ -480,10 +480,11 @@ function closeCard(id) {
 
 function openCardEdit(id){
   openEdit = true
-  document.getElementById(`edit-area`).innerHTML = editTaskHTML();
+  document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
   let task = findTaskById(id);
   fillAllInputs(task);
   getAssignedContact(task);
+  getAllSubtasks(task);
 }
 
 function showAddTask() {
@@ -502,6 +503,33 @@ function fillAllInputs(task){
 
 }
 
+function deleteTask(id){
+let epic = findEpicById(id)
+let cuttedID = id.match(/[0-9]/)[0];
+let task = +cuttedID -1
+epic.tasks.splice(task, 1)
+saveData();
+closeCard(id);
+startRender();
+
+
+
+}
+
+function askDeleteTask(id){
+  document.getElementById(`opened-card-container`).innerHTML = askDeleteHTML(id);
+}
+
+function editTask(id){
+  let task = findTaskById(id)
+  task.title = document.getElementById('edit-title').value 
+  task.description = document.getElementById('edit-description').value
+  task.dueDate = document.getElementById('edit-dueDate').value
+  saveData();
+ closeCard(id);
+ startRender();
+
+}
 
 
 
@@ -519,10 +547,11 @@ function fillAllInputs(task){
 
 
 
-function editTaskHTML() {
+
+function editTaskHTML(id) {
 return /* html */ `
 
-  <img onclick="closeTemplate()" id="close" src="./assets/close.svg" alt="">
+  <img onclick="closeCard('${id}')" id="close" src="./assets/close.svg" alt="">
   <div>
       <div>
 
@@ -588,18 +617,19 @@ return /* html */ `
                       Add new subtask
                   </div>
               </div>
-              <ul id="subtaskList">
+              <div id="openCardSubtasks"> </div> 
+              <!-- <ul id="subtaskList"> -->
                   <!-- Content will be rendered by js-->
-              </ul>
+              <!-- </ul> --> -->
           </div>
 
           <div class="buttonContainer">
-              <div onclick="clearAllInput()" class="button" id="clear">
-                  clear
+              <div onclick="askDeleteTask('${id}');" class="button" id="delete">
+                  Delete task
                   <img src="./assets/clear.svg" alt="">
               </div>
-              <div onclick="createTestTask()" class="button" id="createTask">
-                  create task
+              <div onclick="editTask('${id}')" class="button" id="createTask">
+                  Save changes
                   <img src="./assets/createTask.svg" alt="">
               </div>
           </div>
