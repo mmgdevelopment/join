@@ -62,10 +62,10 @@ async function deleteAllTasks() {
 async function createTestTask(category) {
     createTasktouched = true;
     if (allInputsFilled()) {
-        user.epics.forEach(task => {
-            if (task.name == document.getElementById('firstValue').innerText) {
-                const id = task.name.slice(0, 4).toLowerCase() + (task.totalTasks);
-                task.tasks.push(
+        user.epics.forEach(epic => {
+            if (epic.name == document.getElementById('firstValue').innerText) {
+                const id = epic.name.slice(0, 4).toLowerCase() + (epic.totalTasks);
+                epic.tasks.push(
                     {
                         id: id,
                         title: document.getElementById('title').value,
@@ -77,7 +77,7 @@ async function createTestTask(category) {
                         category: category
                     }
                 )
-                task.totalTasks++;
+                epic.totalTasks++;
             }
         });
         createTasktouched = false;
@@ -88,6 +88,9 @@ async function createTestTask(category) {
     }
 }
 
+function newTask(id) {
+
+}
 function goToBoard() {
     if (window.location.href == 'board.html') {
         closeTemplate()
@@ -183,6 +186,9 @@ function setAssignedEventListener() {
 }
 
 window.addEventListener('click', (event) => {
+    if (event.target.id == 'fullscreen') {
+        closeTemplate();
+    }
     if (createTasktouched) {
         allInputsFilled();
     }
@@ -424,15 +430,6 @@ function resetInputRequiredMessages() {
     )
     createTasktouched = false;
 }
-
-/**
- * This function prevents open cards to be closed
- *
- */
-function dontClose(event) {
-    event.stopPropagation();
-}
-
 
 /***********************HTML Templates**************************/
 
