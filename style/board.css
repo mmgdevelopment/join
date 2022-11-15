@@ -4,6 +4,8 @@ body {
   font-style: normal;
 }
 
+
+
 main {
   display: flex;
   flex-direction: column;
@@ -25,6 +27,25 @@ h2 {
   margin-inline: 5px;
 }
 
+#delete {
+  border: 1px solid #ff3d00;
+  background-color: #ff3d00;
+  color: white;
+}
+
+#edit-area > div > div .buttonContainer {
+  position: unset;
+  margin: 10px;
+}
+
+#delete img{
+  filter: brightness(0) invert(1);
+
+}
+
+#edit-assignedTo{
+  display: flex;
+}
 .d-flex-jc-sb {
   display: flex;
   justify-content: space-between;

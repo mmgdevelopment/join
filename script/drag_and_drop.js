@@ -5,10 +5,12 @@ let doneSubtasks;
 let subtaskDone;
 let printExtraContactOnes;
 let cardWasOpened = false;
+let openEdit = false
 let x = window.matchMedia("(max-width: 800px)");
 x.addListener(checkWitdh);
 let dummysPrinted = false;
 let kanbanCategorys = ["todo", "progress", "feedback", "done"];
+
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -287,9 +289,15 @@ function getAssignedContact(task) {
  * @param {number} i
  */
 function checkLocationContacts(contactInitials, task, contactName, i) {
+
+
   if (cardWasOpened) {
-    renderCardContactsHTML(contactInitials, task, contactName);
+    if(openEdit){
+      renderEditContactsHTML(contactInitials, task)
+    }else{
+    renderCardContactsHTML(contactInitials, task, contactName);}
   }
+
   if (!cardWasOpened && printExtraContactOnes) {
     checkContactsToRender(contactInitials, task, contactName, i);
   }
@@ -461,6 +469,7 @@ function openCard(id) {
  */
 function closeCard(id) {
   cardWasOpened = false;
+  openEdit = false;
   document.getElementById('fullscreen').style.display = 'none'
   document.getElementById("opened-card-container").classList.add("d-none");
   checkSubtaskAmount(findTaskById(id))
@@ -470,7 +479,12 @@ function closeCard(id) {
 
 
 function openCardEdit(id){
-console.log('hey');
+  openEdit = true
+  document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
+  let task = findTaskById(id);
+  fillAllInputs(task);
+  getAssignedContact(task);
+  getAllSubtasks(task);
 }
 
 function showAddTask() {
@@ -478,3 +492,153 @@ function showAddTask() {
 }
 
 
+
+
+
+function fillAllInputs(task){
+ document.getElementById('edit-title').value = task["title"];
+ document.getElementById('edit-description').value = task["description"]
+ document.getElementById('edit-dueDate').value = task["dueDate"]
+ 
+
+}
+
+function deleteTask(id){
+let epic = findEpicById(id)
+let cuttedID = id.match(/[0-9]/)[0];
+let task = +cuttedID -1
+epic.tasks.splice(task, 1)
+saveData();
+closeCard(id);
+startRender();
+
+
+
+}
+
+function askDeleteTask(id){
+  document.getElementById(`opened-card-container`).innerHTML = askDeleteHTML(id);
+}
+
+function editTask(id){
+  let task = findTaskById(id)
+  task.title = document.getElementById('edit-title').value 
+  task.description = document.getElementById('edit-description').value
+  task.dueDate = document.getElementById('edit-dueDate').value
+  saveData();
+ closeCard(id);
+ startRender();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function editTaskHTML(id) {
+return /* html */ `
+
+  <img onclick="closeCard('${id}')" id="close" src="./assets/close.svg" alt="">
+  <div>
+      <div>
+
+          <div class="inputContainer">
+              <label for="edit-title">Title</label>
+              <input type="text" placeholder="Enter a title" id="edit-title">
+              <div id="titleValidation" class="formValidation">
+                  <span>This field is required</span>
+              </div>
+          </div>
+          <div class="inputContainer">
+              <label for="edit-description">Description</label>
+              <textarea id="edit-description" placeholder="Enter a Description" cols="30" rows="5"></textarea>
+              <div id="descriptionValidation" class="formValidation">
+                  <span>This field is required</span>
+              </div>
+          </div>
+          <div class="inputContainer">
+              <label for="edit-dueDate">Due Date</label>
+              <input type="date" placeholder="" id="edit-dueDate">
+              <div id="dueDateValidation" class="formValidation">
+                  <span>This field is required</span>
+              </div>
+          </div>
+          <div class="inputContainer">
+              <label for="customSelect">Assigned</label>
+              <div id="assigned" class="customSelect">
+                  <!-- Content will be rendered by js-->
+              </div>
+              <div id="assignedToValidation" class="formValidation">
+                  <span>This field is required</span>
+              </div>
+              <div id="edit-assignedTo">
+                  <!-- Content will be rendered by js-->
+              </div>
+          </div>
+      </div>
+      <div>
+          <div class="inputContainer">
+              <label>Prio</label>
+              <div class="row">
+                  <button id="urgent" class="prioButton" onclick="prioButton('urgent')">
+                      Urgent
+                      <img src="./assets/urgent.svg" alt="">
+                  </button>
+                  <button id="medium" class="prioButton" onclick="prioButton('medium')">
+                      Medium
+                      <img src="./assets/medium.svg" alt="">
+                  </button>
+                  <button id="low" class="prioButton" onclick="prioButton('low')">
+                      Low
+                      <img src="./assets/low.svg" alt="">
+                  </button>
+              </div>
+              <div id="prioStateValidation" class="formValidation">
+                  <span>This field is required</span>
+              </div>
+          </div>
+          <div class="inputContainer">
+              <label for="subtask">Subtasks</label>
+              <div id="subtask">
+                  <div class="input" onclick="renderSubtaskInput()">
+                      Add new subtask
+                  </div>
+              </div>
+              <div id="openCardSubtasks"> </div> 
+              <!-- <ul id="subtaskList"> -->
+                  <!-- Content will be rendered by js-->
+              <!-- </ul> --> -->
+          </div>
+
+          <div class="buttonContainer">
+              <div onclick="askDeleteTask('${id}');" class="button" id="delete">
+                  Delete task
+                  <img src="./assets/clear.svg" alt="">
+              </div>
+              <div onclick="editTask('${id}')" class="button" id="createTask">
+                  Save changes
+                  <img src="./assets/createTask.svg" alt="">
+              </div>
+          </div>
+      </div>
+  </div>
+  <div id="addedToBoard">
+      <span>Task added to board</span>
+      <img src="./assets/board.svg" alt="">
+  </div>
+
+  `
+}
