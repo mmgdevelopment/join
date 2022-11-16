@@ -347,6 +347,21 @@ function toggleCheckbox(id) {
 }
 
 function renderAssignedContacts() {
+    saveAssignedContactsInArray();
+    renderContactsFromArray();
+};
+
+function renderContactsFromArray() {
+    document.getElementById('assignedTo').innerHTML = '';
+    assignedTo.forEach(contact => {
+        const nameAsArray = contact.split(' ');
+        const foreName = nameAsArray[0];
+        const lastName = nameAsArray[1];
+        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
+    });
+}
+
+function saveAssignedContactsInArray() {
     assignedTo = [];
     const checkboxes = document.getElementsByClassName('checkbox');
     for (let i = 0; i < checkboxes.length; i++) {
@@ -357,15 +372,7 @@ function renderAssignedContacts() {
             assignedTo.push(name);
         }
     };
-    document.getElementById('assignedTo').innerHTML = '';
-    assignedTo.forEach(contact => {
-        const nameAsArray = contact.split(' ');
-        const foreName = nameAsArray[0];
-        const lastName = nameAsArray[1];
-        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
-    });
-
-};
+}
 
 function renderSubtaskInput() {
     document.getElementById('subtask').innerHTML = subtaskInputTemplate();

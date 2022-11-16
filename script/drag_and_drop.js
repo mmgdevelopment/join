@@ -147,7 +147,7 @@ function renderPlaceholder() {
   kanbanCategorys.forEach((category) => {
     if (findTaskById(currentDraggedTask)["category"] != category) {
       document.getElementById(category + "-tasks").innerHTML +=
-      placeholderCardHTML(category);
+        placeholderCardHTML(category);
     }
   });
 }
@@ -471,13 +471,18 @@ function closeCard(id) {
  * @param {sting} id
  */
 function openCardEdit(id) {
-  openEdit = true;
-  document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
+  closeCard(id);
+  document.getElementById('fullscreen').style.display = 'block';
+  document.getElementById('headline').innerHTML = 'Edit Task';
+  renderCategorySelector();
+  renderContactSelector();
   let task = findTaskById(id);
+  // openEdit = true;
+  // document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
   fillAllInputs(task);
-  getAssignedContact(task);
-  getAllSubtasks(task);
-  tickCheckBox(task);
+  //getAssignedContact(task);
+  //getAllSubtasks(task);
+  //tickCheckBox(task);
 }
 
 /**
@@ -501,9 +506,36 @@ function showAddTask(category) {
  */
 
 function fillAllInputs(task) {
-  document.getElementById("edit-title").value = task["title"];
-  document.getElementById("edit-description").value = task["description"];
-  document.getElementById("edit-dueDate").value = task["dueDate"];
+  document.getElementById("title").value = task["title"];
+  document.getElementById("description").value = task["description"];
+  showCategoryInEditTasks(task);
+  // no solution yet / need id for category?
+  assignedTo = task.assignedTo;
+  renderContactsFromArray(); // checkbox need to be checked
+  showSubtasksInEditTasks(task);
+  console.log(assignedTo);
+  document.getElementById("dueDate").value = task["dueDate"];
+  console.log(task);
+  prioButton(task.prio); // rename to showActivePrioButton?
+}
+
+function showCategoryInEditTasks(task) {
+  let firstValue = document.getElementById('firstValue')
+  firstValue.innerHTML = `
+  ${task.category}
+ // <div class="color ${category.color}"></div> //
+  `
+}
+
+function showSubtasksInEditTasks(task) {
+  let subtasks = task.subtasks;
+  if (subtasks.length) {
+    for (let i = 0; i < subtasks.length; i++) {
+      const subtask = subtasks[i];
+      console.log(subtask);
+      document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask.name, i);
+    }
+  }
 }
 
 /**
