@@ -479,7 +479,7 @@ function openCardEdit(id) {
   let task = findTaskById(id);
   // openEdit = true;
   // document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
-  fillAllInputs(task);
+  fillAllInputs(task, id);
   //getAssignedContact(task);
   //getAllSubtasks(task);
   //tickCheckBox(task);
@@ -505,10 +505,10 @@ function showAddTask(category) {
  * @param {object} task
  */
 
-function fillAllInputs(task) {
+function fillAllInputs(task, id) {
   document.getElementById("title").value = task["title"];
   document.getElementById("description").value = task["description"];
-  showCategoryInEditTasks(task);
+  showCategoryInEditTasks(task, id);
   // no solution yet / need id for category?
   assignedTo = task.assignedTo;
   renderContactsFromArray(); // checkbox need to be checked
@@ -519,12 +519,25 @@ function fillAllInputs(task) {
   prioButton(task.prio); // rename to showActivePrioButton?
 }
 
-function showCategoryInEditTasks(task) {
+function showCategoryInEditTasks(task, id) {
+  let category;
+  for (let i = 0; i < user.epics.length; i++) {
+    const epic = user.epics[i];
+    for (let i = 0; i < epic.tasks.length; i++) {
+      if (!category) {
+        category = user.epics.find(repic =>
+          repic.tasks[i].id == id
+        )
+      }
+    }
+  }
+  console.log(category);
   let firstValue = document.getElementById('firstValue')
   firstValue.innerHTML = `
-  ${task.category}
- // <div class="color ${category.color}"></div> //
-  `
+    ${category.name}
+    <div class="color ${category.color}"></div> 
+    `
+
 }
 
 function showSubtasksInEditTasks(task) {
