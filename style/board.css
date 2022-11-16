@@ -144,7 +144,7 @@ h2 {
 
 .kanban-clm {
   min-height: 40%;
-  max-height: 78vh;
+  max-height: calc(100vh - 300px);
   overflow: auto;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
@@ -496,13 +496,13 @@ z-index: 1;
     border-radius: 10px;
   }
 
-  .sticky-mobile {
+  /* .sticky-mobile {
     position: -webkit-sticky;
     position: sticky;
     top: 240px;
     background-color: rgb(245, 245, 245);
     z-index: 3;
-  }
+  } */
 }
 
 @media only screen and (max-width: 1080px) {
@@ -563,4 +563,10 @@ z-index: 1;
     background-color: rgb(245, 245, 245);
     z-index: 2;
   } */
+
+  .kanban-clm {
+    min-height: unset;
+    max-height: unset;
+  }
+  
 }
