@@ -477,9 +477,9 @@ function openCardEdit(id) {
   renderCategorySelector();
   renderContactSelector();
   let task = findTaskById(id);
+  fillAllInputs(task, id);
   // openEdit = true;
   // document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
-  fillAllInputs(task, id);
   //getAssignedContact(task);
   //getAllSubtasks(task);
   //tickCheckBox(task);
@@ -492,6 +492,7 @@ function openCardEdit(id) {
  */
 function showAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
+  document.getElementById('headline').innerHTML = 'Add Task';
   document.getElementById("createTask").onclick = () => {
     createTestTask(category);
   };
@@ -508,36 +509,40 @@ function showAddTask(category) {
 function fillAllInputs(task, id) {
   document.getElementById("title").value = task["title"];
   document.getElementById("description").value = task["description"];
-  showCategoryInEditTasks(task, id);
-  // no solution yet / need id for category?
-  assignedTo = task.assignedTo;
-  renderContactsFromArray(); // checkbox need to be checked
-  showSubtasksInEditTasks(task);
-  console.log(assignedTo);
+  showCategoryInEditTasks(id);
+  showAssignedContactsInEditTasks(task);
   document.getElementById("dueDate").value = task["dueDate"];
-  console.log(task);
   prioButton(task.prio); // rename to showActivePrioButton?
+  showSubtasksInEditTasks(task);
 }
 
-function showCategoryInEditTasks(task, id) {
-  let category;
-  for (let i = 0; i < user.epics.length; i++) {
-    const epic = user.epics[i];
-    for (let i = 0; i < epic.tasks.length; i++) {
-      if (!category) {
-        category = user.epics.find(repic =>
-          repic.tasks[i].id == id
-        )
-      }
-    }
-  }
-  console.log(category);
+function showCategoryInEditTasks(id) {
+  let category = findCategoryById(id);
   let firstValue = document.getElementById('firstValue')
   firstValue.innerHTML = `
     ${category.name}
     <div class="color ${category.color}"></div> 
     `
+}
 
+function findCategoryById(id) {
+  let category;
+  for (let i = 0; i < user.epics.length; i++) {
+    const epic = user.epics[i];
+    for (let i = 0; i < epic.tasks.length; i++) {
+      if (!category) {
+        category = user.epics.find(epic =>
+          epic.tasks[i].id == id
+        )
+      }
+    }
+  }
+  return category;
+}
+
+function showAssignedContactsInEditTasks(task) {
+  assignedTo = task.assignedTo;
+  renderContactsFromArray(); // checkbox need to be checked
 }
 
 function showSubtasksInEditTasks(task) {
