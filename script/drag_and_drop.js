@@ -509,13 +509,14 @@ function fillAllInputs(task) {
 
 function deleteTask(id) {
   let epic = findEpicById(id)
-  let cuttedID = id.match(/[0-9]/)[0];
-  let task = +cuttedID - 1
-  epic.tasks.splice(task, 1)
+  index = epic.tasks.findIndex(x => x.id === id);
+  epic.tasks.splice(index, 1)
   saveData();
-  closeCard(id);
+  cardWasOpened = false;
+  openEdit = false;
+  document.getElementById('fullscreen').style.display = 'none'
+  document.getElementById("opened-card-container").classList.add("d-none");
   startRender();
-
 
 
 }
@@ -529,14 +530,16 @@ function editTask(id) {
   task.title = document.getElementById('edit-title').value
   task.description = document.getElementById('edit-description').value
   task.dueDate = document.getElementById('edit-dueDate').value
-  saveData();
   closeCard(id);
-  startRender();
-
+  saveData();
+  getAllEpics();
 }
 
 
 
+function dontClose(event){
+  event.stopPropagation();
+}
 
 
 
