@@ -528,6 +528,7 @@ z-index: 1;
   .kanban-clm {
     min-height: 50px;
     margin-top: 20px;
+    max-height: unset;
   }
 
   .task-card {
@@ -535,7 +536,7 @@ z-index: 1;
     min-width: unset;
   }
 
-  .sticky-90 {
+  /* .sticky-90 {
     position: -webkit-sticky;
     position: sticky;
     top: 100px;
@@ -561,5 +562,5 @@ z-index: 1;
     height: 310px;
     background-color: rgb(245, 245, 245);
     z-index: 2;
-  }
+  } */
 }
