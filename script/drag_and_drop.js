@@ -24,6 +24,25 @@ async function init() {
 }
 
 /**
+ * This function is used to load a Json containing all users and the tasks of the user
+ *
+ */
+async function loadData() {
+  await downloadFromServer();
+  users = JSON.parse(backend.getItem("users")) || [];
+  let emailUser = localStorage.getItem("user-email");
+  user = users.find((u) => u.email == emailUser);
+}
+
+/**
+ * This function starts the rendering process (Its exists just to clearify code)
+ *
+ */
+
+function startRender() {
+  goThroughAllEpics();
+}
+/**
  * This function will be started when you start dragging a Task.
  *
  *
@@ -48,61 +67,38 @@ addEventListener("drop", (event) => {
   }
 });
 
-/**
- * This function starts the rendering process
- *
- */
 
-function startRender() {
-  getAllEpics();
-}
+
 
 /**
- * This function is used to load a Json containing all users and the tasks of the user
- *
- */
-async function loadData() {
-  await downloadFromServer();
-  users = JSON.parse(backend.getItem("users")) || [];
-  let emailUser = localStorage.getItem("user-email");
-  user = users.find((u) => u.email == emailUser);
-}
-
-/**
- * This function goes through all epics of the database.
+ * This function goes through all epics of the database to start rendering one after the other
  *
  *
  */
 
-function getAllEpics() {
+function goThroughAllEpics() {
   clearColumns();
   let epics = user["epics"];
   for (let i = 0; i < epics.length; i++) {
     const epic = epics[i];
-    getAllTasks(epic);
+    goThroughAllTasks(epic);
   }
 }
 
 /**
- * This function goes through all tasks of each epic
+ * This function goes through all tasks of each epic and renders them
  *
- * @param {object} epic
+ * @param {object} epic The object containing the tasks to be rendered
  */
 
-function getAllTasks(epic) {
+function goThroughAllTasks(epic) {
   for (let i = 0; i < epic["tasks"].length; i++) {
     const task = epic["tasks"][i];
     getTasksCategory(task, epic);
-    task, epic;
   }
 }
 
-/**
- * This function checks the category of the task and starts the render process
- *
- * @param {object} task
- * @param {object} epic
- */
+
 
 // function readTasksCategory(task, epic) {
 //   if (task["category"] == "todo") {
@@ -120,6 +116,14 @@ function getAllTasks(epic) {
 
 // }
 
+/**
+ * This function checks the category of the task and starts the render process
+ *
+ * @param {object} task the task to be rendered
+ * @param {object} epic the epic is just passed through fot the render process
+ */
+
+
 function getTasksCategory(task, epic) {
   kanbanCategorys.forEach((element) => {
     if (task["category"] == element) {
@@ -134,7 +138,7 @@ function getTasksCategory(task, epic) {
 }
 
 /**
- * This function puts a placeholder in every coulmn of the kanban
+ * This function puts a placeholder in every other coulmn of the kanban
  *
  */
 function renderDummys() {
@@ -184,7 +188,7 @@ function clearColumns() {
 /**
  * This function changes the ID of the currentDraggedTaske to the dragged item ones
  *
- * @param {string} id
+ * @param {string} id to indentify a task
  */
 
 function startDragging(id) {
@@ -201,14 +205,14 @@ function allowDrop(ev) {
 }
 
 /**
- * This function changes the category to the one its dropped in
+ * This function changes the category of the task to the category its dropped in
  *
- * @param {string} category
+ * @param {string} category fixed category hardcoded in HTML 
  */
 function moveTo(category) {
   let draggedTask = findTaskById(currentDraggedTask);
   draggedTask["category"] = category;
-  getAllEpics(user);
+  startRender();
   saveData();
 }
 
@@ -532,7 +536,7 @@ function editTask(id) {
   task.dueDate = document.getElementById('edit-dueDate').value
   closeCard(id);
   saveData();
-  getAllEpics();
+  goThroughAllEpics();
 }
 
 
