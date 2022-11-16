@@ -8,16 +8,11 @@
     <link rel="stylesheet" href="./style/fonts.css">
     <script src="./script/mini_backend.js"></script>
     <script src="./script/templates.js"></script>
-    <script src="./script/addTask.js"></script>
-    <script src="./script/database.js"></script>
-    <link rel="stylesheet" href="./style/addTask.css">
-    <title>legalNotice</title>
+    <link rel="stylesheet" href="./style/legalNotice.css">
+     <title>impressum</title>
 </head>
 
-<body onload="init()">
-    <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div>
-    <button style="margin:500px;"
-        onclick="document.getElementById('fullscreen').style.display = 'block'">TEMPLATE</button>
+<body onload="includeHTML()">
     <div w3-include-html="./templates/sideBar.html"></div>
     <div class="container">
    <h1>Impressum</h1>
@@ -44,14 +39,7 @@ Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne konk
 
 Soweit die Inhalte auf dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen werden wir derartige Inhalte umgehend entfernen.</p>
 
-<p>Quelle: <a href="https://www.e-recht24.de">eRecht24</a></p>
-
-<h2>Datenschutz</h2>
-
-<p> Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden, erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche Zustimmung nicht an Dritte weitergegeben.
-Wir weisen darauf hin, dass die Datenübertragung im Internet (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der Daten vor dem Zugriff durch Dritte ist nicht möglich.
-Der Nutzung von im Rahmen der Impressumspflicht veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen, etwa durch Spam-Mails, vor.
-</p>
+<p>Quelle: <a id="source" href="https://www.e-recht24.de">eRecht24</a></p>
 
 
 </div>

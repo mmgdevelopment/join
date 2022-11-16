@@ -4,8 +4,6 @@ body {
   font-style: normal;
 }
 
-
-
 main {
   display: flex;
   flex-direction: column;
@@ -38,12 +36,11 @@ h2 {
   margin: 10px;
 }
 
-#delete img{
+#delete img {
   filter: brightness(0) invert(1);
-
 }
 
-#edit-assignedTo{
+#edit-assignedTo {
   display: flex;
 }
 .d-flex-jc-sb {
@@ -52,7 +49,7 @@ h2 {
   align-items: center;
 }
 
-.fw-700{
+.fw-700 {
   font-weight: 700;
 }
 
@@ -96,21 +93,16 @@ h2 {
 .btn-square-add-task:hover {
   border-color: #29abe2;
   color: #29abe2;
-
 }
 
-.plus{
-position: absolute;
-top: 0;
-left: 0.5px;
-font-size: 38px;
- transform: translateY(-28%);
- font-size: 38px;
-
-
+.plus {
+  position: absolute;
+  top: 0;
+  left: 0.5px;
+  font-size: 38px;
+  transform: translateY(-28%);
+  font-size: 38px;
 }
-
-
 
 #search {
   background-image: url("/assets/search.svg");
@@ -126,7 +118,7 @@ font-size: 38px;
   margin-right: 50px;
 }
 
-#opened-card-container{
+#opened-card-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -150,12 +142,17 @@ font-size: 38px;
   flex-direction: column;
 }
 
-
 .kanban-clm {
   min-height: 40%;
-  margin-top: 50px;
+  max-height: 78vh;
+  overflow: auto;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
+.kanban-clm::-webkit-scrollbar {
+  display: none;
+}
 
 .task-card {
   display: flex;
@@ -217,14 +214,14 @@ font-size: 38px;
   box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   font-weight: 400;
-font-size: 21px;
-line-height: 120%;
-color: #FFFFFF;
-align-items: center;
-justify-content: center;
+  font-size: 21px;
+  line-height: 120%;
+  color: #ffffff;
+  align-items: center;
+  justify-content: center;
 }
 
-.prio_img{
+.prio_img {
   filter: brightness(0) invert(1);
 }
 
@@ -259,41 +256,40 @@ justify-content: center;
   background-color: green;
 }
 
-#opened-card-container{
-  position: fixed
-} 
+#opened-card-container {
+  position: fixed;
+}
 
 #opened-card-container > .task-card {
   position: relative;
   padding: 50px;
 }
 
-#opened-card-container > .task-card > .close-btn{
+#opened-card-container > .task-card > .close-btn {
   position: absolute;
-right: 0px;
-top: 0px;
-padding: 25px 40px 0 0;
+  right: 0px;
+  top: 0px;
+  padding: 25px 40px 0 0;
 }
 
-#opened-card-container > .task-card > .edit-btn{
+#opened-card-container > .task-card > .edit-btn {
   position: absolute;
   right: 30px;
   bottom: 30px;
 }
-
 
 #opened-card-container > .task-card > .epic {
   padding: 4px 36.5px;
   font-size: 27px;
 }
 
-#opened-card-container > .task-card >.task-name {
+#opened-card-container > .task-card > .task-name {
   font-size: 61px;
   margin: unset;
   margin-top: 25px;
 }
 
-#opened-card-container > .task-card >.task-description {
+#opened-card-container > .task-card > .task-description {
   font-size: 21px;
 }
 
@@ -301,37 +297,31 @@ padding: 25px 40px 0 0;
   font-size: 21px;
 }
 
-
 #opened-card-container > .task-card > div > div {
   margin-top: 30px;
-
 }
 
 #opened-card-container > .task-card > div > div > span {
   font-size: 21px;
   margin-right: 25px;
-
-
 }
 
-.close-btn{
+.close-btn {
   position: absolute;
   top: 0;
   right: 10px;
   padding: 20px;
- 
 }
 
-.edit-btn{
+.edit-btn {
   padding: 20px;
   align-self: flex-end;
- 
 }
 
-.wrapper{
+.wrapper {
   display: flex;
   width: 100%;
-  justify-content:space-between 
+  justify-content: space-between;
 }
 
 .wrapper > div > div {
@@ -339,24 +329,21 @@ padding: 25px 40px 0 0;
   display: flex;
   flex-direction: row;
   margin-right: 10px;
-  align-items: baseline
+  align-items: baseline;
 }
-.wrapper > div > div > span{
+.wrapper > div > div > span {
   margin-right: 40px;
 }
 
-#openCardSubtasks{
+#openCardSubtasks {
   display: flex;
   flex-direction: column;
   margin-left: 30px;
 }
 
-#openCardSubtasks > div{
+#openCardSubtasks > div {
   display: flex;
-  
-  
 }
-
 
 #contacts-on-card {
   display: flex;
@@ -365,7 +352,7 @@ padding: 25px 40px 0 0;
 
 .contact-on-card {
   display: flex;
- 
+
   justify-content: center;
   align-items: center;
   padding: 10px 8px;
@@ -380,14 +367,13 @@ padding: 25px 40px 0 0;
   font-size: 12px;
 }
 
-.contact-name{
+.contact-name {
   font-weight: 400;
   font-size: 21px;
-
 }
 
-.extra-contact{
-  background-color: #2A3647 !important;
+.extra-contact {
+  background-color: #2a3647 !important;
   transform: translateX(-30%);
 }
 
@@ -406,45 +392,43 @@ padding: 25px 40px 0 0;
 }
 
 .pink {
-  background-color: #FC71FF;
+  background-color: #fc71ff;
 }
 
 .medium,
 .yellow {
-  background-color: #FFA800;
+  background-color: #ffa800;
 }
 
 .ocean {
-  background-color: #29ABE2;
+  background-color: #29abe2;
 }
 
 .blue {
-  background-color: #462F8A;
+  background-color: #462f8a;
 }
-
 
 .area-highlight {
   background-color: #e5e5e5;
 }
 
-.underlined{
+.underlined {
   text-decoration: underline;
 }
 
-.subtask-titel{
+.subtask-titel {
   font-weight: 400;
-font-size: 21px;
+  font-size: 21px;
 }
 
-
-.checkbox{
+.checkbox {
   padding: 30px;
   background-color: green;
 }
 
-.dummy-card{
+.dummy-card {
   border: solid rgba(0, 0, 0, 0.148) 7px;
-  border-style: dotted ;
+  border-style: dotted;
   background-color: rgba(201, 201, 201, 0.189);
   align-self: center;
   padding: 18px 19px;
@@ -452,23 +436,22 @@ font-size: 21px;
   border-radius: 30px;
   margin-bottom: 35px;
   max-width: 100%;
-    z-index: 0;
-  }
-
-.dummy-card > div{
-    min-height: 180px;
+  z-index: 0;
 }
 
-.d-none{
+.dummy-card > div {
+  min-height: 180px;
+}
+
+.d-none {
   display: none !important;
-
 }
 
-.d-hidden{
+.d-hidden {
   visibility: hidden !important;
 }
 
-.sticky-90{
+/* .sticky-90{
   position: -webkit-sticky;
   position: sticky;
   top: 100px;
@@ -484,9 +467,9 @@ font-size: 21px;
   z-index: 3;
   background-color: rgb(245, 245, 245);
   
-}
+} */
 
-.sticky-helper{
+/* .sticky-helper{
 position: fixed;
 top: 0;
 left: 0;
@@ -494,18 +477,16 @@ right: 0;
 height: 343px;
 background-color: rgb(245, 245, 245);
 z-index: 1;
-}
+} */
 
-.f-end{
+.f-end {
   display: flex;
-align-items: flex-end;
-gap: 25px;
-margin-right: 35px;
+  align-items: flex-end;
+  gap: 25px;
+  margin-right: 35px;
 }
-
 
 @media only screen and (max-width: 800px) {
- 
   #btn-add-task {
     display: flex;
     justify-content: center;
@@ -515,18 +496,14 @@ margin-right: 35px;
     border-radius: 10px;
   }
 
-  .sticky-mobile{
+  .sticky-mobile {
     position: -webkit-sticky;
     position: sticky;
     top: 240px;
     background-color: rgb(245, 245, 245);
     z-index: 3;
-  
-    }
+  }
 }
-
-
-
 
 @media only screen and (max-width: 1080px) {
   .kanban {
@@ -534,13 +511,11 @@ margin-right: 35px;
     margin-bottom: 100px;
   }
 
-
   main {
     left: 20px;
     right: 20px;
     width: 93vw;
   }
-
 
   h1 {
     font-size: 47px;
@@ -553,6 +528,7 @@ margin-right: 35px;
   .kanban-clm {
     min-height: 50px;
     margin-top: 20px;
+    max-height: unset;
   }
 
   .task-card {
@@ -560,26 +536,25 @@ margin-right: 35px;
     min-width: unset;
   }
 
-  .sticky-90{
+  /* .sticky-90 {
     position: -webkit-sticky;
     position: sticky;
     top: 100px;
     z-index: 3;
     background-color: #f5f5f5;
     padding-block: 10px;
-  
   }
-  .sticky-250{
+  .sticky-250 {
     position: -webkit-sticky;
     position: sticky;
-    top:300px;
+    top: 300px;
     padding-inline: 100px;
     z-index: 1;
     background-color: rgb(245, 245, 245);
     border-bottom-left-radius: 30px;
     border-bottom-right-radius: 30px;
   }
-  .sticky-helper{
+  .sticky-helper {
     position: fixed;
     top: 0;
     left: 0;
@@ -587,8 +562,5 @@ margin-right: 35px;
     height: 310px;
     background-color: rgb(245, 245, 245);
     z-index: 2;
-    }
-
-
-  
+  } */
 }
