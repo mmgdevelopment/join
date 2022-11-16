@@ -5,12 +5,11 @@ let doneSubtasks;
 let subtaskDone;
 let printExtraContactOnes;
 let cardWasOpened = false;
-let openEdit = false
+let openEdit = false;
 let x = window.matchMedia("(max-width: 800px)");
 x.addListener(checkWitdh);
 let dummysPrinted = false;
 let kanbanCategorys = ["todo", "progress", "feedback", "done"];
-
 
 /**
  * This function is used to start all functions included by visiting the webpage
@@ -33,7 +32,16 @@ async function loadData() {
   let emailUser = localStorage.getItem("user-email");
   user = users.find((u) => u.email == emailUser);
 }
-
+/**
+ * This function saves the Data on the server
+ *
+ */
+async function saveData() {
+  let emailUser = localStorage.getItem("user-email");
+  const i = users.findIndex((u) => u.email == emailUser);
+  users[i] = user;
+  await backend.setItem("users", JSON.stringify(users));
+}
 /**
  * This function starts the rendering process (Its exists just to clearify code)
  *
@@ -67,9 +75,6 @@ addEventListener("drop", (event) => {
   }
 });
 
-
-
-
 /**
  * This function goes through all epics of the database to start rendering one after the other
  *
@@ -98,8 +103,6 @@ function goThroughAllTasks(epic) {
   }
 }
 
-
-
 // function readTasksCategory(task, epic) {
 //   if (task["category"] == "todo") {
 //     renderCategoryTodo(task, epic);
@@ -122,7 +125,6 @@ function goThroughAllTasks(epic) {
  * @param {object} task the task to be rendered
  * @param {object} epic the epic is just passed through fot the render process
  */
-
 
 function getTasksCategory(task, epic) {
   kanbanCategorys.forEach((element) => {
@@ -207,7 +209,7 @@ function allowDrop(ev) {
 /**
  * This function changes the category of the task to the category its dropped in
  *
- * @param {string} category fixed category hardcoded in HTML 
+ * @param {string} category fixed category hardcoded in HTML
  */
 function moveTo(category) {
   let draggedTask = findTaskById(currentDraggedTask);
@@ -217,9 +219,9 @@ function moveTo(category) {
 }
 
 /**
- * This function gets the array of the task to make the category accessable
+ * This function finds the task if you give it its ID
  *
- * @returns task array
+ * @returns task
  */
 
 function findTaskById(id) {
@@ -235,7 +237,7 @@ function findTaskById(id) {
 }
 
 /**
- * This function returns the epic which contains the given ID
+ * This function finds the epic of an task give it its ID
  *
  * @returns epic
  */
@@ -253,7 +255,7 @@ function findEpicById(id) {
 }
 
 /**
- *This function compares the query witdh choosen with the window witdh of the user
+ *This function compares the query witdh choosen with the window witdh of the user and relocates the searchbar as needed
  *
  * @param {mediaquery} x
  */
@@ -285,7 +287,7 @@ function getAssignedContact(task) {
 
 /**
  * This function checks if the contacts has to be rendered on the open task card,
- * or on the kanban cards
+ * or on the kanban cards, or the edit card
  *
  * @param {string} contactInitials
  * @param {object} task
@@ -293,16 +295,13 @@ function getAssignedContact(task) {
  * @param {number} i
  */
 function checkLocationContacts(contactInitials, task, contactName, i) {
-
-
   if (cardWasOpened) {
     if (openEdit) {
-      renderEditContactsHTML(contactInitials, task)
+      renderEditContactsHTML(contactInitials, task);
     } else {
       renderCardContactsHTML(contactInitials, task, contactName);
     }
   }
-
   if (!cardWasOpened && printExtraContactOnes) {
     checkContactsToRender(contactInitials, task, contactName, i);
   }
@@ -311,10 +310,10 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
 /**
  * This function renders a max of 3 contacts. If there is more, it will print 2 and a number for how many are left.
  *
- * @param {string} contactInitials
+ * @param {string} contactInitials This is just given to the next function, it will be needed for rendering
  * @param {object} task
- * @param {string} contactName
- * @param {number} i
+ * @param {string} contactName This isnt used here, the function is used for many other functions
+ * @param {number} i to check the amount of printed items
  * @return just ends the loop
  */
 
@@ -344,7 +343,7 @@ function printExtraContact(task) {
 }
 
 /**
- * This function gets all the subtasks out of a task
+ * This function gets all the subtasks out of a task and puts its to an render
  *
  * @param {object} task
  */
@@ -359,7 +358,6 @@ function getAllSubtasks(task) {
     );
     i++;
   });
-  tickCheckBox(task);
 }
 
 /**
@@ -383,7 +381,8 @@ function tickCheckBox(task) {
 }
 
 /**
- * This function switches the done when the checkbox is used
+ * This function switches the subtaskprocess to done when the checkbox is used,
+ * or in progress depending of the state
  *
  * @param {string} id
  */
@@ -400,7 +399,7 @@ function taskIsDone(id) {
 }
 
 /**
- * This function checks how many subtasks the task has
+ * This function puts together the total subtasks and the done subtask, so it can be rendered
  *
  * @param {object} task
  */
@@ -440,216 +439,121 @@ function calcBarProgress(task) {
 }
 
 /**
- * This function saves the Data on the server
- *
- */
-async function saveData() {
-  let emailUser = localStorage.getItem("user-email");
-  const i = users.findIndex((u) => u.email == emailUser);
-  users[i] = user;
-  await backend.setItem("users", JSON.stringify(users));
-}
-
-/**
  * This function opens the taskcard you click on
  *
+ *@param {string} id
  */
 function openCard(id) {
   cardWasOpened = true;
   let task = findTaskById(id);
   let epic = findEpicById(id);
-  document.getElementById('opened-card-container').setAttribute('onclick', `closeCard('${id}')`);
-  document.getElementById("opened-card-container").classList.remove("d-none");
-  document.getElementById("opened-card-container").innerHTML = renderTaskCard(
-    task,
-    epic
-  );
+  openCardHTML(id, epic, task);
   getAssignedContact(task);
   getAllSubtasks(task);
+  tickCheckBox(task);
 }
 
 /**
  * This function closes the taskcard.
  *
+ *@param {string} id
  */
 function closeCard(id) {
   cardWasOpened = false;
   openEdit = false;
-  document.getElementById('fullscreen').style.display = 'none'
-  document.getElementById("opened-card-container").classList.add("d-none");
-  checkSubtaskAmount(findTaskById(id))
-
+  closeCardHTML();
+  checkSubtaskAmount(findTaskById(id));
 }
 
-
-
+/**
+ * This function changes the Opencard so it can be edited
+ *
+ * @param {sting} id
+ */
 function openCardEdit(id) {
-  openEdit = true
+  openEdit = true;
   document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
   let task = findTaskById(id);
   fillAllInputs(task);
   getAssignedContact(task);
   getAllSubtasks(task);
+  tickCheckBox(task);
 }
 
+/**
+ * This function shows the addtatask template
+ *
+ * @param {string} category if given the task will be generated in this category. Default is todo
+ */
 function showAddTask(category) {
-  document.getElementById('fullscreen').style.display = 'block';
-  document.getElementById('createTask').onclick = () => { createTestTask(category) };
+  document.getElementById("fullscreen").style.display = "block";
+  document.getElementById("createTask").onclick = () => {
+    createTestTask(category);
+  };
   renderCategorySelector();
   renderContactSelector();
 }
 
-
-
-
+/**
+ * This function fills the input of the editCard with the information of the task which is to be edit
+ *
+ * @param {object} task
+ */
 
 function fillAllInputs(task) {
-  document.getElementById('edit-title').value = task["title"];
-  document.getElementById('edit-description').value = task["description"]
-  document.getElementById('edit-dueDate').value = task["dueDate"]
-
-
+  document.getElementById("edit-title").value = task["title"];
+  document.getElementById("edit-description").value = task["description"];
+  document.getElementById("edit-dueDate").value = task["dueDate"];
 }
 
+/**
+ * This function deletes the task
+ *
+ * @param {string} id
+ */
+
 function deleteTask(id) {
-  let epic = findEpicById(id)
-  index = epic.tasks.findIndex(x => x.id === id);
-  epic.tasks.splice(index, 1)
+  let epic = findEpicById(id);
+  index = epic.tasks.findIndex((x) => x.id === id);
+  epic.tasks.splice(index, 1);
   saveData();
   cardWasOpened = false;
   openEdit = false;
-  document.getElementById('fullscreen').style.display = 'none'
+  document.getElementById("fullscreen").style.display = "none";
   document.getElementById("opened-card-container").classList.add("d-none");
   startRender();
-
-
 }
 
+/**
+ * This function ask if you really want to delete a task
+ *
+ * @param {string} id
+ */
 function askDeleteTask(id) {
-  document.getElementById(`opened-card-container`).innerHTML = askDeleteHTML(id);
+  document.getElementById(`opened-card-container`).innerHTML =
+    askDeleteHTML(id);
 }
 
+/**
+ * This function saves the inputs of the edited task
+ *
+ * @param {string} id
+ */
 function editTask(id) {
-  let task = findTaskById(id)
-  task.title = document.getElementById('edit-title').value
-  task.description = document.getElementById('edit-description').value
-  task.dueDate = document.getElementById('edit-dueDate').value
+  let task = findTaskById(id);
+  task.title = document.getElementById("edit-title").value;
+  task.description = document.getElementById("edit-description").value;
+  task.dueDate = document.getElementById("edit-dueDate").value;
   closeCard(id);
   saveData();
   goThroughAllEpics();
 }
 
-
-
-function dontClose(event){
+/**
+ * This function prevents the windows from closing if pressed on
+ *
+ * @param {event} event
+ */
+function dontClose(event) {
   event.stopPropagation();
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function editTaskHTML(id) {
-  return /* html */ `
-
-  <img onclick="closeCard('${id}')" id="close" src="./assets/close.svg" alt="">
-  <div>
-      <div>
-
-          <div class="inputContainer">
-              <label for="edit-title">Title</label>
-              <input type="text" placeholder="Enter a title" id="edit-title">
-              <div id="titleValidation" class="formValidation">
-                  <span>This field is required</span>
-              </div>
-          </div>
-          <div class="inputContainer">
-              <label for="edit-description">Description</label>
-              <textarea id="edit-description" placeholder="Enter a Description" cols="30" rows="5"></textarea>
-              <div id="descriptionValidation" class="formValidation">
-                  <span>This field is required</span>
-              </div>
-          </div>
-          <div class="inputContainer">
-              <label for="edit-dueDate">Due Date</label>
-              <input type="date" placeholder="" id="edit-dueDate">
-              <div id="dueDateValidation" class="formValidation">
-                  <span>This field is required</span>
-              </div>
-          </div>
-          <div class="inputContainer">
-              <label for="customSelect">Assigned</label>
-              <div id="assigned" class="customSelect">
-                  <!-- Content will be rendered by js-->
-              </div>
-              <div id="assignedToValidation" class="formValidation">
-                  <span>This field is required</span>
-              </div>
-              <div id="edit-assignedTo">
-                  <!-- Content will be rendered by js-->
-              </div>
-          </div>
-      </div>
-      <div>
-          <div class="inputContainer">
-              <label>Prio</label>
-              <div class="row">
-                  <button id="urgent" class="prioButton" onclick="prioButton('urgent')">
-                      Urgent
-                      <img src="./assets/urgent.svg" alt="">
-                  </button>
-                  <button id="medium" class="prioButton" onclick="prioButton('medium')">
-                      Medium
-                      <img src="./assets/medium.svg" alt="">
-                  </button>
-                  <button id="low" class="prioButton" onclick="prioButton('low')">
-                      Low
-                      <img src="./assets/low.svg" alt="">
-                  </button>
-              </div>
-              <div id="prioStateValidation" class="formValidation">
-                  <span>This field is required</span>
-              </div>
-          </div>
-          <div class="inputContainer">
-              <label for="subtask">Subtasks</label>
-              <div id="subtask">
-                  <div class="input" onclick="renderSubtaskInput()">
-                      Add new subtask
-                  </div>
-              </div>
-              <div id="openCardSubtasks"> </div> 
-              <!-- <ul id="subtaskList"> -->
-                  <!-- Content will be rendered by js-->
-              <!-- </ul> --> -->
-          </div>
-
-          <div class="buttonContainer">
-              <div onclick="askDeleteTask('${id}');" class="button" id="delete">
-                  Delete task
-                  <img src="./assets/clear.svg" alt="">
-              </div>
-              <div onclick="editTask('${id}')" class="button" id="createTask">
-                  Save changes
-                  <img src="./assets/createTask.svg" alt="">
-              </div>
-          </div>
-      </div>
-  </div>
-  <div id="addedToBoard">
-      <span>Task added to board</span>
-      <img src="./assets/board.svg" alt="">
-  </div>
-
-  `
 }
