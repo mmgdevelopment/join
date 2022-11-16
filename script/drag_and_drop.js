@@ -58,7 +58,7 @@ function startRender() {
 
 addEventListener("drag", (event) => {
   if (!dummysPrinted) {
-    renderDummys();
+    renderPlaceholder();
     dummysPrinted = true;
   }
 });
@@ -143,11 +143,11 @@ function getTasksCategory(task, epic) {
  * This function puts a placeholder in every other coulmn of the kanban
  *
  */
-function renderDummys() {
+function renderPlaceholder() {
   kanbanCategorys.forEach((category) => {
     if (findTaskById(currentDraggedTask)["category"] != category) {
       document.getElementById(category + "-tasks").innerHTML +=
-        dummyCardHTML(category);
+      placeholderCardHTML(category);
     }
   });
 }
@@ -525,7 +525,7 @@ function deleteTask(id) {
 }
 
 /**
- * This function ask if you really want to delete a task
+ * This function ask if you really want to delete a task to prevent missclicks
  *
  * @param {string} id
  */

@@ -47,22 +47,31 @@ function renderTaskCard(task, epic) {
 }
 /*<span class="underlined" >Subtasks</span>*/
 
-
-
 /**
  * This function renders the progressbar of the subtasks
- * 
- * @param {string} id 
- * @param {object} task 
- * @param {number} done 
- * @param {number} barProgress 
+ *
+ * @param {string} id
+ * @param {object} task
+ * @param {number} done
+ * @param {number} barProgress this contains the progress of the bar in percentage
  */
 function renderSubtaskBarHTML(id, task, done, barProgress) {
   document.getElementById("subtasks" + id).innerHTML = `
         <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${
     barProgress / 100
-  }px, #f4f4f4 0%)"></div><span class="fw-700">${done}/${task["subtasks"].length} Done</span>`;
+  }px, #f4f4f4 0%)"></div><span class="fw-700">${done}/${
+    task["subtasks"].length
+  } Done</span>`;
 }
+
+/**
+ * This function renders the subtasks
+ *
+ * @param {string} name of the subtask
+ * @param {number} i is the place of the subtask which is given to an onlick function
+ * @param {string} id
+ *
+ */
 
 function renderSubtaskHTML(name, i, id) {
   openCardSubtasks;
@@ -74,25 +83,40 @@ function renderSubtaskHTML(name, i, id) {
 
 /**
  * This function is used to render the assigned people on board.html
- * The function will happen after renderTask, because its rendered in that tenplate.
+ * The function will happen after renderTask, because its rendered in a tenplate.
  *
- * @param {object} task
- * @param {string} contact
+ * @param {object} task to find the spot where it is rendered
+ * @param {string} contactInitials
  */
-function renderAssignedContactsHTML(contact, task) {
+function renderAssignedContactsHTML(contactInitials, task) {
   document.getElementById("assigned" + task["id"]).innerHTML += `
-    <div class="contact">${contact}</div>`;
+    <div class="contact">${contactInitials}</div>`;
 }
 
-function renderCardContactsHTML(contact, task, contactName) {
+/**
+ * This function is used to render the assigned people on the openedCard
+ *
+ * @param {string} contactInitials
+ * @param {object} task to find the spot where it is rendered
+ * @param {string} contactName
+ *
+ */
+
+function renderCardContactsHTML(contactInitials, task, contactName) {
   document.getElementById("assignedCard" + task["id"]).innerHTML += `
-   <div class="d-flex-gap-20"><div class="contact-on-card">${contact}</div><span class="contact-name">${contactName}</span></div>  `;
+   <div class="d-flex-gap-20"><div class="contact-on-card">${contactInitials}</div><span class="contact-name">${contactName}</span></div>  `;
 }
 
+/**
+ * This function renders the assigned people on the editCard
+ *
+ * @param {string} contact
+ * @param {object} task
+ */
 
-function renderEditContactsHTML(contact, task) {
+function renderEditContactsHTML(contactInitials, task) {
   document.getElementById("edit-assignedTo").innerHTML += `
-    <div class="contact">${contact}</div>`;
+    <div class="contact">${contactInitials}</div>`;
 }
 /**
  * This function removes the searchbar and puts it in Desktop view and changes the wording of the Addtask-Button
@@ -102,44 +126,69 @@ function renderEditContactsHTML(contact, task) {
 function renderDesktopView() {
   document.getElementById("btn-add-task").innerHTML = "";
   document.getElementById("btn-add-task").innerHTML =
-    'Add Task <img src="assets/plus-white.svg">';
+    'Add Task <img src="assets/plus-white.svg">'; // Wording
   document.getElementById("mobile-search").innerHTML = "";
   document.getElementById("desktop-search").innerHTML =
     '<input id="search" placeholder="Find task" type="text" onkeyup="searchTask()"></input>';
 }
 
 /**
- * This function removes the searchbar and puts it in Mobile view and changes the wording of the Addtask-Button
+ * This function removes the searchbar and puts it in Mobile view and removes the wording of the Addtask-Button
  * On board.html
  *
  */
 function renderMobileView() {
   document.getElementById("btn-add-task").innerHTML = "";
   document.getElementById("btn-add-task").innerHTML =
-    '<img src="assets/plus-white.svg">';
+    '<img src="assets/plus-white.svg">'; // removed Wording
   document.getElementById("desktop-search").innerHTML = "";
   document.getElementById("mobile-search").innerHTML =
     '<input id="search" placeholder="Find task" type="text" onkeyup="searchTask()"></input>';
 }
 
-function dummyCardHTML(id) {
-  return `<div class="dummy-card" id="dummy-card${id}-tasks">
+/**
+ * This function is the HTML needed to render a placeholder in the kanban
+ *
+ * @param {string} category is given so the placeholder has his own ID
+ * @returns PlaceholderHTML
+ */
+
+function placeholderCardHTML(category) {
+  return `<div class="dummy-card" id="dummy-card${category}-tasks">
     <div>
     </div>
     </div>`;
 }
 
-function askDeleteHTML(id){
+/**
+ * This function is the HTML needed to render the card which asks if you wanna delete the task
+ *
+ *
+ * @param {string}
+ * @returns askDeleteHTML
+ */
+
+function askDeleteHTML(id) {
   return `
   <div onclick="dontClose(event)" class="task-card f-end">
     <h2>Are you sure you wanna delete this task?</h2>
     <div class="d-flex-gap-20"> <div onclick="deleteTask('${id}')" class="button" id="delete">Delete</div><div onclick="closeCard()" class="button" id="createTask">Keep</div></div>
   </div>
-`
+`;
 }
 
-function  openCardHTML(id, epic, task){
-  document.getElementById('opened-card-container').setAttribute('onclick', `closeCard('${id}')`);
+/**
+ * This function manipulates the html so the card opens.
+ *
+ * @param {string} id
+ * @param {object} epic
+ * @param {object} task
+ */
+
+function openCardHTML(id, epic, task) {
+  document
+    .getElementById("opened-card-container")
+    .setAttribute("onclick", `closeCard('${id}')`);
   document.getElementById("opened-card-container").classList.remove("d-none");
   document.getElementById("opened-card-container").innerHTML = renderTaskCard(
     task,
@@ -147,11 +196,22 @@ function  openCardHTML(id, epic, task){
   );
 }
 
-function closeCardHTML(){
-  document.getElementById('fullscreen').style.display = 'none'
+/**
+ * This functions closes the card
+ *
+ */
+
+function closeCardHTML() {
+  document.getElementById("fullscreen").style.display = "none";
   document.getElementById("opened-card-container").classList.add("d-none");
 }
 
+/**
+ * This function retruns the editTaskCard
+ *
+ * @param {string} id
+ * @returns
+ */
 
 function editTaskHTML(id) {
   return /* html */ `
@@ -245,5 +305,5 @@ function editTaskHTML(id) {
       <img src="./assets/board.svg" alt="">
   </div>
 
-  `
+  `;
 }
