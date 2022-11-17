@@ -304,10 +304,10 @@ function saveLoggedInUser(user) {
 /**
  * function loggs in user as guest
  */
-function guestLogin() {
+ async function guestLogin() {
     saveGuestToLocalStorage();
-    addGuestToUsers();
-    setTimeout(goToSummary, 500);
+    await addGuestToUsers();
+    goToSummary();
 }
 
 
