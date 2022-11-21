@@ -24,8 +24,30 @@ margin-block: 20px;
     margin-left: 270px;
 }
 
+.container > div {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    margin-bottom: 35px;
+}
+
 p{
     max-width: 70vw;
+    display: flex;
+    flex-direction: row;
+   
+
+}
+
+.container > div > p > a{
+    height: unset;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: unset;
+    text-decoration: none;
+    margin-inline: 5px;
+    color: green;
 }
 
 #source{
@@ -36,4 +58,16 @@ p{
 #source:hover {
     background-color: unset;
     text-decoration: underline;
+}
+
+.section-number{
+    font-weight: 700;
+    font-size: 27px;
+    
+    width: 32px;
+
+
+  margin-right: 35px;
+
+ 
 }
