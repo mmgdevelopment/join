@@ -82,6 +82,10 @@ nav {
     color: #FFFFFF;
 }
 
+#help{
+    cursor: pointer;
+}
+
 a {
     color: #FFFFFF;
     height: 45px;

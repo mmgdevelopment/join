@@ -47,8 +47,13 @@ p{
     gap: unset;
     text-decoration: none;
     margin-inline: 5px;
-    color: green;
+    color: #29ABE2;
 }
+
+.container > div > p > a:hover{
+    background-color: unset;
+}
+
 
 #source{
     text-decoration: none;
