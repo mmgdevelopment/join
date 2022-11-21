@@ -43,7 +43,7 @@ function renderTaskCard(task, epic) {
   <div id="openCardSubtasks">
   </div>
    <img onclick="closeCard('${task["id"]}')" class="close-btn" src="assets/close.svg"</img>
-  <img onclick="openCardEdit('${task["id"]}')" class="edit-btn" src="assets/pencil_filled_square.svg"</img>`;
+  <img onclick="openCardEdit('${task["id"]}')" class="edit-btn" src="assets/pencil-filled-square.svg"</img>`;
 }
 /*<span class="underlined" >Subtasks</span>*/
 
@@ -57,11 +57,9 @@ function renderTaskCard(task, epic) {
  */
 function renderSubtaskBarHTML(id, task, done, barProgress) {
   document.getElementById("subtasks" + id).innerHTML = `
-        <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${
-    barProgress / 100
-  }px, #f4f4f4 0%)"></div><span class="fw-700">${done}/${
-    task["subtasks"].length
-  } Done</span>`;
+        <div class="bar" style="background-image:  linear-gradient(to right, #29ABE2 ${barProgress}%,#29ABE2 ${barProgress / 100
+    }px, #f4f4f4 0%)"></div><span class="fw-700">${done}/${task["subtasks"].length
+    } Done</span>`;
 }
 
 /**
@@ -76,9 +74,8 @@ function renderSubtaskBarHTML(id, task, done, barProgress) {
 function renderSubtaskHTML(name, i, id) {
   openCardSubtasks;
   return /* html*/ `
-    <div class="d-flex-gap-20"><input id="subtaskCheckbox${i}" class="checkbox" type="checkbox" onclick="taskIsDone('${
-    i + id
-  }')"><div class="subtask-titel">${name}</div>`;
+    <div class="d-flex-gap-20"><input id="subtaskCheckbox${i}" class="checkbox" type="checkbox" onclick="taskIsDone('${i + id
+    }')"><div class="subtask-titel">${name}</div>`;
 }
 
 /**
