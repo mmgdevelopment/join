@@ -529,7 +529,7 @@ function findCategoryById(id) {
   let category;
   for (let i = 0; i < user.epics.length; i++) {
     const epic = user.epics[i];
-    for (let j = 0; i < epic.tasks.length; j++) {
+    for (let j = 0; j < epic.tasks.length; j++) {
       if (!category) {
         category = user.epics.find(epic =>
           epic.tasks[j].id == id
