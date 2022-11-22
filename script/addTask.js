@@ -196,7 +196,8 @@ window.addEventListener('click', (event) => {
         event.target.className != 'category' &&
         event.target.className != 'selectable assigned' &&
         event.target.className != 'checkbox' &&
-        event.target.className != 'assigned'
+        event.target.className != 'assigned' &&
+        event.target.id != 'firstValue'
     ) {
         closeAllCustomSelectors();
     };
@@ -205,17 +206,22 @@ window.addEventListener('click', (event) => {
 function closeAllCustomSelectors() {
     document.getElementById('category').classList.remove('open');
     document.getElementById('assigned').classList.remove('open');
-    renderAssignedContactsIfClosed()
     scrollToTop();
+    renderAssignedContactsIfClosed();
 }
 
 function renderAssignedContactsIfClosed() {
-    if (document.getElementById('assigned').offsetHeight < 50) {
-        document.getElementById('assignedTo').style.display = 'none';
-    } else {
-        document.getElementById('assignedTo').style.display = 'flex'
-    }
+    setTimeout(() => {
+        renderAssignedContactsIfClosed()
+        if (document.getElementById('assigned').offsetHeight > 50) {
+            document.getElementById('assignedTo').style.display = 'none';
+        } else {
+            document.getElementById('assignedTo').style.display = 'flex'
+        }
+
+    }, 600);
 }
+
 
 /**
  * necessary while closing the custome selectors
@@ -330,6 +336,7 @@ function renderInviteContactInput() {
 function inviteContact() {
     let value = document.getElementById('contactInput').value;
     if (value) {
+        closeAllCustomSelectors();
         sendInviteMail(value);
         renderContactSelector();
         document.getElementById('assignedToValidation').style.display = 'none';
@@ -427,6 +434,11 @@ function closeTemplate() {
     clearAllInput();
     resetInputRequiredMessages()
     document.getElementById('fullscreen').style.display = 'none';
+}
+
+function closeInviteInput() {
+    closeAllCustomSelectors();
+    renderAddSubtaskContainer();
 }
 
 function resetInputRequiredMessages() {
@@ -529,7 +541,7 @@ function subtaskInputTemplate() {
       <div class="customSelectorInput input p-0">
         <input id="subtaskInput" class="noBorder" placeholder="Add new subtask" type="text">
         <div class="createClearContainer">
-            <img onclick="renderAddSubtaskContainer()" src="./assets/clear.svg" alt=""> |
+            <img onclick="closeInviteInput()" src="./assets/clear.svg" alt=""> |
             <img onclick="addSubtask()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
