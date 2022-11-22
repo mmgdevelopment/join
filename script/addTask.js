@@ -94,7 +94,8 @@ function newTask(id) {
 function goToBoard() {
 
     if (currentSite() == '/board.html') {
-        closeTemplate()
+        closeTemplate();
+        startRender();
     } else {
         window.location.href = 'board.html'
     }
