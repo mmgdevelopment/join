@@ -326,7 +326,7 @@ function renderContactSelector() {
     assigned.innerHTML = contactSelectorTemplate();
     let id = 0
     user.contacts.forEach(contact => {
-        assigned.innerHTML += singleContactTemplate(contact, id);
+        assigned.innerHTML += singleContactTemplate(contact, id, contact.color);
         id++;
     });
     assigned.innerHTML += inviteContactSelectorTemplate();
@@ -368,10 +368,11 @@ function renderAssignedContacts() {
 function renderContactsFromArray() {
     document.getElementById('assignedTo').innerHTML = '';
     assignedTo.forEach(contact => {
-        const nameAsArray = contact.split(' ');
+        name = contact.name;
+        const nameAsArray = name.split(' ');
         const foreName = nameAsArray[0];
         const lastName = nameAsArray[1];
-        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1));
+        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1), contact.color);
     });
 }
 
@@ -383,7 +384,13 @@ function saveAssignedContactsInArray() {
         if (checkbox.checked) {
             const id = checkbox.id.slice(-1);
             const name = document.getElementById(`contact-${id}`).innerText;
-            assignedTo.push(name);
+            const color = document.getElementById(`contact-${id}`).getAttribute('data-color');
+            assignedTo.push(
+                {
+                    'name': name,
+                    'color': color
+                }
+            );
         }
     };
 }
@@ -512,9 +519,9 @@ function contactSelectorTemplate() {
     `
 }
 
-function singleContactTemplate(contact, id) {
+function singleContactTemplate(contact, id, color) {
     return /*html*/`
-    <span onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
+    <span data-color="${color}" onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
         <input class="checkbox" type="checkbox" name="" id="check-${id}">
     </span>
     `
@@ -537,9 +544,9 @@ function renderChoosenCategory(id) {
     `
 }
 
-function assignedToContactCircleTemplate(shortName) {
+function assignedToContactCircleTemplate(shortName, color) {
     return /*html*/ `
-    <div class="assignedTo">${shortName}</div>
+    <div style="background-color: ${color}" class="assignedTo">${shortName}</div>
     `
 }
 
