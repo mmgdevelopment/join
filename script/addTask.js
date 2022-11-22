@@ -92,12 +92,18 @@ function newTask(id) {
 
 }
 function goToBoard() {
-    if (window.location.href == 'board.html') {
+
+    if (currentSite() == '/board.html') {
         closeTemplate()
     } else {
         window.location.href = 'board.html'
     }
+}
 
+function currentSite() {
+    let currentSite = window.location.href;
+    currentSite = currentSite.substring(currentSite.lastIndexOf('/'));
+    return currentSite;
 }
 
 function allInputsFilled() {
@@ -213,12 +219,12 @@ function closeAllCustomSelectors() {
 function renderAssignedContactsIfClosed() {
     setTimeout(() => {
         renderAssignedContactsIfClosed()
-        if (document.getElementById('assigned').offsetHeight > 50) {
+        if (document.getElementById('assigned').offsetHeight > 50 ||
+            document.getElementById('category').offsetHeight > 50) {
             document.getElementById('assignedTo').style.display = 'none';
         } else {
             document.getElementById('assignedTo').style.display = 'flex'
         }
-
     }, 600);
 }
 
