@@ -517,7 +517,7 @@ function fillAllInputs(task, id) {
 }
 
 function showCategoryInEditTasks(id) {
-  let category = findCategoryById(id);
+  let category = findEpicById(id);
   let firstValue = document.getElementById('firstValue')
   firstValue.innerHTML = `
     ${category.name}
@@ -525,20 +525,32 @@ function showCategoryInEditTasks(id) {
     `
 }
 
-function findCategoryById(id) {
-  let category;
-  for (let i = 0; i < user.epics.length; i++) {
-    const epic = user.epics[i];
-    for (let j = 0; j < epic.tasks.length; j++) {
-      if (!category) {
-        category = user.epics.find((epic) => {
-          epic.tasks[j].id == id
-        }
-        )
+// function findCategoryById(id) {
+//   let category;
+//   for (let i = 0; i < user.epics.length; i++) {
+//     const epic = user.epics[i];
+//     for (let j = 0; j < epic.tasks.length; j++) {
+//       if (!category) {
+//         category = user.epics.find((epic) => {
+//           epic.tasks[j].id == id
+//         }
+//         )
+//       }
+//     }
+//   }
+//   return category;
+// }
+
+function findEpicById(id) {
+  for (let j = 0; j < user["epics"].length; j++) {
+    const epic = user["epics"][j];
+    for (let i = 0; i < epic["tasks"].length; i++) {
+      const task = epic["tasks"][i];
+      if (id == task["id"]) {
+        return epic;
       }
     }
   }
-  return category;
 }
 
 function showAssignedContactsInEditTasks(task) {
