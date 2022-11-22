@@ -95,6 +95,7 @@ function goToBoard() {
 
     if (currentSite() == '/board.html') {
         closeTemplate();
+        document.getElementById('addedToBoard').classList.remove('comeFromBottom');
         startRender();
     } else {
         window.location.href = 'board.html'
