@@ -108,7 +108,7 @@ h2 {
 }
 
 #search {
-  background-image: url("/assets/search.svg");
+  background-image: url("../assets/search.svg");
   background-repeat: no-repeat;
   height: 200px;
   width: 251px;
