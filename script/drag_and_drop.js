@@ -276,7 +276,7 @@ function checkWitdh(x) {
 function getAssignedContact(task) {
   printExtraContactOnes = true;
   for (let i = 0; i < task["assignedTo"].length; i++) {
-    const fullContact = task["assignedTo"][i];
+    const fullContact = task["assignedTo"][i].name;
     contact = fullContact.split(" ");
     const sureName = contact[0];
     const lastName = contact[1];
@@ -474,6 +474,14 @@ function openCardEdit(id) {
   closeCard(id);
   document.getElementById('fullscreen').style.display = 'block';
   document.getElementById('headline').innerHTML = 'Edit Task';
+  document.getElementById("createTask").onclick = () => {
+    editTask(id);
+  };
+  document.getElementById("createTask").innerText = 'save'
+  document.getElementById("clear").innerText = 'delete'
+  document.getElementById("clear").onclick = () => {
+    deleteTask(id);
+  }
   renderCategorySelector();
   renderContactSelector();
   let task = findTaskById(id);
@@ -572,10 +580,17 @@ function askDeleteTask(id) {
  */
 function editTask(id) {
   let task = findTaskById(id);
-  task.title = document.getElementById("edit-title").value;
-  task.description = document.getElementById("edit-description").value;
-  task.dueDate = document.getElementById("edit-dueDate").value;
-  closeCard(id);
+  if (allInputsFilled()) {
+    task.title = document.getElementById("title").value;
+    task.description = document.getElementById("description").value;
+    task.dueDate = document.getElementById("dueDate").value;
+    // task.assignedTo = assignedTo;
+    task.prio = returnPrioState();
+    // task.subtasks = getSubtasks();
+  }
+  document.getElementById("fullscreen").style.display = "none";
+  document.getElementById("opened-card-container").classList.add("d-none");
+  startRender();
   saveData();
   goThroughAllEpics();
 }
