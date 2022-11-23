@@ -276,7 +276,7 @@ function checkWitdh(x) {
 function getAssignedContact(task) {
   printExtraContactOnes = true;
   for (let i = 0; i < task["assignedTo"].length; i++) {
-    const fullContact = task["assignedTo"][i].name;
+    const fullContact = task["assignedTo"][i]["name"];
     contact = fullContact.split(" ");
     const sureName = contact[0];
     const lastName = contact[1];
