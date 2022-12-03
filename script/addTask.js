@@ -201,6 +201,7 @@ function setEventListener(id, opponent) {
  * for form validation while input fields are filled after first validation
  */
 window.addEventListener('click', (event) => {
+    renderAssignedContactsIfClosed();
     if (event.target.id == 'fullscreen') {
         closeAddTaskTemplate();
     }
@@ -238,14 +239,13 @@ function closeAllCustomSelectors() {
  */
 function renderAssignedContactsIfClosed() {
     setTimeout(() => {
-        renderAssignedContactsIfClosed()
         if (document.getElementById('assignedSelector').offsetHeight > 50 ||
             document.getElementById('categorySelector').offsetHeight > 50) {
             hide('assignedToContainer');
         } else {
             show('assignedToContainer', 'flex');
         }
-    }, 200);
+    }, 380);
 }
 
 /**
