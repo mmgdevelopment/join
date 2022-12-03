@@ -1,7 +1,8 @@
-let assignedTo = [];
 let users = [];
 let user;
 let categoryColor = '';
+let assignedContacts = [];
+let subtasks = [];
 let createTasktouched = false;
 const buttons = ['urgent', 'medium', 'low'];
 const colors = [
@@ -17,7 +18,6 @@ const colors = [
 async function init() {
     await loadData();
     setUser();
-    await includeHTML();
     renderCategorySelector();
     renderContactSelector();
     colorPicker('blue');
@@ -33,14 +33,6 @@ async function loadData() {
     users = JSON.parse(backend.getItem('users')) || [];
 }
 
-/**
- * saves current user in local varriable 'user'
- */
-function setUser() {
-    let emailUser = localStorage.getItem('user-email');
-    user = users.find(u => u.email == emailUser);
-}
-
 async function saveData() {
     let emailUser = localStorage.getItem('user-email');
     const i = users.findIndex(u => u.email == emailUser);
@@ -48,6 +40,13 @@ async function saveData() {
     await backend.setItem('users', JSON.stringify(users));
 }
 
+/**
+ * saves current user in local varriable 'user'
+ */
+function setUser() {
+    let emailUser = localStorage.getItem('user-email');
+    user = users.find(u => u.email == emailUser);
+}
 
 async function createTaskButtonTouched(category) {
     createTasktouched = true;
@@ -74,7 +73,7 @@ function getTaskFromUserInput(category, id) {
         'id': id,
         'title': document.getElementById('title').value,
         'description': document.getElementById('description').value,
-        'assignedTo': assignedTo,
+        'assignedTo': assignedContacts,
         'dueDate': document.getElementById('dueDate').value,
         'prio': returnPrioState(),
         'subtasks': getSubtasks(),
@@ -168,7 +167,7 @@ function prioStateIsEmpty() {
 }
 
 function assignedToIsEmpty() {
-    return assignedTo.length == 0;
+    return assignedContacts.length == 0;
 }
 
 function categoryIsEmpty() {
@@ -235,9 +234,9 @@ function renderAssignedContactsIfClosed() {
         renderAssignedContactsIfClosed()
         if (document.getElementById('assignedSelector').offsetHeight > 50 ||
             document.getElementById('category').offsetHeight > 50) {
-            hide('assignedTo');
+            hide('assignedToContainer');
         } else {
-            show('assignedTo', 'flex');
+            show('assignedToContainer', 'flex');
         }
     }, 200);
 }
@@ -330,14 +329,6 @@ function newCategory(categoryName) {
     }
 }
 
-function hide(id) {
-    document.getElementById(id).style.display = 'none'
-}
-
-function show(id, mode) {
-    document.getElementById(id).style.display = mode;
-}
-
 function colorPicker(id) {
     resetPicker();
     let choosedColor = document.getElementById(id);
@@ -417,45 +408,68 @@ function sendInviteMail(email) { }
 function toggleCheckbox(id) {
     const checkbox = document.getElementById(`check-${id}`);
     checkbox.toggleAttribute('checked',);
-    renderAssignedContacts();
+    renderCheckedContacts();
 }
 
 /**
- * shows assigned contacts under 'assigned selector'
+ * saves checked contacts in array and
+ * render assigned contacts under 'assigned selector'#
  */
-function renderAssignedContacts() {
-    saveAssignedContactsInArray();
+function renderCheckedContacts() {
+    saveCheckedContactsInArray();
     renderContactsFromArray();
 };
 
-function renderContactsFromArray() {
-    document.getElementById('assignedTo').innerHTML = '';
-    assignedTo.forEach(contact => {
-        name = contact.name;
-        const nameAsArray = name.split(' ');
-        const foreName = nameAsArray[0];
-        const lastName = nameAsArray[1];
-        document.getElementById('assignedTo').innerHTML += assignedToContactCircleTemplate(foreName.slice(0, 1) + lastName.slice(0, 1), contact.color);
-    });
-}
 
-function saveAssignedContactsInArray() {
-    assignedTo = [];
+function saveCheckedContactsInArray() {
+    assignedContacts = [];
     const checkboxes = document.getElementsByClassName('checkbox');
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         if (checkbox.checked) {
-            const id = checkbox.id.slice(-1);
-            const name = document.getElementById(`contact-${id}`).innerText;
-            const color = document.getElementById(`contact-${id}`).getAttribute('data-color');
-            assignedTo.push(
-                {
-                    'name': name,
-                    'color': color
-                }
-            );
+            addContactToArray(checkbox);
         }
     };
+}
+
+function addContactToArray(checkbox) {
+    const id = checkbox.id.slice(-1);
+    const name = document.getElementById(`contact-${id}`).innerText;
+    const color = document.getElementById(`contact-${id}`).getAttribute('data-color');
+    assignedContacts.push(contactTemplate(name, color));
+}
+
+function contactTemplate(name, color) {
+    return {
+        'name': name,
+        'color': color
+    }
+}
+
+function renderContactsFromArray() {
+    const assignedToContainer = document.getElementById('assignedToContainer');
+    assignedToContainer.innerHTML = '';
+    assignedContacts.forEach(contact => { renderSingleContactFromArray(contact) });
+}
+
+/**
+ * render colored circle with initials from assigned contacts
+ * @param {Object} contact 
+ */
+function renderSingleContactFromArray(contact) {
+    const firstNameInitial = getFirstChar(getSingleName(contact.name, 0))
+    const lastNameInitial = getFirstChar(getSingleName(contact.name, 1))
+    assignedToContainer.innerHTML += assignedToContactCircleTemplate(firstNameInitial + lastNameInitial, contact.color);
+}
+
+function getSingleName(name, index) {
+    const nameAsArray = name.split(' ');
+    const singleName = nameAsArray[index];
+    return singleName;
+}
+
+function getFirstChar(string) {
+    return string.slice(0, 1);
 }
 
 function renderSubtaskInput() {
@@ -476,22 +490,26 @@ function addSubtask() {
 }
 
 function getSubtasks() {
-    let subtasks = [];
+    subtasks = [];
     let allSubtasks = document.getElementsByClassName('subtaskCheckbox');
     for (let i = 0; i < allSubtasks.length; i++) {
         const subtask = allSubtasks[i];
-        if (subtask.checked) {
-            let id = subtask.id.slice(-1);
-            let value = document.getElementById(`subtask-${id}`).innerText;
-            subtasks.push(
-                {
-                    name: value,
-                    checked: false
-                }
-            );
-        };
+        if (subtask.checked) { addSubtaskToArray(subtask); };
     };
     return subtasks;
+}
+
+function addSubtaskToArray(subtask) {
+    let id = subtask.id.slice(-1);
+    let value = document.getElementById(`subtask-${id}`).innerText;
+    subtasks.push(subtaskTemplate(value));
+}
+
+function subtaskTemplate(value) {
+    return {
+        'name': value,
+        'checked': false
+    }
 }
 
 function clearAllInput() {
@@ -500,7 +518,7 @@ function clearAllInput() {
     document.getElementById('description').value = '';
     renderCategorySelector();
     renderContactSelector();
-    renderAssignedContacts();
+    renderCheckedContacts();
     document.getElementById('dueDate').value = '';
     resetPrioButtons();
     renderAddSubtaskContainer();
@@ -525,6 +543,14 @@ function resetInputRequiredMessages() {
         message.style.display = 'none'
     )
     createTasktouched = false;
+}
+
+function hide(id) {
+    document.getElementById(id).style.display = 'none'
+}
+
+function show(id, mode) {
+    document.getElementById(id).style.display = mode;
 }
 
 /***********************HTML Templates**************************/

@@ -348,7 +348,7 @@ label {
     padding: 2px;
 }
 
-#assignedTo {
+#assignedToContainer {
     display: flex;
     justify-content: flex-start;
     gap: 10px;
