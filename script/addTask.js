@@ -226,7 +226,7 @@ window.addEventListener('keypress', (event) => {
 })
 
 function closeAllCustomSelectors() {
-    document.getElementById('category').classList.remove('open');
+    document.getElementById('categorySelector').classList.remove('open');
     document.getElementById('assignedSelector').classList.remove('open');
     scrollToTop();
     renderAssignedContactsIfClosed();
@@ -240,7 +240,7 @@ function renderAssignedContactsIfClosed() {
     setTimeout(() => {
         renderAssignedContactsIfClosed()
         if (document.getElementById('assignedSelector').offsetHeight > 50 ||
-            document.getElementById('category').offsetHeight > 50) {
+            document.getElementById('categorySelector').offsetHeight > 50) {
             hide('assignedToContainer');
         } else {
             show('assignedToContainer', 'flex');
@@ -253,7 +253,7 @@ function renderAssignedContactsIfClosed() {
  */
 function scrollToTop() {
     document.getElementById('assignedSelector').scrollTop = 0;
-    document.getElementById('category').scrollTop = 0;
+    document.getElementById('categorySelector').scrollTop = 0;
 }
 
 /**
@@ -290,7 +290,7 @@ function resetPrioButtons() {
  */
 function renderNewCategoryInput() {
     show('colorPicker', 'flex');
-    document.getElementById('category').innerHTML = newCategoryTemplate();
+    document.getElementById('categorySelector').innerHTML = newCategoryTemplate();
     document.getElementById('categoryInput').focus();
 }
 
@@ -351,10 +351,10 @@ function resetPicker() {
 }
 
 function renderCategorySelector() {
-    document.getElementById('category').innerHTML = categorySelectorTemplate();
+    document.getElementById('categorySelector').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
     hide('colorPicker');
-    setEventListener('category', 'assignedSelector');
+    setEventListener('categorySelector', 'assignedSelector');
     resetFieldRequiredMessage('category');
 }
 
@@ -373,7 +373,7 @@ function renderContactSelector() {
     selector.innerHTML = contactSelectorTemplate();
     renderSingleContacts(selector);
     selector.innerHTML += inviteContactSelectorTemplate();
-    setEventListener('assignedSelector', 'category');
+    setEventListener('assignedSelector', 'categorySelector');
     resetFieldRequiredMessage('assignedTo');
 }
 
@@ -564,7 +564,7 @@ function show(id, mode) {
 
 function categorySelectorTemplate() {
     return /*html*/`
-        <span id="categoryPlaceholder" class="placeholder">
+        <span id="categorySelectorPlaceholder" class="placeholder">
             <div id="firstValue">Select task Category</div>
             <img class="category" src="./assets/selectArrow.svg" alt="">
         </span>
@@ -586,7 +586,7 @@ function newCategoryTemplate() {
 function renderSingleCategorys() {
     for (let i = 0; i < user.epics.length; i++) {
         const category = user.epics[i];
-        document.getElementById('category').innerHTML += `
+        document.getElementById('categorySelector').innerHTML += `
        <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
        </span> 
