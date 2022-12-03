@@ -218,6 +218,13 @@ window.addEventListener('click', (event) => {
     };
 })
 
+window.addEventListener('keypress', (event) => {
+    const subtaskInput = document.getElementById('subtaskInput') || '';
+    if (event.key == 'Enter' && document.activeElement == subtaskInput) {
+        addSubtask();
+    }
+})
+
 function closeAllCustomSelectors() {
     document.getElementById('category').classList.remove('open');
     document.getElementById('assignedSelector').classList.remove('open');
