@@ -498,7 +498,7 @@ function showAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById('headline').innerHTML = 'Add Task';
   document.getElementById("createTask").onclick = () => {
-    createTestTask(category);
+    createTaskButtonTouched(category);
   };
   renderCategorySelector();
   renderContactSelector();

@@ -1,5 +1,8 @@
-setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
-
+let assignedTo = [];
+let users = [];
+let user;
+let categoryColor = '';
+let createTasktouched = false;
 const buttons = ['urgent', 'medium', 'low'];
 const colors = [
     'orange',
@@ -11,14 +14,9 @@ const colors = [
     'ocean'
 ];
 
-let assignedTo = [];
-let users = [];
-let user;
-let categoryColor = '';
-let createTasktouched = false;
-
 async function init() {
     await loadData();
+    setUser();
     await includeHTML();
     renderCategorySelector();
     renderContactSelector();
@@ -27,12 +25,19 @@ async function init() {
 /**
  * Backend Functions
 */
+setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+
 async function loadData() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
+}
+
+/**
+ * saves current user in local varriable 'user'
+ */
+function setUser() {
     let emailUser = localStorage.getItem('user-email');
     user = users.find(u => u.email == emailUser);
-    // setInitialCategorysIfNotExist();
 }
 
 async function saveData() {
@@ -42,63 +47,57 @@ async function saveData() {
     await backend.setItem('users', JSON.stringify(users));
 }
 
-async function deleteAllTasks() {
-    user.epics.forEach(epic => {
-        epic.tasks = [];
-    });
-    await saveData();
-    await loadData();
-}
 
-// function setInitialCategorysIfNotExist() {
-//     if (user.epics == '') {
-//         user.epics = taskTemplate();
-//     }
-// }
-
-/**
- * AddTask to JSON
- */
-async function createTestTask(category) {
+async function createTaskButtonTouched(category) {
     createTasktouched = true;
     if (allInputsFilled()) {
-        user.epics.forEach(epic => {
-            if (epic.name == document.getElementById('firstValue').innerText) {
-                const id = epic.name.slice(0, 4).toLowerCase() + (epic.totalTasks);
-                epic.tasks.push(
-                    {
-                        id: id,
-                        title: document.getElementById('title').value,
-                        description: document.getElementById('description').value,
-                        assignedTo: assignedTo,
-                        dueDate: document.getElementById('dueDate').value,
-                        prio: returnPrioState(),
-                        subtasks: getSubtasks(),
-                        category: category
-                    }
-                )
-                epic.totalTasks++;
-            }
-        });
+        createTask(category);
         createTasktouched = false;
         await saveData();
-        document.body.style.overflowY = 'hidden';
-        document.getElementById('addedToBoard').classList.add('comeFromBottom');
-        setTimeout(goToBoard, 2000);
-    }
+        showAnimationAndGoToBoard();
+    };
 }
 
-function saveTask() {
-
+function createTask(category) {
+    user.epics.forEach(epic => {
+        if (epic.name == document.getElementById('firstValue').innerText) {
+            const id = createID(epic);
+            epic.tasks.push(getTaskFromUserInput(category, id));
+            epic.totalTasks++;
+        }
+    });
 }
 
-function newTask(id) {
-
+function getTaskFromUserInput(category, id) {
+    return {
+        'id': id,
+        'title': document.getElementById('title').value,
+        'description': document.getElementById('description').value,
+        'assignedTo': assignedTo,
+        'dueDate': document.getElementById('dueDate').value,
+        'prio': returnPrioState(),
+        'subtasks': getSubtasks(),
+        'category': category
+    };
 }
+
+/**
+ * @param {string} epic from current task
+ * @returns unique id for each task
+ */
+function createID(epic) {
+    return (epic.name.slice(0, 4).toLowerCase() + (epic.totalTasks));
+}
+
+function showAnimationAndGoToBoard() {
+    document.body.style.overflowY = 'hidden';
+    document.getElementById('addedToBoard').classList.add('comeFromBottom');
+    setTimeout(goToBoard, 2000);
+}
+
 function goToBoard() {
-
     if (currentSite() == '/board.html') {
-        closeTemplate();
+        closeAddTaskTemplate();
         document.getElementById('addedToBoard').classList.remove('comeFromBottom');
         startRender();
     } else {
@@ -106,64 +105,73 @@ function goToBoard() {
     }
 }
 
+/**
+ * @returns current html site
+ */
 function currentSite() {
     let currentSite = window.location.href;
     currentSite = currentSite.substring(currentSite.lastIndexOf('/'));
     return currentSite;
 }
 
+/**
+ * @returns boolean if all inputs are filled or not
+ */
 function allInputsFilled() {
     let validateAll = [
-        !isEmpty('title'),
-        !isEmpty('description'),
-        !isEmpty('dueDate'),
-        !prioStateIsEmpty(),
-        !assignedToIsEmpty(),
-        !categoryIsEmpty()
+        !validate(isEmpty('title'), 'title'),
+        !validate(isEmpty('description'), 'description'),
+        !validate(isEmpty('dueDate'), 'dueDate'),
+        !validate(prioStateIsEmpty(), 'prioState'),
+        !validate(assignedToIsEmpty(), 'assignedTo'),
+        !validate(categoryIsEmpty(), 'category'),
     ]
     return validateAll.every(Boolean);
 }
 
-function isEmpty(id) {
-    if (document.getElementById(id).value == '') {
-        document.getElementById(id + 'Validation').style.display = 'block';
+/**
+ * validate if html input element is empty or not
+ * if field is empty show message "field required" under input element
+ * @param {boolean} isempty if field is empty or not
+ * @param {string} id HTML Element ID
+ * @returns boolean if input is empty or not
+ */
+function validate(isempty, id) {
+    if (isempty) {
+        setFieldRequiredMessage(id);
         return true
     } else {
-        document.getElementById(id + 'Validation').style.display = 'none';
+        resetFieldRequiredMessage(id);
         return false
     }
 }
 
+/**
+ * 
+ * @param {string} id HTML Element ID
+ * @returns boolean if input is empty or not
+ */
+function isEmpty(id) {
+    return document.getElementById(id).value == '';
+}
+
+function setFieldRequiredMessage(id) {
+    document.getElementById(id + 'Validation').style.display = 'block';
+}
+function resetFieldRequiredMessage(id) {
+    document.getElementById(id + 'Validation').style.display = 'none';
+}
+
 function prioStateIsEmpty() {
-    if (returnPrioState() == '') {
-        document.getElementById('prioStateValidation').style.display = 'block';
-        return true;
-    } else {
-        document.getElementById('prioStateValidation').style.display = 'none';
-        return false;
-    }
+    return returnPrioState() == ''
 }
 
 function assignedToIsEmpty() {
-    if (assignedTo.length == 0) {
-        document.getElementById('assignedToValidation').style.display = 'block';
-        return true;
-    } else {
-        document.getElementById('assignedToValidation').style.display = 'none';
-        return false;
-    }
-
+    return assignedTo.length == 0;
 }
 
 function categoryIsEmpty() {
-    if (document.getElementById('firstValue').innerText == 'Select task Category') {
-        document.getElementById('categoryValidation').style.display = 'block';
-        return true;
-    } else {
-        document.getElementById('categoryValidation').style.display = 'none';
-        return false;
-    }
-
+    return document.getElementById('firstValue').innerText == 'Select task Category'
 }
 
 function returnPrioState() {
@@ -177,9 +185,8 @@ function returnPrioState() {
 };
 
 /**
- * open and close customized select inputs
+ * set eventListener for category selector input
  */
-
 function setCategoryEventListener() {
     const categoryPlaceholder = document.getElementById('categoryPlaceholder');
     categoryPlaceholder.addEventListener('click', () => {
@@ -188,6 +195,9 @@ function setCategoryEventListener() {
     })
 }
 
+/**
+ * set eventListener for contact selector input
+ */
 function setAssignedEventListener() {
     const assignedPlaceholder = document.getElementById('assignedPlaceholder');
     assignedPlaceholder.addEventListener('click', () => {
@@ -197,9 +207,13 @@ function setAssignedEventListener() {
     })
 }
 
+/**
+ * set event listener for some closing functions and 
+ * for form validation while input fields are filled after first validation
+ */
 window.addEventListener('click', (event) => {
     if (event.target.id == 'fullscreen') {
-        closeTemplate();
+        closeAddTaskTemplate();
     }
     if (createTasktouched) {
         allInputsFilled();
@@ -449,7 +463,7 @@ function clearAllInput() {
     document.getElementById('subtaskList').innerHTML = '';
 }
 
-function closeTemplate() {
+function closeAddTaskTemplate() {
     clearAllInput();
     resetInputRequiredMessages()
     document.getElementById('fullscreen').style.display = 'none';
