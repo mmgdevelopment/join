@@ -20,6 +20,7 @@ async function init() {
     await includeHTML();
     renderCategorySelector();
     renderContactSelector();
+    colorPicker('blue');
 };
 
 /**
@@ -159,7 +160,7 @@ function setFieldRequiredMessage(id) {
     document.getElementById(id + 'Validation').style.display = 'block';
 }
 function resetFieldRequiredMessage(id) {
-    document.getElementById(id + 'Validation').style.display = 'none';
+    hide(id + 'Validation');
 }
 
 function prioStateIsEmpty() {
@@ -185,24 +186,13 @@ function returnPrioState() {
 };
 
 /**
- * set eventListener for category selector input
+ * eventListener to open and close custom selctors
+ * category selector and contact selector
  */
-function setCategoryEventListener() {
-    const categoryPlaceholder = document.getElementById('categoryPlaceholder');
-    categoryPlaceholder.addEventListener('click', () => {
-        document.getElementById('category').classList.toggle('open');
-        document.getElementById('assigned').classList.remove('open');
-    })
-}
-
-/**
- * set eventListener for contact selector input
- */
-function setAssignedEventListener() {
-    const assignedPlaceholder = document.getElementById('assignedPlaceholder');
-    assignedPlaceholder.addEventListener('click', () => {
-        document.getElementById('assigned').classList.toggle('open');
-        document.getElementById('category').classList.remove('open');
+function setEventListener(id, opponent) {
+    document.getElementById(id + 'Placeholder').addEventListener('click', () => {
+        document.getElementById(id).classList.toggle('open');
+        document.getElementById(opponent).classList.remove('open');
         renderAssignedContactsIfClosed()
     })
 }
@@ -231,36 +221,38 @@ window.addEventListener('click', (event) => {
 
 function closeAllCustomSelectors() {
     document.getElementById('category').classList.remove('open');
-    document.getElementById('assigned').classList.remove('open');
+    document.getElementById('assignedSelector').classList.remove('open');
     scrollToTop();
     renderAssignedContactsIfClosed();
 }
 
+/**
+ * render the inital circles from assigned contacts
+ * only when selector is closed
+ */
 function renderAssignedContactsIfClosed() {
     setTimeout(() => {
         renderAssignedContactsIfClosed()
-        if (document.getElementById('assigned').offsetHeight > 50 ||
+        if (document.getElementById('assignedSelector').offsetHeight > 50 ||
             document.getElementById('category').offsetHeight > 50) {
-            document.getElementById('assignedTo').style.display = 'none';
+            hide('assignedTo');
         } else {
-            document.getElementById('assignedTo').style.display = 'flex'
+            show('assignedTo', 'flex');
         }
-    }, 600);
+    }, 200);
 }
 
-
 /**
- * necessary while closing the custome selectors
+ * necessary while closing the custom selectors
  */
 function scrollToTop() {
-    document.getElementById('assigned').scrollTop = 0;
+    document.getElementById('assignedSelector').scrollTop = 0;
     document.getElementById('category').scrollTop = 0;
 }
 
-
 /**
- * Prio Button Function 
- * @param {string} id id from HTML Element
+ * render choosen prio Button 
+ * @param {string} id HTML element ID
  */
 function prioButton(id) {
     resetPrioButtons();
@@ -287,30 +279,63 @@ function resetPrioButtons() {
     });
 }
 
+/**
+ * render input field for new category(epic)
+ */
 function renderNewCategoryInput() {
-    document.getElementById('colorPicker').style.display = 'flex';
+    show('colorPicker', 'flex');
     document.getElementById('category').innerHTML = newCategoryTemplate();
     document.getElementById('categoryInput').focus();
 }
 
-function addCategory() {
-    let input = document.getElementById('categoryInput');
-    if (input.value) {
-        user.epics.push({
-            "name": input.value,
-            "totalTasks": 0,
-            "color": categoryColor,
-            "tasks": []
-        })
-        categoryColor = '';
+/**
+ * check if there is an input or not
+ * and depending add new category to current user
+ */
+async function addCategoryButtonTouched() {
+    const categoryName = document.getElementById('categoryInput').value;
+    if (categoryName) {
+        await addCategory(categoryName);
         renderCategorySelector();
-        document.getElementById('colorPicker').style.display = 'none';
-        let index = (user.epics.length - 1).toString();
-        showCategory(index);
-        document.getElementById('categoryValidation').style.display = 'none'
+        hide('colorPicker');
+        showCategory(lastCategory());
+        resetFieldRequiredMessage('category');
     } else {
-        document.getElementById('categoryValidation').style.display = 'block'
+        setFieldRequiredMessage('category');
     }
+}
+
+/**
+ * @returns last category from current user
+ */
+function lastCategory() {
+    return (user.epics.length - 1).toString();
+}
+
+async function addCategory(categoryName) {
+    user.epics.push(newCategory(categoryName))
+    await saveData();
+}
+
+/**
+ * @param {string} categoryName 
+ * @returns Object 
+ */
+function newCategory(categoryName) {
+    return {
+        "name": categoryName,
+        "totalTasks": 0,
+        "color": categoryColor,
+        "tasks": []
+    }
+}
+
+function hide(id) {
+    document.getElementById(id).style.display = 'none'
+}
+
+function show(id, mode) {
+    document.getElementById(id).style.display = mode;
 }
 
 function colorPicker(id) {
@@ -321,6 +346,7 @@ function colorPicker(id) {
 }
 
 function resetPicker() {
+    categoryColor = '';
     colors.forEach(color => {
         document.getElementById(color).classList = 'color';
     });
@@ -329,11 +355,15 @@ function resetPicker() {
 function renderCategorySelector() {
     document.getElementById('category').innerHTML = categorySelectorTemplate();
     renderSingleCategorys();
-    document.getElementById('colorPicker').style.display = 'none';
-    setCategoryEventListener();
-    document.getElementById('categoryValidation').style.display = 'none'
+    hide('colorPicker');
+    setEventListener('category', 'assignedSelector');
+    resetFieldRequiredMessage('category');
 }
 
+/**
+ * show choosen category at custom selctor
+ * @param {string} id unique id for each category(epic)
+ */
 function showCategory(id) {
     let firstValue = document.getElementById('firstValue');
     firstValue.innerHTML = renderChoosenCategory(id);
@@ -341,44 +371,58 @@ function showCategory(id) {
 }
 
 function renderContactSelector() {
-    let assigned = document.getElementById('assigned');
-    assigned.innerHTML = contactSelectorTemplate();
-    let id = 0
-    user.contacts.forEach(contact => {
-        assigned.innerHTML += singleContactTemplate(contact, id, contact.color);
-        id++;
-    });
-    assigned.innerHTML += inviteContactSelectorTemplate();
-    setAssignedEventListener();
-    document.getElementById('assignedToValidation').style.display = 'none';
+    let selector = document.getElementById('assignedSelector');
+    selector.innerHTML = contactSelectorTemplate();
+    renderSingleContacts(selector);
+    selector.innerHTML += inviteContactSelectorTemplate();
+    setEventListener('assignedSelector', 'category');
+    resetFieldRequiredMessage('assignedTo');
+}
+
+function renderSingleContacts(selector) {
+    for (let id = 0; id < user.contacts.length; id++) {
+        const contact = user.contacts[id];
+        selector.innerHTML += singleContactTemplate(contact, id, contact.color);
+    }
 }
 
 function renderInviteContactInput() {
-    document.getElementById('assigned').innerHTML = inviteContactInputTemplate();
+    document.getElementById('assignedSelector').innerHTML = inviteContactInputTemplate();
     document.getElementById('contactInput').focus();
 
 }
 
 function inviteContact() {
-    let value = document.getElementById('contactInput').value;
-    if (value) {
+    let email = document.getElementById('contactInput').value;
+    if (email) {
         closeAllCustomSelectors();
-        sendInviteMail(value);
+        sendInviteMail(email);
         renderContactSelector();
-        document.getElementById('assignedToValidation').style.display = 'none';
+        resetFieldRequiredMessage('assignedSelector');
     } else {
-        document.getElementById('assignedToValidation').style.display = 'block';
+        setFieldRequiredMessage('assignedSelector');
     }
 }
 
-function sendInviteMail(value) { }
+/**
+ * function not implemented yet
+ * @param {string} email 
+ */
+function sendInviteMail(email) { }
 
+/**
+ * toggles checkbox while clicking on name left of checkbox
+ * @param {string} id from contact in contact selector
+ */
 function toggleCheckbox(id) {
     const checkbox = document.getElementById(`check-${id}`);
     checkbox.toggleAttribute('checked',);
     renderAssignedContacts();
 }
 
+/**
+ * shows assigned contacts under 'assigned selector'
+ */
 function renderAssignedContacts() {
     saveAssignedContactsInArray();
     renderContactsFromArray();
@@ -444,7 +488,6 @@ function getSubtasks() {
                     name: value,
                     checked: false
                 }
-
             );
         };
     };
@@ -452,6 +495,7 @@ function getSubtasks() {
 }
 
 function clearAllInput() {
+    resetInputRequiredMessages();
     document.getElementById('title').value = '';
     document.getElementById('description').value = '';
     renderCategorySelector();
@@ -466,7 +510,7 @@ function clearAllInput() {
 function closeAddTaskTemplate() {
     clearAllInput();
     resetInputRequiredMessages()
-    document.getElementById('fullscreen').style.display = 'none';
+    hide('fullscreen');
 }
 
 function closeInviteInput() {
@@ -500,7 +544,7 @@ function newCategoryTemplate() {
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
             <img onclick="renderCategorySelector()" src="./assets/clear.svg" alt=""> |
-            <img onclick="addCategory()" src="./assets/createTask.svg" alt="">
+            <img onclick="addCategoryButtonTouched()" src="./assets/createTask.svg" alt="">
         </div>
     </div>
     `;
@@ -531,7 +575,7 @@ function inviteContactInputTemplate() {
 
 function contactSelectorTemplate() {
     return /*html*/`
-        <span id="assignedPlaceholder" class="placeholder">
+        <span id="assignedSelectorPlaceholder" class="placeholder">
             Select Contact
             <img class="assigned" src="./assets/selectArrow.svg" alt="">
         </span>
@@ -596,24 +640,4 @@ function subtasklistTemplate(subtask, id) {
             <span id="subtask-${id}">${subtask}</span>
         </div>
     `
-}
-
-function taskTemplate() {
-    return [
-        {
-            "name": "Backoffice",
-            "color": "blue",
-            "tasks": []
-        },
-        {
-            "name": 'Marketing',
-            "color": 'red',
-            "tasks": []
-        },
-        {
-            "name": 'Development',
-            "color": 'orange',
-            "tasks": []
-        }
-    ]
 }
