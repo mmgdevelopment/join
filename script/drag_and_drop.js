@@ -461,14 +461,13 @@ function openCard(id) {
 function closeCard(id) {
   cardWasOpened = false;
   openEdit = false;
-  closeCardHTML();
   checkSubtaskAmount(findTaskById(id));
 }
 
 /**
  * This function changes the Opencard so it can be edited
  *
- * @param {sting} id
+ * @param {string} id
  */
 function openCardEdit(id) {
   closeCard(id);
@@ -477,8 +476,8 @@ function openCardEdit(id) {
   document.getElementById("createTask").onclick = () => {
     editTask(id);
   };
-  document.getElementById("createTask").innerText = 'save'
-  document.getElementById("clear").innerText = 'delete'
+  document.getElementById("createTask").firstChild.data = 'save';
+  document.getElementById("clear").firstChild.data = 'delete'
   document.getElementById("clear").onclick = () => {
     deleteTask(id);
   }
@@ -486,7 +485,6 @@ function openCardEdit(id) {
   renderContactSelector();
   let task = findTaskById(id);
   fillAllInputs(task, id);
-  // document.getElementById(`edit-area`).innerHTML = editTaskHTML(id);
 }
 
 /**
@@ -495,8 +493,14 @@ function openCardEdit(id) {
  * @param {string} category if given the task will be generated in this category. Default is todo
  */
 function showAddTask(category) {
+  clearAllInput();
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById('headline').innerHTML = 'Add Task';
+  document.getElementById("createTask").firstChild.data = 'create task';
+  document.getElementById("clear").firstChild.data = 'clear'
+  document.getElementById("clear").onclick = () => {
+    clearAllInput();
+  }
   document.getElementById("createTask").onclick = () => {
     createTaskButtonTouched(category);
   };
@@ -516,7 +520,7 @@ function fillAllInputs(task, id) {
   showCategoryInEditTasks(id);
   showAssignedContactsInEditTasks(task);
   document.getElementById("dueDate").value = task["dueDate"];
-  prioButton(task.prio); // rename to showActivePrioButton?
+  activatePrioButton(task.prio);
   showSubtasksInEditTasks(task);
 }
 
@@ -530,8 +534,27 @@ function showCategoryInEditTasks(id) {
 }
 
 function showAssignedContactsInEditTasks(task) {
-  assignedTo = task.assignedTo;
+  assignedContacts = task.assignedTo;
   renderContactsFromArray(); // checkbox need to be checked
+  fillCheckboxes();
+}
+
+function fillCheckboxes() {
+  const selectableContacts = document.getElementsByClassName('selectable');
+  for (let i = 0; i < selectableContacts.length; i++) {
+    const selectableContact = selectableContacts[i];
+    const selectedContact = assignedContacts.find(element => element.name == selectableContact.innerText);
+
+    // console.log(selectedContact);
+    if (selectedContact) {
+      selectableContact.lastElementChild.checked = true;
+    }
+    // assignedContacts.find(contact.name == selectableContact, () => {
+    //   selectableContact.previousElementSibling.checked = true;
+    // })
+
+  }
+
 }
 
 function showSubtasksInEditTasks(task) {
@@ -584,7 +607,7 @@ function editTask(id) {
     task.title = document.getElementById("title").value;
     task.description = document.getElementById("description").value;
     task.dueDate = document.getElementById("dueDate").value;
-    // task.assignedTo = assignedTo;
+    // task.assignedTo = assignedContacts();
     task.prio = returnPrioState();
     // task.subtasks = getSubtasks();
   }

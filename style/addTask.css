@@ -407,7 +407,7 @@ ul {
     background-color: #FFFFFF;
     padding: 30px;
     border-radius: 30px;
-    animation: comeFromRight 2000ms 1 alternate;
+    animation: comeFromRight 500ms 1 alternate;
 }
 
 

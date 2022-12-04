@@ -260,7 +260,7 @@ function scrollToTop() {
  * render choosen prio Button 
  * @param {string} id HTML element ID
  */
-function prioButton(id) {
+function activatePrioButton(id) {
     resetPrioButtons();
     let button = document.getElementById(id);
     button.classList.add('active');
@@ -414,7 +414,7 @@ function sendInviteMail(email) { }
  */
 function toggleCheckbox(id) {
     const checkbox = document.getElementById(`check-${id}`);
-    checkbox.toggleAttribute('checked',);
+    checkbox.toggleAttribute('checked');
     renderCheckedContacts();
 }
 

@@ -255,15 +255,15 @@ function editTaskHTML(id) {
           <div class="inputContainer">
               <label>Prio</label>
               <div class="row">
-                  <button id="urgent" class="prioButton" onclick="prioButton('urgent')">
+                  <button id="urgent" class="prioButton" onclick="activatePrioButton('urgent')">
                       Urgent
                       <img src="./assets/urgent.svg" alt="">
                   </button>
-                  <button id="medium" class="prioButton" onclick="prioButton('medium')">
+                  <button id="medium" class="prioButton" onclick="activatePrioButton('medium')">
                       Medium
                       <img src="./assets/medium.svg" alt="">
                   </button>
-                  <button id="low" class="prioButton" onclick="prioButton('low')">
+                  <button id="low" class="prioButton" onclick="activatePrioButton('low')">
                       Low
                       <img src="./assets/low.svg" alt="">
                   </button>
