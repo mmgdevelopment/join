@@ -221,9 +221,21 @@ window.addEventListener('click', (event) => {
 
 window.addEventListener('keypress', (event) => {
     const subtaskInput = document.getElementById('subtaskInput') || '';
+    const newCategory = document.getElementById('categorySelectorPlaceholder')?.nextElementSibling || '';
+    const categoryInput = document.getElementById('categoryInput');
     if (event.key == 'Enter' && document.activeElement == subtaskInput) {
         addSubtask();
     }
+    if (event.key == 'Enter' && document.activeElement == newCategory) {
+        renderNewCategoryInput();
+    }
+    if (event.key == 'Enter' && document.activeElement == categoryInput) {
+        addCategoryButtonTouched();
+        console.log();
+        console.log(document.getElementById('assignedSelectorPlaceholder').nextElementSibling);
+        // document.getElementById('assignedSelectorPlaceholder').nextElementSibling.focus(); /not Working
+    }
+
 })
 
 function closeAllCustomSelectors() {
@@ -568,12 +580,12 @@ function categorySelectorTemplate() {
             <div id="firstValue">Select task Category</div>
             <img class="category" src="./assets/selectArrow.svg" alt="">
         </span>
-        <span onclick="renderNewCategoryInput()" class="selectable category">New Category</span>
+        <span tabindex="0" onclick="renderNewCategoryInput()" class="selectable category">New Category</span>
 `}
 
 function newCategoryTemplate() {
     return /*html*/`
-    <div class="customSelectorInput">
+    <div  class="customSelectorInput">
         <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
         <div class="createClearContainer">
             <img onclick="renderCategorySelector()" src="./assets/clear.svg" alt=""> |
@@ -587,7 +599,7 @@ function renderSingleCategorys() {
     for (let i = 0; i < user.epics.length; i++) {
         const category = user.epics[i];
         document.getElementById('categorySelector').innerHTML += `
-       <span onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
+       <span tabindex="0"  onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
            <div class="color ${category.color}"></div>
        </span> 
        `
