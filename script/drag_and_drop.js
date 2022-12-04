@@ -472,7 +472,7 @@ function closeCard(id) {
  */
 function openCardEdit(id) {
   closeCard(id);
-  showTemplateToEditTask();
+  showTemplateToEditTask(id);
   renderCategorySelector();
   renderContactSelector();
   fillAllInputs(id);
