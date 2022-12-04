@@ -461,6 +461,7 @@ function openCard(id) {
 function closeCard(id) {
   cardWasOpened = false;
   openEdit = false;
+  closeCardHTML();
   checkSubtaskAmount(findTaskById(id));
 }
 
