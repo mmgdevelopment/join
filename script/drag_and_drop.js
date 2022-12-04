@@ -472,29 +472,25 @@ function closeCard(id) {
  */
 function openCardEdit(id) {
   closeCard(id);
-  document.getElementById('fullscreen').style.display = 'block';
-  document.getElementById('headline').innerHTML = 'Edit Task';
-  document.getElementById("createTask").onclick = () => {
-    editTask(id);
-  };
-  document.getElementById("createTask").firstChild.data = 'save';
-  document.getElementById("clear").firstChild.data = 'delete'
-  document.getElementById("clear").onclick = () => {
-    deleteTask(id);
-  }
+  showTemplateToEditTask();
   renderCategorySelector();
   renderContactSelector();
-  let task = findTaskById(id);
-  fillAllInputs(task, id);
+  fillAllInputs(id);
 }
 
 /**
- * This function shows the addtatask template
+ * This function shows the addtask template
  *
  * @param {string} category if given the task will be generated in this category. Default is todo
  */
 function showAddTask(category) {
   clearAllInput();
+  showTemplateToAddTask(category);
+  renderCategorySelector();
+  renderContactSelector();
+}
+
+function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById('headline').innerHTML = 'Add Task';
   document.getElementById("createTask").firstChild.data = 'create task';
@@ -505,8 +501,19 @@ function showAddTask(category) {
   document.getElementById("createTask").onclick = () => {
     createTaskButtonTouched(category);
   };
-  renderCategorySelector();
-  renderContactSelector();
+}
+
+function showTemplateToEditTask() {
+  document.getElementById('fullscreen').style.display = 'block';
+  document.getElementById('headline').innerHTML = 'Edit Task';
+  document.getElementById("createTask").firstChild.data = 'save';
+  document.getElementById("clear").firstChild.data = 'delete';
+  document.getElementById("createTask").onclick = () => {
+    editTask(id);
+  };
+  document.getElementById("clear").onclick = () => {
+    deleteTask(id);
+  };
 }
 
 /**
@@ -514,18 +521,18 @@ function showAddTask(category) {
  *
  * @param {object} task
  */
-
-function fillAllInputs(task, id) {
+function fillAllInputs(id) {
+  let task = findTaskById(id);
   document.getElementById("title").value = task["title"];
   document.getElementById("description").value = task["description"];
-  showCategoryInEditTasks(id);
+  showEpicInEditTasks(id);
   showAssignedContactsInEditTasks(task);
   document.getElementById("dueDate").value = task["dueDate"];
   activatePrioButton(task.prio);
   showSubtasksInEditTasks(task);
 }
 
-function showCategoryInEditTasks(id) {
+function showEpicInEditTasks(id) {
   let category = findEpicById(id);
   let firstValue = document.getElementById('firstValue')
   firstValue.innerHTML = `
@@ -537,19 +544,7 @@ function showCategoryInEditTasks(id) {
 function showAssignedContactsInEditTasks(task) {
   assignedContacts = task.assignedTo;
   renderContactsFromArray();
-  fillCheckboxes();
-}
-
-function fillCheckboxes() {
-  const selectableContacts = document.getElementsByClassName('selectable');
-  for (let i = 0; i < selectableContacts.length; i++) {
-    const selectableContact = selectableContacts[i];
-    const selectedContact = assignedContacts.find(element => element.name == selectableContact.innerText);
-    if (selectedContact) {
-      selectableContact.lastElementChild.setAttribute('checked', true);
-    }
-  }
-
+  fillContactCheckboxes();
 }
 
 function showSubtasksInEditTasks(task) {
@@ -559,6 +554,17 @@ function showSubtasksInEditTasks(task) {
       const subtask = subtasks[i];
       console.log(subtask);
       document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask.name, i);
+    }
+  }
+}
+
+function fillContactCheckboxes() {
+  const selectableContacts = document.getElementsByClassName('selectable');
+  for (let i = 0; i < selectableContacts.length; i++) {
+    const selectableContact = selectableContacts[i];
+    const selectedContact = assignedContacts.find(element => element.name == selectableContact.innerText);
+    if (selectedContact) {
+      selectableContact.lastElementChild.setAttribute('checked', true);
     }
   }
 }
@@ -608,6 +614,10 @@ function editTask(id) {
   }
 }
 
+/**
+ * updates all values in task object
+ * @param {string} id of edited task
+ */
 function updateTask(id) {
   const task = findTaskById(id);
   task.title = document.getElementById("title").value;
@@ -638,6 +648,12 @@ function updateEpic(task, id) {
   }
 }
 
+/**
+ * checks if category is changed by user or not
+ * @param {string} id of edited task
+ * @param {string} newCategory user input in edit task card
+ * @returns boolean 
+ */
 function categoryIsChanged(id, newCategory) {
   return newCategory != findEpicById(id).name
 }
