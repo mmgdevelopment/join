@@ -597,20 +597,40 @@ function askDeleteTask(id) {
  * @param {string} id
  */
 function editTask(id) {
-  let task = findTaskById(id);
+  console.log(id);
+  const newCategory = document.getElementById('firstValue').innerText
+  const task = findTaskById(id);
   if (allInputsFilled()) {
     task.title = document.getElementById("title").value;
     task.description = document.getElementById("description").value;
     task.dueDate = document.getElementById("dueDate").value;
-    // task.assignedTo = assignedContacts();
+    task.assignedTo = assignedContacts;
     task.prio = returnPrioState();
     // task.subtasks = getSubtasks();
+    console.log(id);
+    if (categoryIsChanged(id, newCategory)) {
+      user.epics.forEach(epic => {
+        if (epic.name == newCategory) {
+          task.id = createID(epic);
+          epic.tasks.push(task);
+          task.id = id;
+          deleteTask(id);
+          console.log(id);
+        }
+      })
+    }
   }
+
   document.getElementById("fullscreen").style.display = "none";
   document.getElementById("opened-card-container").classList.add("d-none");
   startRender();
   saveData();
   goThroughAllEpics();
+}
+
+function categoryIsChanged(id, newCategory) {
+  return newCategory != findEpicById(id).name
+
 }
 
 /**
