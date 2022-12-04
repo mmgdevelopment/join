@@ -41,7 +41,7 @@ async function saveData() {
 }
 
 /**
- * saves current user in local varriable 'user'
+ * saves current user in local varriable 'user'//
  */
 function setUser() {
     let emailUser = localStorage.getItem('user-email');
