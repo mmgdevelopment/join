@@ -472,7 +472,7 @@ function closeCard(id) {
  */
 function openCardEdit(id) {
   closeCard(id);
-  showTemplateToEditTask();
+  showTemplateToEditTask(id);
   renderCategorySelector();
   renderContactSelector();
   fillAllInputs(id);
@@ -503,7 +503,7 @@ function showTemplateToAddTask(category) {
   };
 }
 
-function showTemplateToEditTask() {
+function showTemplateToEditTask(id) {
   document.getElementById('fullscreen').style.display = 'block';
   document.getElementById('headline').innerHTML = 'Edit Task';
   document.getElementById("createTask").firstChild.data = 'save';
