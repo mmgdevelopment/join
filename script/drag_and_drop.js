@@ -599,6 +599,7 @@ function askDeleteTask(id) {
 function editTask(id) {
   if (allInputsFilled()) {
     updateTask(id)
+    clearAllInput();
     document.getElementById("fullscreen").style.display = "none";
     document.getElementById("opened-card-container").classList.add("d-none");
     startRender();
@@ -614,7 +615,7 @@ function updateTask(id) {
   task.dueDate = document.getElementById("dueDate").value;
   task.assignedTo = assignedContacts;
   task.prio = returnPrioState();
-  // task.subtasks = getSubtasks();
+  task.subtasks = getSubtasks();
   updateEpic(task, id)
 }
 
