@@ -105,14 +105,6 @@ function goToBoard() {
     }
 }
 
-/**
- * @returns current html site
- */
-function currentSite() {
-    let currentSite = window.location.href;
-    currentSite = currentSite.substring(currentSite.lastIndexOf('/'));
-    return currentSite;
-}
 
 /**
  * @returns boolean if all inputs are filled or not

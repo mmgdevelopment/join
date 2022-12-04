@@ -10,6 +10,29 @@ async function includeHTML() {
             element.innerHTML = 'Page not found';
         }
     }
+    showCurrentPage();
+}
+
+function showCurrentPage() {
+    document.getElementById(getID(currentSite())).classList.add('activeSite');
+    document.getElementById(getID(currentSite())).style.pointerEvents = 'none';
+    document.getElementById(getID(currentSite())).style.userSelect = 'none';
+
+}
+
+/**
+ * @returns current html site
+ */
+function currentSite() {
+    let currentSite = window.location.href;
+    currentSite = currentSite.substring(currentSite.lastIndexOf('/'));
+    return currentSite;
+}
+
+function getID(path) {
+    const pathWithoutDash = path.slice(1);
+    const id = pathWithoutDash.slice(0, -5);
+    return id;
 }
 
 
