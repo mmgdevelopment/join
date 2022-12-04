@@ -21,7 +21,7 @@ async function init() {
     renderCategorySelector();
     renderContactSelector();
     colorPicker('blue');
-};
+}
 
 /**
  * Backend Functions
