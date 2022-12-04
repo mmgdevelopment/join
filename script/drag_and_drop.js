@@ -536,7 +536,7 @@ function showCategoryInEditTasks(id) {
 
 function showAssignedContactsInEditTasks(task) {
   assignedContacts = task.assignedTo;
-  renderContactsFromArray(); // checkbox need to be checked
+  renderContactsFromArray();
   fillCheckboxes();
 }
 
@@ -545,15 +545,9 @@ function fillCheckboxes() {
   for (let i = 0; i < selectableContacts.length; i++) {
     const selectableContact = selectableContacts[i];
     const selectedContact = assignedContacts.find(element => element.name == selectableContact.innerText);
-
-    // console.log(selectedContact);
     if (selectedContact) {
-      selectableContact.lastElementChild.checked = true;
+      selectableContact.lastElementChild.setAttribute('checked', true);
     }
-    // assignedContacts.find(contact.name == selectableContact, () => {
-    //   selectableContact.previousElementSibling.checked = true;
-    // })
-
   }
 
 }
