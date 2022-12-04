@@ -30,8 +30,8 @@ function currentSite() {
 }
 
 function getID(path) {
-    const pathWithoutDash = path.slice(1);
-    const id = pathWithoutDash.slice(0, -5);
+    const pathWithoutHTML = path.split('.html')[0]
+    const id = pathWithoutHTML.slice(1);
     return id;
 }
 
