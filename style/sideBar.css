@@ -84,6 +84,8 @@ nav {
 
 #help {
     cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
 }
 
 a {
