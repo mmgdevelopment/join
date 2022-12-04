@@ -141,7 +141,16 @@ a img {
     padding: 2px;
     width: 25px;
     height: 25px;
+    margin-bottom: 10px;
+}
 
+.legalNotes {
+    width: 100%;
+    justify-content: center;
+}
+
+div:has(> a.legalNotes) {
+    width: 100%;
 }
 
 
