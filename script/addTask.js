@@ -194,6 +194,7 @@ function setEventListener(id, opponent) {
  */
 window.addEventListener('click', (event) => {
     renderAssignedContactsIfClosed();
+    drawDueDateInputColor();
     if (event.target.id == 'fullscreen') {
         closeAddTaskTemplate();
     }
@@ -212,6 +213,7 @@ window.addEventListener('click', (event) => {
 })
 
 window.addEventListener('keypress', (event) => {
+    drawDueDateInputColor();
     const subtaskInput = document.getElementById('subtaskInput') || '';
     const newCategory = document.getElementById('categorySelectorPlaceholder')?.nextElementSibling || '';
     const categoryInput = document.getElementById('categoryInput');
@@ -235,6 +237,19 @@ function closeAllCustomSelectors() {
     document.getElementById('assignedSelector').classList.remove('open');
     scrollToTop();
     renderAssignedContactsIfClosed();
+}
+function drawDueDateInputColor() {
+    const dueDate = document.getElementById('dueDate');
+    if (dueDate.value == '') {
+        dueDate.style.color = '#D1D1D1'
+    }
+    if (dueDate.value != '') {
+        dueDate.style.color = 'black'
+    }
+
+
+
+
 }
 
 /**
