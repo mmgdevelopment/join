@@ -213,7 +213,6 @@ window.addEventListener('click', (event) => {
 })
 
 window.addEventListener('keypress', (event) => {
-    drawDueDateInputColor();
     const subtaskInput = document.getElementById('subtaskInput') || '';
     const newCategory = document.getElementById('categorySelectorPlaceholder')?.nextElementSibling || '';
     const categoryInput = document.getElementById('categoryInput');
