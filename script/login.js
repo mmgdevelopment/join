@@ -9,7 +9,9 @@ let epicsArray = [
         "name": "Backoffice",
         "totalTasks": 0,
         "color": "blue",
-        "tasks": []
+        "tasks": [
+
+        ]
     },
     {
         "name": 'Marketing',

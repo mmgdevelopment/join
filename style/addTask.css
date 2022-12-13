@@ -491,6 +491,14 @@ ul {
     .container {
         margin-left: 0;
     }
+
+    #addTaskTemplate {
+        position: absolute;
+    }
+
+    #fullscreen {
+        height: 200vh;
+    }
 }
 
 @media (max-width: 850px) {
