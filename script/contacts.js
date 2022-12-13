@@ -8,6 +8,18 @@ let indexOfUser;
 let user;
 let contacts;
 
+let certainContact;
+let firstLetters;
+let initials;
+let contactMail;
+let contactColor;
+let contactPhone;
+
+let allNames = [];
+let allFirstLetters = [];
+let allLettersOnce = [];
+
+let IDOfEditContact;
 
 
 
@@ -44,9 +56,6 @@ function defineUser() {
 /**
  * function renders the list of all contacts
  */
-let allNames = [];
-let allFirstLetters = [];
-let allLettersOnce = [];
 function renderList() {
     getAllNames();
     getFirstCharOfNames();
@@ -132,14 +141,6 @@ function renderAllContacts() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-let certainContact;
-let firstLetters;
-let initials;
-let contactMail;
-let contactColor;
-let contactPhone;
-
-
 /**
  * function defines all variables needed for rendering contact, depending on name
  * @param {string} name 
@@ -210,7 +211,6 @@ function checkForMobileView() {
         document.getElementById('add-btn').classList.add('d-none')
     }
 }
-
 
 
 function openMobileList() {
@@ -408,7 +408,6 @@ function ensertInfoIntoEdit(name) {
 }
 
 
-let IDOfEditContact;
 /**
  * function changes infos of contacts, based on the id of the contact
  */
