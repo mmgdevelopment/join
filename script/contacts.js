@@ -1,7 +1,7 @@
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
 let users = [];
-let colors = ['#FF7A00', '#9327FF', '#29ABE2', '#FC71FF', '#02CF2F', '#AF1616', '#462F8A', '#FFC700'];
+let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
 let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
 let email;
 let indexOfUser;
@@ -180,7 +180,7 @@ function renderSingleContact(name, letter) {
 function listContactHTML(name, letter) {
     document.getElementById(`letter-${letter}`).innerHTML += `
     <div onclick="showContactEntrie('${name}')" class="single-contact">
-        <span class="initials" style="background-color:${contactColor};">${initials}</span>
+        <span class="initials ${contactColor}" ;">${initials}</span>
         <div class="name-and-mail">
             <p>${name}</p>
             <p class="mail">${contactMail}</p>
@@ -229,7 +229,7 @@ function selectetContactHTML(name) {
     <img onclick="openMobileList()" class="mobile-back-arrow only-mobile" src="./assets/mobile-back-arrow.svg">
     <img onclick="editPopUp('${name}')" class="mobile-edit-btn only-mobile" src="./assets/mobile-contact-edir.svg">
     <div class="huge-contact">
-        <span class="huge-initials" style="background-color:${contactColor};">${initials}</span>
+        <span class="huge-initials ${contactColor}" ;">${initials}</span>
         <div class="huge-name-add-task">
             <p class="huge-name">${name}</p>
             <a href="addTask.html" class="add-task">
@@ -362,11 +362,11 @@ function renderEditHTML() {
         <img onclick="closeEdit()" class="pop-up-exit only-desktop" src="./assets/pop-up-cross.svg">
 
         <div class="only-mobile">
-            <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
+            <span class="huge-initials pop-up-initials ${contactColor}"  ;">${initials}</span>
         </div>
     
         <div class="only-desktop">
-            <span class="huge-initials pop-up-initials" style="background-color:${contactColor};">${initials}</span>
+            <span class="huge-initials pop-up-initials  ${contactColor}" ;">${initials}</span>
         </div>
     
         <div class="all-inputfields">

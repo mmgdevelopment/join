@@ -277,11 +277,12 @@ function getAssignedContact(task) {
   printExtraContactOnes = true;
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i]["name"];
+    const color = task["assignedTo"][i]["color"];
     contact = fullContact.split(" ");
     const sureName = contact[0];
     const lastName = contact[1];
     let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    checkLocationContacts(contactInitials, task, fullContact, i);
+    checkLocationContacts(contactInitials, task, fullContact, i, color);
   }
 }
 
@@ -294,16 +295,16 @@ function getAssignedContact(task) {
  * @param {string} contactName
  * @param {number} i
  */
-function checkLocationContacts(contactInitials, task, contactName, i) {
+function checkLocationContacts(contactInitials, task, contactName, i, color) {
   if (cardWasOpened) {
     if (openEdit) {
-      renderEditContactsHTML(contactInitials, task);
+      renderEditContactsHTML(contactInitials, task, color);
     } else {
-      renderCardContactsHTML(contactInitials, task, contactName);
+      renderCardContactsHTML(contactInitials, task, contactName, color);
     }
   }
   if (!cardWasOpened && printExtraContactOnes) {
-    checkContactsToRender(contactInitials, task, contactName, i);
+    checkContactsToRender(contactInitials, task, contactName, i, color);
   }
 }
 
@@ -317,15 +318,15 @@ function checkLocationContacts(contactInitials, task, contactName, i) {
  * @return just ends the loop
  */
 
-function checkContactsToRender(contactInitials, task, contactName, i) {
+function checkContactsToRender(contactInitials, task, contactName, i, color) {
   if (i <= 2 && task["assignedTo"].length <= 3) {
-    renderAssignedContactsHTML(contactInitials, task);
+    renderAssignedContactsHTML(contactInitials, task, color);
     return;
   }
   if (i == 2 && task["assignedTo"].length >= 2) {
     printExtraContact(task);
   } else {
-    renderAssignedContactsHTML(contactInitials, task);
+    renderAssignedContactsHTML(contactInitials, task, color);
   }
 }
 

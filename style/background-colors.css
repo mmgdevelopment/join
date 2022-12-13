@@ -25,6 +25,7 @@
 .green {
   background-color: #7ae229;
 }
+
 .neon-green {
   background-color: #02cf2f;
 }
@@ -34,7 +35,7 @@
   background-color: #fc71ff;
 }
 
-#ocean .ocean {
+#ocean, .ocean {
   background-color: #29abe2;
 }
 

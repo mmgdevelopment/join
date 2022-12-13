@@ -194,6 +194,7 @@ function setEventListener(id, opponent) {
  */
 window.addEventListener('click', (event) => {
     renderAssignedContactsIfClosed();
+    drawDueDateInputColor();
     if (event.target.id == 'fullscreen') {
         closeAddTaskTemplate();
     }
@@ -235,6 +236,19 @@ function closeAllCustomSelectors() {
     document.getElementById('assignedSelector').classList.remove('open');
     scrollToTop();
     renderAssignedContactsIfClosed();
+}
+function drawDueDateInputColor() {
+    const dueDate = document.getElementById('dueDate');
+    if (dueDate.value == '') {
+        dueDate.style.color = '#D1D1D1'
+    }
+    if (dueDate.value != '') {
+        dueDate.style.color = 'black'
+    }
+
+
+
+
 }
 
 /**
@@ -646,7 +660,7 @@ function renderChoosenCategory(id) {
 
 function assignedToContactCircleTemplate(shortName, color) {
     return /*html*/ `
-    <div style="background-color: ${color}" class="assignedTo">${shortName}</div>
+    <div class="assignedTo ${color} ">${shortName}</div>
     `
 }
 

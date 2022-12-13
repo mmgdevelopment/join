@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./style/contacts.css">
     <link rel="stylesheet" href="./style/contactMobile.css">
     <link rel="stylesheet" href="./style/fonts.css">
+    <link rel="stylesheet" href="./style/background-colors.css">
 
     <script src="./script/mini_backend.js"></script>
     <script src="./script/contacts.js"></script>
@@ -60,7 +61,8 @@
 
             <div id="pop-up-window" class="pop-up-window hidden">
 
-                <img onclick="closeNewContact()" class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+                <img onclick="closeNewContact()" class="mobile-pop-up-cross only-mobile"
+                    src="./assets/mobile-add-task-cross.svg">
 
                 <div class="pop-up-left">
                     <div class="left-content">
@@ -80,12 +82,14 @@
                     <form onsubmit="createNewContact(); return false;" class="all-inputfields">
 
                         <div class="pop-up-inputfield">
-                            <input id="newName" class="pop-up-input" type="text" placeholder="Name" title="Please ensert a name" required>
+                            <input id="newName" class="pop-up-input" type="text" placeholder="Name"
+                                title="Please ensert a name" required>
                             <img src="./assets/profile.svg">
                         </div>
 
                         <div class="pop-up-inputfield">
-                            <input id="newEmail" class="pop-up-input" type="email" placeholder="Email" title="Please ensert an email" required>
+                            <input id="newEmail" class="pop-up-input" type="email" placeholder="Email"
+                                title="Please ensert an email" required>
                             <img src="./assets/mail.svg">
                         </div>
 
@@ -117,7 +121,8 @@
 
             <div id="pop-up-edit-window" class="pop-up-window hidden">
 
-                <img onclick="closeEdit()" class="mobile-pop-up-cross only-mobile" src="./assets/mobile-add-task-cross.svg">
+                <img onclick="closeEdit()" class="mobile-pop-up-cross only-mobile"
+                    src="./assets/mobile-add-task-cross.svg">
 
                 <div class="pop-up-left">
                     <div class="left-content">

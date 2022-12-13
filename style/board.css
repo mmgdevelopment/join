@@ -252,15 +252,6 @@ h2 {
   font-size: 12px;
 }
 
-.contact:nth-child(2) {
-  transform: translateX(-15%);
-  background-color: green;
-}
-
-.contact:nth-child(3) {
-  transform: translateX(-30%);
-  background-color: green;
-}
 
 #opened-card-container {
   position: fixed;
