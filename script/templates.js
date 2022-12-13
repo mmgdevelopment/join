@@ -43,7 +43,6 @@ function showLogOut() {
     let logOut = document.getElementById('log-out');
     if (logOut.classList.contains('d-none')) {
         document.getElementById('log-out').classList.remove('d-none');
-        console.log('hallo')
     } else {
         document.getElementById('log-out').classList.add('d-none');
     }

@@ -553,7 +553,6 @@ function showSubtasksInEditTasks(task) {
   if (subtasks.length) {
     for (let i = 0; i < subtasks.length; i++) {
       const subtask = subtasks[i];
-      console.log(subtask);
       document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask.name, i);
     }
   }

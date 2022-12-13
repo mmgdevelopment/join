@@ -13,7 +13,6 @@ async function init() {
     renderGreeting();
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
-    console.log(users);
     renderPage();
 }
 
@@ -179,7 +178,7 @@ function getAllTasks(epic) {
  * function pushes the prio of all tasks and their due date into urgency json
  * @param {array} task 
  */
- function pushPrioAndDate(task) {
+function pushPrioAndDate(task) {
     urgency.push({ 'prio': task['prio'], 'date': task['dueDate'] });
 }
 
@@ -230,7 +229,7 @@ function displayAllTaksNumbers() {
  * function renders the task with the highest priority, if there is any
  */
 function renderHighestPrio() {
-    if(!inBoard == 0) {
+    if (!inBoard == 0) {
         renderMidCard();
     }
 }

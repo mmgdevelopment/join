@@ -241,8 +241,6 @@ async function checkForAutoLogIn() {
 function insertLoginMailPassword() {
     let localMail = localStorage.getItem('user-email');
     let user = users.find(u => u.email == localMail);
-    console.log(password.value);
-
     email.value = localMail;
     password.value = user['password'];
 }
@@ -329,7 +327,6 @@ function saveGuestToLocalStorage() {
  */
 async function addGuestToUsers() {
     users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray, contacts: exampleContacts });
-    console.log(users);
     await backend.setItem('users', JSON.stringify(users));
 }
 
@@ -486,7 +483,6 @@ function confirmTheNewPassword(user, firstPassword, secondPassword) {
  * @param {JSON} user 
  */
 async function switchOldWithNewPassword(user, firstPassword) {
-    console.log(user);
     let userIndex = users.findIndex(u => u.email == user['email']);
     users[userIndex]['password'] = firstPassword;
     await backend.setItem('users', JSON.stringify(users));

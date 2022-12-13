@@ -224,8 +224,7 @@ window.addEventListener('keypress', (event) => {
     }
     if (event.key == 'Enter' && document.activeElement == categoryInput) {
         addCategoryButtonTouched();
-        console.log();
-        console.log(document.getElementById('assignedSelectorPlaceholder').nextElementSibling);
+        ('assignedSelectorPlaceholder').nextElementSibling);
         // document.getElementById('assignedSelectorPlaceholder').nextElementSibling.focus(); /not Working
     }
 
