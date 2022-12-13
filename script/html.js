@@ -85,9 +85,9 @@ function renderSubtaskHTML(name, i, id) {
  * @param {object} task to find the spot where it is rendered
  * @param {string} contactInitials
  */
-function renderAssignedContactsHTML(contactInitials, task) {
+function renderAssignedContactsHTML(contactInitials, task, color) {
   document.getElementById("assigned" + task["id"]).innerHTML += `
-    <div class="contact">${contactInitials}</div>`;
+    <div class="contact ${color}">${contactInitials}</div>`;
 }
 
 /**
@@ -101,7 +101,7 @@ function renderAssignedContactsHTML(contactInitials, task) {
 
 function renderCardContactsHTML(contactInitials, task, contactName) {
   document.getElementById("assignedCard" + task["id"]).innerHTML += `
-   <div class="d-flex-gap-20"><div class="contact-on-card">${contactInitials}</div><span class="contact-name">${contactName}</span></div>  `;
+   <div class="d-flex-gap-20"><div class="contact-on-card">${contactInitials}</div><span class="contact-name  ${color}">${contactName}</span></div>  `;
 }
 
 /**
@@ -111,9 +111,9 @@ function renderCardContactsHTML(contactInitials, task, contactName) {
  * @param {object} task
  */
 
-function renderEditContactsHTML(contactInitials, task) {
+function renderEditContactsHTML(contactInitials, task, color) {
   document.getElementById("edit-assignedTo").innerHTML += `
-    <div class="contact">${contactInitials}</div>`;
+    <div class="contact  ${color}">${contactInitials}</div>`;
 }
 /**
  * This function removes the searchbar and puts it in Desktop view and changes the wording of the Addtask-Button
