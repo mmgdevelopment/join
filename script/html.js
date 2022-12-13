@@ -99,7 +99,7 @@ function renderAssignedContactsHTML(contactInitials, task, color) {
  *
  */
 
-function renderCardContactsHTML(contactInitials, task, contactName) {
+function renderCardContactsHTML(contactInitials, task, contactName, color) {
   document.getElementById("assignedCard" + task["id"]).innerHTML += `
    <div class="d-flex-gap-20"><div class="contact-on-card">${contactInitials}</div><span class="contact-name  ${color}">${contactName}</span></div>  `;
 }
