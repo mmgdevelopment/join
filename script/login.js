@@ -30,55 +30,55 @@ let exampleContacts = [
         "name": "Anton Mayer",
         "email": "antom@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#FF7A00"
+        "color": "green"
     },
     {
         "name": "Anja Schulz",
         "email": "schulz@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#9327FF"
+        "color": "yellow"
     },
     {
         "name": "Benedikt Ziegler",
         "email": "benedikt@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#29ABE2"
+        "color": "pink"
     },
     {
         "name": "David Eisenberg",
         "email": "david@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#FC71FF"
+        "color": "blue"
     },
     {
         "name": "Eva Fischer",
         "email": "eva@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#02CF2F"
+        "color": "purple"
     },
     {
         "name": "Emanuel Mauer",
         "email": "emanuel@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#AF1616"
+        "color": "red"
     },
     {
         "name": "Marcel Bauer",
         "email": "marcel@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#462F8A"
+        "color": "neon-green"
     },
     {
         "name": "Steven Munk",
         "email": "steven@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#FFC700"
+        "color": "ocean"
     },
     {
         "name": "Kevin Lentz",
         "email": "kevin@gmail.com",
         "phone": "+49 11 11 1111",
-        "color": "#FF7A00"
+        "color": "dark-red"
     },
 ];
 
@@ -304,7 +304,7 @@ function saveLoggedInUser(user) {
 /**
  * function loggs in user as guest
  */
- async function guestLogin() {
+async function guestLogin() {
     saveGuestToLocalStorage();
     await addGuestToUsers();
     goToSummary();

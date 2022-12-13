@@ -660,7 +660,7 @@ function renderChoosenCategory(id) {
 
 function assignedToContactCircleTemplate(shortName, color) {
     return /*html*/ `
-    <div style="background-color: ${color}" class="assignedTo">${shortName}</div>
+    <div class="assignedTo ${color} ">${shortName}</div>
     `
 }
 
