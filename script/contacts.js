@@ -51,7 +51,7 @@ function renderList() {
     getAllNames();
     getFirstCharOfNames();
     renderAllExistingLetters();
-    renderAllContacts()
+    renderAllContacts();
 }
 
 

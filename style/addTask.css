@@ -465,6 +465,10 @@ ul {
 
 @media (max-width: 1230px) {
 
+    body {
+        justify-content: center;
+    }
+
     .forms {
         flex-direction: column;
         justify-content: unset;
@@ -482,6 +486,10 @@ ul {
     .buttonContainer {
         position: unset;
         margin: 45px;
+    }
+
+    .container {
+        margin-left: 0;
     }
 }
 
