@@ -86,7 +86,6 @@ function renderSubtaskHTML(name, i, id) {
  * @param {string} contactInitials
  */
 function renderAssignedContactsHTML(contactInitials, task, color) {
-  console.log(task["id"]);
   document.getElementById("assigned" + task["id"]).innerHTML += `
     <div class="contact ${color}">${contactInitials}</div>`;
 }
