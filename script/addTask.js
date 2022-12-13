@@ -224,8 +224,6 @@ window.addEventListener('keypress', (event) => {
     }
     if (event.key == 'Enter' && document.activeElement == categoryInput) {
         addCategoryButtonTouched();
-        ('assignedSelectorPlaceholder').nextElementSibling);
-        // document.getElementById('assignedSelectorPlaceholder').nextElementSibling.focus(); /not Working
     }
 
 })
@@ -659,7 +657,7 @@ function renderChoosenCategory(id) {
 
 function assignedToContactCircleTemplate(shortName, color) {
     return /*html*/ `
-    <div class="assignedTo ${color} ">${shortName}</div>
+    <div  class="assignedTo ${color} ">${shortName}</div>
     `
 }
 
