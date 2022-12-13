@@ -8,5 +8,6 @@
     "editor.fontFamily": "Menlo, Monaco, 'Courier New', monospace",
     "editor.tabSize": 4,
     "editor.wordWrap": "on",
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": false
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": false,
+    "liveServer.settings.port": 5501
 }
