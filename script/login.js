@@ -27,6 +27,10 @@ let epicsArray = [
     }
 ]
 
+const guestUserEpicsArray = [
+    [{ "name": "Backoffice", "totalTasks": 1, "color": "blue", "tasks": [{ "id": "back0", "title": "Delete console.log", "description": "Alle console.log Statements löschen", "assignedTo": [{ "name": "Anja Schulz", "color": "yellow" }, { "name": "Benedikt Ziegler", "color": "pink" }, { "name": "David Eisenberg", "color": "blue" }], "dueDate": "2022-12-08", "prio": "low", "subtasks": [], "category": "feedback" }] }, { "name": "Marketing", "totalTasks": 1, "color": "red", "tasks": [{ "id": "mark0", "title": "Dummy Tasks erstellen", "description": "Mehrere Dummy tasks für den Test User erstellen", "assignedTo": [{ "name": "Kevin Lentz", "color": "dark-red" }], "dueDate": "2022-12-10", "prio": "urgent", "subtasks": [], "category": "done" }] }, { "name": "Development", "totalTasks": 2, "color": "orange", "tasks": [{ "id": "deve0", "title": "Margin anpassen", "description": "Abstände der Seite alle auf 25 px angleichen", "assignedTo": [{ "name": "Steven Munk", "color": "ocean" }, { "name": "Kevin Lentz", "color": "dark-red" }], "dueDate": "2022-12-18", "prio": "urgent", "subtasks": [], "category": "todo" }, { "id": "deve1", "title": "Code review", "description": "Jeder stellt seinen Code vor", "assignedTo": [{ "name": "Marcel Bauer", "color": "neon-green" }, { "name": "Steven Munk", "color": "ocean" }, { "name": "Kevin Lentz", "color": "dark-red" }], "dueDate": "2022-12-29", "prio": "medium", "subtasks": [{ "name": "Steven", "checked": false }, { "name": "Kevin", "checked": false }, { "name": "Marcel", "checked": false }], "category": "todo" }] }]
+]
+
 let exampleContacts = [
     {
         "name": "Anton Mayer",
@@ -326,7 +330,7 @@ function saveGuestToLocalStorage() {
  * function adds guest account on first place in users JSON
  */
 async function addGuestToUsers() {
-    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: epicsArray, contacts: exampleContacts });
+    users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: guestUserEpicsArray, contacts: exampleContacts });
     await backend.setItem('users', JSON.stringify(users));
 }
 
