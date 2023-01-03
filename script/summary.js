@@ -30,7 +30,6 @@ function loadUser() {
  * function renders greetings depending on login and device width
  */
 function renderGreeting() {
-
     if (userComesFromLogin()) {
         if (userHasMobileDevice()) {
             renderMobileGreeting();
@@ -40,7 +39,6 @@ function renderGreeting() {
     } else {
         renderSummary();
     }
-
 }
 
 
@@ -209,7 +207,7 @@ function getAllTasksNumbers() {
     inProgress = (workingStages.filter(x => x === 'progress').length);
     awaitingFeedback = (workingStages.filter(x => x === 'feedback').length);
     done = (workingStages.filter(x => x === 'done').length);
-    inBoard = (toDo + inProgress + awaitingFeedback);
+    inBoard = (toDo + inProgress + awaitingFeedback + done);
 }
 
 

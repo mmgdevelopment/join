@@ -2,7 +2,7 @@ setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
 let users = [];
 let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
-let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
+let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','a' ,'b' ,'c' ,'d' ,'e' ,'f' ,'g' ,'h' ,'i' ,'j' ,'k' ,'l' ,'m' ,'n' ,'o' ,'p' ,'q' ,'r' ,'s' ,'t' ,'u' ,'v' ,'w' ,'x' ,'y' ,'z']
 let email;
 let indexOfUser;
 let user;
@@ -84,6 +84,7 @@ function getFirstCharOfNames() {
         const name = allNames[i];
         allFirstLetters.push(name.charAt(0));
     }
+    console.log(allFirstLetters);
 }
 
 
@@ -98,6 +99,7 @@ function renderAllExistingLetters() {
             renderLetterCategory(letter);
         }
     }
+    console.log(allLettersOnce);
 }
 
 
