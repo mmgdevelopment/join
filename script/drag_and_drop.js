@@ -453,6 +453,7 @@ function openCard(id) {
   getAssignedContact(task);
   getAllSubtasks(task);
   tickCheckBox(task);
+  removeKanbanOnPhone();
 }
 
 /**
@@ -465,6 +466,7 @@ function closeCard(id) {
   openEdit = false;
   closeCardHTML();
   checkSubtaskAmount(findTaskById(id));
+  addKanbanOnPhone();
 }
 
 /**
@@ -521,12 +523,12 @@ function showTemplateToEditTask(id) {
 
 function removeKanbanOnPhone(){
 
-  if(y.matches){document.getElementById('kanban').classList.add('d-none')}
+  if(y.matches){document.getElementById('main').classList.add('d-none')}
   
 }
 
 function addKanbanOnPhone(){
-  document.getElementById('kanban').classList.remove('d-none')
+  document.getElementById('main').classList.remove('d-none')
 }
 /**
  * This function fills the input of the editCard with the information of the task which is to be edit

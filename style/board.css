@@ -501,12 +501,44 @@ z-index: 1;
     background-color: rgb(245, 245, 245);
     z-index: 3;
   } */
+
+  .wrapper{
+    flex-direction: column;
+  }
+
+  
+.edit-btn{
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  margin-inline: 1px;
+}
+
+.close-btn{
+  position: fixed;
+  top: 15%;
+  right: 10%;
+  margin-inline: 1px;
+}
 }
 
 @media only screen and (max-width: 1080px) {
   #kanban {
     flex-direction: column;
     margin-bottom: 100px;
+  }
+
+  #opened-card-container{
+    position: absolute !important;
+  }
+
+  #opened-card-container > #edit-area{
+    position: absolute;
+    top: 75px;
+    margin-inline: 1px;
+    padding-bottom: 130px;
+    overflow: auto;
+
   }
 
   main {
@@ -568,3 +600,4 @@ z-index: 1;
   }
 
 }
+
