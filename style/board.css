@@ -252,6 +252,13 @@ h2 {
   font-size: 12px;
 }
 
+.contact:nth-child(2){
+  transform: translateX(-30%);
+}
+.contact:nth-child(3){
+  transform: translateX(-60%);
+}
+
 #opened-card-container {
   position: fixed;
 }
@@ -372,7 +379,6 @@ h2 {
 
 .extra-contact {
   background-color: #2a3647 !important;
-  transform: translateX(-30%);
 }
 
 .urgent,
