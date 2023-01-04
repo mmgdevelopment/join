@@ -551,6 +551,7 @@ function closeAddTaskTemplate() {
     clearAllInput();
     resetInputRequiredMessages()
     hide('fullscreen');
+    addKanbanOnPhone();
 }
 
 function closeInviteInput() {

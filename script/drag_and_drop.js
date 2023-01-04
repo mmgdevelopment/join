@@ -486,6 +486,7 @@ function openCardEdit(id) {
  */
 function showAddTask(category) {
   clearAllInput();
+  removeKanbanOnPhone();
   showTemplateToAddTask(category);
   renderCategorySelector();
   renderContactSelector();
@@ -517,6 +518,14 @@ function showTemplateToEditTask(id) {
   };
 }
 
+function removeKanbanOnPhone(){
+  console.log(x);
+  if(x){  document.getElementById('kanban').classList.add('d-none')}
+}
+
+function addKanbanOnPhone(){
+  if(x){document.getElementById('kanban').classList.remove('d-none')}
+}
 /**
  * This function fills the input of the editCard with the information of the task which is to be edit
  *
