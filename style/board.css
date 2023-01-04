@@ -31,7 +31,7 @@ h2 {
   color: white;
 }
 
-#edit-area>div>div .buttonContainer {
+#edit-area > div > div .buttonContainer {
   position: unset;
   margin: 10px;
 }
@@ -139,7 +139,7 @@ h2 {
   gap: 26px;
 }
 
-#kanban>* {
+#kanban > * {
   flex-basis: 100%;
   display: flex;
   flex-direction: column;
@@ -252,59 +252,66 @@ h2 {
   font-size: 12px;
 }
 
+.contact:nth-child(2) {
+  transform: translateX(-30%);
+}
+.contact:nth-child(3) {
+  transform: translateX(-60%);
+}
 
 #opened-card-container {
   position: fixed;
 }
 
-#opened-card-container>.task-card {
+#opened-card-container > .task-card {
   position: relative;
   padding: 50px;
 }
 
-#opened-card-container>.task-card>.close-btn {
+#opened-card-container > .task-card > .close-btn {
   position: absolute;
   right: 0px;
   top: 0px;
   padding: 25px 40px 0 0;
 }
 
-#opened-card-container>.task-card>.edit-btn {
+#opened-card-container > .task-card > .edit-btn {
   position: absolute;
   right: 30px;
   bottom: 30px;
 }
 
-#opened-card-container>.task-card>.epic {
+#opened-card-container > .task-card > .epic {
   padding: 4px 36.5px;
   font-size: 27px;
 }
 
-#opened-card-container>.task-card>.task-name {
+#opened-card-container > .task-card > .task-name {
   font-size: 61px;
   margin: unset;
   margin-top: 25px;
 }
 
-#opened-card-container>.task-card>.task-description {
+#opened-card-container > .task-card > .task-description {
   font-size: 21px;
 }
 
-#opened-card-container>.task-card>div>div>span {
+#opened-card-container > .task-card > div > div > span {
   font-size: 21px;
 }
 
-#opened-card-container>.task-card>div>div {
+#opened-card-container > .task-card > div > div {
   margin-top: 30px;
 }
 
-#opened-card-container>.task-card>div>div>span {
+#opened-card-container > .task-card > div > div > span {
   font-size: 21px;
   margin-right: 25px;
 }
 
 .close-btn {
   position: absolute;
+  margin: 35px;
   top: 0;
   right: 10px;
   padding: 20px;
@@ -321,7 +328,7 @@ h2 {
   justify-content: space-between;
 }
 
-.wrapper>div>div {
+.wrapper > div > div {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
@@ -329,7 +336,7 @@ h2 {
   align-items: baseline;
 }
 
-.wrapper>div>div>span {
+.wrapper > div > div > span {
   margin-right: 40px;
 }
 
@@ -339,7 +346,7 @@ h2 {
   margin-left: 30px;
 }
 
-#openCardSubtasks>div {
+#openCardSubtasks > div {
   display: flex;
 }
 
@@ -372,7 +379,6 @@ h2 {
 
 .extra-contact {
   background-color: #2a3647 !important;
-  transform: translateX(-30%);
 }
 
 .urgent,
@@ -437,7 +443,7 @@ h2 {
   z-index: 0;
 }
 
-.dummy-card>div {
+.dummy-card > div {
   min-height: 180px;
 }
 
@@ -501,12 +507,46 @@ z-index: 1;
     background-color: rgb(245, 245, 245);
     z-index: 3;
   } */
+
+  .wrapper {
+    flex-direction: column;
+  }
+
+  /* .edit-btn{
+  position: fixed;
+  bottom: 10%;
+  right: 10%;
+  margin-inline: 1px;
+}
+
+.close-btn{
+  position: fixed;
+  top: 15%;
+  right: 10%;
+  margin-inline: 1px; */
+  /* } */
 }
 
 @media only screen and (max-width: 1080px) {
   #kanban {
     flex-direction: column;
     margin-bottom: 100px;
+  }
+
+  #opened-card-container {
+    position: absolute !important;
+  }
+
+  #opened-card-container > #edit-area {
+    position: absolute;
+    top: 75px;
+    margin-inline: 1px;
+    padding-bottom: 130px;
+    overflow: auto;
+  }
+
+  .templateContainer {
+    top: 775px;
   }
 
   main {
@@ -566,5 +606,4 @@ z-index: 1;
     min-height: unset;
     max-height: unset;
   }
-
 }

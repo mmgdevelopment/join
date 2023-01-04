@@ -453,6 +453,7 @@ function openCard(id) {
   getAssignedContact(task);
   getAllSubtasks(task);
   tickCheckBox(task);
+  removeKanbanOnPhone();
 }
 
 /**
@@ -465,6 +466,7 @@ function closeCard(id) {
   openEdit = false;
   closeCardHTML();
   checkSubtaskAmount(findTaskById(id));
+  addKanbanOnPhone();
 }
 
 /**
@@ -478,6 +480,7 @@ function openCardEdit(id) {
   renderCategorySelector();
   renderContactSelector();
   fillAllInputs(id);
+  removeKanbanOnPhone();
 }
 
 /**
@@ -495,22 +498,22 @@ function showAddTask(category) {
 
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById('headline').innerHTML = 'Add Task';
-  document.getElementById("createTask").firstChild.data = 'create task';
-  document.getElementById("clear").firstChild.data = 'clear'
+  document.getElementById("headline").innerHTML = "Add Task";
+  document.getElementById("createTask").firstChild.data = "create task";
+  document.getElementById("clear").firstChild.data = "clear";
   document.getElementById("clear").onclick = () => {
     clearAllInput();
-  }
+  };
   document.getElementById("createTask").onclick = () => {
     createTaskButtonTouched(category);
   };
 }
 
 function showTemplateToEditTask(id) {
-  document.getElementById('fullscreen').style.display = 'block';
-  document.getElementById('headline').innerHTML = 'Edit Task';
-  document.getElementById("createTask").firstChild.data = 'save';
-  document.getElementById("clear").firstChild.data = 'delete';
+  document.getElementById("fullscreen").style.display = "block";
+  document.getElementById("headline").innerHTML = "Edit Task";
+  document.getElementById("createTask").firstChild.data = "save";
+  document.getElementById("clear").firstChild.data = "delete";
   document.getElementById("createTask").onclick = () => {
     editTask(id);
   };
@@ -519,14 +522,14 @@ function showTemplateToEditTask(id) {
   };
 }
 
-function removeKanbanOnPhone(){
-
-  if(y.matches){document.getElementById('kanban').classList.add('d-none')}
-  
+function removeKanbanOnPhone() {
+  if (y.matches) {
+    document.getElementById("main").classList.add("d-none");
+  }
 }
 
-function addKanbanOnPhone(){
-  document.getElementById('kanban').classList.remove('d-none')
+function addKanbanOnPhone() {
+  document.getElementById("main").classList.remove("d-none");
 }
 /**
  * This function fills the input of the editCard with the information of the task which is to be edit
@@ -546,11 +549,11 @@ function fillAllInputs(id) {
 
 function showEpicInEditTasks(id) {
   let category = findEpicById(id);
-  let firstValue = document.getElementById('firstValue')
+  let firstValue = document.getElementById("firstValue");
   firstValue.innerHTML = `
     ${category.name}
     <div class="color ${category.color}"></div> 
-    `
+    `;
 }
 
 function showAssignedContactsInEditTasks(task) {
@@ -564,18 +567,23 @@ function showSubtasksInEditTasks(task) {
   if (subtasks.length) {
     for (let i = 0; i < subtasks.length; i++) {
       const subtask = subtasks[i];
-      document.getElementById('subtaskList').innerHTML += subtasklistTemplate(subtask.name, i);
+      document.getElementById("subtaskList").innerHTML += subtasklistTemplate(
+        subtask.name,
+        i
+      );
     }
   }
 }
 
 function fillContactCheckboxes() {
-  const selectableContacts = document.getElementsByClassName('selectable');
+  const selectableContacts = document.getElementsByClassName("selectable");
   for (let i = 0; i < selectableContacts.length; i++) {
     const selectableContact = selectableContacts[i];
-    const selectedContact = assignedContacts.find(element => element.name == selectableContact.innerText);
+    const selectedContact = assignedContacts.find(
+      (element) => element.name == selectableContact.innerText
+    );
     if (selectedContact) {
-      selectableContact.lastElementChild.setAttribute('checked', true);
+      selectableContact.lastElementChild.setAttribute("checked", true);
     }
   }
 }
@@ -615,7 +623,7 @@ function askDeleteTask(id) {
  */
 function editTask(id) {
   if (allInputsFilled()) {
-    updateTask(id)
+    updateTask(id);
     clearAllInput();
     document.getElementById("fullscreen").style.display = "none";
     document.getElementById("opened-card-container").classList.add("d-none");
@@ -637,7 +645,7 @@ function updateTask(id) {
   task.assignedTo = assignedContacts;
   task.prio = returnPrioState();
   task.subtasks = getSubtasks();
-  updateEpic(task, id)
+  updateEpic(task, id);
 }
 
 /**
@@ -646,16 +654,16 @@ function updateTask(id) {
  * @param {string} id from edited task
  */
 function updateEpic(task, id) {
-  const newCategory = document.getElementById('firstValue').innerText
+  const newCategory = document.getElementById("firstValue").innerText;
   if (categoryIsChanged(id, newCategory)) {
-    user.epics.forEach(epic => {
+    user.epics.forEach((epic) => {
       if (epic.name == newCategory) {
         task.id = createID(epic);
         epic.tasks.push(task);
         task.id = id;
         deleteTask(id);
       }
-    })
+    });
   }
 }
 
@@ -663,10 +671,10 @@ function updateEpic(task, id) {
  * checks if category is changed by user or not
  * @param {string} id of edited task
  * @param {string} newCategory user input in edit task card
- * @returns boolean 
+ * @returns boolean
  */
 function categoryIsChanged(id, newCategory) {
-  return newCategory != findEpicById(id).name
+  return newCategory != findEpicById(id).name;
 }
 
 /**
