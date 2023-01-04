@@ -145,7 +145,7 @@ h2 {
   flex-direction: column;
 }
 
-#kanban-clm {
+.kanban-clm {
   min-height: 40%;
   max-height: calc(100vh - 300px);
   overflow: auto;
@@ -155,7 +155,7 @@ h2 {
   /* Firefox */
 }
 
-#kanban-clm::-webkit-scrollbar {
+.kanban-clm::-webkit-scrollbar {
   display: none;
 }
 
@@ -523,7 +523,7 @@ z-index: 1;
     font-size: 21px;
   }
 
-  #kanban-clm {
+  .kanban-clm {
     min-height: 50px;
     margin-top: 20px;
     max-height: unset;
@@ -562,7 +562,7 @@ z-index: 1;
     z-index: 2;
   } */
 
-  #kanban-clm {
+  .kanban-clm {
     min-height: unset;
     max-height: unset;
   }
