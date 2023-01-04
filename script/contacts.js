@@ -2,7 +2,7 @@ setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
 let users = [];
 let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
-let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','a' ,'b' ,'c' ,'d' ,'e' ,'f' ,'g' ,'h' ,'i' ,'j' ,'k' ,'l' ,'m' ,'n' ,'o' ,'p' ,'q' ,'r' ,'s' ,'t' ,'u' ,'v' ,'w' ,'x' ,'y' ,'z']
+let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 let email;
 let indexOfUser;
 let user;
@@ -307,6 +307,15 @@ function closeNewContact() {
     document.getElementById('pop-up-container').classList.add('d-none');
     document.getElementById('pop-up-window').classList.remove('not-hidden');
     document.getElementById('pop-up-window').classList.remove('not-hidden-mobile');
+}
+
+
+/**
+ * function prevents popup from closing 
+ * @param {event} event 
+ */
+function dontClosePopup(event) {
+    event.stopPropagation(); 
 }
 
 
