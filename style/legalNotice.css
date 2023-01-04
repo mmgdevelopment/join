@@ -34,6 +34,7 @@ p {
   max-width: 70vw;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .container > div > p > a {
@@ -45,6 +46,7 @@ p {
   text-decoration: none;
   margin-inline: 5px;
   color: #29abe2;
+  width: unset;
 }
 
 .container > div > p > a:hover {
