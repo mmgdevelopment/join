@@ -519,7 +519,6 @@ function showTemplateToEditTask(id) {
 }
 
 function removeKanbanOnPhone(){
-  console.log(x);
   if(x){  document.getElementById('kanban').classList.add('d-none')}
 }
 
