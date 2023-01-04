@@ -252,10 +252,10 @@ h2 {
   font-size: 12px;
 }
 
-.contact:nth-child(2){
+.contact:nth-child(2) {
   transform: translateX(-30%);
 }
-.contact:nth-child(3){
+.contact:nth-child(3) {
   transform: translateX(-60%);
 }
 
