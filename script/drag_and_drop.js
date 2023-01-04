@@ -7,6 +7,7 @@ let printExtraContactOnes;
 let cardWasOpened = false;
 let openEdit = false;
 let x = window.matchMedia("(max-width: 800px)");
+let y = window.matchMedia("(max-width: 1080px)");
 x.addListener(checkWitdh);
 let dummysPrinted = false;
 let kanbanCategorys = ["todo", "progress", "feedback", "done"];
@@ -519,11 +520,13 @@ function showTemplateToEditTask(id) {
 }
 
 function removeKanbanOnPhone(){
-  if(x){  document.getElementById('kanban').classList.add('d-none')}
+
+  if(y.matches){document.getElementById('kanban').classList.add('d-none')}
+  
 }
 
 function addKanbanOnPhone(){
-  if(x){document.getElementById('kanban').classList.remove('d-none')}
+  document.getElementById('kanban').classList.remove('d-none')
 }
 /**
  * This function fills the input of the editCard with the information of the task which is to be edit
