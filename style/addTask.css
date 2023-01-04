@@ -499,6 +499,10 @@ ul {
     #fullscreen {
         height: 200vh;
     }
+
+    .templateContainer{
+        top: 800px;
+    }
 }
 
 @media (max-width: 850px) {
