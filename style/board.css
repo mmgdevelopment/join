@@ -517,6 +517,11 @@ z-index: 1;
     border-radius: 0px 0px 30px 30px;
   }
 
+  #opened-card-container > #edit-area {
+    top: 75px;
+  }
+
+
   /* .edit-btn{
   position: fixed;
   bottom: 10%;
@@ -544,7 +549,7 @@ z-index: 1;
 
   #opened-card-container > #edit-area {
     position: absolute;
-    top: 75px;
+    /* top: 75px; */
     margin-inline: 1px;
     padding-bottom: 130px;
     overflow: auto;
