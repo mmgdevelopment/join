@@ -512,6 +512,11 @@ z-index: 1;
     flex-direction: column;
   }
 
+  .templateContainer,
+  .task-card {
+    border-radius: 0px 0px 30px 30px;
+  }
+
   /* .edit-btn{
   position: fixed;
   bottom: 10%;
