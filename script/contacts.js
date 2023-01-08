@@ -216,7 +216,7 @@ function showContactEntrie(name) {
  * function hides list on mobile devices, so that contact entrie can be seen
  */
 function checkForMobileView() {
-    document.getElementById('selected-contact').classList.remove('d-none')
+    document.getElementById('contactEntrie').classList.remove('d-none')
     if (screen.width <= 1080) {
         document.getElementById('list').classList.add('d-none')
         document.getElementById('add-btn').classList.add('d-none')
@@ -227,7 +227,7 @@ function checkForMobileView() {
 function openMobileList() {
     document.getElementById('list').classList.remove('d-none')
     document.getElementById('add-btn').classList.remove('d-none')
-    document.getElementById('selected-contact').classList.add('d-none')
+    document.getElementById('contactEntrie').classList.add('d-none')
 }
 
 
@@ -264,7 +264,7 @@ function selectetContactHTML(name) {
 
     <p class="mail-and-phone">Phone</p>
 
-    <a href="tel:${contactPhone}" class="phone-number">${contactPhone}</a>
+    <a style="justify-content:start;"  href="tel:${contactPhone}" class="phone-number">${contactPhone}</a>
     `;
 }
 

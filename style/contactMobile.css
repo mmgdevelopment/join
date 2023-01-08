@@ -29,6 +29,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
+        padding-bottom: 20px;
     }
 
     .list {
@@ -97,6 +98,8 @@
     .contact-entrie {
         margin: 0px;
         width: 90%;
+        height: calc(100vh - 160px);
+        overflow: scroll;
     }
 
     .title {
@@ -123,6 +126,14 @@
 
     .huge-name {
         font-size: 36px;
+    }
+
+    .huge-name-add-task {
+        width: 70%;
+    }
+
+    .add-task {
+        gap: 5px;
     }
 
     .add-btn {
