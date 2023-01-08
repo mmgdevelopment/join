@@ -8,10 +8,13 @@
   background-color: #ffa800;
 }
 
+
+#yellow,
 .yellow {
   background-color: #ffc700;
 }
 
+#blue,
 .blue {
   background-color: #462f8a;
 }
@@ -35,7 +38,8 @@
   background-color: #fc71ff;
 }
 
-#ocean, .ocean {
+#ocean,
+.ocean {
   background-color: #29abe2;
 }
 

@@ -235,50 +235,6 @@ label {
 
 }
 
-/* #pink {
-    background-color: #FC71FF;
-}
-
-#yellow {
-    background-color: #FFA800;
-}
-
-#ocean {
-    background-color: #29ABE2;
-}
-
-#blue {
-    background-color: #462F8A;
-}
-
-#red {
-    background-color: #FF3D00;
-}
-
-#orange {
-    background-color: #FFA800;
-}
-
-#green {
-    background-color: #7AE229;
-}
-
-.pink {
-    background-color: #FC71FF;
-}
-
-.yellow {
-    background-color: #FFA800;
-}
-
-.ocean {
-    background-color: #29ABE2;
-}
-
-.blue {
-    background-color: #462F8A;
-} */
-
 .colorPicker {
     display: none;
     gap: 15px;
@@ -500,7 +456,7 @@ ul {
         height: 150vh;
     }
 
-    .templateContainer{
+    .templateContainer {
         top: 800px;
     }
 }
