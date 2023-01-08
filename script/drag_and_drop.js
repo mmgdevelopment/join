@@ -516,7 +516,7 @@ function showTemplateToAddTask(category) {
 
 function showTemplateToEditTask(id) {
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("headline").innerHTML = "Edit Task";
+  document.getElementById("headline").innerHTML = "";
   document.getElementById("createTask").firstChild.data = "save";
   document.getElementById("clear").firstChild.data = "delete";
   document.getElementById("createTask").onclick = () => {
