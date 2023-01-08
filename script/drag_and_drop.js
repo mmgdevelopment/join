@@ -279,11 +279,16 @@ function getAssignedContact(task) {
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i]["name"];
     const color = task["assignedTo"][i]["color"];
-    contact = fullContact.split(" ");
-    const sureName = contact[0];
-    const lastName = contact[1];
-    let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-    checkLocationContacts(contactInitials, task, fullContact, i, color);
+
+    const firstLetters = fullContact.match(/\b(\w)/g);
+    const initials = firstLetters.join('');
+
+    // contact = fullContact.split(" ");
+    // const sureName = contact[0];
+    // const lastName = contact[1];
+    // let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
+
+    checkLocationContacts(initials, task, fullContact, i, color);
   }
 }
 
@@ -511,7 +516,7 @@ function showTemplateToAddTask(category) {
 
 function showTemplateToEditTask(id) {
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("headline").innerHTML = "Edit Task";
+  document.getElementById("headline").innerHTML = "";
   document.getElementById("createTask").firstChild.data = "save";
   document.getElementById("clear").firstChild.data = "delete";
   document.getElementById("createTask").onclick = () => {
