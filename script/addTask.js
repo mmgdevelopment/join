@@ -462,20 +462,32 @@ function contactTemplate(name, color) {
     }
 }
 
+
 function renderContactsFromArray() {
-    const assignedToContainer = document.getElementById('assignedToContainer');
-    assignedToContainer.innerHTML = '';
-    assignedContacts.forEach(contact => { renderSingleContactFromArray(contact) });
+    clearInnerHTMLByID('assignedToContainer');
+    for (let i = 0; i < assignedContacts.length; i++) {
+        const contact = assignedContacts[i];
+        if (i == 5 && assignedContacts.length > 5) {
+            renderSingleContactFromArray(`+${assignedContacts.length - 5}`, 'red')
+            return
+        }
+        const firstLetters = contact.name.match(/\b(\w)/g);
+        const initials = firstLetters.join('');
+        renderSingleContactFromArray(initials, contact.color);
+    }
+}
+
+function clearInnerHTMLByID(id) {
+    document.getElementById(id).innerHTML = '';
 }
 
 /**
  * render colored circle with initials from assigned contacts
- * @param {Object} contact 
+ * @param {String} initials 
+ * @param {String} color 
  */
-function renderSingleContactFromArray(contact) {
-    const firstLetters = contact.name.match(/\b(\w)/g);
-    const initials = firstLetters.join('');
-    assignedToContainer.innerHTML += assignedToContactCircleTemplate(initials, contact.color);
+function renderSingleContactFromArray(initials, color) {
+    assignedToContainer.innerHTML += assignedToContactCircleTemplate(initials, color);
 }
 
 function renderSubtaskInput() {
