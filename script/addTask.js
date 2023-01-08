@@ -473,20 +473,21 @@ function renderContactsFromArray() {
  * @param {Object} contact 
  */
 function renderSingleContactFromArray(contact) {
-    const firstNameInitial = getFirstChar(getSingleName(contact.name, 0))
-    const lastNameInitial = getFirstChar(getSingleName(contact.name, 1))
-    assignedToContainer.innerHTML += assignedToContactCircleTemplate(firstNameInitial + lastNameInitial, contact.color);
+    const firstLetters = contact.name.match(/\b(\w)/g);
+    const initials = firstLetters.join('');
+
+    assignedToContainer.innerHTML += assignedToContactCircleTemplate(initials, contact.color);
 }
 
-function getSingleName(name, index) {
-    const nameAsArray = name.split(' ');
-    const singleName = nameAsArray[index];
-    return singleName;
-}
+// function getSingleName(name, index) {
+//     const nameAsArray = name.split(' ');
+//     const singleName = nameAsArray[index];
+//     return singleName;
+// }
 
-function getFirstChar(string) {
-    return string.slice(0, 1);
-}
+// function getFirstChar(string) {
+//     return string.slice(0, 1);
+// }
 
 function renderSubtaskInput() {
     document.getElementById('subtask').innerHTML = subtaskInputTemplate();
