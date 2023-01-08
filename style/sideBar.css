@@ -73,7 +73,7 @@ nav {
     flex-direction: column;
     justify-content: space-between;
     background-color: #2A3647;
-    z-index: 5;
+    z-index: 4;
 }
 
 .navbar {
@@ -163,7 +163,7 @@ div:has(> a.legalNotes) {
         top: 0px;
         right: 0px;
         height: 80px;
-        z-index: 999;
+        /* z-index: 999; */
         justify-content: center;
     }
 
@@ -199,7 +199,7 @@ div:has(> a.legalNotes) {
         bottom: 0px;
         right: 0px;
         height: 80px;
-        z-index: 999;
+        /* z-index: 999; */
     }
 
     .navbar {

@@ -1,11 +1,11 @@
 setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
 
-let users = [];
-let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
+// let users = [];
+// let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
 let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z','a' ,'b' ,'c' ,'d' ,'e' ,'f' ,'g' ,'h' ,'i' ,'j' ,'k' ,'l' ,'m' ,'n' ,'o' ,'p' ,'q' ,'r' ,'s' ,'t' ,'u' ,'v' ,'w' ,'x' ,'y' ,'z']
 let email;
 let indexOfUser;
-let user;
+// let user;
 let contacts;
 
 let certainContact;
@@ -27,7 +27,7 @@ let IDOfEditContact;
 /**
  * function loads all saved users and renders the page
  */
-async function init() {
+async function initContacts() {
     await downloadFromServer();
     users = JSON.parse(backend.getItem('users')) || [];
     defineUser();
@@ -84,7 +84,6 @@ function getFirstCharOfNames() {
         const name = allNames[i];
         allFirstLetters.push(name.charAt(0));
     }
-    console.log(allFirstLetters);
 }
 
 
@@ -99,7 +98,6 @@ function renderAllExistingLetters() {
             renderLetterCategory(letter);
         }
     }
-    console.log(allLettersOnce);
 }
 
 
@@ -234,10 +232,10 @@ function selectetContactHTML(name) {
         <span class="huge-initials ${contactColor}" ;">${initials}</span>
         <div class="huge-name-add-task">
             <p class="huge-name">${name}</p>
-            <a href="addTask.html" class="add-task">
+            <div onclick="openTaskTemplate()" class="add-task">
                 <img class="add-task-img" src="./assets/blue-plus.svg">
                 <p class="add-task-text">Add Task</p>
-            </a>
+            </div>
         </div>
     </div>
 
@@ -442,7 +440,9 @@ function closeEdit() {
 
 
 
-
+function openTaskTemplate() {
+    document.getElementById('fullscreen').style.display = 'block';
+}
 
 
 

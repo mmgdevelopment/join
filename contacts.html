@@ -6,15 +6,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    
+    <link rel="stylesheet" href="./style/addTask.css">
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/contacts.css">
     <link rel="stylesheet" href="./style/contactMobile.css">
     <link rel="stylesheet" href="./style/fonts.css">
     <link rel="stylesheet" href="./style/background-colors.css">
 
+
+
     <script src="./script/mini_backend.js"></script>
+    <script src="./script/addTask.js"></script>
     <script src="./script/contacts.js"></script>
     <script src="./script/templates.js"></script>
+
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
@@ -24,9 +30,12 @@
     <title>Contacts</title>
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="includeHTML(), initContacts()">
+    
+    <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div>
 
     <div w3-include-html="./templates/sideBar.html"></div>
+
 
     <div class="contact-page">
 
@@ -138,6 +147,7 @@
         </editContact>
 
     </div>
+    
 
 </body>
 

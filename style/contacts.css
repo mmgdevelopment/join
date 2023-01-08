@@ -365,7 +365,7 @@ h1 {
     gap: 10px;
 }
 
-.pop-up-inputfield  img{
+.pop-up-inputfield img {
     margin-right: 16px;
 }
 
@@ -460,3 +460,37 @@ h1 {
 .save-btn {
     width: 143px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+#addTaskTemplate {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
