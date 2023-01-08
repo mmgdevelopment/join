@@ -20,7 +20,7 @@ async function init() {
     setUser();
     renderCategorySelector();
     renderContactSelector();
-    colorPicker('blue');
+    colorPicker('ocean');
 }
 
 /**
