@@ -33,6 +33,7 @@ async function initContacts() {
     defineUser();
     renderList();
     initAddTaskTemplate();
+    checkMobileHeader();
 }
 
 /**
@@ -54,6 +55,16 @@ function defineUser() {
     indexOfUser = users.findIndex(u => u.email == email);
     user = users[indexOfUser];
     contacts = user['contacts'];
+}
+
+
+/**
+ * function hides contact header on mobile
+ */
+function checkMobileHeader() {
+    if (screen.width >= 1080) {
+        document.getElementById('contactEntrie').classList.remove('d-none');('d-none');
+    }
 }
 
 
@@ -216,18 +227,18 @@ function showContactEntrie(name) {
  * function hides list on mobile devices, so that contact entrie can be seen
  */
 function checkForMobileView() {
-    document.getElementById('contactEntrie').classList.remove('d-none')
+    document.getElementById('contactEntrie').classList.remove('d-none');
     if (screen.width <= 1080) {
-        document.getElementById('list').classList.add('d-none')
-        document.getElementById('add-btn').classList.add('d-none')
+        document.getElementById('list').classList.add('d-none');
+        document.getElementById('add-btn').classList.add('d-none');
     }
 }
 
 
 function openMobileList() {
-    document.getElementById('list').classList.remove('d-none')
-    document.getElementById('add-btn').classList.remove('d-none')
-    document.getElementById('contactEntrie').classList.add('d-none')
+    document.getElementById('list').classList.remove('d-none');
+    document.getElementById('add-btn').classList.remove('d-none');
+    document.getElementById('contactEntrie').classList.add('d-none');
 }
 
 
@@ -458,27 +469,9 @@ function closeEdit() {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 
-
-
+/**
+ * function shows add task pop up
+ */
 function openTaskTemplate() {
     document.getElementById('fullscreen').style.display = 'block';
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
