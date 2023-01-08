@@ -3,6 +3,7 @@ let user;
 let categoryColor = '';
 let assignedContacts = [];
 let subtasks = [];
+const currentDate = new Date().toJSON().slice(0, 10);
 let createTasktouched = false;
 const buttons = ['urgent', 'medium', 'low'];
 const colors = [
@@ -20,7 +21,8 @@ async function init() {
     setUser();
     renderCategorySelector();
     renderContactSelector();
-    colorPicker('ocean');
+    colorPicker('ocean'); //set default color
+    setDateOfToday();
 }
 
 /**
@@ -79,6 +81,12 @@ function getTaskFromUserInput(category, id) {
         'subtasks': getSubtasks(),
         'category': category
     };
+}
+
+function setDateOfToday() {
+    const datePicker = document.getElementById('dueDate');
+    datePicker.value = currentDate;
+    datePicker.setAttribute('min', currentDate);
 }
 
 /**
@@ -194,7 +202,6 @@ function setEventListener(id, opponent) {
  */
 window.addEventListener('click', (event) => {
     renderAssignedContactsIfClosed();
-    drawDueDateInputColor();
     if (event.target.id == 'fullscreen') {
         closeAddTaskTemplate();
     }
@@ -233,19 +240,6 @@ function closeAllCustomSelectors() {
     document.getElementById('assignedSelector').classList.remove('open');
     scrollToTop();
     renderAssignedContactsIfClosed();
-}
-function drawDueDateInputColor() {
-    const dueDate = document.getElementById('dueDate');
-    if (dueDate.value == '') {
-        dueDate.style.color = '#D1D1D1'
-    }
-    if (dueDate.value != '') {
-        dueDate.style.color = 'black'
-    }
-
-
-
-
 }
 
 /**
@@ -541,7 +535,7 @@ function clearAllInput() {
     renderCategorySelector();
     renderContactSelector();
     renderCheckedContacts();
-    document.getElementById('dueDate').value = '';
+    document.getElementById('dueDate').value = currentDate;
     resetPrioButtons();
     renderAddSubtaskContainer();
     document.getElementById('subtaskList').innerHTML = '';

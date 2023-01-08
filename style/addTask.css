@@ -68,10 +68,6 @@ label {
     margin: 5px;
 }
 
-#dueDate {
-    color: #D1D1D1;
-}
-
 .inputContainer {
     display: flex;
     flex-direction: column;
