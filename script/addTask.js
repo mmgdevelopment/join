@@ -449,7 +449,7 @@ function saveCheckedContactsInArray() {
 }
 
 function addContactToArray(checkbox) {
-    const id = checkbox.id.slice(-1);
+    const id = checkbox.id.split('-')[1];
     const name = document.getElementById(`contact-${id}`).innerText;
     const color = document.getElementById(`contact-${id}`).getAttribute('data-color');
     assignedContacts.push(contactTemplate(name, color));
