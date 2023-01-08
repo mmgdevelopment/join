@@ -66,9 +66,9 @@
         </div>
 
 
-        <addContact id="pop-up-container" class="pop-up-container d-none">
+        <addContact id="pop-up-container" onclick="closeNewContact()" class="pop-up-container d-none">
 
-            <div id="pop-up-window" class="pop-up-window hidden">
+            <div id="pop-up-window" onclick="dontClosePopup(event)" class="pop-up-window hidden">
 
                 <img onclick="closeNewContact()" class="mobile-pop-up-cross only-mobile"
                     src="./assets/mobile-add-task-cross.svg">
@@ -126,9 +126,9 @@
         </addContact>
 
 
-        <editContact id="pop-up-edit" class="pop-up-container d-none">
+        <editContact id="pop-up-edit" onclick="closeEdit()" class="pop-up-container d-none">
 
-            <div id="pop-up-edit-window" class="pop-up-window hidden">
+            <div id="pop-up-edit-window" onclick="dontClosePopup(event)" class="pop-up-window hidden">
 
                 <img onclick="closeEdit()" class="mobile-pop-up-cross only-mobile"
                     src="./assets/mobile-add-task-cross.svg">

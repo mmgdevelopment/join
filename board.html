@@ -28,7 +28,7 @@
 <body onload="init()">
     <div onclick="closeCard()" id="opened-card-container" class="d-none"></div>
     <div w3-include-html="./templates/sideBar.html"></div>
-    <main>
+    <main id="main">
         <div class="d-flex-jc-sb">
             <h1>Board</h1>
             <div class="d-flex-jc-sb">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div id="mobile-search"></div>
-        <div class="kanban">
+        <div id="kanban">
             <div>
                 <div class="d-flex-jc-sb">
                     <h2>To do</h2><button class="btn-square-add-task"> <span class="plus"

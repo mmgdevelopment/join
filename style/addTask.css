@@ -497,7 +497,11 @@ ul {
     }
 
     #fullscreen {
-        height: 200vh;
+        height: 150vh;
+    }
+
+    .templateContainer{
+        top: 800px;
     }
 }
 
@@ -509,6 +513,7 @@ ul {
     .buttonContainer {
         margin-bottom: 200px;
     }
+
 }
 
 @media (max-width: 660px) {
@@ -519,6 +524,10 @@ ul {
     .inputContainer {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    #fullscreen {
+        height: 100vh;
     }
 }
 
