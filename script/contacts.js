@@ -42,7 +42,7 @@ function initAddTaskTemplate() {
     renderCategorySelector();
     renderContactSelector();
     document.getElementById("createTask").onclick = () => {
-        createTaskButtonTouched('Todo');
+        createTaskButtonTouched('todo');
     };
 }
 
