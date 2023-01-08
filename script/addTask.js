@@ -475,19 +475,8 @@ function renderContactsFromArray() {
 function renderSingleContactFromArray(contact) {
     const firstLetters = contact.name.match(/\b(\w)/g);
     const initials = firstLetters.join('');
-
     assignedToContainer.innerHTML += assignedToContactCircleTemplate(initials, contact.color);
 }
-
-// function getSingleName(name, index) {
-//     const nameAsArray = name.split(' ');
-//     const singleName = nameAsArray[index];
-//     return singleName;
-// }
-
-// function getFirstChar(string) {
-//     return string.slice(0, 1);
-// }
 
 function renderSubtaskInput() {
     document.getElementById('subtask').innerHTML = subtaskInputTemplate();
