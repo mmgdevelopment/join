@@ -154,23 +154,30 @@
 
     .pop-up-window {
         z-index: 9999;
-        width: 381px;
-        height: 761px;
+        width: 90%;
+        height: 90%;
         flex-direction: column;
         position: relative;
+        overflow: scroll;
     }
 
     .mobile-pop-up-cross {
         position: absolute;
         top: 26px;
         right: 16px;
+        z-index: 9999;
     }
 
     .pop-up-left {
         border-bottom-left-radius: 0px;
         border-top-right-radius: 30px;
-        width: 381px;
+        width: 100%;
         height: 351px;
+    }
+
+    .left-content {
+        min-height: 270px;
+        margin-inline: 10px;
     }
 
     .pop-up-title {
@@ -186,7 +193,7 @@
         border-bottom-left-radius: 30px;
         flex-direction: column;
         gap: 0px;
-        width: 381px;
+        width: 100%;
         height: 410px;
     }
 
@@ -210,18 +217,22 @@
     }
 
     .pop-up-inputfield {
-        width: 327px;
+        width: 85%;
         height: 41px;
     }
 
     .pop-up-input {
-        width: 80%;
+        width: 70%;
+        padding-block: 0px;
     }
 
     .dark-btn {
         width: 212px;
         height: 51px;
-        margin-top: 34px;
+    }
+
+    .contact-info {
+        padding-bottom: 15px;
     }
 
 
