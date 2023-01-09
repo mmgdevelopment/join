@@ -474,7 +474,7 @@ ul {
 /* unterhalb alles von steven für responsive hinzugefügt*/
 
     .templateContainer {
-        border-radius: 0;
+        border-radius: 0 !important;
         padding: 0px;
         top: 0;
         left: 0;
