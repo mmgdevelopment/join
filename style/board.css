@@ -377,7 +377,6 @@ h2 {
   font-size: 21px;
 }
 
-
 .underlined {
   text-decoration: underline;
 }
@@ -417,7 +416,6 @@ h2 {
   visibility: hidden !important;
 }
 
-
 .f-end {
   display: flex;
   align-items: flex-end;
@@ -435,13 +433,12 @@ h2 {
     border-radius: 10px;
   }
 
-
   .wrapper {
     flex-direction: column;
   }
 
   #fullscreen > .templateContainer,
-  #opened-card-container >.task-card {
+  #opened-card-container > .task-card {
     border-radius: 0px 0px 30px 30px;
   }
 
@@ -456,42 +453,41 @@ h2 {
     margin-bottom: 100px;
   }
 
-   #opened-card-container {
+  #opened-card-container {
     position: absolute !important;
     z-index: 3;
   }
 
-  .task-card{
+  .task-card {
     justify-content: unset;
   }
 
   #edit-area {
-   width: 100%;
-   height: 100%;
-   position: relative;
-   top: 0;
-   padding-bottom: 130px;
-   overflow: auto;
+    width: 100%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    padding-bottom: 130px;
+    overflow: auto;
   }
-  #edit-area  *
-    {
+  #edit-area * {
     margin-inline: 10px;
   }
 
   #edit-area > h4,
   #edit-area > p,
-  #edit-area > span{
+  #edit-area > span {
     margin-inline: 10px !important;
   }
   #opened-card-container > #edit-area {
     position: absolute;
     top: 75px;
-     margin-inline: 1px;
+    margin-inline: 1px;
     padding-bottom: 130px;
     overflow: auto;
   }
 
-  .templateContainer { 
+  .templateContainer {
     top: 735px;
   }
 
