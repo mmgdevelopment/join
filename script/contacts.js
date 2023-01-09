@@ -463,4 +463,9 @@ function closeEdit() {
  */
 function openTaskTemplate() {
     document.getElementById('fullscreen').style.display = 'block';
+    if (screen.width < 1080) {
+        document.getElementById('forms').style = 'margin-top:170px;';
+    } else {
+        document.getElementById('forms').style = 'margin-top:0px;';
+    }
 }

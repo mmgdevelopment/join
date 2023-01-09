@@ -436,7 +436,6 @@ ul {
     .forms {
         flex-direction: column;
         justify-content: unset;
-        margin-top: 170px;  /*von steven für responsive hinzugefügt*/
     }
 
     .form:first-child {

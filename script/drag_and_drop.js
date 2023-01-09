@@ -499,6 +499,12 @@ function showAddTask(category) {
   showTemplateToAddTask(category);
   renderCategorySelector();
   renderContactSelector();
+  //unterhalb code von steven für die responsive ansicht des templates
+  if (screen.width < 1080) {
+    document.getElementById('forms').style = 'margin-top:170px;';
+  } else {
+    document.getElementById('forms').style = 'margin-top:0px;';
+  }
 }
 
 function showTemplateToAddTask(category) {
