@@ -510,7 +510,6 @@ function showAddTask(category) {
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById("headline").innerHTML = "Add Task";
-  document.getElementById("createTask").firstChild.data = "create task";
   document.getElementById("clear").firstChild.data = "clear";
   document.getElementById("clear").onclick = () => {
     clearAllInput();
