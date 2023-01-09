@@ -461,36 +461,6 @@ h1 {
     width: 143px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-#addTaskTemplate {
-    position: absolute;
-    top: 0;
-    left: 0;
+.mobile-entrie {
+    display: flex;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

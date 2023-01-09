@@ -391,8 +391,14 @@ ul {
 }
 
 #addTaskTemplate {
-    position: fixed;
+    position: absolute;
+    top: 0;
+    left: 0;
     z-index: 5;
+}
+
+.mobile-btn-container {
+    display: none;
 }
 
 @keyframes comeFromBottom {
@@ -421,7 +427,7 @@ ul {
 
 }
 
-@media (max-width: 1230px) {
+@media (max-width: 1080px) {
 
     body {
         justify-content: center;
@@ -430,6 +436,7 @@ ul {
     .forms {
         flex-direction: column;
         justify-content: unset;
+        margin-top: 170px;  /*von steven für responsive hinzugefügt*/
     }
 
     .form:first-child {
@@ -444,6 +451,8 @@ ul {
     .buttonContainer {
         position: unset;
         margin: 45px;
+
+        display: none;
     }
 
     .container {
@@ -455,12 +464,71 @@ ul {
     }
 
     #fullscreen {
-        height: 150vh;
+        height: 100vh;
     }
 
-    .templateContainer {
-        top: 800px;
+    .inputContainer {
+        padding: 0px;
     }
+
+/* unterhalb alles von steven für responsive hinzugefügt*/
+
+    .templateContainer {
+        border-radius: 0;
+        padding: 0px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        transform: none;
+        animation: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: scroll;
+    }
+
+    #headline {
+        position: absolute;
+        top: 90px;
+        left: 5%;
+    }
+
+    #close {
+        top: 100px;
+    }
+
+    .mobile-btn-container {
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        right: 0px;
+        height: 80px;
+        background-color: white;
+        z-index: 999;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-btn-container>div {
+        margin-inline: 20px;
+    }
+
+    #createTask {
+        width: 124px;
+        height: 50px;
+        padding: 0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+    }
+
+/* oberhalb alles von steven für responsive hinzugefügt*/
+
 }
 
 @media (max-width: 850px) {
