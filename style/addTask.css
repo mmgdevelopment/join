@@ -447,13 +447,6 @@ ul {
         height: auto;
     }
 
-    .buttonContainer {
-        position: unset;
-        margin: 45px;
-
-        display: none;
-    }
-
     .container {
         margin-left: 0;
     }
@@ -470,7 +463,20 @@ ul {
         padding: 0px;
     }
 
-/* unterhalb alles von steven für responsive hinzugefügt*/
+    /* unterhalb alles von steven für responsive hinzugefügt*/
+
+    .buttonContainer {
+        z-index: 999;
+        position: fixed;
+        margin: 0px;
+        top: 15px;
+        right: 20px;
+        height: 50px;
+    }
+
+    #clear {
+        display: none;
+    }
 
     .templateContainer {
         border-radius: 0 !important;
@@ -526,7 +532,7 @@ ul {
         gap: 5px;
     }
 
-/* oberhalb alles von steven für responsive hinzugefügt*/
+    /* oberhalb alles von steven für responsive hinzugefügt*/
 
 }
 
@@ -534,11 +540,6 @@ ul {
     .container {
         margin-left: 0;
     }
-
-    .buttonContainer {
-        margin-bottom: 200px;
-    }
-
 }
 
 @media (max-width: 660px) {

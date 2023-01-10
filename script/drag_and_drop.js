@@ -501,11 +501,36 @@ function showAddTask(category) {
   renderContactSelector();
   //unterhalb code von steven für die responsive ansicht des templates
   if (screen.width < 1080) {
-    document.getElementById('forms').style = 'margin-top:170px;';
-  } else {
-    document.getElementById('forms').style = 'margin-top:0px;';
-  }
+    openMobileTemplate();
+} else {
+    openDesktopTemplate();
 }
+}
+
+/**
+ * function adjusts settings for mobile template
+ */
+function openMobileTemplate() {
+  document.getElementById('forms').style = 'margin-top:170px;';
+  document.getElementById('createTask').innerHTML = `
+  <p style="font-weight: 700; font-size: 21px;">Create</p>
+  <img src="./assets/createTask.svg">
+  `;
+}
+
+
+/**
+* function adjusts settings for desktop template
+*/
+function openDesktopTemplate() {
+  document.getElementById('forms').style = 'margin-top:0px;';
+  document.getElementById('createTask').innerHTML = `
+  create task
+  <img src="./assets/createTask.svg">
+  `;
+}
+
+  //oberhalb code von steven für die responsive ansicht des templates
 
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
