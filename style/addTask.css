@@ -401,12 +401,12 @@ ul {
     display: none;
 }
 
-.only-dekstop {
-    display: flex;
+.only-desktop {
+    display: flex !important;
 }
 
 .only-mobile {
-    display: none;
+    display: none !important;
 }
 
 @keyframes comeFromBottom {
@@ -437,12 +437,12 @@ ul {
 
 @media (max-width: 1080px) {
 
-    .only-dekstop {
-        display: none;
+    .only-desktop {
+        display: none !important;
     }
 
     .only-mobile {
-        display: block;
+        display: block !important;
     }
 
     body {
@@ -453,6 +453,7 @@ ul {
         flex-direction: column;
         justify-content: unset;
         margin-top: 170px;
+        margin-bottom: 100px;
     }
 
     .form:first-child {

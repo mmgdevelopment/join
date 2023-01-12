@@ -542,4 +542,16 @@ h2 {
   #opened-card-container>#edit-area {
     top: 75px;
   }
+
+  .forms {
+    margin-bottom: 0px !important;
+  }
+
+  nav {
+    z-index: 0 !important;
+  }
+
+  #close {
+    display: block !important;
+}
 }

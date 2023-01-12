@@ -238,4 +238,16 @@
     .contact-info {
         padding-bottom: 15px;
     }
+
+    .forms {
+      margin-bottom: 0px !important;
+    }
+
+    nav {
+        z-index: 0 !important;
+    }
+
+    #close {
+        display: block !important;
+    }
 }
