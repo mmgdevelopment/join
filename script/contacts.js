@@ -481,33 +481,4 @@ function addChangesToList(name) {
  */
 function openTaskTemplate() {
     document.getElementById('fullscreen').style.display = 'block';
-    if (screen.width < 1080) {
-        openMobileTemplate();
-    } else {
-        openDesktopTemplate();
-    }
-}
-
-
-/**
- * function adjusts settings for mobile template
- */
-function openMobileTemplate() {
-    document.getElementById('forms').style = 'margin-top:170px;';
-    document.getElementById('createTask').innerHTML = `
-    <p style="font-weight: 700;">Create</p>
-    <img src="./assets/createTask.svg">
-    `;
-}
-
-
-/**
- * function adjusts settings for desktop template
- */
-function openDesktopTemplate() {
-    document.getElementById('forms').style = 'margin-top:0px;';
-    document.getElementById('createTask').innerHTML = `
-    create task
-    <img src="./assets/createTask.svg">
-    `;
 }

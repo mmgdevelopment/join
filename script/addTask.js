@@ -23,6 +23,7 @@ async function init() {
     renderContactSelector();
     colorPicker('ocean'); //set default color
     setDateOfToday();
+    document.getElementById('fullscreen').style.display = 'block';
 }
 
 /**

@@ -499,43 +499,12 @@ function showAddTask(category) {
   showTemplateToAddTask(category);
   renderCategorySelector();
   renderContactSelector();
-  //unterhalb code von steven für die responsive ansicht des templates
-  if (screen.width < 1080) {
-    openMobileTemplate();
-} else {
-    openDesktopTemplate();
-}
-}
-
-/**
- * function adjusts settings for mobile template
- */
-function openMobileTemplate() {
-  document.getElementById('forms').style = 'margin-top:170px;';
-  document.getElementById('createTask').innerHTML = `
-  <p style="font-weight: 700; font-size: 21px;">Create</p>
-  <img src="./assets/createTask.svg">
-  `;
-}
-
-
-/**
-* function adjusts settings for desktop template
-*/
-function openDesktopTemplate() {
-  document.getElementById('forms').style = 'margin-top:0px;';
-  document.getElementById('createTask').innerHTML = `
-  create task
-  <img src="./assets/createTask.svg">
-  `;
 }
 
   //oberhalb code von steven für die responsive ansicht des templates
 
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("headline").innerHTML = "Add Task";
-  document.getElementById("clear").firstChild.data = "clear";
   document.getElementById("clear").onclick = () => {
     clearAllInput();
   };
@@ -547,8 +516,9 @@ function showTemplateToAddTask(category) {
 function showTemplateToEditTask(id) {
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById("headline").innerHTML = "";
-  document.getElementById("createTask").firstChild.data = "save";
-  document.getElementById("clear").firstChild.data = "delete";
+  document.getElementById("createTaskText").innerHTML = "save";
+  document.getElementById("createText").innerHTML = "save";
+  document.getElementById("cancelText").innerHTML = "delete";
   document.getElementById("createTask").onclick = () => {
     editTask(id);
   };

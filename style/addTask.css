@@ -83,6 +83,7 @@ label {
 .forms {
     display: flex;
     justify-content: center;
+    margin-top: 0px;
 }
 
 .form {
@@ -400,6 +401,14 @@ ul {
     display: none;
 }
 
+.only-dekstop {
+    display: flex;
+}
+
+.only-mobile {
+    display: none;
+}
+
 @keyframes comeFromBottom {
     0% {
         bottom: -150px;
@@ -428,6 +437,14 @@ ul {
 
 @media (max-width: 1080px) {
 
+    .only-dekstop {
+        display: none;
+    }
+
+    .only-mobile {
+        display: block;
+    }
+
     body {
         justify-content: center;
     }
@@ -435,6 +452,7 @@ ul {
     .forms {
         flex-direction: column;
         justify-content: unset;
+        margin-top: 170px;
     }
 
     .form:first-child {
