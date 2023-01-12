@@ -493,8 +493,9 @@ h2 {
   } */
 
   main {
-    left: 20px;
-    right: 20px;
+    right: 0px;
+    left: 50%;
+    transform: translate(-50%, 0);
     width: 93vw;
   }
 
