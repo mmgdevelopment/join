@@ -287,7 +287,7 @@ async function createNewContact() {
 
     contacts.push({ 'name': name, 'email': email, 'phone': phone, 'color': color })
     await backend.setItem('users', JSON.stringify(users));
-    window.location.href = `contacts.html?msg=Du hast ${name} in deinen Kontakten gespeichet`
+    window.location.href = `contacts.html?msg=Du hast ${name} in deinen Kontakten gespeichet`;
 }
 
 
