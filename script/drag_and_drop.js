@@ -629,8 +629,7 @@ function askDeleteTask(id) {
 function editTask(id) {
   if (allInputsFilled()) {
     updateTask(id);
-    clearAllInput();
-    document.getElementById("fullscreen").style.display = "none";
+    closeAddTaskTemplate();
     document.getElementById("opened-card-container").classList.add("d-none");
     startRender();
     saveData();
