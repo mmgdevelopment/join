@@ -450,10 +450,12 @@ h2 {
   #opened-card-container {
     position: absolute !important;
     z-index: 3;
+    background: #ffffff;
   }
 
   .task-card {
     justify-content: unset;
+    box-shadow: none;
   }
 
   #edit-area {
@@ -461,32 +463,80 @@ h2 {
     height: 100%;
     position: relative;
     top: 0;
-    padding-bottom: 130px;
     overflow: auto;
   }
 
-  #edit-area * {
-    margin-inline: 10px;
+  .task-name {
+    font-weight: 700;
+    font-size: 36px !important;
+    margin-top: 18px;
+    margin-bottom: 0px;
   }
 
-  #edit-area>h4,
-  #edit-area>p,
-  #edit-area>span {
-    margin-inline: 10px !important;
+  .task-description {
+    font-weight: 400;
+    font-size: 16px !important;
+    color: black;
+    margin-top: 18px;
+    margin-bottom: 18px;
+  }
+
+  .priority {
+    transform: scale(0.8);
+    position: relative;
+    top: 4px;
+  }
+
+  .wrapper>div>div>span {
+    margin-right: 20px;
+    font-weight: 700;
+  }
+
+  .edit-btn {
+    position: fixed;
+    padding: 0px;
+    bottom: 100px;
+    right: 25px;
+    width: 40px;
+  }
+
+  .contact-on-card {
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .contact-name {
+    font-size: 16px;
+  }
+
+  .subtask-titel {
+    font-size: 16px;
+  }
+
+  .epic {
+    padding: 5px 15px !important;
   }
 
   #opened-card-container>#edit-area {
     position: absolute;
-    top: 75px;
-    margin-inline: 1px;
-    padding-bottom: 130px;
-    overflow: auto;
+    top: 80px;
+    height: calc(100vh - 160px);
+    overflow: scroll;
+    width: 90%;
+    padding: 0px;
+    padding-top: 20px;
   }
 
-  /*von steven auskommentiert*/
-  /* .templateContainer {
-    top: 775px;
-  } */
+  #opened-card-container>.task-card>div>div {
+    margin-top: 0px;
+  }
+
+  .close-btn {
+    margin: 0px;
+    padding-inline: 0px;
+  }
 
   main {
     right: 0px;
@@ -518,6 +568,18 @@ h2 {
     min-height: unset;
     max-height: unset;
   }
+
+  .forms {
+    margin-bottom: 0px !important;
+  }
+
+  nav {
+    z-index: 5 !important;
+  }
+
+  #close {
+    display: block !important;
+  }
 }
 
 @media only screen and (max-width: 800px) {
@@ -533,25 +595,4 @@ h2 {
   .wrapper {
     flex-direction: column;
   }
-
-  #fullscreen>.templateContainer,
-  #opened-card-container>.task-card {
-    border-radius: 0px 0px 30px 30px;
-  }
-
-  #opened-card-container>#edit-area {
-    top: 75px;
-  }
-
-  .forms {
-    margin-bottom: 0px !important;
-  }
-
-  nav {
-    z-index: 0 !important;
-  }
-
-  #close {
-    display: block !important;
-}
 }
