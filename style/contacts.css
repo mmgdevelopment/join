@@ -465,3 +465,7 @@ h1 {
 .mobile-entrie {
     display: flex;
 }
+
+nav {
+    z-index: 4 !important;
+  }

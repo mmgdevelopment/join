@@ -409,6 +409,10 @@ ul {
     display: none !important;
 }
 
+nav {
+    z-index: 999 !important;
+}
+
 @keyframes comeFromBottom {
     0% {
         bottom: -150px;
