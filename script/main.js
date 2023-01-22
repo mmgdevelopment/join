@@ -1,4 +1,4 @@
-setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
+setURL('https://marcel-gregor.developerakademie.net/smallest_backend_ever');
 let users = [];
 let user;
 
