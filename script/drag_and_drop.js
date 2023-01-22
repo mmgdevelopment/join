@@ -506,18 +506,20 @@ function showAddTask(category) {
 
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("clear").onclick = () => {
-    clearAllInput();
-  };
+  document.getElementById("headline").innerHTML = "Add Task";
+  document.getElementById("createText").innerHTML = "create taks";
+  document.getElementById("cancelText").innerHTML = "clear";
   document.getElementById("createTask").onclick = () => {
     createTaskButtonTouched(category);
+  };
+  document.getElementById("clear").onclick = () => {
+    clearAllInput();
   };
 }
 
 function showTemplateToEditTask(id) {
   document.getElementById("fullscreen").style.display = "block";
   document.getElementById("headline").innerHTML = "";
-  document.getElementById("createTaskText").innerHTML = "save";
   document.getElementById("createText").innerHTML = "save";
   document.getElementById("cancelText").innerHTML = "delete";
   document.getElementById("createTask").onclick = () => {
