@@ -13,6 +13,9 @@ const colors = [
     'ocean'
 ];
 
+/**
+ * is called if html body element is onload
+ */
 async function initAddTask() {
     await initMain();
     renderCategorySelector();
@@ -21,6 +24,10 @@ async function initAddTask() {
     setDateOfToday();
 }
 
+/**
+ * 
+ * @param {string} category where task gonna shown in kanban board
+ */
 async function createTaskButtonTouched(category) {
     createTasktouched = true;
     if (allInputsFilled()) {
@@ -41,6 +48,12 @@ function createTask(category) {
     });
 }
 
+/**
+ * 
+ * @param {string} category where task gonna shown in kanban board
+ * @param {string } id random id from createID function
+ * @returns 
+ */
 function getTaskFromUserInput(category, id) {
     return {
         'id': id,
@@ -88,7 +101,6 @@ function goToBoard() {
     }
 }
 
-
 /**
  * @returns boolean if all inputs are filled or not
  */
@@ -105,8 +117,8 @@ function allInputsFilled() {
 }
 
 /**
- * validate if html input element is empty or not
- * if field is empty show message "field required" under input element
+ * validate if html input element is filled by user
+ * if field is empty show message "field required" at UI
  * @param {boolean} isempty if field is empty or not
  * @param {string} id HTML Element ID
  * @returns boolean if input is empty or not
@@ -130,35 +142,45 @@ function isEmpty(id) {
     return document.getElementById(id).value == '';
 }
 
+/**
+ * show message "field required" under input with ID
+ * @param {string} id HTML Element ID
+ */
 function setFieldRequiredMessage(id) {
     document.getElementById(id + 'Validation').style.display = 'block';
 }
 
+/**
+ * hide message "field required" under input with ID
+ * @param {string} id HTML Element ID
+ */
 function resetFieldRequiredMessage(id) {
     hide(id + 'Validation');
 }
 
+/**
+ * 
+ * @returns true if input is empty
+ */
 function prioStateIsEmpty() {
     return returnPrioState() == ''
 }
 
+/**
+ * 
+ * @returns true if input is empty
+ */
 function assignedToIsEmpty() {
     return assignedContacts.length == 0;
 }
 
+/**
+ * 
+ * @returns true if input is empty
+ */
 function categoryIsEmpty() {
     return document.getElementById('firstValue').innerText == 'Select task Category'
 }
-
-function returnPrioState() {
-    let activeButton = '';
-    buttons.forEach(button => {
-        if (document.getElementById(button).classList.contains('active')) {
-            activeButton = button;
-        };
-    });
-    return activeButton;
-};
 
 /**
  * eventListener to open and close custom selctors
@@ -219,27 +241,26 @@ function closeAllCustomSelectors() {
 }
 
 /**
- * render the inital circles from assigned contacts
- * only when selector is closed
- */
-function renderAssignedContactsIfClosed() {
-    setTimeout(() => {
-        if (document.getElementById('assignedSelector').offsetHeight > 50 ||
-            document.getElementById('categorySelector').offsetHeight > 50) {
-            hide('assignedToContainer');
-        } else {
-            show('assignedToContainer', 'flex');
-        }
-    }, 380);
-}
-
-/**
  * necessary while closing the custom selectors
  */
 function scrollToTop() {
     document.getElementById('assignedSelector').scrollTop = 0;
     document.getElementById('categorySelector').scrollTop = 0;
 }
+
+/**
+ * check witch button is checked by user
+ * @returns name of the active button
+ */
+function returnPrioState() {
+    let activeButton = '';
+    buttons.forEach(button => {
+        if (document.getElementById(button).classList.contains('active')) {
+            activeButton = button;
+        };
+    });
+    return activeButton;
+};
 
 /**
  * render choosen prio Button 
@@ -271,7 +292,7 @@ function resetPrioButtons() {
 }
 
 /**
- * render input field for new category(epic)
+ * render input field to create new category/epic 
  */
 function renderNewCategoryInput() {
     show('colorPicker', 'flex');
@@ -280,8 +301,8 @@ function renderNewCategoryInput() {
 }
 
 /**
- * check if there is an input or not
- * and depending add new category to current user
+ * validate if input is empty
+ * if not, add new category/epic to current user
  */
 async function addCategoryButtonTouched() {
     const categoryName = document.getElementById('categoryInput').value;
@@ -404,7 +425,7 @@ function toggleCheckbox(id) {
 }
 
 /**
- * saves checked contacts in array and
+ * save checked contacts in array and
  * render assigned contacts under 'assigned selector'#
  */
 function renderCheckedContacts() {
@@ -438,7 +459,6 @@ function contactTemplate(name, color) {
     }
 }
 
-
 function renderContactsFromArray() {
     clearInnerHTMLByID('assignedToContainer');
     for (let i = 0; i < assignedContacts.length; i++) {
@@ -453,10 +473,6 @@ function renderContactsFromArray() {
     }
 }
 
-function clearInnerHTMLByID(id) {
-    document.getElementById(id).innerHTML = '';
-}
-
 /**
  * render colored circle with initials from assigned contacts
  * @param {String} initials 
@@ -464,6 +480,20 @@ function clearInnerHTMLByID(id) {
  */
 function renderSingleContactFromArray(initials, color) {
     assignedToContainer.innerHTML += assignedToContactCircleTemplate(initials, color);
+}
+
+/**
+ * render colored circle only when selector is closed
+ */
+function renderAssignedContactsIfClosed() {
+    setTimeout(() => {
+        if (document.getElementById('assignedSelector').offsetHeight > 50 ||
+            document.getElementById('categorySelector').offsetHeight > 50) {
+            hide('assignedToContainer');
+        } else {
+            show('assignedToContainer', 'flex');
+        }
+    }, 380);
 }
 
 function renderSubtaskInput() {
@@ -506,6 +536,9 @@ function subtaskTemplate(value) {
     }
 }
 
+/**
+ * reset all user input fields
+ */
 function clearAllInput() {
     resetInputRequiredMessages();
     document.getElementById('title').value = '';
@@ -532,12 +565,3 @@ function resetInputRequiredMessages() {
     )
     createTasktouched = false;
 }
-
-function hide(id) {
-    document.getElementById(id).style.display = 'none'
-}
-
-function show(id, mode) {
-    document.getElementById(id).style.display = mode;
-}
-

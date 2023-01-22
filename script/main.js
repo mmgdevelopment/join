@@ -22,3 +22,14 @@ async function initMain() {
     includeHTML();
 }
 
+function hide(id) {
+    document.getElementById(id).style.display = 'none'
+}
+
+function show(id, mode) {
+    document.getElementById(id).style.display = mode;
+}
+
+function clearInnerHTMLByID(id) {
+    document.getElementById(id).innerHTML = '';
+}
