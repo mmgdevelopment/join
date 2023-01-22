@@ -12,7 +12,6 @@ async function initLogin() {
     deleteAllExistingGuests();
 }
 
-
 /**
  * function defines user variables to inputfields
  */
@@ -21,7 +20,6 @@ function defineInputVariables() {
     email = document.getElementById('email');
     password = document.getElementById('password');
 }
-
 
 /**
  * function plays animation, if user loaded index.html for the first time
@@ -36,7 +34,6 @@ async function initIndexHTML() {
     setTimeout(checkForAutoLogIn, 600);
 }
 
-
 /**
  * @returns if first load has a value
  */
@@ -44,7 +41,6 @@ function firstLoadOfPage() {
     return localStorage.getItem('First load of index.html') == null
 
 }
-
 
 /**
  * function cancels animation on index.html
@@ -57,7 +53,6 @@ function noAnimation() {
     giveLogoRightPos();
 }
 
-
 /**
  * function gives all animation elements transition 0ms
  * @param {Array} animationElements 
@@ -68,7 +63,6 @@ function giveAllElementsNoTransition(animationElements) {
         document.getElementById(element).style = 'transition: 0ms;';
     }
 }
-
 
 /**
  * function gives all animation elements opacity 1
@@ -81,7 +75,6 @@ function giveAllElementsOpacity(animationElements) {
     }
 }
 
-
 /**
  * function positions logo correct 
  */
@@ -89,7 +82,6 @@ function giveLogoRightPos() {
     document.getElementById('logo-dektop').classList.add('logo-after');
     document.getElementById('logo-mobile').classList.add('mobile-logo-after');
 }
-
 
 /**
  * function renders animation for first load
@@ -101,7 +93,6 @@ function startAnimation() {
         startDesktopAnimation();
     }
 }
-
 
 /**
  * function renders animation for first load of the mobile site
@@ -116,14 +107,12 @@ function startMobileAnimation() {
     setTimeout(removeScreenCover, 500);
 }
 
-
 /**
  * funciton removes screen cover for mobile animation
  */
 function removeScreenCover() {
     document.getElementById('screen-cover').style = "display:none;";
 }
-
 
 /**
  * function renders animation for first load of the desktop site
@@ -133,12 +122,6 @@ function startDesktopAnimation() {
     document.getElementById('card').classList.remove('opacity-zero');
     document.getElementById('sign-up-desktop').classList.remove('opacity-zero');
 }
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
  * function checks if auto log in is wanted and loggs previous user in
@@ -151,14 +134,12 @@ async function checkForAutoLogIn() {
     }
 }
 
-
 function insertLoginMailPassword() {
     let localMail = localStorage.getItem('user-email');
     let user = users.find(u => u.email == localMail);
     email.value = localMail;
     password.value = user['password'];
 }
-
 
 /**
  * function logs existing user into page and denies entrance to none existig users.
@@ -172,14 +153,12 @@ function logIn() {
     }
 }
 
-
 /**
  * @returns is email and password matching?
  */
 function emailAndPasswordMatch() {
     return u => u.email == email.value && u.password == password.value
 }
-
 
 /**
  * after correct email and passwor function loggs user into join
@@ -189,7 +168,6 @@ function userGetsLoggdIn(user) {
     saveLoggedInUser(user);
     goToSummary();
 }
-
 
 /**
  * function ckecks the checkbox and saves a value to the local storage, if user wants to be auto logged in next time or not
@@ -203,7 +181,6 @@ function setAutoLogIn() {
     }
 }
 
-
 /**
  * function saves logged in user information to local storage
  * @param {JSON} user 
@@ -214,7 +191,6 @@ function saveLoggedInUser(user) {
     localStorage.setItem('Go to summary from LogIn', true);
 }
 
-
 /**
  * function loggs in user as guest
  */
@@ -223,7 +199,6 @@ async function guestLogin() {
     await addGuestToUsers();
     goToSummary();
 }
-
 
 /**
  * function saves some data of guest user to local storage for summary.html to work
@@ -235,7 +210,6 @@ function saveGuestToLocalStorage() {
     localStorage.setItem('Go to summary from LogIn', true);
 }
 
-
 /**
  * function adds guest account on first place in users JSON
  */
@@ -243,7 +217,6 @@ async function addGuestToUsers() {
     users.unshift({ username: 'Guest', email: 'guest@mail.com', password: 'guest1234', epics: guestUserEpicsArray, contacts: exampleContacts });
     await backend.setItem('users', JSON.stringify(users));
 }
-
 
 /**
  * function deletes all existing guests
@@ -259,7 +232,6 @@ function deleteAllExistingGuests() {
     users.splice(0, amountOfGuests);
 }
 
-
 /**
  * function sends the user to summary.html
  */
@@ -267,7 +239,6 @@ function goToSummary() {
     localStorage.removeItem('First load of index.html');
     window.location.href = 'summary.html?msg=Du hast dich erfolgreich eingeloggt!';
 }
-
 
 /**
  * after incorrect email and password the entrance to join will be denied and the inputs will be cleared
@@ -277,7 +248,6 @@ function userDoesntGetLoggedIn() {
     clearAllInput();
     document.getElementById('remember-me').checked = false;
 }
-
 
 /**
  * function checks if just the password is wrong, if the email also doesnt exist
@@ -290,14 +260,6 @@ function checkLoginFault() {
         wrongPassword();
     }
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 
 /**
  * function creates a new user and pushes him into users(Array).
@@ -316,7 +278,6 @@ async function signUp() {
     }
 }
 
-
 /**
  * @returns looks in array for username
  */
@@ -324,14 +285,12 @@ function usernameAlreadyExists() {
     return users.find(u => u.username == username.value)
 }
 
-
 /**
  * @returns looks in array for email
  */
 function emailAlreadyExists() {
     return users.find(u => u.email == email.value)
 }
-
 
 /**
  * function creats a new user with input from sin_up.html and saves him on backend 
@@ -341,15 +300,6 @@ async function createNewUser() {
     await backend.setItem('users', JSON.stringify(users));
     window.location.href = 'index.html?msg=Du hast dich erfolgreich registriert!';
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 /**
  * function checks the email and leads the user to reset.html
@@ -365,7 +315,6 @@ function checkIfEmailExists() {
     }
 }
 
-
 /**
  * funciton leads to reset.html and stores the user in local storage to change exactly his password
  * @param {JSON} user 
@@ -374,7 +323,6 @@ function saveUserInLocalStorage(user) {
     let userJSON = JSON.stringify(user);
     localStorage.setItem('User who forgot password', userJSON);
 }
-
 
 /**
  * function takes all information needed for confirming and creating a new password and then does so
@@ -386,7 +334,6 @@ async function createNewPassword() {
     let secondPassword = document.getElementById('secondPassword').value;
     confirmTheNewPassword(user, firstPassword, secondPassword);
 }
-
 
 /**
  * function checks if the passwords written are identical and if so the function changes the password
@@ -404,7 +351,6 @@ function confirmTheNewPassword(user, firstPassword, secondPassword) {
     }
 }
 
-
 /**
  * function takes the old password and changes it with the new one (also in backend)
  * @param {JSON} user 
@@ -417,7 +363,6 @@ async function switchOldWithNewPassword(user, firstPassword) {
     goToSuccessReset();
 }
 
-
 /**
  * function leads to success_reset.html
  */
@@ -425,21 +370,12 @@ function goToPesetPage() {
     window.location.href = 'reset.html?msg=Bitte erstelle ein neues Passwort!';
 }
 
-
 /**
  * function leads to success_reset.html
  */
 function goToSuccessReset() {
     window.location.href = 'success_reset.html';
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-
 
 /**
  * function changes lock to closed eye if password gets input
@@ -451,7 +387,6 @@ function changePasswordIcon() {
         document.getElementById('password-icon').src = './assets/icons8-unsichtbar.png';
     }
 }
-
 
 /**
  * function toggles password visibility
@@ -467,7 +402,6 @@ function makePasswordVisible() {
     }
 }
 
-
 /**
  * function clears all input values
  */
@@ -478,7 +412,6 @@ function clearAllInput() {
     }
 }
 
-
 /**
  * function displays wrong username message for 3 seconds
  */
@@ -486,7 +419,6 @@ function wrongUsername() {
     document.getElementById('wrong-username').classList.remove('opacity-zero');
     setTimeout((hideWrongUsername), 3000);
 }
-
 
 /**
  * function hieds wrong username message 
@@ -496,7 +428,6 @@ function hideWrongUsername() {
 
 }
 
-
 /**
  * function displays wrong email message for 3 seconds
  */
@@ -504,7 +435,6 @@ function wrongEmail() {
     document.getElementById('wrong-email').classList.remove('opacity-zero');
     setTimeout((hideWrongEmail), 3000);
 }
-
 
 /**
  * function hieds wrong email message 
@@ -514,7 +444,6 @@ function hideWrongEmail() {
 
 }
 
-
 /**
  * function displays wrong password message for 3 seconds
  */
@@ -523,11 +452,9 @@ function wrongPassword() {
     setTimeout(hideWrongPassword, 3000);
 }
 
-
 /**
  * function hieds wrong password message 
  */
 function hideWrongPassword() {
     document.getElementById('wrong-password').classList.add('opacity-zero');
-
 }

@@ -2,7 +2,6 @@ let username;
 let today = new Date()
 let curHr = today.getHours()
 
-
 /**
  * function renders summary page and loads array with users form backend
  */
@@ -13,7 +12,6 @@ async function initSummary() {
     renderPage();
 }
 
-
 /**
  * function loads email and username into variables
  */
@@ -21,7 +19,6 @@ function loadUser() {
     email = localStorage.getItem('user-email');
     username = localStorage.getItem('user-username');
 }
-
 
 /**
  * function renders greetings depending on login and device width
@@ -38,7 +35,6 @@ function renderGreeting() {
     }
 }
 
-
 /**
  * @returns if user comes from login or not
  */
@@ -46,14 +42,12 @@ function userComesFromLogin() {
     return localStorage.getItem('Go to summary from LogIn') == 'true'
 }
 
-
 /**
  * @returns if user has mobile device or not
  */
 function userHasMobileDevice() {
     return screen.width <= 1080
 }
-
 
 /**
  * function renders the mobile greeting screen and transitions to summary afterwards
@@ -66,7 +60,6 @@ function renderMobileGreeting() {
     setTimeout(renderSummary, 2000);
 }
 
-
 /**
  * function loads css to greeting container, so it looks good in mobile view
  */
@@ -76,7 +69,6 @@ function loadMobileGreetingCSS() {
     document.getElementById('mobileGreeting-title').style = "font-size: 36px;";
     document.getElementById('name-mobile').style = "font-size: 47px;";
 }
-
 
 /**
  * function gets the right greeting for the right daytime
@@ -91,7 +83,6 @@ function getDaytimeGreeting(greetingH2) {
         document.getElementById(greetingH2).innerHTML = 'Good evening';
     }
 }
-
 
 /**
  * function renders username 
@@ -108,7 +99,6 @@ function renderName() {
     }
 }
 
-
 /**
  * function renders the greeting for desktop view
  */
@@ -119,7 +109,6 @@ function renderDesktopGreeting() {
     localStorage.setItem('Go to summary from LogIn', false);
 }
 
-
 /**
  * function renders summary
  */
@@ -129,7 +118,6 @@ function renderSummary() {
     document.getElementById('greeting').style.display = "none";
     document.getElementById('container').style.display = "block";
 }
-
 
 /**
  * function leads to board
@@ -161,7 +149,6 @@ let month;
 let toDo;
 let done;
 
-
 /**
  * function renders whole page
  */
@@ -170,7 +157,6 @@ function renderPage() {
     renderAllWorkingStages();
     renderHighestPrio();
 }
-
 
 /**
  * This function goes through all epics of the database.
@@ -198,7 +184,6 @@ function getAllTasks(epic) {
     }
 }
 
-
 /**
  * function pushes the prio of all tasks and their due date into urgency json
  * @param {array} task 
@@ -206,7 +191,6 @@ function getAllTasks(epic) {
 function pushPrioAndDate(task) {
     urgency.push({ 'prio': task['prio'], 'date': task['dueDate'] });
 }
-
 
 /**
  * function pushes all categories into array
@@ -216,7 +200,6 @@ function pushAllWorkingStages(task) {
     workingStages.push(task['category']);
 }
 
-
 /**
  * function rendersall amounts of tasks in diffrent working stages
  */
@@ -224,7 +207,6 @@ function renderAllWorkingStages() {
     getAllTasksNumbers();
     displayAllTaksNumbers();
 }
-
 
 /**
  * function gets all amounts of tasks in diffrent working stages and puts them into variables
@@ -237,7 +219,6 @@ function getAllTasksNumbers() {
     inBoard = (toDo + inProgress + awaitingFeedback + done);
 }
 
-
 /**
  * function displays all amounts of tasks in diffrent working stages
  */
@@ -249,7 +230,6 @@ function displayAllTaksNumbers() {
     document.getElementById('done').innerHTML = done;
 }
 
-
 /**
  * function renders the task with the highest priority, if there is any
  */
@@ -258,7 +238,6 @@ function renderHighestPrio() {
         renderMidCard();
     }
 }
-
 
 /**
  * function renders mid card
@@ -277,7 +256,6 @@ function renderMidCard() {
     }
 }
 
-
 /**
  * function checks if and how often a certain urgency is given in epics
  * @param {string} value 
@@ -286,7 +264,6 @@ function renderMidCard() {
 function urgencyContains(value) {
     return urgency.filter((v) => (v.prio === value)).length;
 }
-
 
 /**
  * function displays the task with the highest priority in middle card
@@ -304,7 +281,6 @@ function displayHighestPrioTask(value) {
     displayDueDate(value);
 }
 
-
 /**
  * function displays the due date with the highest priority in middle card
  * @param {string} value 
@@ -316,7 +292,6 @@ function displayDueDate(value) {
     document.getElementById('deadline').innerHTML = nearestDeadline;
     document.getElementById('deadlineText').innerHTML = 'Upcoming Deadline';
 }
-
 
 /**
  * function pushes all due dates with highest urgency into array
@@ -331,7 +306,6 @@ function pushAllDueDatesInArray(value) {
     }
 }
 
-
 /**
  * function finds the nearest due date from all dates with highest urgency
  */
@@ -342,7 +316,6 @@ function getNearestDueDate() {
     day = dateInNumbers.substr(8, 2);
     getMonthInLetters(dateInNumbers);
 }
-
 
 /**
  * function changes month number into month written
@@ -357,10 +330,3 @@ function getMonthInLetters(dateInNumbers) {
         }
     }
 }
-
-
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////
