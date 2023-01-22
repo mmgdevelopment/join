@@ -8,6 +8,8 @@
 
     <script src="./script/mini_backend.js"></script>
     <script src="./script/login.js"></script>
+    <script src="./script/templates.js"></script>
+    <script src="./script/main.js"></script>
 
     <link rel="stylesheet" href="./style/login.css">
     <link rel="stylesheet" href="./style/loginMobile.css">
@@ -19,15 +21,18 @@
     <link rel="manifest" href="favicon/site.webmanifest">
     <title>Login</title>
 </head>
-<body onload="init(), initIndexHTML()">
+
+<body onload="initLogin()">
 
 
-    <!--dektop logo-->                        
-    <a href="index.html"><img id="logo-dektop" class="logo-before only-dekstop" src="./assets/join-logo.svg" alt="join-logo"></a>
+    <!--dektop logo-->
+    <a href="index.html"><img id="logo-dektop" class="logo-before only-dekstop" src="./assets/join-logo.svg"
+            alt="join-logo"></a>
 
 
     <!--mobile logo-->
-    <a href="index.html"><img id="logo-mobile" class="mobile-logo-before only-mobile" src="./assets/join-logo.svg" alt="join-logo"></a>
+    <a href="index.html"><img id="logo-mobile" class="mobile-logo-before only-mobile" src="./assets/join-logo.svg"
+            alt="join-logo"></a>
 
 
     <!--screen cover for login effect-->
@@ -61,9 +66,10 @@
                 </div>
 
                 <div id="password-container" class="inputfield">
-                    <input oninput="changePasswordIcon()" class="input" id="password" minlength="8" type="password" placeholder="Password"
-                        title="Please ensert your password" required>
-                    <img onclick="makePasswordVisible()" style="cursor: pointer;" id="password-icon" src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
+                    <input oninput="changePasswordIcon()" class="input" id="password" minlength="8" type="password"
+                        placeholder="Password" title="Please ensert your password" required>
+                    <img onclick="makePasswordVisible()" style="cursor: pointer;" id="password-icon"
+                        src="./assets/lock.svg" alt="lock-icon" title="Please ensert your password">
                     <span id="wrong-password" class="wrong-input opacity-zero">Wrong Password</span>
                 </div>
 

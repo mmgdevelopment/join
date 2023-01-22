@@ -1,9 +1,4 @@
-setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
-
-let users = [];
-let email;
 let username;
-
 let today = new Date()
 let curHr = today.getHours()
 
@@ -11,11 +6,10 @@ let curHr = today.getHours()
 /**
  * function renders summary page and loads array with users form backend
  */
-async function init() {
+async function initSummary() {
+    await initMain();
     loadUser();
     renderGreeting();
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
     renderPage();
 }
 
@@ -90,12 +84,12 @@ function loadMobileGreetingCSS() {
  */
 function getDaytimeGreeting(greetingH2) {
     if (curHr < 12) {
-        document.getElementById(greetingH2).innerHTML='Good morning';
-      } else if (curHr < 18) {
-        document.getElementById(greetingH2).innerHTML='Good afternoon';
-      } else {
-        document.getElementById(greetingH2).innerHTML='Good evening';
-      }
+        document.getElementById(greetingH2).innerHTML = 'Good morning';
+    } else if (curHr < 18) {
+        document.getElementById(greetingH2).innerHTML = 'Good afternoon';
+    } else {
+        document.getElementById(greetingH2).innerHTML = 'Good evening';
+    }
 }
 
 
@@ -107,8 +101,8 @@ function renderName() {
         getDaytimeGreeting('mobileGreeting-title');
         getDaytimeGreeting('greeting-title');
     } else {
-        document.getElementById('mobileGreeting-title').innerHTML+=',';
-        document.getElementById('greeting-title').innerHTML+=',';
+        document.getElementById('mobileGreeting-title').innerHTML += ',';
+        document.getElementById('greeting-title').innerHTML += ',';
         document.getElementById('name-desktop').innerHTML = username;
         document.getElementById('name-mobile').innerHTML = username;
     }
