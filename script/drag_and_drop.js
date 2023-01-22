@@ -499,9 +499,10 @@ function showAddTask(category) {
   showTemplateToAddTask(category);
   renderCategorySelector();
   renderContactSelector();
+  setDateOfToday();
 }
 
-  //oberhalb code von steven für die responsive ansicht des templates
+//oberhalb code von steven für die responsive ansicht des templates
 
 function showTemplateToAddTask(category) {
   document.getElementById("fullscreen").style.display = "block";
