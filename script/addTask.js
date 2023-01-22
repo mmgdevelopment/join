@@ -519,12 +519,6 @@ function clearAllInput() {
     document.getElementById('subtaskList').innerHTML = '';
 }
 
-function closeAddTaskTemplate() {
-    clearAllInput();
-    resetInputRequiredMessages()
-    hide('fullscreen');
-}
-
 function closeInviteInput() {
     closeAllCustomSelectors();
     renderAddSubtaskContainer();

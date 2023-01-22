@@ -65,6 +65,14 @@ function showAddTask(category) {
     renderCategorySelector();
     renderContactSelector();
     setDateOfToday();
+    removeKanbanOnPhone();
+}
+
+function closeAddTaskTemplate() {
+    clearAllInput();
+    resetInputRequiredMessages()
+    hide('fullscreen');
+    showKanban();
 }
 
 function showTemplateToAddTask(category) {
@@ -98,6 +106,8 @@ function showTemplateToEditTask(id) {
         deleteTask(id);
     };
 }
+
+
 
 /*****************AddTask****HTML Templates**************************/
 

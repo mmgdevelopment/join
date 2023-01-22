@@ -156,6 +156,7 @@ label {
     padding: 12px;
     cursor: pointer;
     height: fit-content;
+    display: flex;
 }
 
 .button p {
@@ -464,8 +465,13 @@ nav {
     .forms {
         flex-direction: column;
         justify-content: unset;
-        margin-top: 170px;
         margin-bottom: 100px;
+
+    }
+
+    .forms.templates {
+        margin-top: 170px;
+
     }
 
     .form:first-child {
@@ -502,10 +508,6 @@ nav {
         top: 15px;
         right: 20px;
         height: 50px;
-    }
-
-    #clear {
-        display: none;
     }
 
     .templateContainer {
@@ -552,7 +554,7 @@ nav {
         margin-inline: 20px;
     }
 
-    #createTask {
+    #createTask #clear {
         width: 124px;
         height: 50px;
         padding: 0px;
@@ -589,7 +591,15 @@ nav {
 
 @media (max-width: 440px) {
     *, button, input, label, textarea {
-        font-size: 14px;
+        font-size: 14px !important;
+    }
+
+    h1 {
+        font-size: 36px !important;
+    }
+
+    .plus {
+        font-size: 38px !important;
     }
 
     .prioButton {
