@@ -509,6 +509,9 @@ function showTemplateToAddTask(category) {
   document.getElementById("headline").innerHTML = "Add Task";
   document.getElementById("createText").innerHTML = "create taks";
   document.getElementById("cancelText").innerHTML = "clear";
+  document.getElementById("cancelText").style.color = "black";
+  document.getElementById("clear").style.backgroundColor = 'white';
+  document.getElementById("cancelImage").classList.remove('filterWhite');
   document.getElementById("createTask").onclick = () => {
     createTaskButtonTouched(category);
   };
@@ -522,6 +525,9 @@ function showTemplateToEditTask(id) {
   document.getElementById("headline").innerHTML = "";
   document.getElementById("createText").innerHTML = "save";
   document.getElementById("cancelText").innerHTML = "delete";
+  document.getElementById("cancelText").style.color = "white";
+  document.getElementById("cancelImage").classList.add('filterWhite');
+  document.getElementById("clear").style.backgroundColor = '#ff3d00';
   document.getElementById("createTask").onclick = () => {
     editTask(id);
   };
