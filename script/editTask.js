@@ -70,6 +70,7 @@ function openCardEdit(id) {
     renderCategorySelector();
     renderContactSelector();
     fillAllInputs(id);
+    removeKanbanOnPhone();
 }
 
 /**
