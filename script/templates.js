@@ -14,9 +14,13 @@ async function includeHTML() {
 }
 
 function showCurrentPage() {
-    document.getElementById(getID(currentSite())).classList.add('activeSite');
-    document.getElementById(getID(currentSite())).style.pointerEvents = 'none';
-    document.getElementById(getID(currentSite())).style.userSelect = 'none';
+    let site;
+    if (site = document.getElementById(getID(currentSite()))) {
+        site.classList.add('activeSite');
+        site.style.pointerEvents = 'none';
+        site.style.userSelect = 'none';
+    }
+
 
 }
 
