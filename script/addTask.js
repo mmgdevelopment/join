@@ -1,7 +1,6 @@
 let categoryColor = '';
 let assignedContacts = [];
 let subtasks = [];
-const currentDate = new Date().toJSON().slice(0, 10);
 let createTasktouched = false;
 const buttons = ['urgent', 'medium', 'low'];
 const colors = [
@@ -21,7 +20,6 @@ async function initAddTask() {
     colorPicker('ocean'); //set default color
     setDateOfToday();
 }
-
 
 async function createTaskButtonTouched(category) {
     createTasktouched = true;
@@ -56,10 +54,14 @@ function getTaskFromUserInput(category, id) {
     };
 }
 
+function getCurrentDate() {
+    return new Date().toJSON().slice(0, 10);
+}
+
 function setDateOfToday() {
     const datePicker = document.getElementById('dueDate');
-    datePicker.value = currentDate;
-    datePicker.setAttribute('min', currentDate);
+    datePicker.value = getCurrentDate();
+    datePicker.setAttribute('min', getCurrentDate());
 }
 
 /**
@@ -131,6 +133,7 @@ function isEmpty(id) {
 function setFieldRequiredMessage(id) {
     document.getElementById(id + 'Validation').style.display = 'block';
 }
+
 function resetFieldRequiredMessage(id) {
     hide(id + 'Validation');
 }
@@ -510,7 +513,7 @@ function clearAllInput() {
     renderCategorySelector();
     renderContactSelector();
     renderCheckedContacts();
-    document.getElementById('dueDate').value = currentDate;
+    document.getElementById('dueDate').value = getCurrentDate();
     resetPrioButtons();
     renderAddSubtaskContainer();
     document.getElementById('subtaskList').innerHTML = '';
@@ -520,7 +523,6 @@ function closeAddTaskTemplate() {
     clearAllInput();
     resetInputRequiredMessages()
     hide('fullscreen');
-    addKanbanOnPhone();
 }
 
 function closeInviteInput() {
@@ -545,117 +547,3 @@ function show(id, mode) {
     document.getElementById(id).style.display = mode;
 }
 
-/***********************HTML Templates**************************/
-
-function categorySelectorTemplate() {
-    return /*html*/`
-        <span id="categorySelectorPlaceholder" class="placeholder">
-            <div id="firstValue">Select task Category</div>
-            <img class="category" src="./assets/selectArrow.svg" alt="">
-        </span>
-        <span tabindex="0" onclick="renderNewCategoryInput()" class="selectable category">New Category</span>
-`}
-
-function newCategoryTemplate() {
-    return /*html*/`
-    <div  class="customSelectorInput">
-        <input id="categoryInput" class="noBorder" placeholder="New category name" type="text">
-        <div class="createClearContainer">
-            <img onclick="renderCategorySelector()" src="./assets/clear.svg" alt=""> |
-            <img onclick="addCategoryButtonTouched()" src="./assets/createTask.svg" alt="">
-        </div>
-    </div>
-    `;
-};
-
-function renderSingleCategorys() {
-    for (let i = 0; i < user.epics.length; i++) {
-        const category = user.epics[i];
-        document.getElementById('categorySelector').innerHTML += `
-       <span tabindex="0"  onclick="showCategory('category-${i}')" id="category-${i}" class="selectable category">${category.name}
-           <div class="color ${category.color}"></div>
-       </span> 
-       `
-    }
-}
-
-function inviteContactInputTemplate() {
-    return /*html*/`
-    <div class="customSelectorInput">
-        <input id="contactInput" class="noBorder" placeholder="contact email" type="text">
-        <div class="createClearContainer">
-            <img onclick="renderContactSelector()" src="./assets/clear.svg" alt=""> |
-            <img onclick="inviteContact()" src="./assets/createTask.svg" alt="">
-        </div>
-    </div>
-    `;
-};
-
-function contactSelectorTemplate() {
-    return /*html*/`
-        <span id="assignedSelectorPlaceholder" class="placeholder">
-            Select Contact
-            <img class="assigned" src="./assets/selectArrow.svg" alt="">
-        </span>
-    `
-}
-
-function singleContactTemplate(contact, id, color) {
-    return /*html*/`
-    <span data-color="${color}" onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
-        <input class="checkbox contactCheckbox" type="checkbox" name="" id="check-${id}">
-    </span>
-    `
-}
-
-function inviteContactSelectorTemplate() {
-    return /*html*/`
-        <span onclick="renderInviteContactInput()" class="selectable assigned">Invite new Contact
-            </span id="contactImg" src="./assets/contacts.svg" alt="">
-        </span>
-    `
-}
-
-function renderChoosenCategory(id) {
-    index = id.slice(-1);
-    let category = user.epics[index]
-    return /*html*/ `
-            ${category.name}
-            <div class="color ${category.color}"></div>
-    `
-}
-
-function assignedToContactCircleTemplate(shortName, color) {
-    return /*html*/ `
-    <div  class="assignedTo ${color} ">${shortName}</div>
-    `
-}
-
-function subtaskInputTemplate() {
-    return /*html*/ `
-      <div class="customSelectorInput input p-0">
-        <input id="subtaskInput" class="noBorder" placeholder="Add new subtask" type="text">
-        <div class="createClearContainer">
-            <img onclick="closeInviteInput()" src="./assets/clear.svg" alt=""> |
-            <img onclick="addSubtask()" src="./assets/createTask.svg" alt="">
-        </div>
-    </div>
-    `
-}
-
-function addSubtaskContainerTemplate() {
-    return /*html*/ `
-        <div class="input" onclick="renderSubtaskInput()">
-            Add new subtask
-        </div>
-    `
-}
-
-function subtasklistTemplate(subtask, id) {
-    return /*html*/ `
-        <div>
-            <input checked="true" type="checkbox" id="subCheck-${id}" class="subtaskCheckbox">
-            <span id="subtask-${id}">${subtask}</span>
-        </div>
-    `
-}
