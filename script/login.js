@@ -7,7 +7,6 @@ let password;
  */
 async function initLogin() {
     await initMain();
-    initIndexHTML();
     defineInputVariables();
     deleteAllExistingGuests();
 }
