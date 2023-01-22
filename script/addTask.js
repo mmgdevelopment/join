@@ -440,7 +440,7 @@ function renderCheckedContacts() {
 
 function saveCheckedContactsInArray() {
     assignedContacts = [];
-    const checkboxes = document.getElementsByClassName('checkbox');
+    const checkboxes = document.getElementsByClassName('contactCheckbox');
     for (let i = 0; i < checkboxes.length; i++) {
         const checkbox = checkboxes[i];
         if (checkbox.checked) {
@@ -631,7 +631,7 @@ function contactSelectorTemplate() {
 function singleContactTemplate(contact, id, color) {
     return /*html*/`
     <span data-color="${color}" onclick="toggleCheckbox(${id})" id="contact-${id}" class="selectable assigned">${contact.name}
-        <input class="checkbox" type="checkbox" name="" id="check-${id}">
+        <input class="checkbox contactCheckbox" type="checkbox" name="" id="check-${id}">
     </span>
     `
 }
