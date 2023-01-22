@@ -1,5 +1,3 @@
-let users = [];
-let user;
 let categoryColor = '';
 let assignedContacts = [];
 let subtasks = [];
@@ -16,40 +14,14 @@ const colors = [
     'ocean'
 ];
 
-async function init() {
-    await loadData();
-    setUser();
+async function initAddTask() {
+    await initMain();
     renderCategorySelector();
     renderContactSelector();
     colorPicker('ocean'); //set default color
     setDateOfToday();
-    document.getElementById('fullscreen').style.display = 'block';
 }
 
-/**
- * Backend Functions
-*/
-setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
-
-async function loadData() {
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-}
-
-async function saveData() {
-    let emailUser = localStorage.getItem('user-email');
-    const i = users.findIndex(u => u.email == emailUser);
-    users[i] = user;
-    await backend.setItem('users', JSON.stringify(users));
-}
-
-/**
- * saves current user in local varriable 'user'
- */
-function setUser() {
-    let emailUser = localStorage.getItem('user-email');
-    user = users.find(u => u.email == emailUser);
-}
 
 async function createTaskButtonTouched(category) {
     createTasktouched = true;

@@ -1,5 +1,3 @@
-setURL("https://gruppe-354.developerakademie.net/smallest_backend_ever");
-
 let currentDraggedTask;
 let doneSubtasks;
 let subtaskDone;
@@ -16,33 +14,12 @@ let kanbanCategorys = ["todo", "progress", "feedback", "done"];
  * This function is used to start all functions included by visiting the webpage
  *
  */
-async function init() {
-  await loadData();
-  includeHTML();
+async function initBoard() {
+  await initMain();
   startRender();
   checkWitdh(x);
 }
 
-/**
- * This function is used to load a Json containing all users and the tasks of the user
- *
- */
-async function loadData() {
-  await downloadFromServer();
-  users = JSON.parse(backend.getItem("users")) || [];
-  let emailUser = localStorage.getItem("user-email");
-  user = users.find((u) => u.email == emailUser);
-}
-/**
- * This function saves the Data on the server
- *
- */
-async function saveData() {
-  let emailUser = localStorage.getItem("user-email");
-  const i = users.findIndex((u) => u.email == emailUser);
-  users[i] = user;
-  await backend.setItem("users", JSON.stringify(users));
-}
 /**
  * This function starts the rendering process (Its exists just to clearify code)
  *
@@ -104,22 +81,6 @@ function goThroughAllTasks(epic) {
   }
 }
 
-// function readTasksCategory(task, epic) {
-//   if (task["category"] == "todo") {
-//     renderCategoryTodo(task, epic);
-//   }
-//   if (task["category"] == "progress") {
-//     renderCategoryProgress(task, epic);
-//   }
-//   if (task["category"] == "feedback") {
-//     renderCategoryFeedback(task, epic);
-//   }
-//   if (task["category"] == "done") {
-//     renderCategoryDone(task, epic);
-//   }
-
-// }
-
 /**
  * This function checks the category of the task and starts the render process
  *
@@ -153,28 +114,6 @@ function renderPlaceholder() {
   });
 }
 
-/**
- * These following functions render the tasks in the specific kanban column
- *
- * @param {object} task
- * @param {object} epic
- */
-
-// function renderCategoryTodo(task, epic) {
-//     document.getElementById("todo-tasks").innerHTML += renderTask(task, epic);
-//   }
-
-// function renderCategoryProgress(task, epic) {
-//   document.getElementById("progress-tasks").innerHTML += renderTask(task, epic);
-// }
-
-// function renderCategoryFeedback(task, epic) {
-//   document.getElementById("feedback-tasks").innerHTML += renderTask(task, epic);
-// }
-
-// function renderCategoryDone(task, epic) {
-//   document.getElementById("done-tasks").innerHTML += renderTask(task, epic);
-// }
 
 /**
  * This function clears the content of every column of the kanban
@@ -212,11 +151,11 @@ function allowDrop(ev) {
  *
  * @param {string} category fixed category hardcoded in HTML
  */
-function moveTo(category) {
+async function moveTo(category) {
   let draggedTask = findTaskById(currentDraggedTask);
   draggedTask["category"] = category;
   startRender();
-  saveData();
+  await saveData();
 }
 
 /**
@@ -279,15 +218,8 @@ function getAssignedContact(task) {
   for (let i = 0; i < task["assignedTo"].length; i++) {
     const fullContact = task["assignedTo"][i]["name"];
     const color = task["assignedTo"][i]["color"];
-
     const firstLetters = fullContact.match(/\b(\w)/g);
     const initials = firstLetters.join('');
-
-    // contact = fullContact.split(" ");
-    // const sureName = contact[0];
-    // const lastName = contact[1];
-    // let contactInitials = sureName.slice(0, 1) + lastName.slice(0, 1);
-
     checkLocationContacts(initials, task, fullContact, i, color);
   }
 }
@@ -394,7 +326,7 @@ function tickCheckBox(task) {
  * @param {string} id
  */
 
-function taskIsDone(id) {
+async function taskIsDone(id) {
   let task = findTaskById(id.toString().slice(1));
   let subtaskNumber = id.toString().slice(0, 1);
   if (task["subtasks"][subtaskNumber].checked) {
@@ -402,7 +334,7 @@ function taskIsDone(id) {
   } else {
     task["subtasks"][subtaskNumber].checked = true;
   }
-  saveData();
+  await saveData();
 }
 
 /**
@@ -471,7 +403,6 @@ function closeCard(id) {
   openEdit = false;
   closeCardHTML();
   checkSubtaskAmount(findTaskById(id));
-  addKanbanOnPhone();
 }
 
 /**
@@ -485,66 +416,8 @@ function openCardEdit(id) {
   renderCategorySelector();
   renderContactSelector();
   fillAllInputs(id);
-  removeKanbanOnPhone();
 }
 
-/**
- * This function shows the addtask template
- *
- * @param {string} category if given the task will be generated in this category. Default is todo
- */
-function showAddTask(category) {
-  clearAllInput();
-  removeKanbanOnPhone();
-  showTemplateToAddTask(category);
-  renderCategorySelector();
-  renderContactSelector();
-  setDateOfToday();
-}
-
-//oberhalb code von steven für die responsive ansicht des templates
-
-function showTemplateToAddTask(category) {
-  document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("headline").innerHTML = "Add Task";
-  document.getElementById("createText").innerHTML = "create taks";
-  document.getElementById("cancelText").innerHTML = "clear";
-  document.getElementById("cancelText").style.color = "black";
-  document.getElementById("clear").style.backgroundColor = 'white';
-  document.getElementById("cancelImage").classList.remove('filterWhite');
-  document.getElementById("createTask").onclick = () => {
-    createTaskButtonTouched(category);
-  };
-  document.getElementById("clear").onclick = () => {
-    clearAllInput();
-  };
-}
-
-function showTemplateToEditTask(id) {
-  document.getElementById("fullscreen").style.display = "block";
-  document.getElementById("headline").innerHTML = "";
-  document.getElementById("createText").innerHTML = "save";
-  document.getElementById("cancelText").innerHTML = "delete";
-  document.getElementById("cancelText").style.color = "white";
-  document.getElementById("cancelImage").classList.add('filterWhite');
-  document.getElementById("clear").style.backgroundColor = '#ff3d00';
-  document.getElementById("createTask").onclick = () => {
-    editTask(id);
-  };
-  document.getElementById("clear").onclick = () => {
-    deleteTask(id);
-  };
-}
-
-function removeKanbanOnPhone() {
-  if (y.matches) {
-    document.getElementById("main").classList.add("d-none");
-  }
-}
-
-function addKanbanOnPhone() {
-  document.getElementById("main").classList.remove("d-none");
-}
 /**
  * This function fills the input of the editCard with the information of the task which is to be edit
  *
@@ -608,11 +481,11 @@ function fillContactCheckboxes() {
  * @param {string} id
  */
 
-function deleteTask(id) {
+async function deleteTask(id) {
   let epic = findEpicById(id);
   index = epic.tasks.findIndex((x) => x.id === id);
   epic.tasks.splice(index, 1);
-  saveData();
+  await saveData();
   cardWasOpened = false;
   openEdit = false;
   document.getElementById("fullscreen").style.display = "none";
@@ -635,13 +508,13 @@ function askDeleteTask(id) {
  *
  * @param {string} id
  */
-function editTask(id) {
+async function editTask(id) {
   if (allInputsFilled()) {
     updateTask(id);
     closeAddTaskTemplate();
     document.getElementById("opened-card-container").classList.add("d-none");
     startRender();
-    saveData();
+    await saveData();
     goThroughAllEpics();
   }
 }

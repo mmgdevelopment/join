@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+
     <link rel="stylesheet" href="./style/addTask.css">
     <link rel="stylesheet" href="./style/sideBar.css">
     <link rel="stylesheet" href="./style/contacts.css">
@@ -17,6 +17,7 @@
 
 
     <script src="./script/mini_backend.js"></script>
+    <script src="./script/main.js"></script>
     <script src="./script/addTask.js"></script>
     <script src="./script/contacts.js"></script>
     <script src="./script/templates.js"></script>
@@ -30,8 +31,8 @@
     <title>Contacts</title>
 </head>
 
-<body onload="includeHTML(), initContacts()">
-    
+<body onload="initContacts()">
+
     <div id="addTaskTemplate" w3-include-html="./templates/addTaskTemplate.html"></div>
 
     <div w3-include-html="./templates/sideBar.html"></div>
@@ -147,7 +148,7 @@
         </editContact>
 
     </div>
-    
+
 
 </body>
 

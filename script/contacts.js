@@ -1,11 +1,7 @@
-setURL('https://gruppe-354.developerakademie.net/smallest_backend_ever');
-
-// let users = [];
 // let colors = ['neon-orange', 'orange', 'yellow', 'blue', 'dark-red', 'green', 'neon-green', 'pink', 'ocean', 'purple', 'red'];
 let letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 let email;
 let indexOfUser;
-// let user;
 let contacts;
 
 let certainContact;
@@ -22,37 +18,20 @@ let allLettersOnce = [];
 let IDOfEditContact;
 
 
-
-
 /**
  * function loads all saved users and renders the page
  */
 async function initContacts() {
-    await downloadFromServer();
-    users = JSON.parse(backend.getItem('users')) || [];
-    defineUser();
+    await initMain();
+    importContacts();
     renderList();
-    initAddTaskTemplate();
 }
 
-/**
- * initialising for AddTask Template
- */
-function initAddTaskTemplate() {
-    renderCategorySelector();
-    renderContactSelector();
-    document.getElementById("createTask").onclick = () => {
-        createTaskButtonTouched('todo');
-    };
-}
 
 /**
  * function defines variables for futher use in js code
  */
-function defineUser() {
-    email = localStorage.getItem('user-email');
-    indexOfUser = users.findIndex(u => u.email == email);
-    user = users[indexOfUser];
+function importContacts() {
     contacts = user['contacts'];
 }
 
@@ -285,7 +264,7 @@ async function createNewContact() {
     let phone = document.getElementById('newPhone').value;
     let color = colors[Math.floor(Math.random() * 8)];
     contacts.push({ 'name': name, 'email': email, 'phone': phone, 'color': color })
-    await backend.setItem('users', JSON.stringify(users));
+    await saveData();
     addChangesToList(name);
     closeNewContact();
 }
@@ -480,5 +459,5 @@ function addChangesToList(name) {
  * function shows add task pop up
  */
 function openTaskTemplate() {
-    document.getElementById('fullscreen').style.display = 'block';
+    showAddTask('todo');
 }

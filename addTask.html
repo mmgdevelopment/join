@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="./style/background-colors.css">
     <script src="./script/mini_backend.js"></script>
     <script src="./script/templates.js"></script>
+    <script src="./script/main.js"></script>
+
     <script src="./script/addTask.js"></script>
 
     <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
@@ -20,7 +22,7 @@
     <link rel="manifest" href="favicon/site.webmanifest">
 </head>
 
-<body onload="includeHTML(), init()">
+<body onload="initAddTask()">
     <div w3-include-html="./templates/sideBar.html"></div>
 
     <div class="container">
