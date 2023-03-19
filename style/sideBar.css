@@ -157,7 +157,7 @@ div:has(> a.legalNotes) {
 }
 
 
-@media (max-width: 1080px) {
+@media (max-width: 1180px) {
 
     header {
         position: fixed;
