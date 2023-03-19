@@ -118,6 +118,7 @@ function showContactEntrie(name) {
     getVariablesForContact(name);
     checkForMobileView();
     selectetContactHTML(name);
+    showActiveContact(name.replace(' ', ''));
 }
 
 /**
@@ -273,4 +274,12 @@ function addChangesToList(name) {
  */
 function openTaskTemplate() {
     showAddTask('todo');
+}
+
+function showActiveContact(activeContact) {
+    let singleContacts = [...document.getElementsByClassName('single-contact')];
+    singleContacts.forEach((contact) => {
+        contact.classList.remove('activeContact');
+    })
+    document.getElementById(activeContact).classList.add('activeContact');
 }

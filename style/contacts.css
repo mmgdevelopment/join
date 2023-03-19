@@ -468,4 +468,11 @@ h1 {
 
 nav {
     z-index: 4 !important;
-  }
+}
+
+.activeContact {
+    background-image: none;
+    color: white;
+    background-color: #2A3647;
+    pointer-events: none;
+}

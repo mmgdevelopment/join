@@ -600,3 +600,10 @@ nav {
     flex-direction: column;
   }
 }
+
+
+@media (hover:hover) {
+  #mobile-column-btns-container {
+    display: none;
+  }
+}

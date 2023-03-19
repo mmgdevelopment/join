@@ -340,7 +340,7 @@ function renderLetterCategory(letter) {
  */
 function listContactHTML(name, letter) {
     document.getElementById(`letter-${letter}`).innerHTML += `
-    <div onclick="showContactEntrie('${name}')" class="single-contact">
+    <div id=${name.replace(' ', '')} onclick="showContactEntrie('${name}')" class="single-contact">
         <span class="initials ${contactColor}" ;">${initials}</span>
         <div class="name-and-mail">
             <p>${name}</p>

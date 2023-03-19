@@ -35,6 +35,12 @@ function renderTaskCard(task, epic) {
       <p class="task-description">${task["description"]}</p>
       <div class="wrapper">
       <div style="padding-bottom: 40px;">
+      <div id="mobile-column-btns-container">
+        <span class="mobile-column-btn">Todo</span>
+        <span class="mobile-column-btn">In Progress</span>
+        <span class="mobile-column-btn">Feedback</span>
+        <span class="mobile-column-btn">Done</span>
+      </div>
       <div><span>Due date:</span> ${task["dueDate"]}</div>
       <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}.svg"</img></span></div>
       <div  id="contacts-on-card"><span>Assigned To:</span><div id="assignedCard${task["id"]}">
