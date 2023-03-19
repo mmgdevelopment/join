@@ -1,4 +1,4 @@
-/****************************OUTSEIDE OF CARD*************************/
+/****************************OUTSIDE OF CARD*************************/
 
 .only-dekstop {
     display: flex;
@@ -60,7 +60,7 @@
     body {
         flex-direction: column;
         justify-content: flex-start;
-        margin-top: 200px;
+        margin-top: 100px;
     }
 
     .only-dekstop {
@@ -76,7 +76,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(1.5);
-        transition: 500ms ease-in-out; 
+        transition: 500ms ease-in-out;
     }
 
     .mobile-logo-after {
@@ -124,7 +124,7 @@
         height: 51px;
     }
 
-    /****************************OUTSEIDE OF CARD*************************/
+    /****************************OUTSIDE OF CARD*************************/
 
     /****************************INSIDE OF CARD*************************/
 
@@ -189,7 +189,7 @@
 
     /****************************RESET SECTION*************************/
 
-    .reset-card{
+    .reset-card {
         text-align: center;
         gap: 20px;
         height: 525px;
@@ -211,5 +211,14 @@
     }
 
     /****************************ANIMATION SECTION*************************/
+}
+
+@media (max-width: 700px) {
+    .mobile-logo-after {
+
+        top: -15px;
+        left: 0px;
+        transform: scale(0.5);
+    }
 
 }
