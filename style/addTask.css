@@ -23,6 +23,10 @@ input, select, button, .input {
     cursor: pointer;
 }
 
+.contactCheckbox {
+    pointer-events: none;
+}
+
 .p-0 {
     padding: 0;
 }
