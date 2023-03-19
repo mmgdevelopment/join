@@ -148,8 +148,7 @@ async function deleteTask(id) {
     startRender();
 }
 
-function changeCategory(category) {
-
+function renderCurrentCategory(category) {
     let btns = [...document.getElementsByClassName('mobile-column-btn')];
     btns.forEach((btn) => {
         if (!btn.classList.contains(category)) {
@@ -158,6 +157,10 @@ function changeCategory(category) {
             btn.classList.add('active');
         }
     })
+}
+
+function changeCategory(category) {
+
     closeCard(currentDraggedTask)
     moveTo(category);
 }

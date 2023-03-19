@@ -529,7 +529,7 @@ nav {
     height: calc(100vh - 160px);
     overflow: scroll;
     width: 90%;
-    padding: 0px;
+    padding: 10px;
     padding-top: 20px;
   }
 
@@ -613,7 +613,7 @@ nav {
   align-items: center;
   justify-content: space-around;
   width: 100%;
-  gap: 5px;
+  gap: 20px;
 }
 
 .mobile-column-btn {
@@ -621,11 +621,11 @@ nav {
   justify-content: center;
   align-items: center;
   padding: 5px;
-  text-align: center;
   border-radius: 15px;
   border: 1px solid rgba(0, 0, 0, 0.5);
-  width: 20%;
-  height: 100%;
+
+
+  flex-grow: 1;
 }
 
 .mobile-column-btn.active {

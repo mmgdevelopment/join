@@ -34,7 +34,7 @@ function renderTaskCard(task, epic) {
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
         <div id="mobile-column-btns-container">
-        <span onclick="changeCategory('todo')" class="mobile-column-btn active todo">Todo</span>
+        <span onclick="changeCategory('todo')" class="mobile-column-btn todo">Todo</span>
         <span onclick="changeCategory('progress')" class="mobile-column-btn progress">In Progress</span>
         <span onclick="changeCategory('feedback')" class="mobile-column-btn feedback">Feedback</span>
         <span onclick="changeCategory('done')" class="mobile-column-btn done">Done</span>

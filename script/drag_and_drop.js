@@ -386,12 +386,14 @@ function openCard(id) {
   cardWasOpened = true;
   let task = findTaskById(id);
   let epic = findEpicById(id);
+  let category = task.category;
   openCardHTML(id, epic, task);
   getAssignedContact(task);
   getAllSubtasks(task);
   tickCheckBox(task);
   removeKanbanOnPhone();
   currentDraggedTask = id;
+  renderCurrentCategory(category);
 }
 
 /**
