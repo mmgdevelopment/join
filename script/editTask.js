@@ -147,3 +147,17 @@ async function deleteTask(id) {
     document.getElementById("opened-card-container").classList.add("d-none");
     startRender();
 }
+
+function changeCategory(category) {
+
+    let btns = [...document.getElementsByClassName('mobile-column-btn')];
+    btns.forEach((btn) => {
+        if (!btn.classList.contains(category)) {
+            btn.classList.remove('active')
+        } else {
+            btn.classList.add('active');
+        }
+    })
+    closeCard(currentDraggedTask)
+    moveTo(category);
+}

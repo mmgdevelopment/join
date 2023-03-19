@@ -33,14 +33,14 @@ function renderTaskCard(task, epic) {
       <span style="transform: scale(0.8); position: relative; right: 15px;" class="epic ${epic["color"]}">${epic["name"]}</span>
       <h4 class="task-name">${task["title"]}</h4>
       <p class="task-description">${task["description"]}</p>
+        <div id="mobile-column-btns-container">
+        <span onclick="changeCategory('todo')" class="mobile-column-btn active todo">Todo</span>
+        <span onclick="changeCategory('progress')" class="mobile-column-btn progress">In Progress</span>
+        <span onclick="changeCategory('feedback')" class="mobile-column-btn feedback">Feedback</span>
+        <span onclick="changeCategory('done')" class="mobile-column-btn done">Done</span>
+      </div>
       <div class="wrapper">
       <div style="padding-bottom: 40px;">
-      <div id="mobile-column-btns-container">
-        <span class="mobile-column-btn">Todo</span>
-        <span class="mobile-column-btn">In Progress</span>
-        <span class="mobile-column-btn">Feedback</span>
-        <span class="mobile-column-btn">Done</span>
-      </div>
       <div><span>Due date:</span> ${task["dueDate"]}</div>
       <div><span>Priotity:</span><span class="priority ${task["prio"]}">${task["prio"]}<img class="prio_img" src="assets/${task["prio"]}.svg"</img></span></div>
       <div  id="contacts-on-card"><span>Assigned To:</span><div id="assignedCard${task["id"]}">

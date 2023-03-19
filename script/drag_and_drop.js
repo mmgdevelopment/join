@@ -391,6 +391,7 @@ function openCard(id) {
   getAllSubtasks(task);
   tickCheckBox(task);
   removeKanbanOnPhone();
+  currentDraggedTask = id;
 }
 
 /**

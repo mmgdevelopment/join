@@ -602,8 +602,39 @@ nav {
 }
 
 
-@media (hover:hover) {
+/* @media (hover:hover) {
   #mobile-column-btns-container {
     display: none;
   }
+} */
+
+#mobile-column-btns-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+  gap: 5px;
+}
+
+.mobile-column-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  text-align: center;
+  border-radius: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  width: 20%;
+  height: 100%;
+}
+
+.mobile-column-btn.active {
+  text-decoration: underline;
+  background-color: #2a3647;
+  pointer-events: none;
+  color: #f4f4f4;
+}
+
+.mobile-column-btn:hover {
+  background-color: #a8a8a8;
 }
