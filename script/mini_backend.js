@@ -98,8 +98,6 @@ function saveJSONToServer() {
 
 
 function determineProxySettings() {
-    return '';
-
     if (window.location.href.indexOf('.developerakademie.com') > -1) {
         return '';
     } else {
